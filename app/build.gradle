@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'de.mannodermaus.android-junit5'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "pl.reconizer.cityadventure"
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "0.1"
+        multiDexEnabled = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    testOptions {
+        junitPlatform {
+            filters {
+                engines {
+                    include 'spek2'
+                }
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled true  // shrink
+            useProguard false   // don't obfuscate
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFiles fileTree('proguard').asList().toArray()
+        }
+        release {
+            minifyEnabled true  // shrink
+            useProguard true    // obfuscate
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFiles fileTree('proguard').asList().toArray()
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlinVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ext.kotlinExtensionsVersion"
+
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
+    implementation "com.google.android.material:material:$rootProject.ext.materialVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.androidXVersion"
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlinVersion"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.ext.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
+
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
+
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:$rootProject.ext.spekVersion"
+    testImplementation "org.spekframework.spek2:spek-runner-junit5:$rootProject.ext.spekVersion"
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+    testImplementation "com.winterbe:expekt:$rootProject.ext.assertionEngineVersion"
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+
+}
