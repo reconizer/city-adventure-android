@@ -9,12 +9,13 @@ buildscript {
         materialVersion = '1.0.0'
         constraintLayoutVersion = '2.0.0-alpha2'
         retrofitVersion = '2.4.0'
-        okhttpVersion = '3.10.0'
+        okhttpVersion = '3.11.0'
         daggerVersion = '2.15'
         rxKotlinVersion = '2.2.0'
         rxAndroidVersion = '2.0.2'
         gsonVersion = '2.8.2'
         assertionEngineVersion = '0.5.0'
+        mockitoVersion = '2.7.22'
     }
 
     repositories {
