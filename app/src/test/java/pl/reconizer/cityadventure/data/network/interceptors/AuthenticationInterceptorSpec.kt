@@ -1,6 +1,9 @@
 package pl.reconizer.cityadventure.data.network.interceptors
 
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.winterbe.expekt.expect
+import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.mockwebserver.MockResponse
@@ -8,6 +11,7 @@ import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import pl.reconizer.cityadventure.domain.repositories.IAuthenticationRepository
 
 class AuthenticationInterceptorSpec : Spek({
 
@@ -15,10 +19,12 @@ class AuthenticationInterceptorSpec : Spek({
 
         lateinit var mockServer: MockWebServer
         var token: String? = ""
+        var repository = mock<IAuthenticationRepository>()
         lateinit var request: RecordedRequest
 
         fun prepareRequest() {
-            OkHttpClient().newBuilder().addInterceptor(AuthenticationInterceptor(token)).build()
+            whenever(repository.getToken()).thenReturn(Single.just(token))
+            OkHttpClient().newBuilder().addInterceptor(AuthenticationInterceptor(repository)).build()
                     .newCall(Request.Builder().url(mockServer.url("/")).build()).execute()
             request = mockServer.takeRequest()
         }
@@ -28,7 +34,9 @@ class AuthenticationInterceptorSpec : Spek({
             mockServer.start()
             mockServer.enqueue(MockResponse())
         }
-        afterEachTest { mockServer.shutdown() }
+        afterEachTest {
+            mockServer.shutdown()
+        }
 
         context("when token is provided") {
             beforeEachTest {
@@ -43,7 +51,7 @@ class AuthenticationInterceptorSpec : Spek({
 
         context("when token is not provided") {
             beforeEachTest {
-                token = null
+                token = ""
                 prepareRequest()
             }
 

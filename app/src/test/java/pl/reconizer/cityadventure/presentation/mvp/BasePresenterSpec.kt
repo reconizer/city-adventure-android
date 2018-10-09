@@ -1,5 +1,8 @@
 package pl.reconizer.cityadventure.presentation.mvp
 
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.verify
 import com.winterbe.expekt.expect
 import io.reactivex.disposables.CompositeDisposable
 import org.mockito.Mockito
@@ -15,8 +18,8 @@ class BasePresenterSpec : Spek({
 
         beforeEachTest {
             presenter = BasePresenter()
-            view = Mockito.mock(IView::class.java)
-            disposables = Mockito.spy(CompositeDisposable::class.java)
+            view = mock()
+            disposables = spy()
             presenter.disposables = disposables
         }
 
@@ -24,8 +27,8 @@ class BasePresenterSpec : Spek({
 
             it("disposes all subscribers") {
                 presenter.subscribe(view)
-                Mockito.verify(disposables, Mockito.atLeastOnce()).clear()
-                Mockito.verify(disposables, Mockito.atLeastOnce()).dispose()
+                verify(disposables, Mockito.atLeastOnce()).clear()
+                verify(disposables, Mockito.atLeastOnce()).dispose()
             }
 
             it("saves the view") {
@@ -43,8 +46,8 @@ class BasePresenterSpec : Spek({
 
             it("disposes all subscribers") {
                 presenter.subscribe(view)
-                Mockito.verify(disposables, Mockito.atLeastOnce()).clear()
-                Mockito.verify(disposables, Mockito.atLeastOnce()).dispose()
+                verify(disposables, Mockito.atLeastOnce()).clear()
+                verify(disposables, Mockito.atLeastOnce()).dispose()
             }
         }
 

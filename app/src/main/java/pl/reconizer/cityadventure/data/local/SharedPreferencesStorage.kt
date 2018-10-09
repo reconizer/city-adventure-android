@@ -1,11 +1,13 @@
 package pl.reconizer.cityadventure.data.local
 
-import android.content.SharedPreferences
+import android.content.Context
 
-class SharedPreferencesStorage(private val sharedPreferences: SharedPreferences) : ILocalStorage {
+class SharedPreferencesStorage(context: Context) : ILocalStorage {
 
-    override fun save(key: String, value: String?) {
-        sharedPreferences.edit().putString(key, value).commit()
+    private val sharedPreferences = context.getSharedPreferences("LOCAL_STORAGE", Context.MODE_PRIVATE)
+
+    override fun set(key: String, value: String?) {
+        sharedPreferences.edit().putString(key, value).apply()
     }
 
     override fun get(key: String): String? {
@@ -13,6 +15,6 @@ class SharedPreferencesStorage(private val sharedPreferences: SharedPreferences)
     }
 
     override fun remove(key: String) {
-        save(key, null)
+        set(key, null)
     }
 }

@@ -8,15 +8,19 @@ import pl.reconizer.cityadventure.domain.repositories.IAuthenticationRepository
 class AuthenticationRepository(private val localStorage: ILocalStorage) : IAuthenticationRepository {
 
     override fun getToken(): Single<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Single.fromCallable { localStorage[TOKEN_KEY] ?: "" }
     }
 
     override fun saveToken(token: String?): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Completable.fromAction { localStorage[TOKEN_KEY] = token }
     }
 
     override fun clearToken(): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Completable.fromAction { localStorage.remove(TOKEN_KEY) }
+    }
+
+    companion object {
+        private const val TOKEN_KEY = "token"
     }
 
 }
