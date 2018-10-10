@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_login.*
 import pl.reconizer.cityadventure.CityAdventureApp
 import pl.reconizer.cityadventure.R
 import javax.inject.Inject
@@ -27,10 +29,17 @@ class LoginFragment : Fragment(), ILoginView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        submit.setOnClickListener {
+            presenter.login(Form(
+                    emailInput.text.toString(),
+                    passwordInput.text.toString()
+            ))
+        }
     }
 
     override fun successfulSignIn() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(context, "Logged in", Toast.LENGTH_LONG).show()
     }
 
 }
