@@ -10,9 +10,10 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_login.*
 import pl.reconizer.cityadventure.CityAdventureApp
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import javax.inject.Inject
 
-class LoginFragment : Fragment(), ILoginView {
+class LoginFragment : BaseFragment(), ILoginView {
 
     @Inject
     lateinit var presenter: LoginPresenter
@@ -36,6 +37,16 @@ class LoginFragment : Fragment(), ILoginView {
                     passwordInput.text.toString()
             ))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.subscribe(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
     }
 
     override fun successfulSignIn() {
