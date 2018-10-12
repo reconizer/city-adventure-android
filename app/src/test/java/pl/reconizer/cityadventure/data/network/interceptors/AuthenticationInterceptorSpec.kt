@@ -19,7 +19,7 @@ class AuthenticationInterceptorSpec : Spek({
 
         lateinit var mockServer: MockWebServer
         var token: String? = ""
-        var repository = mock<IAuthenticationRepository>()
+        val repository = mock<IAuthenticationRepository>()
         lateinit var request: RecordedRequest
 
         fun prepareRequest() {

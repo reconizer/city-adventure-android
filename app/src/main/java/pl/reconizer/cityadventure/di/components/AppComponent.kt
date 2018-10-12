@@ -3,9 +3,7 @@ package pl.reconizer.cityadventure.di.components
 import dagger.Component
 import pl.reconizer.cityadventure.CityAdventureApp
 import pl.reconizer.cityadventure.di.modules.*
-import pl.reconizer.cityadventure.di.modules.usecases.authentication.AuthenticationUsecasesModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
-import pl.reconizer.cityadventure.presentation.authentication.login.LoginFragment
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import javax.inject.Singleton
 

@@ -1,6 +1,7 @@
 package pl.reconizer.cityadventure.presentation.errorhandlers
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.presentation.mvp.IView
 import retrofit2.HttpException
@@ -57,14 +58,14 @@ open class ErrorHandler<TErrorEntity>(
         val stringResponse = e.response().errorBody()?.string()
         val entityResponse = try {
             gson.fromJson(stringResponse, errorEntityType)
-        } catch (exception: IllegalStateException) {
+        } catch (exception: JsonSyntaxException) {
             gson.fromJson("{}", errorEntityType) // it will create empty instance
         }
         view?.get()?.showParametrizedError(entityResponse as Error)
     }
 
     /**
-     * Status 500
+     * Status 5xx
      */
     open fun handleServerError() {
         view?.get()?.showServerError()

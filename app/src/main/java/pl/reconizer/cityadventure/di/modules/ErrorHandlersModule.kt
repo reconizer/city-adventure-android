@@ -8,7 +8,7 @@ import pl.reconizer.cityadventure.di.scopes.ViewScope
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 
 @Module
-class ErrorHandlersModule() {
+class ErrorHandlersModule {
 
     @Provides
     @ViewScope

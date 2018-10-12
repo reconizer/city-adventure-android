@@ -9,8 +9,8 @@ class AuthenticationRepositorySpec : Spek({
 
     describe("AuthenticationRepository") {
 
-        var localStorage: ILocalStorage = mock()
-        var repository = AuthenticationRepository(localStorage)
+        val localStorage: ILocalStorage = mock()
+        val repository = AuthenticationRepository(localStorage)
         val token = "token"
 
         afterEachTest {
