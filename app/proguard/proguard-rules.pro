@@ -74,5 +74,3 @@
 -keepclassmembers class **$WhenMappings {
     <fields>;
 }
--dontwarn kotlin.reflect.jvm.internal.**
--keep class kotlin.reflect.jvm.internal.** { *; }

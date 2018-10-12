@@ -76,7 +76,7 @@ class NetworkModule {
     }
 
     companion object {
-        const val BASE_API_URL = "http://192.168.1.104:4008"
+        const val BASE_API_URL = "http://ec2-34-241-151-89.eu-west-1.compute.amazonaws.com:8080/"
     }
 
 

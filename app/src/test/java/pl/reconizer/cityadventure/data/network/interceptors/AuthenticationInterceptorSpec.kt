@@ -16,7 +16,6 @@ import pl.reconizer.cityadventure.domain.repositories.IAuthenticationRepository
 class AuthenticationInterceptorSpec : Spek({
 
     describe("AuthenticationInterceptor") {
-
         lateinit var mockServer: MockWebServer
         var token: String? = ""
         val repository = mock<IAuthenticationRepository>()
@@ -59,7 +58,6 @@ class AuthenticationInterceptorSpec : Spek({
                 expect(request.getHeader("authorization")).to.be.`null`
             }
         }
-
 
     }
 

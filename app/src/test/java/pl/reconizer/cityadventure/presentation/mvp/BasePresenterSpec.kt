@@ -35,6 +35,7 @@ class BasePresenterSpec : Spek({
                 presenter.subscribe(view)
                 expect(presenter.view).to.be.equal(view)
             }
+
         }
 
         describe("unsubscribe") {
@@ -49,6 +50,7 @@ class BasePresenterSpec : Spek({
                 verify(disposables, Mockito.atLeastOnce()).clear()
                 verify(disposables, Mockito.atLeastOnce()).dispose()
             }
+
         }
 
         describe("isSubscribed") {
@@ -68,7 +70,9 @@ class BasePresenterSpec : Spek({
                     expect(presenter.isSubscribed).to.be.`false`
                 }
             }
+
         }
+
     }
 
 })

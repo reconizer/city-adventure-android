@@ -10,7 +10,6 @@ import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
 class UserRepositorySpec : Spek({
 
     describe("UserRepository") {
-
         val api = mock<IAuthenticationApi>()
         val repository = UserRepository(api)
         val authenticationEntity = Authentication("token")

@@ -8,7 +8,6 @@ import pl.reconizer.cityadventure.data.entities.Authentication
 class TokenMapperSpec : Spek({
 
     describe("TokenMapper") {
-
         lateinit var authenticationEntity: Authentication
         val token = "token"
 

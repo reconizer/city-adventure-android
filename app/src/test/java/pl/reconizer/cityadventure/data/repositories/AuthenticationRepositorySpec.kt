@@ -8,7 +8,6 @@ import pl.reconizer.cityadventure.data.local.ILocalStorage
 class AuthenticationRepositorySpec : Spek({
 
     describe("AuthenticationRepository") {
-
         val localStorage: ILocalStorage = mock()
         val repository = AuthenticationRepository(localStorage)
         val token = "token"
@@ -65,6 +64,7 @@ class AuthenticationRepositorySpec : Spek({
                 verify(localStorage, atLeastOnce()).remove(any())
             }
         }
+
     }
 
 })
