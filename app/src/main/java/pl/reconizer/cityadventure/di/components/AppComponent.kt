@@ -19,6 +19,8 @@ interface AppComponent {
 
     fun inject(app: CityAdventureApp)
 
+    fun activityComponent(module: MainActivityModule): MainActivityComponent
+
     fun loginComponent(module: LoginModule): LoginComponent
 
 }

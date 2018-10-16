@@ -47,11 +47,12 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlinVersion"
     implementation "androidx.core:core-ktx:$rootProject.ext.kotlinExtensionsVersion"
 
+    implementation "com.google.android.gms:play-services-maps:$rootProject.ext.mapsServicesVersion"
+
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
     implementation "com.google.android.material:material:$rootProject.ext.materialVersion"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
-    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.ext.androidXVersion"
 
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
