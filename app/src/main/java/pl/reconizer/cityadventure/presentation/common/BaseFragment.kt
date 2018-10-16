@@ -1,7 +1,9 @@
 package pl.reconizer.cityadventure.presentation.common
 
+import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import pl.reconizer.cityadventure.MainActivity
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.presentation.mvp.IView
@@ -9,6 +11,15 @@ import pl.reconizer.cityadventure.presentation.mvp.IView
 open class BaseFragment : Fragment(), IView {
 
     private var genericErrorDialog: AlertDialog? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (withStatusBar()) {
+            (activity as MainActivity).showStatusBar()
+        } else {
+            (activity as MainActivity).hideStatusBar()
+        }
+    }
 
     override fun showGenericError() {
         context?.let {
@@ -37,5 +48,9 @@ open class BaseFragment : Fragment(), IView {
 
     override fun showServerError() {
         showGenericError()
+    }
+
+    open fun withStatusBar(): Boolean {
+        return true
     }
 }

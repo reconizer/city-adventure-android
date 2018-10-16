@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 
 interface INavigator {
 
+    fun open(fragment: Fragment)
     fun goTo(fragment: Fragment)
     fun goBack()
     fun goBackToRoot()

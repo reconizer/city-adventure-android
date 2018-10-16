@@ -9,6 +9,11 @@ class Navigator(
         private val fragmentManager: FragmentManager
 ) : INavigator {
 
+    override fun open(fragment: Fragment) {
+        clearBackStack()
+        goTo(fragment)
+    }
+
     override fun goTo(fragment: Fragment) {
         fragmentManager.beginTransaction()
                 .replace(container, fragment)
@@ -34,7 +39,7 @@ class Navigator(
         return fragmentManager.backStackEntryCount <= 1
     }
 
-    private fun clearBackStack(leave: Int) {
+    private fun clearBackStack(leave: Int = 0) {
         val backStackCount = fragmentManager.backStackEntryCount
         for (i in 0 until backStackCount - leave) {
             val backStackId = fragmentManager.getBackStackEntryAt(i).id
