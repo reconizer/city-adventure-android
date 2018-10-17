@@ -3,6 +3,7 @@ package pl.reconizer.cityadventure
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.di.modules.MainActivityModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
 import pl.reconizer.cityadventure.presentation.navigation.INavigator
@@ -16,12 +17,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        CityAdventureApp.appComponent.activityComponent(MainActivityModule(
-                R.id.fragmentContainer,
-                supportFragmentManager
-        )).inject(this)
+        Injector.buildMainActivityComponent(R.id.fragmentContainer, this).inject(this)
         navigator.open(GameMapFragment.newInstance())
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearMainActivityComponent()
     }
 
     fun showStatusBar() {

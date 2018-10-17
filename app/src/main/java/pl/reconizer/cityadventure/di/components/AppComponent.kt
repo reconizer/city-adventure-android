@@ -21,6 +21,4 @@ interface AppComponent {
 
     fun activityComponent(module: MainActivityModule): MainActivityComponent
 
-    fun loginComponent(module: LoginModule): LoginComponent
-
 }
