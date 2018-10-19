@@ -48,6 +48,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.ext.kotlinExtensionsVersion"
 
     implementation "com.google.android.gms:play-services-maps:$rootProject.ext.mapsServicesVersion"
+    implementation "com.google.maps.android:android-maps-utils:$rootProject.ext.mapUtilsVersion"
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
     implementation "com.google.android.material:material:$rootProject.ext.materialVersion"

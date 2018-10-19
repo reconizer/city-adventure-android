@@ -5,6 +5,8 @@ import io.reactivex.subjects.PublishSubject
 
 interface ILocationProvider {
 
+    val lastLocation: Location?
+
     val statusChange: PublishSubject<GpsInterfaceStatus>
     val locationChange: PublishSubject<Location>
     val isEnabled: Boolean

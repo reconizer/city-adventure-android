@@ -14,7 +14,7 @@ import io.reactivex.subjects.PublishSubject
 class LocationProvider(private val context: Context) : ILocationProvider, LocationListener {
     private var locationManager: LocationManager? = null
     private var locationProvider: String? = null
-    var lastLocation: Location? = null
+    override var lastLocation: Location? = null
         private set
 
     override val statusChange: PublishSubject<GpsInterfaceStatus> = PublishSubject.create<GpsInterfaceStatus>()
@@ -48,16 +48,12 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
 
     override fun disable() {
         Log.d(TAG, "stop_location_updates")
-        locationManager!!.removeUpdates(this)
+        locationManager?.removeUpdates(this)
         isEnabled = false
     }
 
     override fun onLocationChanged(location: Location) {
         lastLocation = location
-        val newLatLng = LatLng(location.latitude, location.longitude)
-
-        Log.d(TAG, newLatLng.toString())
-
         locationChange.onNext(location)
     }
 
