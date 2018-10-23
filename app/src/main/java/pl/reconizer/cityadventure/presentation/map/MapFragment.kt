@@ -11,6 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.SphericalUtil
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.domain.entities.Adventure
 import kotlin.math.abs
 
 class MapFragment : SupportMapFragment(), IMapView {
@@ -18,6 +19,8 @@ class MapFragment : SupportMapFragment(), IMapView {
     private var googleMap: GoogleMap? = null
 
     private var userMarker: Marker? = null
+    private var adventureMarkers: MutableList<Marker> = mutableListOf()
+    private val adventurePinMapper = AdventurePinMapper()
 
     private var currentLocation: LatLng? = null
 
@@ -53,6 +56,20 @@ class MapFragment : SupportMapFragment(), IMapView {
             if (currentLocation == null) {
                 moveToLocation(location)
             }
+        }
+    }
+
+    override fun showAdventureMarkers(adventures: List<Adventure>) {
+        adventureMarkers.forEach { it.remove() }
+        adventureMarkers.clear()
+        adventures.forEach {
+            adventureMarkers.add(googleMap!!.addMarker(MarkerOptions()
+                    .position(LatLng(it.position.lat, it.position.lng))
+                    .icon(adventurePinMapper.determinePin(it)))
+                    .apply {
+                        tag = it
+                    }
+            )
         }
     }
 

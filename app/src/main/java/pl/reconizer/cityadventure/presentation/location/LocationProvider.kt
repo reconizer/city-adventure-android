@@ -8,14 +8,30 @@ import android.location.*
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.SphericalUtil
 import io.reactivex.subjects.PublishSubject
+import pl.reconizer.cityadventure.common.extensions.toLatLng
 
 class LocationProvider(private val context: Context) : ILocationProvider, LocationListener {
+
     private var locationManager: LocationManager? = null
     private var locationProvider: String? = null
+    private var previousLocation: Location? = null
+
     override var lastLocation: Location? = null
         private set
+
+    override val changeDistance: Double
+        get() {
+            return if (lastLocation == null || previousLocation == null) {
+                0.0
+            } else {
+                SphericalUtil.computeDistanceBetween(
+                        lastLocation!!.toLatLng(),
+                        previousLocation!!.toLatLng()
+                )
+            }
+        }
 
     override val statusChange: PublishSubject<GpsInterfaceStatus> = PublishSubject.create<GpsInterfaceStatus>()
     override val locationChange: PublishSubject<Location> = PublishSubject.create<Location>()
@@ -53,6 +69,7 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
     }
 
     override fun onLocationChanged(location: Location) {
+        previousLocation = lastLocation
         lastLocation = location
         locationChange.onNext(location)
     }

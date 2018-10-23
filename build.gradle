@@ -10,7 +10,7 @@ buildscript {
         constraintLayoutVersion = '2.0.0-alpha2'
 
         mapsServicesVersion = '16.0.0'
-        mapUtilsVersion = '0.5+'
+        mapUtilsVersion = '0.5'
 
         retrofitVersion = '2.4.0'
         okhttpVersion = '3.11.0'

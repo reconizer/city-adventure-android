@@ -2,13 +2,16 @@ package pl.reconizer.cityadventure.presentation.map.game
 
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
+import io.reactivex.Observable
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.data.entities.Error
+import pl.reconizer.cityadventure.domain.entities.Position
 import pl.reconizer.cityadventure.presentation.common.rx.CallbackWrapper
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
 import pl.reconizer.cityadventure.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
+import java.util.concurrent.TimeUnit
 
 class GameMapPresenter(
         private val backgroundScheduler: Scheduler,
@@ -30,20 +33,40 @@ class GameMapPresenter(
         super.subscribe(view)
         errorHandler.view = WeakReference(view)
         if (locationProvider.hasPermission) {
-            locationProvider.locationChange
-                    .subscribeOn(backgroundScheduler)
-                    .observeOn(mainScheduler)
-                    .map { LatLng(it.latitude, it.longitude) }
-                    .subscribeWith(object : CallbackWrapper<LatLng, Error>(errorHandler) {
-                        override fun onComplete() {}
+            val locationChangeObservable = locationProvider.locationChange.share()
+            disposables.add(
+                    locationChangeObservable
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .map { LatLng(it.latitude, it.longitude) }
+                        .subscribeWith(object : CallbackWrapper<LatLng, Error>(errorHandler) {
+                            override fun onComplete() {}
 
-                        override fun onNext(t: LatLng) {
-                            Log.d("GameMap", "Location: (${t.latitude}, ${t.longitude}")
-                            this@GameMapPresenter.view?.showCurrentLocation(t)
-                        }
+                            override fun onNext(t: LatLng) {
+                                Log.d("GameMap", "Location: (${t.latitude}, ${t.longitude}")
+                                this@GameMapPresenter.view?.showCurrentLocation(t)
+                            }
 
 
-                    })
+                        })
+            )
+            disposables.add(
+                    Observable.concat(
+                            locationChangeObservable,
+                            Observable.interval(30,30, TimeUnit.SECONDS)
+                    )
+                            .doAfterNext {
+                                when(it) {
+                                    is Long -> {
+
+                                    }
+                                    is Position -> {}
+                                }
+                            }
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(mainScheduler)
+                            .subscribe()
+            )
             locationProvider.enable()
         } else {
             this@GameMapPresenter.view?.requestLocationPermission()

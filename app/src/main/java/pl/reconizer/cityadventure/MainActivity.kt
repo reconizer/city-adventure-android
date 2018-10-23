@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import pl.reconizer.cityadventure.di.Injector
-import pl.reconizer.cityadventure.di.modules.MainActivityModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
 import pl.reconizer.cityadventure.presentation.navigation.INavigator
 import javax.inject.Inject

@@ -64,7 +64,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == LOCATION_PERMISSION_REQUEST) {
             if (grantResults.size != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                // TODO start listening for location
+                // TODO permissions not granted
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
