@@ -5,9 +5,12 @@ import dagger.Module
 import dagger.Provides
 import pl.reconizer.cityadventure.data.local.ILocalStorage
 import pl.reconizer.cityadventure.data.local.SharedPreferencesStorage
+import pl.reconizer.cityadventure.data.network.api.IAdventureApi
 import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
+import pl.reconizer.cityadventure.data.repositories.AdventureRepository
 import pl.reconizer.cityadventure.data.repositories.AuthenticationRepository
 import pl.reconizer.cityadventure.data.repositories.UserRepository
+import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.domain.repositories.IAuthenticationRepository
 import pl.reconizer.cityadventure.domain.repositories.IUserRepository
 import javax.inject.Singleton
@@ -31,6 +34,12 @@ class DataModule {
     @Singleton
     fun provideUserRepository(authenticationApi: IAuthenticationApi): IUserRepository {
         return UserRepository(authenticationApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAdventureRepository(adventureApi: IAdventureApi): IAdventureRepository {
+        return AdventureRepository(adventureApi)
     }
 
 }

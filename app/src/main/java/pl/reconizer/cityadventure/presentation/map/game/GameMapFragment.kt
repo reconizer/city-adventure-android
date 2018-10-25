@@ -10,7 +10,10 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
+import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.Position
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.map.IMapView
 import javax.inject.Inject
@@ -48,6 +51,9 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         presenter.subscribe(this)
         presenter.lastLocation?.let {
             mapView.handleNewUserLocation(it)
+        }
+        mapView.cameraMovedListener = {
+            presenter.cameraPositionObserver.onNext(it)
         }
     }
 
@@ -95,8 +101,12 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
     }
 
-    override fun showCurrentLocation(location: LatLng) {
-        mapView.handleNewUserLocation(location)
+    override fun showCurrentLocation(position: Position) {
+        mapView.handleNewUserLocation(position.toLatLng())
+    }
+
+    override fun showAdventures(adventures: List<Adventure>) {
+        mapView.showAdventureMarkers(adventures)
     }
 
     override fun showLocationUnavailable() {

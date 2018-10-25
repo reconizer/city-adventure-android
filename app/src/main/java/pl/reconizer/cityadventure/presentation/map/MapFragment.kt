@@ -31,6 +31,9 @@ class MapFragment : SupportMapFragment(), IMapView {
     override lateinit var overlayBitmap: Bitmap
     private lateinit var overlayBitmapDescriptor: BitmapDescriptor
 
+    override var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)? = null
+    override var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overlayBitmap = BitmapFactory.decodeResource(resources, R.drawable.map_overlay)
@@ -101,11 +104,25 @@ class MapFragment : SupportMapFragment(), IMapView {
             handleNewUserLocation(it)
         }
 
-        googleMap!!.setOnCameraMoveListener{
+        // when camera is moving
+        googleMap!!.setOnCameraMoveListener {
+            cameraMoveListener?.invoke(CameraDetails(
+                    googleMap!!.cameraPosition.target,
+                    googleMap!!.cameraPosition.zoom
+            ))
             if (shouldUpdateOverlays()) {
                 updateOverlays()
             }
         }
+
+        // when camera stopped moving
+        googleMap!!.setOnCameraIdleListener {
+            cameraMovedListener?.invoke(CameraDetails(
+                    googleMap!!.cameraPosition.target,
+                    googleMap!!.cameraPosition.zoom
+            ))
+        }
+
         if (currentLocation != null) {
             moveToLocation(currentLocation!!)
         }

@@ -23,6 +23,9 @@ android {
                 }
             }
         }
+        unitTests {
+            includeAndroidResources = true
+        }
     }
     buildTypes {
         debug {
@@ -75,7 +78,10 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.ext.mockitoKotlinVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.ext.okhttpVersion"
     testImplementation "com.winterbe:expekt:$rootProject.ext.assertionEngineVersion"
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+
+    testImplementation 'com.android.support.test:rules:1.0.2'
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation "org.robolectric:robolectric:4.0-beta-3"
 
 }

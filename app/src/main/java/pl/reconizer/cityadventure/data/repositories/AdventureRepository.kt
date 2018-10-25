@@ -44,6 +44,22 @@ class AdventureRepository(
                         started = false,
                         purchasable = false,
                         completed = true
+                ),
+                Adventure(
+                        adventureId = "5",
+                        startPointId = "5",
+                        position = Position(53.010191, 18.607667),
+                        started = true,
+                        purchasable = true,
+                        completed = false
+                ),
+                Adventure(
+                        adventureId = "6",
+                        startPointId = "6",
+                        position = Position(53.010176, 18.607966),
+                        started = false,
+                        purchasable = true,
+                        completed = true
                 )
         ))
     }

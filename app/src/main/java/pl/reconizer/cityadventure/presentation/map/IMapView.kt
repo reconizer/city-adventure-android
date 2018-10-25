@@ -6,6 +6,9 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 
 interface IMapView {
 
+    var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)?
+    var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)?
+
     var overlayBitmap: Bitmap
 
     fun isMapReady(): Boolean

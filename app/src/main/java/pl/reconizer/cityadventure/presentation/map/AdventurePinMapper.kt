@@ -7,17 +7,19 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 
 class AdventurePinMapper {
 
-    private val purchasablePin by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_purchasable) }
+    val purchasablePin: BitmapDescriptor by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_purchasable_not_started) }
+    val purchasableStartedPin: BitmapDescriptor by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_purchasable_started) }
+    val purchasableFinishedPin: BitmapDescriptor by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_purchasable_finished) }
 
-    private val freePin by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_free_not_started) }
-    private val freeStartedPin by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_free_started) }
-    private val freeFinishedPin by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_free_finished) }
+    val freePin: BitmapDescriptor by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_free_not_started) }
+    val freeStartedPin: BitmapDescriptor by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_free_started) }
+    val freeFinishedPin: BitmapDescriptor by lazy { BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_free_finished) }
 
     fun determinePin(adventure: Adventure): BitmapDescriptor {
         return if (adventure.purchasable) {
             when {
-                adventure.completed -> freeFinishedPin // we dont have a correct pin
-                adventure.started -> freeStartedPin
+                adventure.completed -> purchasableFinishedPin
+                adventure.started -> purchasableStartedPin
                 else -> purchasablePin
             }
         } else {
