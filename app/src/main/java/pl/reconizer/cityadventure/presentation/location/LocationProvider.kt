@@ -21,18 +21,6 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
     override var lastLocation: Location? = null
         private set
 
-    override val changeDistance: Double
-        get() {
-            return if (lastLocation == null || previousLocation == null) {
-                0.0
-            } else {
-                SphericalUtil.computeDistanceBetween(
-                        lastLocation!!.toLatLng(),
-                        previousLocation!!.toLatLng()
-                )
-            }
-        }
-
     override val statusChange: PublishSubject<GpsInterfaceStatus> = PublishSubject.create<GpsInterfaceStatus>()
     override val locationChange: PublishSubject<Location> = PublishSubject.create<Location>()
 

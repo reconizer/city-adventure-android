@@ -47,12 +47,13 @@ class GameMapPresenter(
                         SphericalUtil.computeDistanceBetween(it.position, previousCameraDetails!!.position) > DISTANCE_CHANGE ||
                         it.zoom != previousCameraDetails!!.zoom
             }
-            .doAfterNext { previousCameraDetails = it }
-            .map { Position(it.position.latitude, it.position.longitude) }
+            .doOnNext { previousCameraDetails = it }
+            .map { it.position.toPosition() }
             .share()
 
-    private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS)
+    private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
             .filter { previousCameraDetails != null }
+            .map { previousCameraDetails!!.position.toPosition() }
             .share()
 
     override fun subscribe(view: IGameMapView) {
@@ -83,17 +84,7 @@ class GameMapPresenter(
                     )
                             .flatMapSingle {
                                 Log.d("GameMapPresenter", "Checking pins")
-                                when(it) {
-                                    is Long -> {
-                                        Log.d("GameMapPresenter", "Checking pins - because of time")
-                                        getAdventures(Position(previousCameraDetails!!.position.latitude, previousCameraDetails!!.position.longitude))
-                                    }
-                                    is Position -> {
-                                        Log.d("GameMapPresenter", "Checking pins - because of move")
-                                        getAdventures(it)
-                                    }
-                                    else -> Single.error(IllegalArgumentException())
-                                }
+                                getAdventures(it)
                             }
                             .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)
