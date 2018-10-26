@@ -1,13 +1,11 @@
 package pl.reconizer.cityadventure.presentation.map.game
 
 import android.util.Log
-import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
-import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.domain.entities.Adventure
@@ -34,12 +32,12 @@ class GameMapPresenter(
 
     val cameraPositionObserver: PublishSubject<CameraDetails> = PublishSubject.create()
 
-    val lastLocation: LatLng?
+    val lastLocation: Position?
         get() {
             return if (locationProvider.lastLocation == null) {
                 null
             } else {
-                locationProvider.lastLocation!!.toLatLng()
+                locationProvider.lastLocation!!.toPosition()
             }
         }
 
@@ -122,6 +120,6 @@ class GameMapPresenter(
 
     companion object {
         const val DISTANCE_CHANGE = 500 // in meters
-        const val LOAD_ADVENTURES_TIMEOUT = 5L // in seconds
+        const val LOAD_ADVENTURES_TIMEOUT = 30L // in seconds
     }
 }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toLatLng
@@ -41,7 +40,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         super.onViewCreated(view, savedInstanceState)
         myLocationButton.setOnClickListener {
             presenter.lastLocation?.let {
-                mapView.moveToLocation(it)
+                mapView.moveToLocation(it.toLatLng())
             }
         }
     }
@@ -50,7 +49,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         super.onResume()
         presenter.subscribe(this)
         presenter.lastLocation?.let {
-            mapView.handleNewUserLocation(it)
+            mapView.handleNewUserLocation(it.toLatLng())
         }
         mapView.cameraMovedListener = {
             presenter.cameraPositionObserver.onNext(it)

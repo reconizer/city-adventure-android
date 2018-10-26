@@ -1,11 +1,6 @@
 package pl.reconizer.cityadventure.presentation.map
 
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.whenever
-import com.winterbe.expekt.expect
+import com.nhaarman.mockitokotlin2.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.cityadventure.domain.entities.Adventure
@@ -25,47 +20,77 @@ class AdventurePinMapperSpek : Spek({
     }
 
     describe("AdventurePinMapper") {
-        var pinMapper = spy(AdventurePinMapper())
+        val pinProvider = mock<PinProvider>()
+        var pinMapper = AdventurePinMapper(pinProvider)
 
-//        before {
-//            whenever(pinMapper.purchasablePin).thenReturn(mock())
-//            whenever(pinMapper.purchasableStartedPin).thenReturn(mock())
-//            whenever(pinMapper.purchasableFinishedPin).thenReturn(mock())
-//
-//            whenever(pinMapper.freePin).thenReturn(mock())
-//            whenever(pinMapper.freeStartedPin).thenReturn(mock())
-//            whenever(pinMapper.freeFinishedPin).thenReturn(mock())
-//        }
+        beforeEachTest { reset(pinProvider) }
 
         describe("determinePin") {
             lateinit var adventure: Adventure
 
             context("purchasable") {
 
-                context("completed") {
-                    //beforeEachTest { adventure = adventureFactory(true, true, false) }
+                context("not started") {
+                    beforeEachTest { adventure = adventureFactory(true, false, false) }
 
                     it("returns correct pin") {
-                        //expect(pinMapper.determinePin(adventure)).equal(pinMapper.purchasableFinishedPin)
+                        pinMapper.determinePin(adventure)
+                        verify(pinProvider, atLeastOnce()).purchasablePin
+                    }
+                }
+
+                context("completed") {
+                    beforeEachTest { adventure = adventureFactory(true, true, false) }
+
+                    it("returns correct pin") {
+                        pinMapper.determinePin(adventure)
+                        verify(pinProvider, atLeastOnce()).purchasableFinishedPin
                     }
                 }
 
                 context("started") {
+                    beforeEachTest { adventure = adventureFactory(true, false, true) }
 
+                    it("returns correct pin") {
+                        pinMapper.determinePin(adventure)
+                        verify(pinProvider, atLeastOnce()).purchasableStartedPin
+                    }
                 }
             }
 
             context("free") {
 
-                context("completed") {
+                context("not started") {
+                    beforeEachTest { adventure = adventureFactory(false, false, false) }
 
+                    it("returns correct pin") {
+                        pinMapper.determinePin(adventure)
+                        verify(pinProvider, atLeastOnce()).freePin
+                    }
+                }
+
+                context("completed") {
+                    beforeEachTest { adventure = adventureFactory(false, true, false) }
+
+                    it("returns correct pin") {
+                        pinMapper.determinePin(adventure)
+                        verify(pinProvider, atLeastOnce()).freeFinishedPin
+                    }
                 }
 
                 context("started") {
+                    beforeEachTest { adventure = adventureFactory(false, false, true) }
 
+                    it("returns correct pin") {
+                        pinMapper.determinePin(adventure)
+                        verify(pinProvider, atLeastOnce()).freeStartedPin
+                    }
                 }
 
             }
+
         }
+
     }
+
 })

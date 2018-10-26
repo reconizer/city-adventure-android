@@ -22,7 +22,7 @@ class LoginPresenter(
     fun login(form: Form) {
         if (form.isValid()) {
             disposables.add(
-                signIn(form.email!!, form.password!!)
+                signIn(form.email, form.password)
                         .observeOn(mainScheduler)
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {

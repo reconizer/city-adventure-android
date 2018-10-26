@@ -23,8 +23,8 @@ buildscript {
 
         spekVersion = '2.0.0-rc.1'
         assertionEngineVersion = '0.5.0'
-        mockitoVersion = '2.7.22'
-        mockitoKotlinVersion = '2.0.0-RC1'
+        mockitoVersion = '2.23.0'
+        mockitoKotlinVersion = '2.0.0-RC3'
     }
 
     repositories {

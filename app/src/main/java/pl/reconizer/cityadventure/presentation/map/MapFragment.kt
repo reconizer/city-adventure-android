@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.DrawableRes
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -20,7 +21,9 @@ class MapFragment : SupportMapFragment(), IMapView {
 
     private var userMarker: Marker? = null
     private var adventureMarkers: MutableList<Marker> = mutableListOf()
-    private val adventurePinMapper = AdventurePinMapper()
+
+    private lateinit var adventurePinMapper: AdventurePinMapper
+    private lateinit var pinProvider: PinProvider
 
     private var currentLocation: LatLng? = null
 
@@ -28,7 +31,9 @@ class MapFragment : SupportMapFragment(), IMapView {
     private var lastMapCenter: LatLng? = null
     private var lastMapZoom: Float = 0f
 
-    override lateinit var overlayBitmap: Bitmap
+    @DrawableRes
+    override var overlayDrawableRes: Int = R.drawable.map_overlay
+    private lateinit var overlayBitmap: Bitmap
     private lateinit var overlayBitmapDescriptor: BitmapDescriptor
 
     override var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)? = null
@@ -36,8 +41,7 @@ class MapFragment : SupportMapFragment(), IMapView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overlayBitmap = BitmapFactory.decodeResource(resources, R.drawable.map_overlay)
-        overlayBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(overlayBitmap)
+        overlayBitmap = BitmapFactory.decodeResource(resources, overlayDrawableRes)
         getMapAsync(this::configure)
     }
 
@@ -78,6 +82,9 @@ class MapFragment : SupportMapFragment(), IMapView {
 
     private fun configure(map: GoogleMap) {
         googleMap = map
+        overlayBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(overlayBitmap)
+        pinProvider = PinProvider()
+        adventurePinMapper = AdventurePinMapper(pinProvider)
         if (googleMap!!.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.google_map_style))) {
             googleMap!!.apply {
                 setMinZoomPreference(MIN_ZOOM)
