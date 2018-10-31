@@ -73,8 +73,6 @@ class GameMapPresenter(
                                 Log.d("GameMap", "Location: (${t.lat}, ${t.lng})")
                                 this@GameMapPresenter.view?.showCurrentLocation(t)
                             }
-
-
                         })
             )
             disposables.add(
@@ -94,7 +92,6 @@ class GameMapPresenter(
                                 }
 
                                 override fun onComplete() {}
-
                             })
             )
             locationProvider.enable()

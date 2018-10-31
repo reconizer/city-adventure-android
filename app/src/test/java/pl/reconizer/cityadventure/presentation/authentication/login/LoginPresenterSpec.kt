@@ -1,6 +1,5 @@
 package pl.reconizer.cityadventure.presentation.authentication.login
 
-import android.util.Patterns
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
@@ -11,9 +10,6 @@ import pl.reconizer.cityadventure.domain.usecases.authentication.SignIn
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 
 class LoginPresenterSpec : Spek({
-    beforeGroup {
-        Patterns.EMAIL_ADDRESS
-    }
 
     describe("LoginPresenter") {
         val view = mock<ILoginView>()
