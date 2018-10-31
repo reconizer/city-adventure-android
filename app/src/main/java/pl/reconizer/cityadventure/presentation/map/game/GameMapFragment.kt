@@ -13,6 +13,7 @@ import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.Position
+import pl.reconizer.cityadventure.presentation.adventure.StartPointFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.map.IMapView
 import javax.inject.Inject
@@ -53,6 +54,9 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
         mapView.cameraMovedListener = {
             presenter.cameraPositionObserver.onNext(it)
+        }
+        mapView.adventurePinClickListener = { adventure ->
+            navigator.goTo(StartPointFragment.newInstance(adventure))
         }
     }
 

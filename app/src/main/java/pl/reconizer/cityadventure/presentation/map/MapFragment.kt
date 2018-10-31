@@ -36,6 +36,7 @@ class MapFragment : SupportMapFragment(), IMapView {
     private lateinit var overlayBitmap: Bitmap
     private lateinit var overlayBitmapDescriptor: BitmapDescriptor
 
+    override var adventurePinClickListener: ((adventure: Adventure) -> Unit)? = null
     override var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)? = null
     override var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)? = null
 
@@ -128,6 +129,15 @@ class MapFragment : SupportMapFragment(), IMapView {
                     googleMap!!.cameraPosition.target,
                     googleMap!!.cameraPosition.zoom
             ))
+        }
+
+        googleMap!!.setOnMarkerClickListener {
+            if (it.tag is Adventure) {
+                adventurePinClickListener?.invoke(it.tag as Adventure)
+                true
+            } else {
+                false
+            }
         }
 
         if (currentLocation != null) {

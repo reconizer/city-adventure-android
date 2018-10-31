@@ -5,6 +5,7 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 
 interface IMapView {
 
+    var adventurePinClickListener: ((adventure: Adventure) -> Unit)?
     var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)?
     var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)?
 

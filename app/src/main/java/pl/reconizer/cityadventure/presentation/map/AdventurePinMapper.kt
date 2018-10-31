@@ -1,8 +1,6 @@
 package pl.reconizer.cityadventure.presentation.map
 
 import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.domain.entities.Adventure
 
 class AdventurePinMapper(

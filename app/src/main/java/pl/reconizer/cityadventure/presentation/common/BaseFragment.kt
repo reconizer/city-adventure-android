@@ -7,10 +7,14 @@ import pl.reconizer.cityadventure.MainActivity
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.presentation.mvp.IView
+import pl.reconizer.cityadventure.presentation.navigation.INavigator
 
 open class BaseFragment : Fragment(), IView {
 
     private var genericErrorDialog: AlertDialog? = null
+
+    val navigator: INavigator
+        get() = (activity as MainActivity).navigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
