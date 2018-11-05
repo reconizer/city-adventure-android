@@ -9,6 +9,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
 import pl.reconizer.cityadventure.CityAdventureApp
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import javax.inject.Inject
 
@@ -17,9 +18,9 @@ class LoginFragment : BaseFragment(), ILoginView {
     @Inject
     lateinit var presenter: LoginPresenter
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        CityAdventureApp.appComponent.loginComponent(LoginModule()).inject(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Injector.buildLoginComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,11 @@ class LoginFragment : BaseFragment(), ILoginView {
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearLoginComponent()
     }
 
     override fun successfulSignIn() {

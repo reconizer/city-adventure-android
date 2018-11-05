@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Single
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import pl.reconizer.cityadventure.data.entities.Authentication
+import pl.reconizer.cityadventure.data.entities.AuthenticationResponse
 import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
 
 class UserRepositorySpec : Spek({
@@ -12,7 +12,7 @@ class UserRepositorySpec : Spek({
     describe("UserRepository") {
         val api = mock<IAuthenticationApi>()
         val repository = UserRepository(api)
-        val authenticationEntity = Authentication("token")
+        val authenticationEntity = AuthenticationResponse("token")
 
         before { whenever(api.login(any(), any())).thenReturn(Single.just(authenticationEntity)) }
 

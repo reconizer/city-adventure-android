@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:name="pl.reconizer.cityadventure.presentation.authentication.login.LoginFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_login" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
