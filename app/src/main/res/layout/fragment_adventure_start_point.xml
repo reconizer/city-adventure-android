@@ -1,12 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/testScroll"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="18sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/firstBackgroundTile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/background_tile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/secondBackgroundTile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/background_tile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstBackgroundTile"/>
+
+            <ImageView
+                android:id="@+id/bannerImageBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_lg"
+                android:layout_marginTop="@dimen/space_xxl"
+                android:layout_marginEnd="@dimen/space_lg"
+                android:adjustViewBounds="true"
+                android:src="@drawable/banner_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/bannerImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/banner_padding_start"
+                android:layout_marginTop="@dimen/banner_padding_top"
+                android:layout_marginEnd="@dimen/banner_padding_end"
+                android:layout_marginBottom="@dimen/banner_padding_bottom"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_banner_big"
+                app:layout_constraintBottom_toBottomOf="@id/bannerImageBackground"
+                app:layout_constraintEnd_toEndOf="@id/bannerImageBackground"
+                app:layout_constraintStart_toStartOf="@id/bannerImageBackground"
+                app:layout_constraintTop_toTopOf="@id/bannerImageBackground" />
+
+            <Space
+                android:id="@+id/topMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/space_sm"
+                app:layout_constraintBottom_toTopOf="@+id/bannerImageBackground" />
+
+            <Space
+                android:id="@+id/topLeftMargin"
+                android:layout_width="@dimen/space_xs"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/bannerImageBackground" />
+
+            <Space
+                android:id="@+id/bottomMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/space_sm"
+                app:layout_constraintTop_toBottomOf="@+id/bannerImageBackground" />
+
+            <Space
+                android:id="@+id/bottomRightMargin"
+                android:layout_width="@dimen/space_xs"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/bannerImageBackground" />
+
+            <ImageView
+                android:id="@+id/topBannerCorner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_corner_top"
+                app:layout_constraintStart_toStartOf="@+id/topLeftMargin"
+                app:layout_constraintTop_toTopOf="@+id/topMargin" />
+
+            <ImageView
+                android:id="@+id/bottomBannerCorner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_corner_bottom"
+                app:layout_constraintBottom_toBottomOf="@+id/bottomMargin"
+                app:layout_constraintEnd_toEndOf="@+id/bottomRightMargin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/creatorLeftGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.13" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/creatorRightGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.87" />
+
+            <ImageView
+                android:id="@+id/creatorBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_lg"
+                android:adjustViewBounds="true"
+                android:src="@drawable/start_point_creator_background"
+                app:layout_constraintEnd_toStartOf="@+id/creatorRightGuideline"
+                app:layout_constraintStart_toStartOf="@+id/creatorLeftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/bannerImageBackground" />
+
+            <ImageView
+                android:id="@+id/creatorBackgroundTape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/start_point_creator_background_tape"
+                app:layout_constraintBottom_toTopOf="@+id/creatorBackground"
+                app:layout_constraintEnd_toEndOf="@+id/creatorBackground"
+                app:layout_constraintStart_toStartOf="@+id/creatorBackground"
+                app:layout_constraintTop_toTopOf="@+id/creatorBackground" />
+
+            <ImageView
+                android:id="@+id/closeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/space_sm"
+                android:paddingTop="@dimen/space_sm"
+                android:paddingEnd="@dimen/space_md"
+                android:paddingBottom="@dimen/space_sm"
+                android:src="@drawable/icon_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

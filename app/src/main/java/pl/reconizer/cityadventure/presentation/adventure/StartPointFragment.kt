@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
@@ -19,7 +18,6 @@ class StartPointFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textView.text = (arguments!![ADVENTURE_PARAM] as Adventure).adventureId
     }
 
     companion object {
