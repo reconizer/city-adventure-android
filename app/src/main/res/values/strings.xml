@@ -11,4 +11,8 @@
     <string name="error_something_went_wrong">Coś poszło nie tak</string>
 
     <string name="location_permission">Lokalizacja jest potrzebna do poprawnego działania aplikacji</string>
+
+    <!--adventure start point-->
+    <string name="creator_title">Twórca:</string>
+
 </resources>

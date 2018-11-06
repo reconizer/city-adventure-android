@@ -37,7 +37,7 @@
                 android:src="@drawable/background_tile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/firstBackgroundTile"/>
+                app:layout_constraintTop_toBottomOf="@id/firstBackgroundTile" />
 
             <ImageView
                 android:id="@+id/bannerImageBackground"
@@ -107,41 +107,15 @@
                 app:layout_constraintBottom_toBottomOf="@+id/bottomMargin"
                 app:layout_constraintEnd_toEndOf="@+id/bottomRightMargin" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/creatorLeftGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.13" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/creatorRightGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.87" />
-
-            <ImageView
-                android:id="@+id/creatorBackground"
+            <pl.reconizer.cityadventure.presentation.adventure.AuthorInfoView
+                android:id="@+id/authorInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_lg"
-                android:adjustViewBounds="true"
-                android:src="@drawable/start_point_creator_background"
-                app:layout_constraintEnd_toStartOf="@+id/creatorRightGuideline"
-                app:layout_constraintStart_toStartOf="@+id/creatorLeftGuideline"
-                app:layout_constraintTop_toBottomOf="@+id/bannerImageBackground" />
-
-            <ImageView
-                android:id="@+id/creatorBackgroundTape"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/start_point_creator_background_tape"
-                app:layout_constraintBottom_toTopOf="@+id/creatorBackground"
-                app:layout_constraintEnd_toEndOf="@+id/creatorBackground"
-                app:layout_constraintStart_toStartOf="@+id/creatorBackground"
-                app:layout_constraintTop_toTopOf="@+id/creatorBackground" />
+                android:layout_marginTop="@dimen/space_md"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/firstBackgroundTile"
+                app:layout_constraintTop_toBottomOf="@+id/bannerImageBackground"
+                android:text="Author Name" />
 
             <ImageView
                 android:id="@+id/closeButton"

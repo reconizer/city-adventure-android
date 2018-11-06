@@ -76,6 +76,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
 
+    implementation "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
+
     testImplementation "org.spekframework.spek2:spek-dsl-jvm:$rootProject.ext.spekVersion"
     testImplementation "org.spekframework.spek2:spek-runner-junit5:$rootProject.ext.spekVersion"
     testImplementation "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
