@@ -13,8 +13,6 @@ class ScalableTextView @JvmOverloads constructor(
 ) : TextView(context, attrs, defStyleAttr) {
 
     private var baseScreenSize: Int = DEFAULT_BASE_SCREEN_SIZE
-        private set
-
 
     init {
         attrs?.let {

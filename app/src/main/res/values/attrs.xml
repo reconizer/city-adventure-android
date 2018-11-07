@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <declare-styleable name="Scalables">
+        <attr name="baseScreenWidth" format="integer" />
+    </declare-styleable>
     
     <declare-styleable name="ShadowView">
         <attr name="shadowRadius" format="integer" />
@@ -9,7 +13,11 @@
     </declare-styleable>
 
     <declare-styleable name="ScalableTextView">
-        <attr name="baseScreenWidth" format="integer" />
+        <attr name="baseScreenWidth" />
+    </declare-styleable>
+
+    <declare-styleable name="ScalableSpace">
+        <attr name="baseScreenWidth" />
     </declare-styleable>
 
     <declare-styleable name="AuthorInfoView">
