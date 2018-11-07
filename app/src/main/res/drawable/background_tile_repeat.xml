@@ -2,8 +2,6 @@
 <bitmap
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/background_tile"
-    android:tileModeY="repeat"
-    android:tileModeX="disabled"
+    android:tileMode="repeat"
     android:antialias="true"
-    android:dither="false"
-    android:filter="false" />
+    android:dither="true" />

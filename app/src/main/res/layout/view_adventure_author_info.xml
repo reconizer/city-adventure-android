@@ -70,13 +70,25 @@
         app:layout_constraintStart_toStartOf="@+id/authorBackground"
         app:layout_constraintTop_toTopOf="@+id/authorBackground" />
 
+
+    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+        android:id="@+id/authorImageShadow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/authorImage"
+        app:layout_constraintEnd_toEndOf="@+id/authorImage"
+        app:layout_constraintStart_toStartOf="@+id/authorImage"
+        app:layout_constraintTop_toTopOf="@+id/authorImage"
+        app:shadowOffsetX="2dp"
+        app:shadowOffsetY="2dp"
+        app:shadowRadius="2" />
+
     <ImageView
         android:id="@+id/authorImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:elevation="15dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/author_default_logo"
+        android:src="@drawable/test_banner"
         app:layout_constraintBottom_toTopOf="@+id/authorImageBottomGuideline"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="@+id/authorImageLeftGuideline"
@@ -116,7 +128,7 @@
             android:id="@+id/authorTitle"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:fontFamily="@font/veteran_typewriter"
+            android:textAppearance="@style/TypeWriterText"
             android:gravity="bottom|center_horizontal"
             android:text="@string/creator_title"
             android:textAlignment="gravity"
@@ -130,7 +142,7 @@
             android:id="@+id/authorName"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:fontFamily="@font/veteran_typewriter"
+            android:textAppearance="@style/TypeWriterText"
             android:gravity="top|center_horizontal"
             android:text="Creator Name"
             android:textAlignment="gravity"

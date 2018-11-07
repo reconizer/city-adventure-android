@@ -25,7 +25,7 @@ class AuthorInfoView @JvmOverloads constructor(
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.AuthorInfoView)
             name = typedArray.getString(R.styleable.AuthorInfoView_android_text) ?: ""
-            authorImage.setImageResource(typedArray.getResourceId(R.styleable.AuthorInfoView_android_src, R.drawable.author_default_logo))
+            authorImage.setImageResource(typedArray.getResourceId(R.styleable.AuthorInfoView_android_src, R.drawable.test_banner))
             typedArray.recycle()
         }
 
