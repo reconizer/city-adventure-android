@@ -25,4 +25,8 @@
         <attr name="android:src" />
     </declare-styleable>
 
+    <declare-styleable name="BannerView">
+        <attr name="android:src" />
+    </declare-styleable>
+
 </resources>
