@@ -5,12 +5,12 @@ import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.view.Display
 import android.view.WindowManager
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import pl.reconizer.cityadventure.R
 
 class ScalableTextView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : TextView(context, attrs, defStyleAttr) {
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     private var baseScreenSize: Int = DEFAULT_BASE_SCREEN_SIZE
 
