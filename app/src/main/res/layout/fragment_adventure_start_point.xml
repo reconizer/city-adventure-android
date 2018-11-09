@@ -44,6 +44,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/banner" />
 
+            <include
+                android:id="@+id/ratingContainer"
+                layout="@layout/view_adventure_start_point_rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/authorInfo" />
+
             <ImageView
                 android:id="@+id/closeButton"
                 android:layout_width="wrap_content"

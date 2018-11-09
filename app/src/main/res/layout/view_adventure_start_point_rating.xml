@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/leftMargin"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/rightMargin"
+        android:layout_width="18dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/leftTapeOffset"
+        android:layout_width="wrap_content"
+        android:layout_height="9dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/rightTapeOffset"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ratingBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_point_rating_background"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@id/leftMargin"
+        app:layout_constraintEnd_toStartOf="@id/rightMargin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/leftTape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_point_rating_left_tape"
+        app:layout_constraintTop_toBottomOf="@id/leftTapeOffset"
+        app:layout_constraintStart_toStartOf="@id/ratingBackground"
+        app:layout_constraintEnd_toStartOf="@id/ratingBackground" />
+
+    <ImageView
+        android:id="@+id/rightTape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_point_rating_right_tape"
+        app:layout_constraintTop_toBottomOf="@id/rightTapeOffset"
+        app:layout_constraintStart_toEndOf="@id/ratingBackground"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackground" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/titleTopMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        app:layout_constraintTop_toTopOf="@id/ratingBackground"/>
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#302e2a"
+        android:text="@string/rate_adventure"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/titleTopMargin"
+        app:layout_constraintStart_toStartOf="@id/ratingBackground"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackground" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/titleBottomMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/ratingSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        app:layout_constraintTop_toBottomOf="@id/titleBottomMargin" />
+
+    <pl.reconizer.cityadventure.presentation.adventure.RatingView
+        android:id="@+id/ratingView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/ratingSpace"
+        app:layout_constraintBottom_toBottomOf="@id/ratingSpace"
+        app:layout_constraintStart_toStartOf="@id/ratingBackground"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackground" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

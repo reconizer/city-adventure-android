@@ -9,6 +9,7 @@
 
     <style name="TypeWriterText">
         <item name="android:fontFamily">@font/veteran_typewriter</item>
+        <item name="android:textColor">@color/fontBlack</item>
     </style>
 
 </resources>

@@ -15,4 +15,6 @@
     <!--adventure start point-->
     <string name="creator_title">Twórca:</string>
 
+    <string name="rate_adventure">Oceń przygodę:</string>
+
 </resources>
