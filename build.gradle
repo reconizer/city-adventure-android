@@ -22,6 +22,7 @@ buildscript {
         daggerVersion = '2.15'
 
         picassoVersion = '2.71828'
+        propertyAnimatorVersion = '1.4.5'
 
         spekVersion = '2.0.0-rc.1'
         assertionEngineVersion = '0.5.0'
