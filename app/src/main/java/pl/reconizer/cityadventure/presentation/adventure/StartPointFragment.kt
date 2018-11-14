@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.DifficultyLevel
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 
 class StartPointFragment : BaseFragment() {
@@ -30,6 +32,8 @@ class StartPointFragment : BaseFragment() {
 
         authorInfo.name = "Cool Author"
         authorInfo.setLogo("https://placekitten.com/g/300/300")
+
+        difficultyLevel.level = DifficultyLevel.MEDIUM
 
         ratingView.rateListener = {
             showRating()
@@ -58,6 +62,7 @@ class StartPointFragment : BaseFragment() {
                 .setInterpolator(AccelerateDecelerateInterpolator())
                 .setDuration(RATING_HIGHT_ANIMATION_DURATION)
                 .setStartDelay(RATING_VISIBILITY_ANIMATION_DURATION + RATING_ANIMATION_DELAY)
+                .withEndAction { ratingViewContainer.isGone = true }
                 .start()
         showRatingStamp()
     }
