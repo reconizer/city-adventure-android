@@ -11,6 +11,7 @@ import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.common.extensions.TimeConsts
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.DifficultyLevel
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
@@ -34,6 +35,9 @@ class StartPointFragment : BaseFragment() {
         authorInfo.setLogo("https://placekitten.com/g/300/300")
 
         difficultyLevel.level = DifficultyLevel.MEDIUM
+
+        timeLength.minLength = 10L * TimeConsts.SECONDS_IN_HOUR
+        timeLength.minLength = 3L * TimeConsts.SECONDS_IN_DAY + 5 * TimeConsts.SECONDS_IN_HOUR + 43
 
         ratingView.rateListener = {
             showRating()
