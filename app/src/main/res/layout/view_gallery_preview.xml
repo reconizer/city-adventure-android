@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/firstImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/secondImage"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/test_banner" />
+
+    <ImageView
+        android:id="@+id/secondImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_sm"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/firstImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/test_banner" />
+
+    <ImageView
+        android:id="@+id/thirdImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_sm"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/moreImagesContainer"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firstImage"
+        tools:src="@drawable/test_banner" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/moreImagesContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_sm"
+        android:layout_marginTop="@dimen/space_sm"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/thirdImage"
+        app:layout_constraintTop_toBottomOf="@id/secondImage">
+
+        <ImageView
+            android:id="@+id/fourthImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/test_banner" />
+
+        <View
+            android:id="@+id/imageOverlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/galleryImageOverlayColor"
+            app:layout_constraintBottom_toBottomOf="@id/fourthImage"
+            app:layout_constraintEnd_toEndOf="@id/fourthImage"
+            app:layout_constraintStart_toStartOf="@id/fourthImage"
+            app:layout_constraintTop_toTopOf="@id/fourthImage" />
+
+        <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+            android:id="@+id/galleryImageCount"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textAlignment="gravity"
+            android:textAppearance="@style/TypeWriterText"
+            android:textColor="#887a6b"
+            android:textSize="42dp"
+            app:layout_constraintBottom_toBottomOf="@id/fourthImage"
+            app:layout_constraintEnd_toEndOf="@id/fourthImage"
+            app:layout_constraintStart_toStartOf="@id/fourthImage"
+            app:layout_constraintTop_toTopOf="@id/fourthImage"
+            tools:text="+15" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
