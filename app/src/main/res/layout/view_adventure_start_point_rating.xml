@@ -41,19 +41,19 @@
         app:layout_constraintEnd_toStartOf="@id/rightMargin"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/leftTape"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="23dp"
+        android:layout_height="45dp"
         android:src="@drawable/start_point_rating_left_tape"
         app:layout_constraintTop_toBottomOf="@id/leftTapeOffset"
         app:layout_constraintStart_toStartOf="@id/ratingBackground"
         app:layout_constraintEnd_toStartOf="@id/ratingBackground" />
 
-    <ImageView
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/rightTape"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="23dp"
+        android:layout_height="80dp"
         android:src="@drawable/start_point_rating_right_tape"
         app:layout_constraintTop_toBottomOf="@id/rightTapeOffset"
         app:layout_constraintStart_toEndOf="@id/ratingBackground"

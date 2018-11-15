@@ -52,18 +52,15 @@
         app:layout_constraintStart_toEndOf="@id/leftMargin"
         app:layout_constraintEnd_toStartOf="@id/rightMargin"/>
 
-    <ImageView
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/authorBackgroundTape"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
+        android:layout_width="81dp"
+        android:layout_height="26dp"
         android:src="@drawable/start_point_creator_background_tape"
         app:layout_constraintBottom_toTopOf="@+id/authorBackground"
         app:layout_constraintEnd_toEndOf="@+id/authorBackground"
         app:layout_constraintStart_toStartOf="@+id/authorBackground"
         app:layout_constraintTop_toTopOf="@+id/authorBackground" />
-
 
     <pl.reconizer.cityadventure.presentation.customviews.ShadowView
         android:id="@+id/authorImageShadow"

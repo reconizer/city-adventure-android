@@ -37,7 +37,9 @@ class StartPointFragment : BaseFragment() {
         difficultyLevel.level = DifficultyLevel.MEDIUM
 
         timeLength.minLength = 10L * TimeConsts.SECONDS_IN_HOUR
-        timeLength.minLength = 3L * TimeConsts.SECONDS_IN_DAY + 5 * TimeConsts.SECONDS_IN_HOUR + 43
+        timeLength.maxLength = 3L * TimeConsts.SECONDS_IN_DAY + 5 * TimeConsts.SECONDS_IN_HOUR + 43
+
+        adventureDescription.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo magna, auctor et ornare a, auctor ac elit. Cras sit amet consectetur est. Suspendisse dui lacus, blandit non neque fermentum, tincidunt eleifend tortor. Phasellus faucibus volutpat sapien, at viverra turpis vestibulum eu. Donec iaculis ullamcorper dolor, a consectetur nulla. Donec eget semper neque. Donec interdum sagittis nisl. Etiam at metus posuere, tincidunt ligula a, tristique dui."
 
         ratingView.rateListener = {
             showRating()

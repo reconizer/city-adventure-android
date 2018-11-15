@@ -5,24 +5,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
-        android:id="@+id/drawableSpace"
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/difficultyIcon"
         android:layout_width="73dp"
         android:layout_height="81dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/difficultyIcon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@id/drawableSpace"
-        app:layout_constraintEnd_toEndOf="@id/drawableSpace"
-        app:layout_constraintStart_toStartOf="@id/drawableSpace"
-        app:layout_constraintTop_toTopOf="@id/drawableSpace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/difficulty_level_hard" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
@@ -31,7 +22,7 @@
         android:layout_height="7dp"
         app:layout_constraintEnd_toEndOf="@id/difficultyIcon"
         app:layout_constraintStart_toStartOf="@+id/difficultyIcon"
-        app:layout_constraintTop_toBottomOf="@id/drawableSpace" />
+        app:layout_constraintTop_toBottomOf="@id/difficultyIcon" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
         android:id="@+id/difficultyLevelName"

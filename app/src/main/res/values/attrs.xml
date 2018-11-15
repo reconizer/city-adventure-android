@@ -20,6 +20,11 @@
         <attr name="baseScreenWidth" />
     </declare-styleable>
 
+    <declare-styleable name="ScalableImageView">
+        <attr name="baseScreenWidth" />
+        <attr name="android:src" />
+    </declare-styleable>
+
     <declare-styleable name="ScalableSpace">
         <attr name="baseScreenWidth" />
     </declare-styleable>
