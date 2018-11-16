@@ -1,13 +1,11 @@
 package pl.reconizer.cityadventure.presentation.customviews
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.renderscript.*
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import pl.reconizer.cityadventure.R
 
@@ -26,10 +24,13 @@ class ShadowView @JvmOverloads constructor(
     private var shadowOffsetX: Int = 0
     private var shadowOffsetY: Int = 0
 
+    private var desiredWidth: Int = 0
+    private var desiredHeight: Int = 0
+
     init {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.ShadowView)
-            radius = typedArray.getInt(R.styleable.ShadowView_shadowRadius, 0)
+            radius = typedArray.getDimensionPixelOffset(R.styleable.ShadowView_shadowRadius, 0)
             shadowColor = typedArray.getColor(R.styleable.ShadowView_shadowColor, ContextCompat.getColor(context, R.color.basicShadow))
             shadowOffsetX = typedArray.getDimensionPixelOffset(R.styleable.ShadowView_shadowOffsetX, 0)
             shadowOffsetY = typedArray.getDimensionPixelOffset(R.styleable.ShadowView_shadowOffsetY, 0)
@@ -39,21 +40,34 @@ class ShadowView @JvmOverloads constructor(
         translationY = y + shadowOffsetY
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        desiredWidth = MeasureSpec.getSize(widthMeasureSpec) + 2 * radius
+        desiredHeight = MeasureSpec.getSize(heightMeasureSpec) + 2 * radius
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        scaleX = 1f * desiredWidth / (right - left)
+        scaleY = 1f * desiredHeight / (bottom - top)
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        if (!isInEditMode && canvas != null) {
-
-            if (shadowBitmap == null) {
-                shadowBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-                generateShadow()
+        if (!isInEditMode) {
+            canvas?.let {
+                val newRect = it.clipBounds
+                if (shadowBitmap == null) {
+                    shadowBitmap = Bitmap.createBitmap(newRect.width(), newRect.height(), Bitmap.Config.ARGB_8888)
+                    generateShadow()
+                }
+                it.drawBitmap(shadowBitmap, newRect.left.toFloat(), newRect.top.toFloat(), null)
             }
-            canvas.drawBitmap(shadowBitmap, 0f, 0f, null)
         }
     }
 
     override fun onAttachedToWindow() {
         if (!isInEditMode) {
-
             rs = RenderScript.create(context)
             val element = Element.U8_4(rs)
             blurScript = ScriptIntrinsicBlur.create(rs, element)
@@ -67,7 +81,7 @@ class ShadowView @JvmOverloads constructor(
             color = shadowColor
             style = Paint.Style.FILL
         }
-        val shadowRect = Rect(radius, radius, width - radius, height - radius)
+        val shadowRect = Rect(radius, radius, shadowBitmap!!.width - radius, shadowBitmap!!.height - radius)
         val mainCanvas = Canvas(shadowBitmap)
 
         mainCanvas.drawRect(shadowRect, shadowPaint)

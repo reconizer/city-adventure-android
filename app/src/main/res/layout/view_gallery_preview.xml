@@ -3,7 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:padding="8dp">
+
+    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+        android:id="@+id/firstImageShadow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/firstImage"
+        app:layout_constraintEnd_toEndOf="@id/firstImage"
+        app:layout_constraintStart_toStartOf="@id/firstImage"
+        app:layout_constraintTop_toTopOf="@id/firstImage"
+        app:shadowOffsetX="1dp"
+        app:shadowOffsetY="1dp"
+        app:shadowRadius="2dp" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+        android:id="@+id/secondImageShadow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/secondImage"
+        app:layout_constraintEnd_toEndOf="@id/secondImage"
+        app:layout_constraintStart_toStartOf="@id/secondImage"
+        app:layout_constraintTop_toTopOf="@id/secondImage"
+        app:shadowOffsetX="1dp"
+        app:shadowOffsetY="1dp"
+        app:shadowRadius="2dp" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+        android:id="@+id/thirdImageShadow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/thirdImage"
+        app:layout_constraintEnd_toEndOf="@id/thirdImage"
+        app:layout_constraintStart_toStartOf="@id/thirdImage"
+        app:layout_constraintTop_toTopOf="@id/thirdImage"
+        app:shadowOffsetX="1dp"
+        app:shadowOffsetY="1dp"
+        app:shadowRadius="2dp" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+        android:id="@+id/fourthImageShadow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/moreImagesContainer"
+        app:layout_constraintEnd_toEndOf="@id/moreImagesContainer"
+        app:layout_constraintStart_toStartOf="@id/moreImagesContainer"
+        app:layout_constraintTop_toTopOf="@id/moreImagesContainer"
+        app:shadowOffsetX="1dp"
+        app:shadowOffsetY="1dp"
+        app:shadowRadius="2dp" />
 
     <ImageView
         android:id="@+id/firstImage"

@@ -70,9 +70,9 @@
         app:layout_constraintEnd_toEndOf="@+id/authorImage"
         app:layout_constraintStart_toStartOf="@+id/authorImage"
         app:layout_constraintTop_toTopOf="@+id/authorImage"
-        app:shadowOffsetX="2dp"
-        app:shadowOffsetY="2dp"
-        app:shadowRadius="2" />
+        app:shadowOffsetX="1dp"
+        app:shadowOffsetY="1dp"
+        app:shadowRadius="2dp" />
 
     <ImageView
         android:id="@+id/authorImage"

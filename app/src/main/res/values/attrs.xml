@@ -10,7 +10,7 @@
     </declare-styleable>
     
     <declare-styleable name="ShadowView">
-        <attr name="shadowRadius" format="integer" />
+        <attr name="shadowRadius" format="dimension" />
         <attr name="shadowOffsetX" format="dimension" />
         <attr name="shadowOffsetY" format="dimension" />
         <attr name="shadowColor" format="color" />

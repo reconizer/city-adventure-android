@@ -41,6 +41,18 @@ class StartPointFragment : BaseFragment() {
 
         adventureDescription.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo magna, auctor et ornare a, auctor ac elit. Cras sit amet consectetur est. Suspendisse dui lacus, blandit non neque fermentum, tincidunt eleifend tortor. Phasellus faucibus volutpat sapien, at viverra turpis vestibulum eu. Donec iaculis ullamcorper dolor, a consectetur nulla. Donec eget semper neque. Donec interdum sagittis nisl. Etiam at metus posuere, tincidunt ligula a, tristique dui."
 
+        galleryPreview.setImages(listOf(
+                "https://loremflickr.com/1280/720/car",
+                "https://loremflickr.com/1280/720/cat",
+                "https://loremflickr.com/1280/720/usa",
+                "https://loremflickr.com/1280/720/warsaw",
+                "https://loremflickr.com/1280/720/city",
+                "https://loremflickr.com/1280/720/dog",
+                "https://loremflickr.com/1280/720/tiger",
+                "https://loremflickr.com/1280/720",
+                "https://loremflickr.com/1280/720"
+        ))
+
         ratingView.rateListener = {
             showRating()
         }

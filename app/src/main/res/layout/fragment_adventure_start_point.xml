@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/testScroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentContainer"
@@ -81,11 +81,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_lg"
+                android:layout_marginStart="@dimen/space_sm"
+                android:layout_marginEnd="@dimen/space_sm"
                 android:textAppearance="@style/TypeWriterText"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toStartOf="@id/rightGuideLine"
                 app:layout_constraintStart_toStartOf="@id/leftGuideline"
                 app:layout_constraintTop_toBottomOf="@id/difficultyLevel" />
+
+            <pl.reconizer.cityadventure.presentation.customviews.GalleryPreviewView
+                android:id="@+id/galleryPreview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                app:layout_constraintEnd_toStartOf="@id/rightGuideLine"
+                app:layout_constraintStart_toStartOf="@id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@id/adventureDescription" />
 
             <ImageView
                 android:id="@+id/closeButton"
@@ -115,14 +126,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.0778" />
+                app:layout_constraintGuide_percent="0.0556" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/rightGuideLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9222" />
+                app:layout_constraintGuide_percent="0.9444" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
