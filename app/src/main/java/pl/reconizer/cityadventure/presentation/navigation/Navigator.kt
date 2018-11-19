@@ -16,7 +16,7 @@ class Navigator(
 
     override fun goTo(fragment: Fragment) {
         fragmentManager.beginTransaction()
-                .replace(container, fragment)
+                .add(container, fragment)
 //                .setCustomAnimations(R.anim.slide_in_left,
 //                        R.anim.slide_out_right,
 //                        R.anim.slide_in_right,

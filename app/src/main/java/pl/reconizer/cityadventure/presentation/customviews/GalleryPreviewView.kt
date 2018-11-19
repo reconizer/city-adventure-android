@@ -3,6 +3,7 @@ package pl.reconizer.cityadventure.presentation.customviews
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import com.squareup.picasso.Picasso
@@ -15,9 +16,16 @@ class GalleryPreviewView @JvmOverloads constructor(
 
     private var images: List<String> = emptyList()
 
+    var thumbClickListener: ((idx: Int, view: View) -> Unit)? = null
+
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.view_gallery_preview, this, true)
+
+        firstImage.setOnClickListener { thumbClickListener?.invoke(0, it) }
+        secondImage.setOnClickListener { thumbClickListener?.invoke(1, it) }
+        thirdImage.setOnClickListener { thumbClickListener?.invoke(2, it) }
+        moreImagesContainer.setOnClickListener { thumbClickListener?.invoke(3, it) }
     }
 
     fun setImages(newImages: List<String>) {
