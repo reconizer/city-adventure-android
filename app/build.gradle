@@ -78,6 +78,7 @@ dependencies {
 
     implementation "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
     implementation "com.bartoszlipinski:viewpropertyobjectanimator:$rootProject.ext.propertyAnimatorVersion"
+    implementation "com.github.chrisbanes:PhotoView:$rootProject.ext.imageViewWithGesturesVersion"
 
     testImplementation "org.spekframework.spek2:spek-dsl-jvm:$rootProject.ext.spekVersion"
     testImplementation "org.spekframework.spek2:spek-runner-junit5:$rootProject.ext.spekVersion"
