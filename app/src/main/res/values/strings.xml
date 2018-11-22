@@ -18,6 +18,10 @@
 
     <string name="rate_adventure">Oceń przygodę:</string>
 
+    <!--ranking-->
+    <string name="ranking_your_time">Twój czas:</string>
+    <string name="ranking_position">Miejsce:</string>
+
     <string name="difficulty_level_easy">łatwy</string>
     <string name="difficulty_level_medium">średni</string>
     <string name="difficulty_level_hard">trudny</string>

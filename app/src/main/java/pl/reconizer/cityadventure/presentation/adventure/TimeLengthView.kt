@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_adventure_time_length.view.*
 import pl.reconizer.cityadventure.R
-import pl.reconizer.cityadventure.common.extensions.toPrretyTimeString
+import pl.reconizer.cityadventure.common.extensions.toPrettyTimeString
 
 class TimeLengthView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -34,6 +34,6 @@ class TimeLengthView @JvmOverloads constructor(
     }
 
     private fun updateTextView() {
-        timeTextView.text = "${minLength.toPrretyTimeString()} - ${maxLength.toPrretyTimeString()}"
+        timeTextView.text = "${minLength.toPrettyTimeString()} - ${maxLength.toPrettyTimeString()}"
     }
 }

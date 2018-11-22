@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/frame"
+        android:layout_width="288dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ranking_user_frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/placementSpace"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/frame"
+        app:layout_constraintStart_toStartOf="@id/frame"
+        app:layout_constraintTop_toTopOf="@id/frame" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/placementDecoration"
+        android:layout_width="24dp"
+        android:layout_height="23dp"
+        app:layout_constraintBottom_toBottomOf="@id/placementSpace"
+        app:layout_constraintEnd_toEndOf="@id/placementSpace"
+        app:layout_constraintStart_toStartOf="@id/placementSpace"
+        app:layout_constraintTop_toTopOf="@id/placementSpace"
+        tools:src="@drawable/ranking_first_place" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/placementTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#302e2a"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/placementSpace"
+        app:layout_constraintEnd_toEndOf="@id/placementSpace"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@id/placementSpace"
+        app:layout_constraintTop_toTopOf="@id/placementSpace"
+        app:layout_constraintVertical_bias="0.6"
+        tools:text="1" />
+    
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/avatarBackground"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:src="@drawable/ranking_avatar_background_small"
+        app:layout_constraintStart_toEndOf="@id/placementSpace"
+        app:layout_constraintTop_toTopOf="@id/frame"
+        app:layout_constraintBottom_toBottomOf="@id/frame"/>
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        tools:src="@drawable/test_avatar"
+        app:layout_constraintStart_toStartOf="@id/avatarBackground"
+        app:layout_constraintTop_toTopOf="@id/avatarBackground"
+        app:layout_constraintEnd_toEndOf="@id/avatarBackground"
+        app:layout_constraintBottom_toBottomOf="@id/avatarBackground" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#453b2c"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/frame"
+        app:layout_constraintEnd_toStartOf="@id/timeTextView"
+        app:layout_constraintStart_toEndOf="@id/avatarBackground"
+        app:layout_constraintTop_toTopOf="@id/frame"
+        tools:text="Test Name" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#453b2c"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/frame"
+        app:layout_constraintEnd_toEndOf="@id/frame"
+        app:layout_constraintTop_toTopOf="@id/frame"
+        tools:text="Test Name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
