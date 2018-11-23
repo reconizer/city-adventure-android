@@ -25,7 +25,11 @@ class GalleryPreviewView @JvmOverloads constructor(
         firstImage.setOnClickListener { thumbClickListener?.invoke(0, it) }
         secondImage.setOnClickListener { thumbClickListener?.invoke(1, it) }
         thirdImage.setOnClickListener { thumbClickListener?.invoke(2, it) }
-        moreImagesContainer.setOnClickListener { thumbClickListener?.invoke(3, it) }
+        moreImagesContainer.setOnClickListener { thumbClickListener?.invoke(3, fourthImage) }
+        firstImage.transitionName = "${resources.getString(R.string.galleryItemTransitionName)}_0"
+        secondImage.transitionName = "${resources.getString(R.string.galleryItemTransitionName)}_1"
+        thirdImage.transitionName = "${resources.getString(R.string.galleryItemTransitionName)}_2"
+        fourthImage.transitionName = "${resources.getString(R.string.galleryItemTransitionName)}_3"
     }
 
     fun setImages(newImages: List<String>) {

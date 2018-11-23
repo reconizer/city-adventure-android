@@ -16,14 +16,16 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.DifficultyLevel
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
+import pl.reconizer.cityadventure.presentation.navigation.SharedTransitionElement
 
 class StartPointFragment : BaseFragment() {
 
     val images = listOf(
             "https://loremflickr.com/1280/720/car",
+            "https://dummyimage.com/1440x800/000/fff",
             "https://loremflickr.com/1280/720/cat",
-            "https://loremflickr.com/1280/720/usa",
-            "https://loremflickr.com/1280/720/warsaw",
+            "https://loremflickr.com/1280/720/motor",
+            "https://loremflickr.com/1280/720/flower",
             "https://loremflickr.com/1280/720/city",
             "https://loremflickr.com/1280/720/dog",
             "https://loremflickr.com/1280/720/tiger",
@@ -56,8 +58,12 @@ class StartPointFragment : BaseFragment() {
 
         galleryPreview.setImages(images)
         galleryPreview.thumbClickListener = {idx, view ->
-            navigator.goTo(GalleryFragment.newInstance(images, idx))
-//            GalleryFragment.newInstance(images).show(childFragmentManager, "gallery")
+            val frag = GalleryFragment.newInstance(images, idx)
+//            val frag = GalleryItemFragment.newInstance(images[idx], "galleryItem_$idx}")
+            navigator.goTo(
+                    frag,
+                    SharedTransitionElement(view, images[idx])
+            )
         }
 
         ratingView.rateListener = {

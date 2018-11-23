@@ -4,26 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.os.bundleOf
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.PicassoProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.Fade
+import androidx.transition.TransitionInflater
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
-import java.lang.Exception
 
-class GalleryFragment : BaseFragment(), IImageLoader {
+class GalleryFragment : BaseFragment() {
 
     val images by lazy { arguments!![IMAGES_PARAM] as List<String> }
     val startIndex by lazy { arguments!![START_INDEX_PARAM] as Int }
 
-    private var wasInitialImageShown: Boolean = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
+        enterTransition = Fade()
+        exitTransition = Fade()
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.gallery_transition)
+        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(R.transition.gallery_transition)
+
+//        setEnterSharedElementCallback(object : SharedElementCallback() {
+//            override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
+//                val currentPagerView = galleryViewPager.adapter?.instantiateItem(galleryViewPager, startIndex) as View
+//
+//                // Map the first shared element name to the child ImageView.
+//                sharedElements!![names!!.first()] = currentPagerView.findViewById(R.id.image)
+//            }
+//        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,32 +43,9 @@ class GalleryFragment : BaseFragment(), IImageLoader {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        galleryViewPager.adapter = GalleryAdapter(this, context!!, images)
+        galleryViewPager.adapter = GalleryAdapter(childFragmentManager, images, startIndex)
         galleryViewPager.currentItem = startIndex
         closeButton.setOnClickListener { navigator.goBack() }
-    }
-
-    override fun loadInto(url: String, view: ImageView) {
-        if (wasInitialImageShown) {
-            Picasso.get()
-                    .load(url)
-                    .into(view)
-        } else {
-            wasInitialImageShown = true
-            Picasso.get()
-                    .load(url)
-                    .noFade()
-                    .into(view, object : Callback {
-                        override fun onSuccess() {
-                            startPostponedEnterTransition()
-                        }
-
-                        override fun onError(e: Exception?) {
-                            startPostponedEnterTransition()
-                        }
-
-                    })
-        }
     }
 
     companion object {

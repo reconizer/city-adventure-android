@@ -11,10 +11,10 @@ class PhotoViewPager(context: Context, attrs: AttributeSet?) : ViewPager(context
      * https://github.com/chrisbanes/PhotoView#issues-with-viewgroups
      */
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        try {
-            return super.onInterceptTouchEvent(ev)
+        return try {
+            super.onInterceptTouchEvent(ev)
         } catch (e: IllegalArgumentException) {
-            return false
+            false
         }
 
     }
