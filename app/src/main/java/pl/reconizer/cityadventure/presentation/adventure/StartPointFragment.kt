@@ -10,6 +10,8 @@ import androidx.core.view.isGone
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.*
+import kotlinx.android.synthetic.main.view_adventure_start_point_ranking.*
+import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.TimeConsts
 import pl.reconizer.cityadventure.domain.entities.Adventure
@@ -64,6 +66,50 @@ class StartPointFragment : BaseFragment() {
                     frag,
                     SharedTransitionElement(view, images[idx])
             )
+        }
+
+        userRankingView.apply {
+            username = "Test User"
+            position = 34
+            completionTime = 3L * TimeConsts.SECONDS_IN_DAY + 5 * TimeConsts.SECONDS_IN_HOUR + 43
+            setAvatar(R.drawable.test_avatar)
+        }
+
+        firstPlaceEntryView.apply {
+            showData()
+            position = 1
+            username = "First User"
+            completionTime = 5L * TimeConsts.SECONDS_IN_HOUR + 20 * 60 + 43
+            setAvatar(R.drawable.test_avatar)
+        }
+
+        secondPlaceEntryView.apply {
+            showData()
+            position = 2
+            username = "Second User"
+            completionTime = 8L * TimeConsts.SECONDS_IN_HOUR + 45 * 60 + 43
+            setAvatar(R.drawable.test_avatar)
+        }
+
+        thirdPlaceEntryView.apply {
+            showData()
+            position = 3
+            username = "Third User"
+            completionTime = 10L * TimeConsts.SECONDS_IN_HOUR + 45 * 60 + 43
+            setAvatar(R.drawable.test_avatar)
+        }
+
+        fourthPlaceEntryView.apply {
+            showData()
+            position = 4
+            username = "Fourth User"
+            completionTime = 1L * TimeConsts.SECONDS_IN_DAY + 2 * TimeConsts.SECONDS_IN_HOUR + 43
+            setAvatar(R.drawable.test_avatar)
+        }
+
+        fifthPlaceEntryView.apply {
+            hideData()
+            position = 5
         }
 
         ratingView.rateListener = {
