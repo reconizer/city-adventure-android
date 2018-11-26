@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
+import androidx.transition.Fade
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.*
@@ -35,6 +36,12 @@ class StartPointFragment : BaseFragment() {
             "https://loremflickr.com/1280/720"
     )
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        exitTransition = Fade()
+//        reenterTransition = Fade()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_adventure_start_point, container, false)
@@ -62,7 +69,7 @@ class StartPointFragment : BaseFragment() {
         galleryPreview.thumbClickListener = {idx, view ->
             val frag = GalleryFragment.newInstance(images, idx)
 //            val frag = GalleryItemFragment.newInstance(images[idx], "galleryItem_$idx}")
-            navigator.goTo(
+            navigator.openOver(
                     frag,
                     SharedTransitionElement(view, images[idx])
             )

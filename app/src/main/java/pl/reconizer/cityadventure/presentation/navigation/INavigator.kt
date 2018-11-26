@@ -6,7 +6,7 @@ interface INavigator {
 
     fun open(fragment: Fragment)
     fun goTo(fragment: Fragment, transitionElement: SharedTransitionElement? = null)
-    fun openOver(fragment: Fragment)
+    fun openOver(fragment: Fragment, transitionElement: SharedTransitionElement? = null)
     fun goBack()
     fun goBackToRoot()
     fun isRoot(): Boolean

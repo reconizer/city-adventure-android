@@ -20,8 +20,8 @@ class GalleryFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
-        enterTransition = Fade()
-        exitTransition = Fade()
+//        enterTransition = Fade()
+//        exitTransition = Fade()
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.gallery_transition)
         sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(R.transition.gallery_transition)
 

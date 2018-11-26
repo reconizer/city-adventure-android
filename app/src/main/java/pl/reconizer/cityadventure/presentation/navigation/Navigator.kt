@@ -20,16 +20,20 @@ class Navigator(
                 addSharedElement(transitionElement.view, transitionElement.transitionName)
             }
         }
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(container, fragment)
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .addToBackStack(fragment.toString())
                 .commit()
     }
 
-    override fun openOver(fragment: Fragment) {
-        fragmentManager.beginTransaction()
+    override fun openOver(fragment: Fragment, transitionElement: SharedTransitionElement?) {
+        fragmentManager.beginTransaction().apply {
+            if (transitionElement != null) {
+                addSharedElement(transitionElement.view, transitionElement.transitionName)
+            }
+        }
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .add(container, fragment)
-                //.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .addToBackStack(fragment.toString())
                 .commit()
     }
