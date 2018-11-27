@@ -24,22 +24,22 @@ import pl.reconizer.cityadventure.presentation.navigation.SharedTransitionElemen
 class StartPointFragment : BaseFragment() {
 
     val images = listOf(
-            "https://loremflickr.com/1280/720/car",
+            "https://dummyimage.com/1440x800/0033ff/fff",
+            "https://dummyimage.com/600x800/ff001e/fff",
+            "https://dummyimage.com/1200x800/000/fff",
+            "https://dummyimage.com/960x800/0033ff/fff",
+            "https://dummyimage.com/1920x1080/ff8400/fff",
+            "https://dummyimage.com/1440x800/ff001e/fff",
+            "https://dummyimage.com/1440x800/000/0033ff",
+            "https://dummyimage.com/1440x800/000/ff001e",
             "https://dummyimage.com/1440x800/000/fff",
-            "https://loremflickr.com/1280/720/cat",
-            "https://loremflickr.com/1280/720/motor",
-            "https://loremflickr.com/1280/720/flower",
-            "https://loremflickr.com/1280/720/city",
-            "https://loremflickr.com/1280/720/dog",
-            "https://loremflickr.com/1280/720/tiger",
-            "https://loremflickr.com/1280/720",
-            "https://loremflickr.com/1280/720"
+            "https://dummyimage.com/1440x800/000/fff"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        exitTransition = Fade()
-//        reenterTransition = Fade()
+        exitTransition = null
+        reenterTransition = Fade()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
