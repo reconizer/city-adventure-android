@@ -19,7 +19,8 @@ class AdventureRepository(
                         position = Position(53.010612, 18.608255),
                         started = false,
                         purchasable = false,
-                        completed = false
+                        completed = false,
+                        purchased = false
                 ),
                 Adventure(
                         adventureId = "2",
@@ -27,7 +28,8 @@ class AdventureRepository(
                         position = Position(53.010989, 18.607530),
                         started = false,
                         purchasable = true,
-                        completed = false
+                        completed = false,
+                        purchased = true
                 ),
                 Adventure(
                         adventureId = "3",
@@ -35,7 +37,8 @@ class AdventureRepository(
                         position = Position(53.010591, 18.607667),
                         started = true,
                         purchasable = false,
-                        completed = false
+                        completed = false,
+                        purchased = false
                 ),
                 Adventure(
                         adventureId = "4",
@@ -43,7 +46,8 @@ class AdventureRepository(
                         position = Position(53.010276, 18.607966),
                         started = false,
                         purchasable = false,
-                        completed = true
+                        completed = true,
+                        purchased = false
                 ),
                 Adventure(
                         adventureId = "5",
@@ -51,7 +55,8 @@ class AdventureRepository(
                         position = Position(53.010191, 18.607667),
                         started = true,
                         purchasable = true,
-                        completed = false
+                        completed = false,
+                        purchased = true
                 ),
                 Adventure(
                         adventureId = "6",
@@ -59,7 +64,8 @@ class AdventureRepository(
                         position = Position(53.010176, 18.607966),
                         started = false,
                         purchasable = true,
-                        completed = true
+                        completed = true,
+                        purchased = true
                 )
         ))
     }

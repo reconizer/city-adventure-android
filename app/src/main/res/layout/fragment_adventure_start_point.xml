@@ -148,4 +148,14 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <ImageView
+        android:id="@+id/actionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/map_ui_margin"
+        android:layout_marginBottom="@dimen/map_ui_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@drawable/button_adventure_start"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,8 @@ class StartPointFragment : BaseFragment() {
             "https://dummyimage.com/1440x800/000/fff"
     )
 
+    val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         exitTransition = null
@@ -127,6 +129,8 @@ class StartPointFragment : BaseFragment() {
         closeButton.setOnClickListener {
             navigator.goBack()
         }
+
+        updateActionButton()
     }
 
     private fun showRating() {
@@ -163,6 +167,21 @@ class StartPointFragment : BaseFragment() {
                 .setDuration(RATING_STAMP_ANIMATION_DURATION)
                 .setStartDelay(RATING_VISIBILITY_ANIMATION_DURATION + RATING_HIGHT_ANIMATION_DURATION + RATING_ANIMATION_DELAY)
                 .start()
+    }
+
+    private fun updateActionButton() {
+        adventure?.let {
+            if (it.completed) {
+                actionButton.isGone = true
+            } else {
+                actionButton.isGone = false
+                when {
+                    it.started -> actionButton.setImageResource(R.drawable.button_adventure_resume)
+                    it.purchasable && !it.purchased -> actionButton.setImageResource(R.drawable.button_adventure_buy)
+                    else -> actionButton.setImageResource(R.drawable.button_adventure_start)
+                }
+            }
+        }
     }
 
     companion object {
