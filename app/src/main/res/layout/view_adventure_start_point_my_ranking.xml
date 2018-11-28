@@ -105,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="bottom|center_horizontal"
-        android:text="@string/ranking_your_time"
+        android:text="@string/adventure_user_ranking_completion_time"
         android:textAlignment="gravity"
         android:textAppearance="@style/TypeWriterText"
         android:textColor="#1b1813"
@@ -148,7 +148,7 @@
         android:textAppearance="@style/TypeWriterText"
         android:textColor="#15120e"
         android:textSize="15dp"
-        android:text="@string/ranking_position"
+        android:text="@string/adventure_position"
         app:layout_constraintStart_toEndOf="@id/timeFrame"
         app:layout_constraintEnd_toEndOf="@id/rankingBackground"
         app:layout_constraintBottom_toTopOf="@id/timeFrameGuideline" />

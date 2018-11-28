@@ -15,7 +15,8 @@ class AdventurePinMapperSpek : Spek({
                 position = Position(0.0, 0.0),
                 purchasable = purchasable,
                 completed = completed,
-                started = started
+                started = started,
+                purchased = false
         )
     }
 

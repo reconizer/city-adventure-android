@@ -8,6 +8,9 @@ import pl.reconizer.cityadventure.di.components.DaggerAppComponent
 import pl.reconizer.cityadventure.di.components.MainActivityComponent
 import pl.reconizer.cityadventure.di.modules.ContextModule
 import pl.reconizer.cityadventure.di.modules.MainActivityModule
+import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointComponent
+import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
@@ -19,6 +22,7 @@ object Injector {
     private var mainActivityComponent: MainActivityComponent? = null
     private var loginComponent: LoginComponent? = null
     private var gameMapComponent: GameMapComponent? = null
+    private var adventureStartPointComponent: StartPointComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -45,6 +49,13 @@ object Injector {
         return gameMapComponent!!
     }
 
+    fun buildAdventureStartPointComponent(adventure: Adventure): StartPointComponent {
+        adventureStartPointComponent = mainActivityComponent!!.adventureStartPointComponent(
+                StartPointModule(adventure)
+        )
+        return adventureStartPointComponent!!
+    }
+
     fun clearAppComponent() {
         appComponent = null
     }
@@ -59,5 +70,9 @@ object Injector {
 
     fun clearGameMapComponent() {
         gameMapComponent = null
+    }
+
+    fun clearAdventureStartPointComponent() {
+        adventureStartPointComponent = null
     }
 }

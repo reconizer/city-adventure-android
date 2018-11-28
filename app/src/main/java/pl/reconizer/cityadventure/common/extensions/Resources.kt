@@ -5,7 +5,7 @@ import android.content.res.Resources
 import androidx.annotation.StringRes
 import pl.reconizer.cityadventure.R
 
-fun Resources.getStringByName(context: Context, resourceName: String, @StringRes defaultResource: Int = R.string.no_translation): String {
+fun Resources.getStringByName(context: Context, resourceName: String, @StringRes defaultResource: Int = R.string.common_no_translation): String {
     val packageName = context.packageName
     val resId = getIdentifier(resourceName.toLowerCase(), "string", packageName)
     return when(resId) {

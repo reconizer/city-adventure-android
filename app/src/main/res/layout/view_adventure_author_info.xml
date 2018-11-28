@@ -120,7 +120,7 @@
             android:layout_height="0dp"
             android:textAppearance="@style/TypeWriterText"
             android:gravity="bottom|center_horizontal"
-            android:text="@string/creator_title"
+            android:text="@string/adventure_author"
             android:textAlignment="gravity"
             android:textSize="12dp"
             app:layout_constraintBottom_toTopOf="@+id/detailsTopGuideline"

@@ -1,13 +1,11 @@
 package pl.reconizer.cityadventure.presentation.authentication.login
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
-import pl.reconizer.cityadventure.CityAdventureApp
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
@@ -56,6 +54,13 @@ class LoginFragment : BaseFragment(), ILoginView {
 
     override fun successfulSignIn() {
         Toast.makeText(context, "Logged in", Toast.LENGTH_LONG).show()
+        navigator.goBack()
+    }
+
+    companion object {
+        fun newInstance(): LoginFragment {
+            return LoginFragment()
+        }
     }
 
 }

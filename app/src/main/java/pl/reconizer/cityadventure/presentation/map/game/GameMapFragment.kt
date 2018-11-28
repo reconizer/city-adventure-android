@@ -13,7 +13,7 @@ import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.Position
-import pl.reconizer.cityadventure.presentation.adventure.StartPointFragment
+import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.map.IMapView
 import javax.inject.Inject
@@ -89,11 +89,11 @@ class GameMapFragment : BaseFragment(), IGameMapView {
             context?.let {
                 if (locationPermissionDialog == null) {
                     locationPermissionDialog = AlertDialog.Builder(it)
-                            .setMessage(R.string.location_permission)
-                            .setPositiveButton(R.string.ok) { _, _ ->
+                            .setMessage(R.string.location_access_explaination)
+                            .setPositiveButton(R.string.common_ok) { _, _ ->
                                 requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST)
                             }
-                            .setNegativeButton(R.string.close) { _, _ ->
+                            .setNegativeButton(R.string.common_close) { _, _ ->
                                 activity?.finish() // close the app for now
                             }.create()
                 }

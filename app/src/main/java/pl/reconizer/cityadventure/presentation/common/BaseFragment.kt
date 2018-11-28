@@ -1,11 +1,13 @@
 package pl.reconizer.cityadventure.presentation.common
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import pl.reconizer.cityadventure.MainActivity
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.data.entities.Error
+import pl.reconizer.cityadventure.presentation.authentication.login.LoginFragment
 import pl.reconizer.cityadventure.presentation.mvp.IView
 import pl.reconizer.cityadventure.presentation.navigation.INavigator
 
@@ -16,8 +18,8 @@ open class BaseFragment : Fragment(), IView {
     val navigator: INavigator
         get() = (activity as MainActivity).navigator
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (withStatusBar()) {
             (activity as MainActivity).showStatusBar()
         } else {
@@ -30,7 +32,7 @@ open class BaseFragment : Fragment(), IView {
             if (genericErrorDialog == null) {
                 genericErrorDialog = AlertDialog.Builder(it).run {
                     setMessage(R.string.error_something_went_wrong)
-                    setNeutralButton(R.string.close) { dialog, _ -> dialog.dismiss() }
+                    setNeutralButton(R.string.common_close) { dialog, _ -> dialog.dismiss() }
                     create()
                 }
             }
@@ -43,7 +45,7 @@ open class BaseFragment : Fragment(), IView {
     }
 
     override fun showAuthorizationError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        navigator.goTo(LoginFragment.newInstance())
     }
 
     override fun showParametrizedError(errorEntity: Error) {

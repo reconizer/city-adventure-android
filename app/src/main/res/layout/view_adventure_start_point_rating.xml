@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TypeWriterText"
         android:textColor="#302e2a"
-        android:text="@string/rate_adventure"
+        android:text="@string/adventure_add_rating"
         android:textSize="20dp"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/titleTopMargin"

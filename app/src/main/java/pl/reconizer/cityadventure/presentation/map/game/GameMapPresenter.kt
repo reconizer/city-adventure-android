@@ -80,11 +80,12 @@ class GameMapPresenter(
                             cameraMovedByDistanceObservable,
                             loadingIntervalsObservable
                     )
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(backgroundScheduler)
                             .flatMapSingle {
                                 Log.d("GameMapPresenter", "Checking pins")
                                 getAdventures(it)
                             }
-                            .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)
                             .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorHandler) {
                                 override fun onNext(t: List<Adventure>) {
