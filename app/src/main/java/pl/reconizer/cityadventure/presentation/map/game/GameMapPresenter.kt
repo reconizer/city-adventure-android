@@ -42,18 +42,28 @@ class GameMapPresenter(
         }
 
     private val cameraMovedByDistanceObservable = cameraPositionObserver
+            .subscribeOn(backgroundScheduler)
+            .observeOn(backgroundScheduler)
             .filter {
                 previousCameraDetails == null ||
                         SphericalUtil.computeDistanceBetween(it.position, previousCameraDetails!!.position) > DISTANCE_CHANGE ||
                         it.zoom != previousCameraDetails!!.zoom
             }
-            .doOnNext { previousCameraDetails = it }
+            .doOnNext {
+                Log.d("GameMap", "Camera: ${Thread.currentThread().name}")
+                previousCameraDetails = it
+            }
             .map { it.position.toPosition() }
             .share()
 
     private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
+            .subscribeOn(backgroundScheduler)
+            .observeOn(backgroundScheduler)
             .filter { previousCameraDetails != null }
-            .map { previousCameraDetails!!.position.toPosition() }
+            .map {
+                Log.d("GameMap", "Loading: ${Thread.currentThread().name}")
+                previousCameraDetails!!.position.toPosition()
+            }
             .share()
 
     override fun subscribe(view: IGameMapView) {
