@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
-import androidx.transition.Fade
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.*
@@ -19,6 +18,7 @@ import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
 import javax.inject.Inject
 
@@ -26,6 +26,9 @@ class StartPointFragment : BaseFragment(), IStartPointView {
 
     @Inject
     lateinit var presenter: StartPointPresenter
+
+    @Inject
+    lateinit var shadowGenerator: ShadowGenerator
 
     val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
 
@@ -42,6 +45,11 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        ratingViewContainer.isGone = true
+        difficultyLevel.isGone = true
+        timeLength.isGone = true
+        galleryPreview.isGone = true
+
         ratingView.rateListener = {
             showRating()
         }
@@ -51,11 +59,18 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         }
 
         updateActionButton()
+
+        authorInfo.shadowGenerator = shadowGenerator
+        galleryPreview.shadowGenerator = shadowGenerator
+        userRankingView.shadowGenerator = shadowGenerator
     }
 
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
+        if (presenter.adventureStartPoint != null) {
+            show(presenter.adventureStartPoint!!)
+        }
         presenter.fetchData()
     }
 
@@ -72,7 +87,10 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         showCurrentUserRanking(adventureStartPoint)
         showTopFiveRanking(adventureStartPoint)
         showCurrentUserRating(adventureStartPoint)
+
+        difficultyLevel.isGone = false
         difficultyLevel.level = adventureStartPoint.difficultyLevel
+
         adventureDescription.text = adventureStartPoint.description
     }
 
@@ -89,8 +107,6 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     }
 
     private fun showFinishTime(adventureStartPoint: AdventureStartPoint) {
-        timeLength.minLength = 10L * TimeConsts.SECONDS_IN_HOUR
-        timeLength.maxLength = 3L * TimeConsts.SECONDS_IN_DAY + 5 * TimeConsts.SECONDS_IN_HOUR + 43
         if (adventureStartPoint.minFinishTime == null || adventureStartPoint.maxFinishTime == null) {
             timeLength.isGone = true
         } else {
@@ -106,7 +122,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         } else {
             galleryPreview.isGone = false
             galleryPreview.setImages(adventureStartPoint.gallery)
-            galleryPreview.thumbClickListener = {idx, view ->
+            galleryPreview.thumbClickListener = {idx, _ ->
                 navigator.openOver(GalleryFragment.newInstance(adventureStartPoint.gallery, idx))
             }
         }

@@ -16,6 +16,14 @@ class GalleryPreviewView @JvmOverloads constructor(
 
     private var images: List<String> = emptyList()
 
+    var shadowGenerator: ShadowGenerator? = null
+        set(value) {
+            firstImageShadow.shadowGenerator = value
+            secondImageShadow.shadowGenerator = value
+            thirdImageShadow.shadowGenerator = value
+            fourthImageShadow.shadowGenerator = value
+        }
+
     var thumbClickListener: ((idx: Int, view: View) -> Unit)? = null
 
     init {

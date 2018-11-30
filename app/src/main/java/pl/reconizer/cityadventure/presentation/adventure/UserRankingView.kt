@@ -8,10 +8,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_adventure_start_point_my_ranking.view.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toPrettyTimeString
+import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
 
 class UserRankingView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+    var shadowGenerator: ShadowGenerator? = null
+        set(value) { avatarShadow.shadowGenerator = value }
 
     var username: String
         get() = usernameTextView.text.toString()

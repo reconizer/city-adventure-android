@@ -7,10 +7,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_adventure_author_info.view.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
 
 class AuthorInfoView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+    var shadowGenerator: ShadowGenerator? = null
+        set(value) { authorImageShadow.shadowGenerator = value }
 
     var name: String
         get() = authorName.text.toString()

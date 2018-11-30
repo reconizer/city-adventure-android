@@ -2,10 +2,9 @@ package pl.reconizer.cityadventure.presentation.customviews
 
 import android.content.Context
 import android.graphics.*
-import android.renderscript.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import pl.reconizer.cityadventure.R
 
@@ -13,10 +12,10 @@ class ShadowView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private lateinit var rs: RenderScript
-    private lateinit var blurScript: ScriptIntrinsicBlur
-    private lateinit var colorMatrixScript: ScriptIntrinsicColorMatrix
+    var shadowGenerator: ShadowGenerator? = null//ShadowGenerator(context, Schedulers.io(), AndroidSchedulers.mainThread())
+
     private var shadowBitmap: Bitmap? = null
+    private var isShadowPrepared = false
 
     private var radius: Int = 0
 
@@ -57,46 +56,24 @@ class ShadowView @JvmOverloads constructor(
         if (!isInEditMode) {
             canvas?.let {
                 val newRect = it.clipBounds
-                if (shadowBitmap == null) {
-                    shadowBitmap = Bitmap.createBitmap(newRect.width(), newRect.height(), Bitmap.Config.ARGB_8888)
-                    generateShadow()
+                if (!isShadowPrepared) {
+                    isShadowPrepared = true
+                    shadowGenerator?.generateShadowAsync(
+                            newRect.width(),
+                            newRect.height(),
+                            shadowColor,
+                            radius
+                    ) {
+                        shadowBitmap = it
+                        postInvalidate()
+                    }
                 }
-                it.drawBitmap(shadowBitmap, newRect.left.toFloat(), newRect.top.toFloat(), null)
+                if (shadowBitmap != null) {
+                    Log.d("ShadowView", "DRAW SHADOW")
+                    it.drawBitmap(shadowBitmap!!, newRect.left.toFloat(), newRect.top.toFloat(), null)
+                }
             }
         }
-    }
-
-    override fun onAttachedToWindow() {
-        if (!isInEditMode) {
-            rs = RenderScript.create(context)
-            val element = Element.U8_4(rs)
-            blurScript = ScriptIntrinsicBlur.create(rs, element)
-            colorMatrixScript = ScriptIntrinsicColorMatrix.create(rs)
-        }
-        super.onAttachedToWindow()
-    }
-
-    private fun generateShadow() {
-        val shadowPaint = Paint().apply {
-            color = shadowColor
-            style = Paint.Style.FILL
-        }
-        val shadowRect = Rect(radius, radius, shadowBitmap!!.width - radius, shadowBitmap!!.height - radius)
-        val mainCanvas = Canvas(shadowBitmap)
-
-        mainCanvas.drawRect(shadowRect, shadowPaint)
-        val allocationIn = Allocation.createFromBitmap(rs, shadowBitmap)
-        val allocationOut = Allocation.createTyped(rs, allocationIn.type)
-
-        blurScript.setRadius(radius.toFloat())
-
-        blurScript.setInput(allocationIn)
-        blurScript.forEach(allocationOut)
-
-        allocationOut.copyTo(shadowBitmap)
-
-        allocationIn.destroy()
-        allocationOut.destroy()
     }
 
 }

@@ -42,7 +42,6 @@ class GameMapPresenter(
         }
 
     private val cameraMovedByDistanceObservable = cameraPositionObserver
-            .subscribeOn(backgroundScheduler)
             .observeOn(backgroundScheduler)
             .filter {
                 previousCameraDetails == null ||
@@ -57,7 +56,6 @@ class GameMapPresenter(
             .share()
 
     private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
-            .subscribeOn(backgroundScheduler)
             .observeOn(backgroundScheduler)
             .filter { previousCameraDetails != null }
             .map {
@@ -74,8 +72,8 @@ class GameMapPresenter(
             disposables.add(
                     locationChangeObservable
                         .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
                         .map { it.toPosition() }
+                        .observeOn(mainScheduler)
                         .subscribeWith(object : CallbackWrapper<Position, Error>(errorHandler) {
                             override fun onComplete() {}
 

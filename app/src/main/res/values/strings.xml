@@ -1,35 +1,9 @@
 <resources>
-    <!--<string name="app_name">cityadventure</string>-->
-
-    <!--<string name="sign_in">Zaloguj się</string>-->
-    <!--<string name="no_translation">brak tłumaczenia</string>-->
-
-    <!--&lt;!&ndash;generic action&ndash;&gt;-->
-    <!--<string name="close">Zamknij</string>-->
-    <!--<string name="ok">OK</string>-->
-
-    <!--&lt;!&ndash;generic errors&ndash;&gt;-->
-    <!--<string name="error_something_went_wrong">Coś poszło nie tak</string>-->
-
-    <!--<string name="location_permission">Lokalizacja jest potrzebna do poprawnego działania aplikacji</string>-->
-
-    <!--&lt;!&ndash;adventure start point&ndash;&gt;-->
-    <!--<string name="creator_title">Twórca:</string>-->
-
-    <!--<string name="rate_adventure">Oceń przygodę:</string>-->
-
-    <!--&lt;!&ndash;ranking&ndash;&gt;-->
-    <!--<string name="ranking_your_time">Twój czas:</string>-->
-    <!--<string name="ranking_position">Miejsce:</string>-->
-
-    <!--<string name="difficulty_level_easy">łatwy</string>-->
-    <!--<string name="difficulty_level_medium">średni</string>-->
-    <!--<string name="difficulty_level_hard">trudny</string>-->
-
     <string name="adventure_add_rating">Oceń przygodę:</string>
     <string name="adventure_author">Author:</string>
     <string name="adventure_position">Miejsce:</string>
     <string name="adventure_user_ranking_completion_time">Twój czas:</string>
+    <string name="app_name">cityadventure</string>
     <string name="common_close">Zamknij</string>
     <string name="common_no_translation">brak tłumaczenia</string>
     <string name="common_ok">OK</string>
@@ -38,8 +12,7 @@
     <string name="difficulty_level_medium">średni</string>
     <string name="error_something_went_wrong">Coś poszło nie tak</string>
     <string name="location_access_denied">Brak dostępu do usług lokalizacji. Przejdź do ustawień i włącz dostęp.</string>
-    <string name="location_access_explaination">Wystąpił błąd podczas pobierania lokalizacji.</string>
-    <string name="location_error_occured">Lokalizacja jest potrzebna do poprawnego działania aplikacji.</string>
+    <string name="location_access_explaination">Lokalizacja jest potrzebna do poprawnego działania aplikacji.</string>
+    <string name="location_error_occured">Wystąpił błąd podczas pobierania lokalizacji.</string>
     <string name="login_submit">Zaloguj się</string>
-
 </resources>
