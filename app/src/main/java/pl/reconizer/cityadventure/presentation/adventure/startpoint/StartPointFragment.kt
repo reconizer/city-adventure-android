@@ -128,13 +128,9 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     }
 
     private fun showFinishTime(adventureStartPoint: AdventureStartPoint) {
-        if (adventureStartPoint.minFinishTime == null || adventureStartPoint.maxFinishTime == null) {
-            timeLength.isGone = true
-        } else {
-            timeLength.minLength = adventureStartPoint.minFinishTime
-            timeLength.maxLength = adventureStartPoint.maxFinishTime
-            timeLength.isGone = false
-        }
+        timeLength.minLength = adventureStartPoint.minFinishTime
+        timeLength.maxLength = adventureStartPoint.maxFinishTime
+        timeLength.isGone = false
     }
 
     private fun showGallery(adventureStartPoint: AdventureStartPoint) {

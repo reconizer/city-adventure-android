@@ -1,6 +1,9 @@
 <resources>
     <string name="adventure_add_rating">Oceń przygodę:</string>
     <string name="adventure_author">Author:</string>
+    <string name="adventure_journal_desc_tab">Opis</string>
+    <string name="adventure_journal_exit">Wyjdź z przygody</string>
+    <string name="adventure_journal_progress_tab">Postęp</string>
     <string name="adventure_position">Miejsce:</string>
     <string name="adventure_user_ranking_completion_time">Twój czas:</string>
     <string name="app_name">cityadventure</string>

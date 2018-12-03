@@ -12,4 +12,10 @@
         <item name="android:textColor">@color/fontBlack</item>
     </style>
 
+    <style name="TypeWriterText.JournalTabTitle">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">#41382f</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>
