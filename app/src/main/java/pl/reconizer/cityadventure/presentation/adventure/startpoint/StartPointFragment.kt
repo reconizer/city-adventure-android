@@ -8,12 +8,13 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_ranking.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
+import kotlinx.android.synthetic.main.view_ranking_title.*
 import pl.reconizer.cityadventure.R
-import pl.reconizer.cityadventure.common.extensions.TimeConsts
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
@@ -63,6 +64,26 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         authorInfo.shadowGenerator = shadowGenerator
         galleryPreview.shadowGenerator = shadowGenerator
         userRankingView.shadowGenerator = shadowGenerator
+
+        Picasso.get()
+                .load(R.drawable.start_point_ranking_background)
+                .into(rankingBackground)
+
+        Picasso.get()
+                .load(R.drawable.ranking_title_frame)
+                .into(rankingTitleFrame)
+
+        Picasso.get()
+                .load(R.drawable.ranking_title)
+                .into(rankingTitleText)
+
+        Picasso.get()
+                .load(R.drawable.start_point_ranking_top_outer_frame)
+                .into(outerFrame)
+
+        Picasso.get()
+                .load(R.drawable.start_point_ranking_top_inner_frame)
+                .into(innerFrame)
     }
 
     override fun onResume() {

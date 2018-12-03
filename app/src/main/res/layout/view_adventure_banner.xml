@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@drawable/banner_background"
+        tools:src="@drawable/banner_background"
         app:layout_constraintEnd_toStartOf="@id/rightMargin"
         app:layout_constraintStart_toEndOf="@id/leftMargin"
         app:layout_constraintTop_toBottomOf="@id/topMargin" />
@@ -183,7 +183,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/image_corner_top"
+        tools:src="@drawable/image_corner_top"
         app:layout_constraintEnd_toEndOf="@id/topCornerSpace"
         app:layout_constraintStart_toStartOf="@+id/topCornerSpace"
         app:layout_constraintTop_toTopOf="@id/topMargin" />
@@ -194,7 +194,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/image_corner_bottom"
+        tools:src="@drawable/image_corner_bottom"
         app:layout_constraintBottom_toBottomOf="@id/bottomMargin"
         app:layout_constraintEnd_toEndOf="@id/bottomCornerSpace"
         app:layout_constraintStart_toStartOf="@id/bottomCornerSpace" />

@@ -10,7 +10,7 @@
         android:id="@+id/outerFrame"
         android:layout_width="311dp"
         android:layout_height="175dp"
-        android:src="@drawable/start_point_ranking_top_outer_frame"
+        tools:src="@drawable/start_point_ranking_top_outer_frame"
         android:layout_marginTop="@dimen/space_md"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

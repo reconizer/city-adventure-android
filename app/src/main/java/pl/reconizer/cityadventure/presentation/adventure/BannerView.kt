@@ -44,6 +44,17 @@ class BannerView @JvmOverloads constructor(
             typedArray.recycle()
         }
 
+        Picasso.get()
+                .load(R.drawable.banner_background)
+                .into(bannerImageBackground)
+
+        Picasso.get()
+                .load(R.drawable.image_corner_top)
+                .into(topBannerCorner)
+        Picasso.get()
+                .load(R.drawable.image_corner_bottom)
+                .into(bottomBannerCorner)
+
     }
 
     fun setImage(url: String) {

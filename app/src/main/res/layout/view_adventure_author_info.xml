@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@drawable/start_point_creator_background"
+        tools:src="@drawable/start_point_creator_background"
         app:layout_constraintTop_toBottomOf="@id/topMargin"
         app:layout_constraintStart_toEndOf="@id/leftMargin"
         app:layout_constraintEnd_toStartOf="@id/rightMargin"/>
@@ -56,7 +56,7 @@
         android:id="@+id/authorBackgroundTape"
         android:layout_width="81dp"
         android:layout_height="26dp"
-        android:src="@drawable/start_point_creator_background_tape"
+        tools:src="@drawable/start_point_creator_background_tape"
         app:layout_constraintBottom_toTopOf="@+id/authorBackground"
         app:layout_constraintEnd_toEndOf="@+id/authorBackground"
         app:layout_constraintStart_toStartOf="@+id/authorBackground"
