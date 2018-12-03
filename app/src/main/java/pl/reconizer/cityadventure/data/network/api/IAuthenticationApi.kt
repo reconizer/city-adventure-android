@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface IAuthenticationApi {
 
-    @POST("/auth")
+    @POST("/api/auth")
     fun login(
             @Query("email") email: String,
             @Query("password") password: String

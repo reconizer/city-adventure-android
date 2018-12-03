@@ -1,13 +1,11 @@
 package pl.reconizer.cityadventure.domain.usecases.adventure
 
-import io.reactivex.Scheduler
 import io.reactivex.Single
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.Position
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 
 class GetAdventures(
-        private val scheduler: Scheduler,
         private val adventureRepository: IAdventureRepository
 ) {
 

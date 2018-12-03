@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="GlobalAttrs">
+        <attr name="name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="Scalables">
+        <attr name="baseScreenWidth" format="integer" />
+    </declare-styleable>
+    
+    <declare-styleable name="ShadowView">
+        <attr name="shadowRadius" format="dimension" />
+        <attr name="shadowOffsetX" format="dimension" />
+        <attr name="shadowOffsetY" format="dimension" />
+        <attr name="shadowColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ScalableTextView">
+        <attr name="baseScreenWidth" />
+    </declare-styleable>
+
+    <declare-styleable name="ScalableImageView">
+        <attr name="baseScreenWidth" />
+        <attr name="android:src" />
+    </declare-styleable>
+
+    <declare-styleable name="ScalableSpace">
+        <attr name="baseScreenWidth" />
+    </declare-styleable>
+
+    <declare-styleable name="AuthorInfoView">
+        <attr name="android:text" />
+        <attr name="android:src" />
+    </declare-styleable>
+
+    <declare-styleable name="BannerView">
+        <attr name="android:src" />
+        <attr name="name" />
+    </declare-styleable>
+
+</resources>

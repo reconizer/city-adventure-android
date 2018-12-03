@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/rankingBackground"
+        android:layout_width="245dp"
+        android:layout_height="70dp"
+        android:src="@drawable/start_point_user_ranking_background"
+        app:layout_constraintBottom_toBottomOf="@+id/frame"
+        app:layout_constraintEnd_toEndOf="@+id/frame"
+        app:layout_constraintStart_toStartOf="@+id/frame"
+        app:layout_constraintTop_toTopOf="@+id/frame" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/frame"
+        android:layout_width="265dp"
+        android:layout_height="80dp"
+        android:src="@drawable/start_point_user_ranking_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Space
+        android:id="@+id/backgroundLeftMargin"
+        android:layout_width="7dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/rankingBackground"
+        app:layout_constraintStart_toStartOf="@id/rankingBackground"
+        app:layout_constraintTop_toTopOf="@+id/rankingBackground" />
+
+    <Space
+        android:id="@+id/backgroundTopMargin"
+        android:layout_width="0dp"
+        android:layout_height="7dp"
+        app:layout_constraintEnd_toEndOf="@id/rankingBackground"
+        app:layout_constraintStart_toStartOf="@id/rankingBackground"
+        app:layout_constraintTop_toTopOf="@+id/rankingBackground" />
+
+    <Space
+        android:id="@+id/backgroundBottomMargin"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rankingBackground"
+        app:layout_constraintEnd_toEndOf="@id/rankingBackground"
+        app:layout_constraintStart_toStartOf="@id/rankingBackground" />
+
+    <ImageView
+        android:id="@+id/avatarBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ranking_avatar_background"
+        app:layout_constraintBottom_toTopOf="@id/backgroundBottomMargin"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintStart_toEndOf="@id/backgroundLeftMargin"
+        app:layout_constraintTop_toBottomOf="@id/backgroundTopMargin" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+        android:id="@+id/avatarShadow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="@id/avatar"
+        app:layout_constraintStart_toStartOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:shadowOffsetX="1dp"
+        app:shadowOffsetY="1dp"
+        app:shadowRadius="2dp" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/ranking_avatar_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/test_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/avatarBackground"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="@id/avatarBackground"
+        app:layout_constraintStart_toStartOf="@id/avatarBackground"
+        app:layout_constraintTop_toTopOf="@id/avatarBackground" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/timeFrame"
+        android:layout_width="109dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/start_point_ranking_user_time_frame"
+        app:layout_constraintBottom_toTopOf="@+id/backgroundBottomMargin"
+        app:layout_constraintStart_toEndOf="@+id/avatarBackground" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/timeFrameGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.57" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/timeTitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="bottom|center_horizontal"
+        android:text="@string/adventure_user_ranking_completion_time"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#1b1813"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/timeFrameGuideline"
+        app:layout_constraintEnd_toEndOf="@+id/timeFrame"
+        app:layout_constraintStart_toStartOf="@+id/timeFrame"
+        app:layout_constraintTop_toTopOf="@+id/timeFrame" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/timeTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#26221b"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/timeFrame"
+        app:layout_constraintEnd_toEndOf="@+id/timeFrame"
+        app:layout_constraintStart_toStartOf="@+id/timeFrame"
+        app:layout_constraintTop_toBottomOf="@+id/timeFrameGuideline"
+        tools:text="1d 14h 20m" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#1b1813"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/timeFrame"
+        app:layout_constraintStart_toStartOf="@id/timeFrame"
+        tools:text="Michał Szpak" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/positionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#15120e"
+        android:textSize="15dp"
+        android:text="@string/adventure_position"
+        app:layout_constraintStart_toEndOf="@id/timeFrame"
+        app:layout_constraintEnd_toEndOf="@id/rankingBackground"
+        app:layout_constraintBottom_toTopOf="@id/timeFrameGuideline" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/positionTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="#201c17"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/rankingBackground"
+        app:layout_constraintEnd_toEndOf="@id/rankingBackground"
+        app:layout_constraintStart_toEndOf="@id/timeFrame"
+        app:layout_constraintTop_toBottomOf="@+id/timeFrameGuideline"
+        tools:text="54" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

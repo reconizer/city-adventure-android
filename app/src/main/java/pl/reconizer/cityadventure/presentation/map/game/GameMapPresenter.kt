@@ -42,18 +42,26 @@ class GameMapPresenter(
         }
 
     private val cameraMovedByDistanceObservable = cameraPositionObserver
+            .observeOn(backgroundScheduler)
             .filter {
                 previousCameraDetails == null ||
                         SphericalUtil.computeDistanceBetween(it.position, previousCameraDetails!!.position) > DISTANCE_CHANGE ||
                         it.zoom != previousCameraDetails!!.zoom
             }
-            .doOnNext { previousCameraDetails = it }
+            .doOnNext {
+                Log.d("GameMap", "Camera: ${Thread.currentThread().name}")
+                previousCameraDetails = it
+            }
             .map { it.position.toPosition() }
             .share()
 
     private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
+            .observeOn(backgroundScheduler)
             .filter { previousCameraDetails != null }
-            .map { previousCameraDetails!!.position.toPosition() }
+            .map {
+                Log.d("GameMap", "Loading: ${Thread.currentThread().name}")
+                previousCameraDetails!!.position.toPosition()
+            }
             .share()
 
     override fun subscribe(view: IGameMapView) {
@@ -64,8 +72,8 @@ class GameMapPresenter(
             disposables.add(
                     locationChangeObservable
                         .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
                         .map { it.toPosition() }
+                        .observeOn(mainScheduler)
                         .subscribeWith(object : CallbackWrapper<Position, Error>(errorHandler) {
                             override fun onComplete() {}
 
@@ -80,11 +88,12 @@ class GameMapPresenter(
                             cameraMovedByDistanceObservable,
                             loadingIntervalsObservable
                     )
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(backgroundScheduler)
                             .flatMapSingle {
                                 Log.d("GameMapPresenter", "Checking pins")
                                 getAdventures(it)
                             }
-                            .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)
                             .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorHandler) {
                                 override fun onNext(t: List<Adventure>) {

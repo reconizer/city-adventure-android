@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="fontBlack">#332d26</color>
+
+    <color name="basicShadow">#d94a4135</color>
+
+    <color name="galleryImageOverlayColor">#d94a4135</color>
 </resources>

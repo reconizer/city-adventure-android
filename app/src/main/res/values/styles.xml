@@ -7,4 +7,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TypeWriterText">
+        <item name="android:fontFamily">@font/veterantypewriter</item>
+        <item name="android:textColor">@color/fontBlack</item>
+    </style>
+
 </resources>

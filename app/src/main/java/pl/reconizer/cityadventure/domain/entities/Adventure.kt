@@ -6,10 +6,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Adventure(
-        @SerializedName("adenture_id") val adventureId: String,
+        @SerializedName("adventure_id") val adventureId: String,
         val completed: Boolean,
         val started: Boolean,
         @SerializedName("paid") val purchasable: Boolean,
+        val purchased: Boolean,
         @SerializedName("start_point_id") val startPointId: String,
         val position: Position
 ): Parcelable

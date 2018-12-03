@@ -21,10 +21,10 @@ class GetAdventuresSpek : Spek({
                 position = position,
                 completed = false,
                 purchasable = false,
-                started = false
+                started = false,
+                purchased = false
         ))
         val getAdventures = GetAdventures(
-                scheduler,
                 repository
         )
 

@@ -9,7 +9,6 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
 import org.spekframework.spek2.Spek
-import org.spekframework.spek2.dsl.Skip
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error

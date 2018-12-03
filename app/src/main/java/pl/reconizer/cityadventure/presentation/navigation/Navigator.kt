@@ -14,13 +14,26 @@ class Navigator(
         goTo(fragment)
     }
 
-    override fun goTo(fragment: Fragment) {
-        fragmentManager.beginTransaction()
+    override fun goTo(fragment: Fragment, transitionElement: SharedTransitionElement?) {
+        fragmentManager.beginTransaction().apply {
+            if (transitionElement != null) {
+                addSharedElement(transitionElement.view, transitionElement.transitionName)
+            }
+        }
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(container, fragment)
-//                .setCustomAnimations(R.anim.slide_in_left,
-//                        R.anim.slide_out_right,
-//                        R.anim.slide_in_right,
-//                        R.anim.slide_out_left)
+                .addToBackStack(fragment.toString())
+                .commit()
+    }
+
+    override fun openOver(fragment: Fragment, transitionElement: SharedTransitionElement?) {
+        fragmentManager.beginTransaction().apply {
+            if (transitionElement != null) {
+                addSharedElement(transitionElement.view, transitionElement.transitionName)
+            }
+        }
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                .add(container, fragment)
                 .addToBackStack(fragment.toString())
                 .commit()
     }
