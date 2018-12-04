@@ -80,10 +80,6 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
     }
 
-    override fun withStatusBar(): Boolean {
-        return false
-    }
-
     override fun requestLocationPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
             context?.let {

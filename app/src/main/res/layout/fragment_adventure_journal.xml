@@ -32,6 +32,7 @@
         android:gravity="top|center"
         android:padding="10dp"
         android:src="@drawable/journal_exit_button"
+        android:textAppearance="@style/TypeWriterText"
         android:text="@string/adventure_journal_exit"
         android:textAllCaps="true"
         android:textColor="#41382f"
@@ -50,5 +51,44 @@
         android:src="@drawable/button_go_to_map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/topJournalMargin"
+        android:layout_width="1dp"
+        android:layout_height="103.5dp" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/journalTabsMargin"
+        android:layout_width="1dp"
+        android:layout_height="42dp"
+        app:layout_constraintTop_toTopOf="@id/journalContentBackground"/>
+
+    <ImageView
+        android:id="@+id/journalCover"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/journal_content_background_cover"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topJournalMargin" />
+
+    <pl.reconizer.cityadventure.presentation.adventure.JournalTabsView
+        android:id="@+id/joutnalTabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/journalTabsMargin"/>
+
+    <ImageView
+        android:id="@+id/journalContentBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/journal_content_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topJournalMargin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

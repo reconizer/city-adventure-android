@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_journal_tabs.view.*
 import pl.reconizer.cityadventure.R
 
@@ -30,6 +31,7 @@ class JournalTabsView @JvmOverloads constructor(
         descriptionTabButton.setOnClickListener {
             activeTab = Tabs.DESCRIPTION
         }
+        updateView()
     }
 
     private fun updateView() {

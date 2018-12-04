@@ -57,6 +57,6 @@ open class BaseFragment : Fragment(), IView {
     }
 
     open fun withStatusBar(): Boolean {
-        return true
+        return false
     }
 }

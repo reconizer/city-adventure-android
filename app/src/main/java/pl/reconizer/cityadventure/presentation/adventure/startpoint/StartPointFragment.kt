@@ -18,6 +18,7 @@ import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
+import pl.reconizer.cityadventure.presentation.adventure.JournalFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
@@ -246,6 +247,10 @@ class StartPointFragment : BaseFragment(), IStartPointView {
                     else -> actionButton.setImageResource(R.drawable.button_adventure_start)
                 }
             }
+        }
+        //TODO: need to be changed - for testing
+        actionButton.setOnClickListener {
+            navigator.goTo(JournalFragment.newInstance())
         }
     }
 
