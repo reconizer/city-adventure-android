@@ -104,6 +104,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     }
 
     override fun show(adventureStartPoint: AdventureStartPoint) {
+        adventureInfoView.isGone = false
         adventureInfoView.adventureStartPoint = adventureStartPoint
         showCurrentUserRanking(adventureStartPoint)
         showTopFiveRanking(adventureStartPoint)

@@ -8,13 +8,13 @@
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/leftMargin"
         android:layout_width="28dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/rightMargin"
         android:layout_width="28dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
@@ -40,38 +40,38 @@
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/topBannerMargin"
-        android:layout_width="wrap_content"
+        android:layout_width="1dp"
         android:layout_height="11dp"
         app:layout_constraintTop_toTopOf="@id/bannerImageBackground" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/bottomBannerMargin"
-        android:layout_width="wrap_content"
+        android:layout_width="1dp"
         android:layout_height="41dp"
         app:layout_constraintBottom_toBottomOf="@id/bannerImageBackground" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/leftBannerMargin"
         android:layout_width="39dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="@id/bannerImageBackground" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/rightBannerMargin"
         android:layout_width="37dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="@id/bannerImageBackground" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/topCornerSpace"
         android:layout_width="72dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="@id/topLeftMargin" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/bottomCornerSpace"
         android:layout_width="72dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="@id/bottomRightMargin" />
 
     <Space
@@ -127,7 +127,7 @@
         
         <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
             android:id="@+id/starsSpace"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
