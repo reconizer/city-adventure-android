@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topJournalMargin" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.JournalTabsView
+    <pl.reconizer.cityadventure.presentation.adventure.journal.JournalTabsView
         android:id="@+id/journalTabs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,5 +91,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topJournalMargin" />
+    
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/journalPageRightMargin"
+        android:layout_width="29dp"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/journalPageTopMargin"
+        android:layout_width="1dp"
+        android:layout_height="26dp"
+        app:layout_constraintTop_toBottomOf="@id/topJournalMargin"/>
+
+    <pl.reconizer.cityadventure.presentation.adventure.journal.JournalPageView
+        android:id="@+id/journalPageDescriptionView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/journalPageTopMargin"
+        app:layout_constraintEnd_toStartOf="@id/journalPageRightMargin">
+
+        <pl.reconizer.cityadventure.presentation.adventure.AdventureInfoView
+            android:id="@+id/journalAdventureDescriptionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--<pl.reconizer.cityadventure.presentation.adventure.AdventureInfoView-->
+            <!--android:id="@+id/journalAdventureDescriptionView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--android:scaleX="0.79"-->
+        <!--android:scaleY="0.79" />-->
+
+    </pl.reconizer.cityadventure.presentation.adventure.journal.JournalPageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

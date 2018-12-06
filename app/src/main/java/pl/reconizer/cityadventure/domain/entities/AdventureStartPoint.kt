@@ -1,7 +1,10 @@
 package pl.reconizer.cityadventure.domain.entities
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class AdventureStartPoint(
         val id: String,
         val description: String,
@@ -20,7 +23,7 @@ data class AdventureStartPoint(
         @SerializedName("top_five") val topFiveRanking: List<RankingEntry>,
         @SerializedName("current_user_rating") val currentUserRating: Int?
 
-) {
+): Parcelable {
 
     val difficultyLevel
             get() = DifficultyLevel.fromInt(difficultyLevelValue)

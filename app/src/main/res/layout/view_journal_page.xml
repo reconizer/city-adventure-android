@@ -10,6 +10,33 @@
     android:paddingEnd="12dp">
 
     <ImageView
+        android:id="@+id/turnArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:paddingStart="@dimen/space_md"
+        android:paddingTop="@dimen/space_sm"
+        android:paddingBottom="@dimen/space_sm"
+        android:scaleType="fitXY"
+        android:src="@drawable/journal_bottom_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="@id/bottomDecoration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/topDecoration" />
+
+    <ImageView
         android:id="@+id/topDecoration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,28 +60,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/turnArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:paddingStart="@dimen/space_md"
-        android:paddingTop="@dimen/space_sm"
-        android:paddingBottom="@dimen/space_sm"
-        android:scaleType="fitXY"
-        android:src="@drawable/journal_bottom_arrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/contentContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
