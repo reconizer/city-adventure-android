@@ -9,7 +9,7 @@
 
     <style name="TypeWriterText">
         <item name="android:fontFamily">@font/veterantypewriter</item>
-        <item name="android:textColor">@color/fontBlack</item>
+        <item name="android:textColor">@color/fontDark</item>
     </style>
 
     <style name="TypeWriterText.JournalTabTitle">

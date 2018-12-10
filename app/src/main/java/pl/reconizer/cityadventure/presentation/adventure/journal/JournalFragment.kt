@@ -36,9 +36,7 @@ class JournalFragment : BaseFragment() {
             journalAdventureDescriptionView.adventureStartPoint = it
         }
 
-        //journalAdventureDescriptionView.scaleX = 0.79f
-        //journalAdventureDescriptionView.scaleY = 0.79f
-        journalPageDescriptionView.forceLayout()
+        journalPageDescriptionView.turnable = false
     }
 
     companion object {

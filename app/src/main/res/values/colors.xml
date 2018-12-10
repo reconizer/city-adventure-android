@@ -7,7 +7,9 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 
-    <color name="fontBlack">#332d26</color>
+    <color name="fontDarker">#27221e</color>
+    <color name="fontDark">#332d26</color>
+    <color name="fontLighter">#41382f</color>
 
     <color name="basicShadow">#d94a4135</color>
 

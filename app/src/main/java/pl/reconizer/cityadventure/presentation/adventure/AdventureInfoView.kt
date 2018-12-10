@@ -36,90 +36,21 @@ class AdventureInfoView @JvmOverloads constructor(
     var galleryImageClickListener: ((index: Int) -> Unit)? = null
     var rateListener: ((rateValue: Int) -> Unit)? = null
 
-    private var _scaleX: Float = 1f
-    private var _scaleY: Float = 1f
-
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.view_adventure_info, this, true)
-
-        attrs?.let {
-            val typedArray = context.obtainStyledAttributes(it, R.styleable.AdventureInfoView)
-            _scaleX = typedArray.getFloat(R.styleable.AdventureInfoView_android_scaleX, 1f)
-            _scaleY = typedArray.getFloat(R.styleable.AdventureInfoView_android_scaleX, 1f)
-            typedArray.recycle()
-        }
 
         ratingView.rateListener = {
             showRating()
             rateListener?.invoke(it)
         }
-//        container.scaleX = _scaleX
-//        container.scaleY = _scaleY
         pivotY = 0f
-    }
-
-//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-//        Log.v("[View name] onMeasure w", MeasureSpec.toString(widthMeasureSpec))
-//        Log.v("[View name] onMeasure h", MeasureSpec.toString(heightMeasureSpec))
-//        val width = MeasureSpec.getSize(widthMeasureSpec)
-//        val height = MeasureSpec.getSize(heightMeasureSpec)
-//        if (container.measuredHeight > 0) {
-//            setMeasuredDimension((width * scaleX).toInt(), (container.measuredHeight * scaleY).toInt())
-//        } else {
-//            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//        }
-//        if (height > 0) {
-//            setMeasuredDimension((width * scaleX).toInt(), (height * scaleY).toInt())
-//        } else {
-//            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//        }
-//        if (container.measuredWidth > 0) {
-//            //container.pivotX = container.measuredWidth / 2f
-//            container.pivotY = 0f
-//            setMeasuredDimension(width, (container.measuredHeight * scaleY).toInt())
-//        } else {
-//
-//            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//        }
-
-//    }
-
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         pivotX = (right - left) / 2f
         super.onLayout(changed, left, top, right, bottom)
     }
-
-//    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-//        //super.onLayout(changed, left, top, right, (bottom * _scaleY).toInt())
-//        layout(left, top, right, (bottom * _scaleY).toInt())
-//        //container.layout(left, top, right, (bottom * _scaleY).toInt())
-//    }
-//
-//    override fun getScaleX(): Float {
-//        return _scaleX
-//    }
-//
-//    override fun getScaleY(): Float {
-//        return _scaleY
-//    }
-//
-//    override fun setScaleX(scaleX: Float) {
-//        _scaleX = scaleX
-////        container.scaleX = scaleX
-////        requestLayout()
-//    }
-//
-//    override fun setScaleY(scaleY: Float) {
-//        _scaleY = scaleY
-////        container.scaleY = scaleY
-////        requestLayout()
-//    }
 
     private fun show() {
         if (adventureStartPoint != null) {

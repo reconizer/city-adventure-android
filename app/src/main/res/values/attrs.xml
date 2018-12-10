@@ -39,9 +39,4 @@
         <attr name="name" />
     </declare-styleable>
 
-    <declare-styleable name="AdventureInfoView">
-        <attr name="android:scaleX" />
-        <attr name="android:scaleY" />
-    </declare-styleable>
-
 </resources>

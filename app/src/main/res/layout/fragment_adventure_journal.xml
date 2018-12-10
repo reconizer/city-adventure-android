@@ -120,13 +120,6 @@
             android:scaleX="0.79"
             android:scaleY="0.79" />
 
-        <!--<pl.reconizer.cityadventure.presentation.adventure.AdventureInfoView-->
-            <!--android:id="@+id/journalAdventureDescriptionView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--android:scaleX="0.79"-->
-        <!--android:scaleY="0.79" />-->
-
     </pl.reconizer.cityadventure.presentation.adventure.journal.JournalPageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
