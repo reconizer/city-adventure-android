@@ -5,39 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/indexSpace"
+        android:layout_width="@dimen/journalClueNumberSpace"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/clueIdIcon"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:src="@drawable/icon_journal_clue"
         app:layout_constraintBottom_toBottomOf="@id/clueIdTextView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/indexSpace"
         app:layout_constraintTop_toTopOf="@id/clueIdTextView" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
         android:id="@+id/clueIdTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/space_xs"
         android:textAppearance="@style/TypeWriterText"
         android:textColor="@color/fontLighter"
         android:textSize="@dimen/journalClueIdFontSize"
+        app:layout_constraintEnd_toEndOf="@id/indexSpace"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/clueIdIcon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="5" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end"
-        app:constraint_referenced_ids="clueIdTextView" />
+        tools:text="10" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/imageLeftMargin"
         android:layout_width="@dimen/space_lg"
         android:layout_height="1dp"
-        app:layout_constraintStart_toEndOf="@id/barrier" />
+        app:layout_constraintStart_toEndOf="@id/indexSpace" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/imageRightMargin"

@@ -9,6 +9,9 @@ import pl.reconizer.cityadventure.di.components.MainActivityComponent
 import pl.reconizer.cityadventure.di.modules.ContextModule
 import pl.reconizer.cityadventure.di.modules.MainActivityModule
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
+import pl.reconizer.cityadventure.presentation.adventure.journal.JournalComponent
+import pl.reconizer.cityadventure.presentation.adventure.journal.JournalModule
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointComponent
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
@@ -23,6 +26,7 @@ object Injector {
     private var loginComponent: LoginComponent? = null
     private var gameMapComponent: GameMapComponent? = null
     private var adventureStartPointComponent: StartPointComponent? = null
+    private var journalComponent: JournalComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -56,6 +60,13 @@ object Injector {
         return adventureStartPointComponent!!
     }
 
+    fun buildJournalComponent(adventure: Adventure, adventureStartPoint: AdventureStartPoint): JournalComponent {
+        journalComponent = mainActivityComponent!!.journalComponent(
+                JournalModule(adventure, adventureStartPoint)
+        )
+        return journalComponent!!
+    }
+
     fun clearAppComponent() {
         appComponent = null
     }
@@ -74,5 +85,9 @@ object Injector {
 
     fun clearAdventureStartPointComponent() {
         adventureStartPointComponent = null
+    }
+
+    fun clearJournalComponent() {
+        journalComponent = null
     }
 }

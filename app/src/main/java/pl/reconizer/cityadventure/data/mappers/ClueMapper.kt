@@ -4,8 +4,9 @@ import pl.reconizer.cityadventure.data.entities.ClueResponse
 import pl.reconizer.cityadventure.domain.common.Mapper
 import pl.reconizer.cityadventure.domain.entities.Clue
 import pl.reconizer.cityadventure.domain.entities.ClueType
+import javax.inject.Inject
 
-class ClueMapper : Mapper<ClueResponse, Clue>() {
+class ClueMapper @Inject constructor() : Mapper<ClueResponse, Clue>() {
 
     override fun map(from: ClueResponse): Clue {
         return Clue(

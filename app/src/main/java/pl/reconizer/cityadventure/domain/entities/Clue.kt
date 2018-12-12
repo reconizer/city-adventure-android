@@ -4,6 +4,6 @@ data class Clue(
     val id: String,
     val originalResourceUrl: String?,
     val type: ClueType,
-    val description: String,
+    val description: String?,
     val pointId: String
 )
