@@ -13,6 +13,7 @@ import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPagesAdapter
+import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import javax.inject.Inject
 
@@ -57,6 +58,7 @@ class JournalFragment : BaseFragment(), IJournalView {
 
         journalPageDescriptionView.turnable = false
         journalProgressViewPager.adapter = cluesPagesAdapter
+        journalProgressViewPager.setPageTransformer(false, ViewPagerStack())
     }
 
     override fun onStart() {

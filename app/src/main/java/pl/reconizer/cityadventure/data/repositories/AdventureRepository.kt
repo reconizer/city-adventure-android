@@ -29,7 +29,10 @@ class AdventureRepository(
                     val newCluesList = mutableListOf<ClueResponse>()
                     it.forEach {
                         newCluesList.add(it)
-                        newCluesList.add(it.copy(pointId = testSecondId))
+                        newCluesList.add(it.copy(
+                                pointId = testSecondId,
+                                description = it.description + testSecondId
+                        ))
                     }
                     //Single.just(it.map { response -> clueMapper.map(response) })
                     Single.just(newCluesList.map { response -> clueMapper.map(response) })
