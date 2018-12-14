@@ -12,6 +12,9 @@ import pl.reconizer.cityadventure.presentation.common.recyclerview.ItemOffsetDec
 
 class CluesPagesAdapter : PagerAdapter() {
 
+    var turnLeftListener: ((currentPageNumber: Int) -> Unit)? = null
+    var turnRightListener: ((currentPageNumber: Int) -> Unit)? = null
+
     private var cluesByPoint: Map<String, List<Clue>> = emptyMap()
     private var points: List<String> = emptyList()
 
@@ -42,6 +45,14 @@ class CluesPagesAdapter : PagerAdapter() {
         cluesAdapter.clues = cluesByPoint[points[position]] ?: emptyList()
         cluesAdapter.notifyDataSetChanged()
         container.addView(view)
+        view.journalPageView.turnableLeft = position != 0
+        view.journalPageView.turnableRight = position < points.size - 1
+        if (position < points.size) {
+            view.journalPageView.turnRightListener = { turnRightListener?.invoke(position) }
+        }
+        if (position > 0) {
+            view.journalPageView.turnLeftListener = { turnLeftListener?.invoke(position) }
+        }
         return view
     }
 
@@ -54,4 +65,5 @@ class CluesPagesAdapter : PagerAdapter() {
     override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
         container.removeView(view as View)
     }
+
 }

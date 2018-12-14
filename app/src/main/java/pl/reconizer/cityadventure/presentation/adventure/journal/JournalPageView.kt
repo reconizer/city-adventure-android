@@ -14,17 +14,35 @@ class JournalPageView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var turnable: Boolean = true
+    var turnLeftListener: (() -> Unit)? = null
+    var turnRightListener: (() -> Unit)? = null
+
+    var turnableRight: Boolean = true
         set(value) {
             field = value
-            turnArrow.isGone = !value
+            turnNextArrow.isGone = !value
+        }
+
+    var turnableLeft: Boolean = false
+        set(value) {
+            field = value
+            turnPrevArrow.isGone = !value
         }
 
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.view_journal_page, this, true)
 
-        turnable = true
+        turnableRight = true
+        turnableLeft = false
+
+        turnNextArrow.setOnClickListener {
+            turnRightListener?.invoke()
+        }
+
+        turnPrevArrow.setOnClickListener {
+            turnLeftListener?.invoke()
+        }
     }
 
     override fun onAttachedToWindow() {

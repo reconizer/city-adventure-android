@@ -25,7 +25,7 @@ class JournalFragment : BaseFragment(), IJournalView {
     @Inject
     lateinit var presenter: JournalPresenter
 
-    val cluesPagesAdapter = CluesPagesAdapter()
+    private val cluesPagesAdapter = CluesPagesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +56,18 @@ class JournalFragment : BaseFragment(), IJournalView {
         }
         updateTabsVisibility(journalTabs.activeTab)
 
-        journalPageDescriptionView.turnable = false
+        journalPageDescriptionView.turnableRight = false
         journalProgressViewPager.adapter = cluesPagesAdapter
         journalProgressViewPager.setPageTransformer(false, ViewPagerStack())
+
+        cluesPagesAdapter.apply {
+            turnLeftListener = { currentPageNumber ->
+                journalProgressViewPager.currentItem = currentPageNumber - 1
+            }
+            turnRightListener = { currentPageNumber ->
+                journalProgressViewPager.currentItem = currentPageNumber + 1
+            }
+        }
     }
 
     override fun onStart() {

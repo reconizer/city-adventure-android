@@ -10,17 +10,32 @@
     android:paddingEnd="12dp">
 
     <ImageView
-        android:id="@+id/turnArrow"
+        android:id="@+id/turnNextArrow"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:paddingStart="@dimen/space_md"
+        android:paddingStart="@dimen/space_xxl"
         android:paddingTop="@dimen/space_sm"
         android:paddingBottom="@dimen/space_sm"
         android:scaleType="fitXY"
         android:src="@drawable/journal_bottom_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
+
+    <ImageView
+        android:id="@+id/turnPrevArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:paddingStart="@dimen/space_xxl"
+        android:paddingTop="@dimen/space_sm"
+        android:paddingBottom="@dimen/space_sm"
+        android:scaleType="fitXY"
+        android:src="@drawable/journal_bottom_arrow"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
 
     <FrameLayout
