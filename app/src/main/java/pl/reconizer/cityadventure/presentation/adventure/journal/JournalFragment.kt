@@ -47,6 +47,14 @@ class JournalFragment : BaseFragment(), IJournalView {
                 .load(R.drawable.journal_background)
                 .into(backgroundImage)
 
+        Picasso.get()
+                .load(R.drawable.journal_content_background_cover)
+                .into(journalCover)
+
+        Picasso.get()
+                .load(R.drawable.journal_content_background)
+                .into(journalContentBackground)
+
         adventureStartPoint?.let {
             journalAdventureDescriptionView.adventureStartPoint = it
         }

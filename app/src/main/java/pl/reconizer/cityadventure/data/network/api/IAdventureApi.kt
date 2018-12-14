@@ -3,6 +3,7 @@ package pl.reconizer.cityadventure.data.network.api
 import io.reactivex.Single
 import pl.reconizer.cityadventure.data.entities.ClueResponse
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -25,5 +26,10 @@ interface IAdventureApi {
     fun getAdventureDiscoveredClues(
             @Path("id") adventureId: String
     ): Single<List<ClueResponse>>
+
+    @GET("api/adventures/{id}/completed_points")
+    fun getAdventureCompletedPoints(
+            @Path("id") adventureId: String
+    ): Single<List<AdventurePoint>>
 
 }

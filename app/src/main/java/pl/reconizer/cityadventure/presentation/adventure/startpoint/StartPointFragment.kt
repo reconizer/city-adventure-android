@@ -45,6 +45,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         super.onViewCreated(view, savedInstanceState)
 
         adventureInfoView.isGone = true
+        rankingContainer.isGone = true
 
         adventureInfoView.galleryImageClickListener = { imageIndex ->
             presenter.adventureStartPoint?.let {
@@ -105,6 +106,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
 
     override fun show(adventureStartPoint: AdventureStartPoint) {
         adventureInfoView.isGone = false
+        rankingContainer.isGone = false
         adventureInfoView.adventureStartPoint = adventureStartPoint
         showCurrentUserRanking(adventureStartPoint)
         showTopFiveRanking(adventureStartPoint)

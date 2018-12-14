@@ -56,12 +56,6 @@ class CluesPagesAdapter : PagerAdapter() {
         return view
     }
 
-    override fun finishUpdate(container: ViewGroup) {
-        super.finishUpdate(container)
-    }
-
-
-
     override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
         container.removeView(view as View)
     }
