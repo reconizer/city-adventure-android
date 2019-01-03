@@ -40,8 +40,14 @@ class JournalFragment : BaseFragment(), IJournalView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        journalAdventureDescriptionView.rateable = false
-        journalAdventureDescriptionView.isCompleted = adventure?.completed ?: false
+        journalAdventureDescriptionView.apply {
+            rateable = false
+            isCompleted = this@JournalFragment.adventure?.completed ?: false
+        }
+        journalPageDescriptionView.apply {
+            turnableRight = false
+            turnableLeft = false
+        }
 
         Picasso.get()
                 .load(R.drawable.journal_background)
@@ -64,7 +70,6 @@ class JournalFragment : BaseFragment(), IJournalView {
         }
         updateTabsVisibility(journalTabs.activeTab)
 
-        journalPageDescriptionView.turnableRight = false
         journalProgressViewPager.adapter = cluesPagesAdapter
         journalProgressViewPager.setPageTransformer(false, ViewPagerStack())
 

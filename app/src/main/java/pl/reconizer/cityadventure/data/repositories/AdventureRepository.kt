@@ -23,6 +23,7 @@ class AdventureRepository(
         return adventureApi.getAdventure(adventureId)
     }
 
+    // TODO - remove the result doubling; for testing I'm doubling the result
     override fun getAdventureDiscoveredClues(adventureId: String): Single<List<Clue>> {
         return adventureApi.getAdventureDiscoveredClues(adventureId)
                 .flatMap {
