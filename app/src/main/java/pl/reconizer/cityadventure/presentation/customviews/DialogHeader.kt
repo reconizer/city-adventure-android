@@ -11,7 +11,7 @@ class DialogHeader @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var text: String
+    var text: String?
         get() = headerTextView.text.toString()
         set(value) {
             headerTextView.text = value

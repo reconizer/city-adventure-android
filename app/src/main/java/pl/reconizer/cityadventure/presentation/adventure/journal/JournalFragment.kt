@@ -15,6 +15,7 @@ import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPagesAdapter
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
 import javax.inject.Inject
 
 class JournalFragment : BaseFragment(), IJournalView {
@@ -79,6 +80,16 @@ class JournalFragment : BaseFragment(), IJournalView {
             }
             turnRightListener = { currentPageNumber ->
                 journalProgressViewPager.currentItem = currentPageNumber + 1
+            }
+        }
+
+        exitButton.setOnClickListener {
+            PrettyDialog().apply {
+                headerText = this@JournalFragment.resources.getString(R.string.adventure_journal_exit)
+                contentText = this@JournalFragment.resources.getString(R.string.journal_exit_info)
+                firstButtonText = this@JournalFragment.resources.getString(R.string.common_yes)
+                secondButtonText = this@JournalFragment.resources.getString(R.string.common_no)
+                show(this@JournalFragment.childFragmentManager, "alert")
             }
         }
     }

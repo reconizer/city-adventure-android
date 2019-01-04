@@ -18,6 +18,10 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="CustomDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog.MinWidth">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="DialogText" parent="TypeWriterText">
         <item name="android:textColor">#453c32</item>
         <item name="android:textSize">14dp</item>

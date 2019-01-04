@@ -22,10 +22,11 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="2.3334dp"
         android:layout_marginBottom="4dp"
+        android:paddingBottom="@dimen/space_xl"
         android:background="@drawable/dialog_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialogHeader">
 
         <ImageView
@@ -63,7 +64,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogText" />
+            app:layout_constraintTop_toBottomOf="@id/dialogText"
+            tools:text="@string/common_ok"/>
 
         <Button
             android:id="@+id/dialogButtonSecond"
@@ -75,7 +77,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/dialogButtonFirst"
-            app:layout_constraintTop_toBottomOf="@id/dialogText" />
+            app:layout_constraintTop_toBottomOf="@id/dialogText"
+            tools:text="@string/common_close" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
