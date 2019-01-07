@@ -20,6 +20,7 @@
 
     <style name="CustomDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog.MinWidth">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimAmount">0.7</item>
     </style>
 
     <style name="DialogText" parent="TypeWriterText">

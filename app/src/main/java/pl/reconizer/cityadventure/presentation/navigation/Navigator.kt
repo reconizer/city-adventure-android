@@ -14,15 +14,17 @@ class Navigator(
         goTo(fragment)
     }
 
-    override fun goTo(fragment: Fragment, transitionElement: SharedTransitionElement?) {
+    override fun goTo(fragment: Fragment, addOnStack: Boolean, transitionElement: SharedTransitionElement?) {
         fragmentManager.beginTransaction().apply {
             if (transitionElement != null) {
                 addSharedElement(transitionElement.view, transitionElement.transitionName)
             }
+            if (addOnStack) {
+                addToBackStack(fragment.toString())
+            }
         }
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(container, fragment)
-                .addToBackStack(fragment.toString())
                 .commit()
     }
 

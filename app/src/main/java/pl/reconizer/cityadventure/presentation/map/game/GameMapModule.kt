@@ -5,6 +5,7 @@ import dagger.Provides
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.di.modules.ErrorHandlersModule
+import pl.reconizer.cityadventure.di.modules.UtilsModule
 import pl.reconizer.cityadventure.di.modules.usecases.AdventureUsecasesModule
 import pl.reconizer.cityadventure.di.scopes.ViewScope
 import pl.reconizer.cityadventure.domain.usecases.adventure.GetAdventures

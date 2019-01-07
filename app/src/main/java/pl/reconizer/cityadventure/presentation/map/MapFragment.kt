@@ -12,7 +12,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.SphericalUtil
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.IPositionable
 import kotlin.math.abs
 
 class MapFragment : SupportMapFragment(), IMapView {
@@ -20,10 +22,7 @@ class MapFragment : SupportMapFragment(), IMapView {
     private var googleMap: GoogleMap? = null
 
     private var userMarker: Marker? = null
-    private var adventureMarkers: MutableList<Marker> = mutableListOf()
-
-    private lateinit var adventurePinMapper: AdventurePinMapper
-    private lateinit var pinProvider: PinProvider
+    private var markers: MutableList<Marker> = mutableListOf()
 
     private var currentLocation: LatLng? = null
 
@@ -31,12 +30,15 @@ class MapFragment : SupportMapFragment(), IMapView {
     private var lastMapCenter: LatLng? = null
     private var lastMapZoom: Float = 0f
 
+    override var pinMapper: IPinMapper? = null
+    override var userPin: BitmapDescriptor? = null
+
     @DrawableRes
     override var overlayDrawableRes: Int = R.drawable.map_overlay
     private lateinit var overlayBitmap: Bitmap
     private lateinit var overlayBitmapDescriptor: BitmapDescriptor
 
-    override var adventurePinClickListener: ((adventure: Adventure) -> Unit)? = null
+    override var pinClickListener: ((pin: IPositionable) -> Unit)? = null
     override var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)? = null
     override var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)? = null
 
@@ -67,13 +69,13 @@ class MapFragment : SupportMapFragment(), IMapView {
         }
     }
 
-    override fun showAdventureMarkers(adventures: List<Adventure>) {
-        adventureMarkers.forEach { it.remove() }
-        adventureMarkers.clear()
-        adventures.forEach {
-            adventureMarkers.add(googleMap!!.addMarker(MarkerOptions()
-                    .position(LatLng(it.position.lat, it.position.lng))
-                    .icon(adventurePinMapper.determinePin(it)))
+    override fun showMarkers(positionables: List<IPositionable>) {
+        markers.forEach { it.remove() }
+        markers.clear()
+        positionables.forEach {
+            markers.add(googleMap!!.addMarker(MarkerOptions()
+                    .position(it.position.toLatLng())
+                    .icon(pinMapper?.determinePin(it)))
                     .apply {
                         tag = it
                     }
@@ -84,8 +86,6 @@ class MapFragment : SupportMapFragment(), IMapView {
     private fun configure(map: GoogleMap) {
         googleMap = map
         overlayBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(overlayBitmap)
-        pinProvider = PinProvider()
-        adventurePinMapper = AdventurePinMapper(pinProvider)
         if (googleMap!!.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.google_map_style))) {
             googleMap!!.apply {
                 setMinZoomPreference(MIN_ZOOM)
@@ -132,8 +132,8 @@ class MapFragment : SupportMapFragment(), IMapView {
         }
 
         googleMap!!.setOnMarkerClickListener {
-            if (it.tag is Adventure) {
-                adventurePinClickListener?.invoke(it.tag as Adventure)
+            if (it.tag is IPositionable) {
+                pinClickListener?.invoke(it.tag as IPositionable)
                 true
             } else {
                 false
@@ -150,7 +150,8 @@ class MapFragment : SupportMapFragment(), IMapView {
                 .zIndex(1f)
                 .position(latLng)
                 .anchor(0.5f, 1f)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_user)))
+                .icon(userPin)
+        )
     }
 
     private fun updateOverlays() {
