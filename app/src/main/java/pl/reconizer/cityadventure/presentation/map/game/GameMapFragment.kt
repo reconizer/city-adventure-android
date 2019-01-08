@@ -15,6 +15,7 @@ import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
@@ -80,7 +81,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun onResume() {
         super.onResume()
-        presenter.subscribe(this)
+        presenter.subscribe(this, MapMode.ADVENTURES)
         presenter.lastLocation?.let {
             mapView.handleNewUserLocation(it.toLatLng())
         }
@@ -140,6 +141,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun showAdventures(adventures: List<Adventure>) {
         mapView.showMarkers(adventures)
+    }
+
+    override fun showAdventurePoints(points: List<AdventurePoint>) {
+        mapView.showMarkers(points)
     }
 
     override fun showLocationUnavailable() {
