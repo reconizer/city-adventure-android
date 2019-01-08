@@ -1,6 +1,7 @@
 package pl.reconizer.cityadventure.presentation.location
 
 import android.location.Location
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
 interface ILocationProvider {
@@ -9,6 +10,7 @@ interface ILocationProvider {
 
     val statusChange: PublishSubject<GpsInterfaceStatus>
     val locationChange: PublishSubject<Location>
+    val lastLocationChange: BehaviorSubject<Location>
     val isEnabled: Boolean
     val interfaceStatus: GpsInterfaceStatus
     val canCollectLocation: Boolean

@@ -1,18 +1,17 @@
 package pl.reconizer.cityadventure.presentation.navigation
 
+import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
 
 class Navigator(
         @IdRes private val container: Int,
         private val fragmentManager: FragmentManager
 ) : INavigator {
 
-    override fun open(fragment: Fragment) {
-        clearBackStack()
-        goTo(fragment)
-    }
+    private val mapFragment = GameMapFragment()
 
     override fun goTo(fragment: Fragment, addOnStack: Boolean, transitionElement: SharedTransitionElement?) {
         fragmentManager.beginTransaction().apply {
@@ -20,7 +19,7 @@ class Navigator(
                 addSharedElement(transitionElement.view, transitionElement.transitionName)
             }
             if (addOnStack) {
-                addToBackStack(fragment.toString())
+                addToBackStack(null)
             }
         }
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
@@ -36,30 +35,67 @@ class Navigator(
         }
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .add(container, fragment)
-                .addToBackStack(fragment.toString())
+                .addToBackStack(null)
                 .commit()
     }
 
     override fun goBack() {
         if (!isRoot()) {
-            fragmentManager.popBackStackImmediate()
+            fragmentManager.popBackStack()
         }
-    }
-
-    override fun goBackToRoot() {
-        clearBackStack(leave = 1)
     }
 
     override fun isRoot(): Boolean {
         return fragmentManager.backStackEntryCount <= 1
     }
 
-    private fun clearBackStack(leave: Int = 0) {
-        val backStackCount = fragmentManager.backStackEntryCount
-        for (i in 0 until backStackCount - leave) {
-            val backStackId = fragmentManager.getBackStackEntryAt(i).id
-            fragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    override fun showMap(bundle: Bundle) {
+        mapFragment.arguments = bundle
+        if (mapFragment.isDetached) {
+            attachMap()
+        } else {
+            openMapRoot(bundle)
         }
+
+    }
+
+    override fun leaveMap() {
+        if (mapFragment.isAdded) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                    .detach(mapFragment)
+                    .commit()
+        }
+    }
+
+    override fun openMapRoot(bundle: Bundle) {
+        mapFragment.arguments = bundle
+        clearUntilMap()
+        if (mapFragment.isDetached) {
+            attachMap()
+        } else {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                    .addToBackStack(MAP_ROOT_TAG)
+                    .replace(container, mapFragment)
+                    .commit()
+        }
+    }
+
+    private fun clearUntilMap() {
+        // clears back-stack until map
+        fragmentManager.popBackStackImmediate(MAP_ROOT_TAG, 0)
+    }
+
+    private fun attachMap() {
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                .attach(mapFragment)
+                .commit()
+    }
+
+    companion object {
+        private const val MAP_ROOT_TAG = "map_root"
     }
 
 }

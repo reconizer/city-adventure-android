@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_game_map.*
+import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
@@ -26,7 +28,7 @@ import pl.reconizer.cityadventure.presentation.map.PinProvider
 import javax.inject.Inject
 import javax.inject.Named
 
-class GameMapFragment : BaseFragment(), IGameMapView {
+class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
 
     @Inject
     lateinit var pinProvider: PinProvider
@@ -40,9 +42,11 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     @Inject
     lateinit var presenter: GameMapPresenter
 
-    private val mapMode: MapMode by lazy { (arguments?.get(MAP_MODE_PARAM) as MapMode?) ?: MapMode.ADVENTURES }
+    private val mapMode: MapMode
+        get() { return (arguments?.get(MAP_MODE_PARAM) as MapMode?) ?: MapMode.ADVENTURES }
 
-    private val mapView: IMapView by lazy { childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
+    private val mapView: IMapView
+        get() { return childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
 
     private var locationPermissionDialog: AlertDialog? = null
 
@@ -63,6 +67,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 mapView.moveToLocation(it.toLatLng())
             }
         }
+        journalButton.setOnClickListener { navigator.leaveMap() }
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
             journalButton.isGone = true
@@ -77,11 +82,13 @@ class GameMapFragment : BaseFragment(), IGameMapView {
             searchButton.isGone = true
         }
         mapView.userPin = pinProvider.userPin
+        mapView.clearMarkers()
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.subscribe(this, MapMode.ADVENTURES)
+        presenter.adventure = arguments?.get(ADVENTURE_PARAM) as Adventure?
+        presenter.subscribe(this, mapMode)
         presenter.lastLocation?.let {
             mapView.handleNewUserLocation(it.toLatLng())
         }
@@ -90,7 +97,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
         mapView.pinClickListener = {
             when (it) {
-                is Adventure -> navigator.goTo(StartPointFragment.newInstance(it))
+                is Adventure -> {
+                    navigator.leaveMap()
+                    navigator.goTo(StartPointFragment.newInstance(it))
+                }
             }
         }
     }
@@ -103,6 +113,13 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     override fun onDestroy() {
         super.onDestroy()
         Injector.clearGameMapComponent()
+    }
+
+    override fun goBack(): Boolean {
+        if (!navigator.isRoot()) {
+            navigator.leaveMap()
+        }
+        return !navigator.isRoot()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -153,15 +170,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     companion object {
         const val MAP_MODE_PARAM = "map_mode"
+        const val ADVENTURE_PARAM = "adventure"
         const val LOCATION_PERMISSION_REQUEST = 1
-
-        fun newInstance(mapMode: MapMode = MapMode.ADVENTURES): GameMapFragment {
-            return GameMapFragment().apply {
-                arguments = bundleOf(
-                        MAP_MODE_PARAM to mapMode
-                )
-            }
-        }
     }
 
 }

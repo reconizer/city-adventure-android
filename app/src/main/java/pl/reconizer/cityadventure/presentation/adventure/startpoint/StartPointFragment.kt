@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_ranking.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
 import kotlinx.android.synthetic.main.view_ranking_title.*
+import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
@@ -19,9 +20,11 @@ import pl.reconizer.cityadventure.presentation.adventure.journal.JournalFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
+import pl.reconizer.cityadventure.presentation.map.MapMode
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
 
-class StartPointFragment : BaseFragment(), IStartPointView {
+class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListener {
 
     @Inject
     lateinit var presenter: StartPointPresenter
@@ -62,7 +65,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         adventureInfoView.isCompleted = adventure?.completed ?: false
 
         closeButton.setOnClickListener {
-            navigator.goBack()
+            goBack()
         }
 
         updateActionButton()
@@ -102,6 +105,13 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     override fun onDestroy() {
         super.onDestroy()
         Injector.clearAdventureStartPointComponent()
+    }
+
+    override fun goBack(): Boolean {
+        navigator.openMapRoot(bundleOf(
+                MAP_MODE_PARAM to MapMode.ADVENTURES
+        ))
+        return true
     }
 
     override fun show(adventureStartPoint: AdventureStartPoint) {
@@ -166,10 +176,13 @@ class StartPointFragment : BaseFragment(), IStartPointView {
                 }
             }
         }
-        //TODO: need to be changed - for testing
+        //TODO: need to be changed - for testing, only starting a adventure
         actionButton.setOnClickListener {
             if (adventure != null && presenter.adventureStartPoint != null) {
-                navigator.goTo(JournalFragment.newInstance(adventure!!, presenter.adventureStartPoint!!))
+                navigator.goTo(
+                        JournalFragment.newInstance(adventure!!, presenter.adventureStartPoint!!),
+                        false
+                )
             }
         }
     }

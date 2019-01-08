@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.maps.android.SphericalUtil
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
@@ -12,6 +13,7 @@ import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.common.rx.CallbackWrapper
+import pl.reconizer.cityadventure.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.cityadventure.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
@@ -72,7 +74,7 @@ class GameMapPresenter(
         super.subscribe(view)
         errorHandler.view = WeakReference(view)
         if (locationProvider.hasPermission) {
-            val locationChangeObservable = locationProvider.locationChange.share()
+            val locationChangeObservable = locationProvider.lastLocationChange.share()
             disposables.add(
                     locationChangeObservable
                         .subscribeOn(backgroundScheduler)
@@ -109,6 +111,27 @@ class GameMapPresenter(
                                 }
 
                                 override fun onComplete() {}
+                            })
+            )
+            disposables.add(
+                    locationChangeObservable.firstElement()
+                            .filter { mapMode == MapMode.ADVENTURES }
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(backgroundScheduler)
+                            .flatMap {
+                                Log.d("GameMapPresenter", "Checking pins")
+                                adventureRepository.getAdventures(
+                                        lat = it.latitude,
+                                        lng = it.longitude
+                                ).toMaybe()
+                            }
+                            .observeOn(mainScheduler)
+                            .subscribeWith(object : MaybeCallbackWrapper<List<Adventure>, Error>(errorHandler) {
+                                override fun onComplete() {}
+
+                                override fun onSuccess(t: List<Adventure>) {
+                                    this@GameMapPresenter.view?.showAdventures(t)
+                                }
                             })
             )
             if (mapMode == MapMode.STARTED_ADVENTURE && adventure != null) {

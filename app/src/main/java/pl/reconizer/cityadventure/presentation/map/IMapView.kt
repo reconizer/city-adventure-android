@@ -20,5 +20,6 @@ interface IMapView {
     fun handleNewUserLocation(location: LatLng)
 
     fun showMarkers(positionables: List<IPositionable>)
+    fun clearMarkers()
 
 }

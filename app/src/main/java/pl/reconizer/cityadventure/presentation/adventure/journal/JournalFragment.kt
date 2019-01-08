@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_adventure_journal.*
+import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
@@ -16,9 +17,12 @@ import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPage
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
+import pl.reconizer.cityadventure.presentation.map.MapMode
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
 
-class JournalFragment : BaseFragment(), IJournalView {
+class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
 
     val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
     val adventureStartPoint by lazy { arguments?.get(ADVENTURE_START_POINT_PARAM) as AdventureStartPoint? }
@@ -84,12 +88,15 @@ class JournalFragment : BaseFragment(), IJournalView {
         }
 
         exitButton.setOnClickListener {
-            PrettyDialog().apply {
-                headerText = this@JournalFragment.resources.getString(R.string.adventure_journal_exit)
-                contentText = this@JournalFragment.resources.getString(R.string.journal_exit_info)
-                firstButtonText = this@JournalFragment.resources.getString(R.string.common_yes)
-                secondButtonText = this@JournalFragment.resources.getString(R.string.common_no)
-                show(this@JournalFragment.childFragmentManager, "alert")
+            showExitAdventureDialog()
+        }
+
+        goToMapButton.setOnClickListener { _ ->
+            adventure?.let {
+                navigator.showMap(bundleOf(
+                        MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
+                        ADVENTURE_PARAM to it
+                ))
             }
         }
     }
@@ -103,6 +110,11 @@ class JournalFragment : BaseFragment(), IJournalView {
     override fun onStop() {
         super.onStop()
         presenter.unsubscribe()
+    }
+
+    override fun goBack(): Boolean {
+        showExitAdventureDialog()
+        return true
     }
 
     override fun showClues() {
@@ -120,6 +132,24 @@ class JournalFragment : BaseFragment(), IJournalView {
                 journalPageDescriptionView.isGone = false
                 journalProgressViewPager.isGone = true
             }
+        }
+    }
+
+    private fun showExitAdventureDialog() {
+        PrettyDialog().apply {
+            headerText = this@JournalFragment.resources.getString(R.string.adventure_journal_exit)
+            contentText = this@JournalFragment.resources.getString(R.string.journal_exit_info)
+            firstButtonText = this@JournalFragment.resources.getString(R.string.common_yes)
+            secondButtonText = this@JournalFragment.resources.getString(R.string.common_no)
+            show(this@JournalFragment.childFragmentManager, "alert")
+        }.apply {
+            firstButtonClickListener = {
+                dismiss()
+                navigator.openMapRoot(bundleOf(
+                        MAP_MODE_PARAM to MapMode.ADVENTURES
+                ))
+            }
+            secondButtonClickListener = { dismiss() }
         }
     }
 

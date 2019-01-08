@@ -70,8 +70,7 @@ class MapFragment : SupportMapFragment(), IMapView {
     }
 
     override fun showMarkers(positionables: List<IPositionable>) {
-        markers.forEach { it.remove() }
-        markers.clear()
+        clearMarkers()
         positionables.forEach {
             markers.add(googleMap!!.addMarker(MarkerOptions()
                     .position(it.position.toLatLng())
@@ -81,6 +80,11 @@ class MapFragment : SupportMapFragment(), IMapView {
                     }
             )
         }
+    }
+
+    override fun clearMarkers() {
+        markers.forEach { it.remove() }
+        markers.clear()
     }
 
     private fun configure(map: GoogleMap) {
