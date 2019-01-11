@@ -11,6 +11,8 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
 
     var clues: List<Clue> = emptyList()
 
+    var clueClickListener: ((clue: Clue) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (ClueType.fromInt(viewType)) {
@@ -44,14 +46,17 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
 
     private fun onBindImageClue(holder: ImageClueViewHolder, position: Int) {
         holder.bind(getClue(position), flipPosition(position))
+        holder.image.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindAudioClue(holder: AudioClueViewHolder, position: Int) {
         holder.bind(getClue(position), flipPosition(position))
+        holder.fileName.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindVideoClue(holder: VideoClueViewHolder, position: Int) {
         holder.bind(getClue(position), flipPosition(position))
+        holder.thumbnail.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun getClue(position: Int): Clue {

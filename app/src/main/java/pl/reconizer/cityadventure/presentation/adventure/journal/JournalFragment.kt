@@ -13,10 +13,12 @@ import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
+import pl.reconizer.cityadventure.domain.entities.ClueType
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPagesAdapter
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
+import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
@@ -84,6 +86,20 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
             }
             turnRightListener = { currentPageNumber ->
                 journalProgressViewPager.currentItem = currentPageNumber + 1
+            }
+            clueClickListener = { clue ->
+                when (clue.type) {
+                    ClueType.IMAGE -> {
+                        clue.originalResourceUrl?.let {
+                            navigator.openOver(GalleryFragment.newInstance(
+                                    listOf(it),
+                                    0
+                            ))
+                        }
+
+                    }
+                }
+
             }
         }
 

@@ -15,6 +15,8 @@ class CluesPagesAdapter : PagerAdapter() {
     var turnLeftListener: ((currentPageNumber: Int) -> Unit)? = null
     var turnRightListener: ((currentPageNumber: Int) -> Unit)? = null
 
+    var clueClickListener: ((clue: Clue) -> Unit)? = null
+
     private var cluesByPoint: Map<String, List<Clue>> = emptyMap()
     private var points: List<String> = emptyList()
 
@@ -53,6 +55,7 @@ class CluesPagesAdapter : PagerAdapter() {
         if (position > 0) {
             view.journalPageView.turnLeftListener = { turnLeftListener?.invoke(position) }
         }
+        cluesAdapter.clueClickListener = clueClickListener
         return view
     }
 
