@@ -17,6 +17,7 @@ import pl.reconizer.cityadventure.domain.entities.ClueType
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPagesAdapter
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.customviews.AudioPlayerFragment
 import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
 import pl.reconizer.cityadventure.presentation.map.MapMode
@@ -97,6 +98,11 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
                             ))
                         }
 
+                    }
+                    ClueType.AUDIO -> {
+                        clue.originalResourceUrl?.let {
+                            navigator.goTo(AudioPlayerFragment.newInstance(it))
+                        }
                     }
                 }
 
