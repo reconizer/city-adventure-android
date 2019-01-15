@@ -40,6 +40,7 @@ class CluesPagesAdapter : PagerAdapter() {
         cluesAdapter.clues = points[position].clues
         cluesAdapter.notifyDataSetChanged()
         container.addView(view)
+        view.pointHeader.text = points[position].discoveryDateString
         view.journalPageView.turnableLeft = position != 0
         view.journalPageView.turnableRight = position < points.size - 1
         if (position < points.size) {

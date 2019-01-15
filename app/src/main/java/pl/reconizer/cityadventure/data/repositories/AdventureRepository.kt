@@ -24,7 +24,7 @@ class AdventureRepository(
     override fun getAdventureDiscoveredClues(adventureId: String): Single<List<AdventurePointWithClues>> {
         return adventureApi.getAdventureDiscoveredClues(adventureId)
                 .flatMap {
-                    Single.just(it.map { response -> adventurePointWithCluesMapper.map(response) })
+                    Single.just(it.map { response -> adventurePointWithCluesMapper.map(response) }.asReversed())
                 }
     }
 
