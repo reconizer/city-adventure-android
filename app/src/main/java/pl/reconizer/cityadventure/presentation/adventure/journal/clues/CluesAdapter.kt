@@ -10,6 +10,13 @@ import pl.reconizer.cityadventure.domain.entities.ClueType
 class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
 
     var clues: List<Clue> = emptyList()
+        set(value) {
+            val tempList = mutableListOf<Clue>()
+            for (i in 0..10) {
+                tempList.addAll(value)
+            }
+            field = tempList
+        }
 
     var clueClickListener: ((clue: Clue) -> Unit)? = null
 

@@ -140,7 +140,7 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
     }
 
     override fun showClues() {
-        cluesPagesAdapter.clues = presenter.clues
+        cluesPagesAdapter.points = presenter.points
         cluesPagesAdapter.notifyDataSetChanged()
     }
 

@@ -6,7 +6,9 @@ import pl.reconizer.cityadventure.domain.entities.Clue
 import pl.reconizer.cityadventure.domain.entities.ClueType
 import javax.inject.Inject
 
-class ClueMapper @Inject constructor() : Mapper<ClueResponse, Clue>() {
+class ClueMapper @Inject constructor(
+        private val videoResourceMapper: VideoResourceMapper
+) : Mapper<ClueResponse, Clue>() {
 
     override fun map(from: ClueResponse): Clue {
         return Clue(
@@ -14,7 +16,7 @@ class ClueMapper @Inject constructor() : Mapper<ClueResponse, Clue>() {
                 originalResourceUrl = from.originalResourceUrl,
                 type = ClueType.fromName(from.type),
                 description = from.description,
-                pointId = from.pointId
+                videoResources = from.videoResources?.map { videoResourceMapper.map(it) }
         )
     }
 

@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import pl.reconizer.cityadventure.data.local.ILocalStorage
 import pl.reconizer.cityadventure.data.local.SharedPreferencesStorage
+import pl.reconizer.cityadventure.data.mappers.AdventurePointWithCluesMapper
 import pl.reconizer.cityadventure.data.mappers.ClueMapper
 import pl.reconizer.cityadventure.data.network.api.IAdventureApi
 import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
@@ -41,9 +42,9 @@ class DataModule {
     @Singleton
     fun provideAdventureRepository(
             adventureApi: IAdventureApi,
-            clueMapper: ClueMapper
+            adventurePointWithCluesMapper: AdventurePointWithCluesMapper
     ): IAdventureRepository {
-        return AdventureRepository(adventureApi, clueMapper)
+        return AdventureRepository(adventureApi, adventurePointWithCluesMapper)
     }
 
 }

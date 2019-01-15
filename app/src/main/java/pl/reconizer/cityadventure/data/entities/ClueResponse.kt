@@ -7,5 +7,5 @@ data class ClueResponse(
     @SerializedName("original_asset_url") val originalResourceUrl: String?,
     val type: String,
     val description: String?,
-    @SerializedName("point_id") val pointId: String
+    @SerializedName("conversion_urls") val videoResources: List<VideoResourceResponse>?
 )

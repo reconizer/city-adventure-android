@@ -5,5 +5,5 @@ data class Clue(
     val originalResourceUrl: String?,
     val type: ClueType,
     val description: String?,
-    val pointId: String
+    val videoResources: List<VideoResource>?
 )

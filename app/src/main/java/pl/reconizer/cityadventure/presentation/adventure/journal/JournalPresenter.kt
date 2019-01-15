@@ -3,6 +3,7 @@ package pl.reconizer.cityadventure.presentation.adventure.journal
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventurePointWithClues
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.domain.entities.Clue
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
@@ -20,7 +21,7 @@ class JournalPresenter(
         private val adventureStartPoint: AdventureStartPoint
 ) : BasePresenter<IJournalView>() {
 
-    var clues: List<Clue> = emptyList()
+    var points: List<AdventurePointWithClues> = emptyList()
         private set
 
     override fun subscribe(view: IJournalView) {
@@ -33,9 +34,9 @@ class JournalPresenter(
                 adventureRepository.getAdventureDiscoveredClues(adventure.adventureId)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<List<Clue>, Error>(errorHandler) {
-                            override fun onSuccess(t: List<Clue>) {
-                                clues = t
+                        .subscribeWith(object : SingleCallbackWrapper<List<AdventurePointWithClues>, Error>(errorHandler) {
+                            override fun onSuccess(t: List<AdventurePointWithClues>) {
+                                points = t
                                 view?.showClues()
                             }
                         })

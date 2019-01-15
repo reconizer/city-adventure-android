@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
 import kotlinx.android.synthetic.main.view_journal_clues_page.view.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.domain.entities.AdventurePointWithClues
 import pl.reconizer.cityadventure.domain.entities.Clue
 import pl.reconizer.cityadventure.presentation.common.recyclerview.ItemOffsetDecorator
 
@@ -17,15 +18,7 @@ class CluesPagesAdapter : PagerAdapter() {
 
     var clueClickListener: ((clue: Clue) -> Unit)? = null
 
-    private var cluesByPoint: Map<String, List<Clue>> = emptyMap()
-    private var points: List<String> = emptyList()
-
-    var clues: List<Clue> = emptyList()
-        set(value) {
-            field = value
-            cluesByPoint = value.groupBy { it.pointId }
-            points = cluesByPoint.keys.toList()
-        }
+    var points: List<AdventurePointWithClues> = emptyList()
 
     override fun isViewFromObject(view: View, obj: Any): Boolean {
         return view == obj
@@ -44,7 +37,7 @@ class CluesPagesAdapter : PagerAdapter() {
             layoutManager = LinearLayoutManager(context)
             adapter = cluesAdapter
         }
-        cluesAdapter.clues = cluesByPoint[points[position]] ?: emptyList()
+        cluesAdapter.clues = points[position].clues
         cluesAdapter.notifyDataSetChanged()
         container.addView(view)
         view.journalPageView.turnableLeft = position != 0
