@@ -22,6 +22,7 @@ import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.ADVENTURE_POINT_ID_PARAM
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
 
@@ -106,6 +107,15 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
                     }
                 }
 
+            }
+            pointClickListener = { pointId ->
+                adventure?.let {
+                    navigator.showMap(bundleOf(
+                            MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
+                            ADVENTURE_PARAM to it,
+                            ADVENTURE_POINT_ID_PARAM to pointId
+                    ))
+                }
             }
         }
 

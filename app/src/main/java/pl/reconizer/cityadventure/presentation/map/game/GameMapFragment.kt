@@ -45,6 +45,9 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
     private val mapMode: MapMode
         get() { return (arguments?.get(MAP_MODE_PARAM) as MapMode?) ?: MapMode.ADVENTURES }
 
+    private val adventurePointId: String?
+        get() { return arguments?.get(ADVENTURE_POINT_ID_PARAM) as String? }
+
     private val mapView: IMapView
         get() { return childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
 
@@ -162,6 +165,14 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
 
     override fun showAdventurePoints(points: List<AdventurePoint>) {
         mapView.showMarkers(points)
+        adventurePointId?.let {id ->
+            val centeredPooint = points.find { point ->
+                point.id == id
+            }
+            centeredPooint?.let {
+                mapView.moveToLocation(it.position.toLatLng())
+            }
+        }
     }
 
     override fun showLocationUnavailable() {
@@ -171,6 +182,7 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
     companion object {
         const val MAP_MODE_PARAM = "map_mode"
         const val ADVENTURE_PARAM = "adventure"
+        const val ADVENTURE_POINT_ID_PARAM = "adventure_point_id"
         const val LOCATION_PERMISSION_REQUEST = 1
     }
 

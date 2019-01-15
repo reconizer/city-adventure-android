@@ -17,6 +17,7 @@ class CluesPagesAdapter : PagerAdapter() {
     var turnRightListener: ((currentPageNumber: Int) -> Unit)? = null
 
     var clueClickListener: ((clue: Clue) -> Unit)? = null
+    var pointClickListener: ((pointId: String) -> Unit)? = null
 
     var points: List<AdventurePointWithClues> = emptyList()
 
@@ -40,7 +41,12 @@ class CluesPagesAdapter : PagerAdapter() {
         cluesAdapter.clues = points[position].clues
         cluesAdapter.notifyDataSetChanged()
         container.addView(view)
+
         view.pointHeader.text = points[position].discoveryDateString
+        view.pointHeaderContainer.setOnClickListener {
+            pointClickListener?.invoke(points[position].id)
+        }
+
         view.journalPageView.turnableLeft = position != 0
         view.journalPageView.turnableRight = position < points.size - 1
         if (position < points.size) {
