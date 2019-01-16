@@ -1,6 +1,7 @@
 package pl.reconizer.cityadventure.presentation.map.game
 
 import android.location.Location
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.cityadventure.presentation.location.GpsInterfaceStatus
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
@@ -12,6 +13,8 @@ class MockLocationProvider : ILocationProvider {
     override val statusChange = PublishSubject.create<GpsInterfaceStatus>()
 
     override val locationChange = PublishSubject.create<Location>()
+
+    override val lastLocationChange = BehaviorSubject.create<Location>()
 
     override val isEnabled = true
 
@@ -30,5 +33,6 @@ class MockLocationProvider : ILocationProvider {
     fun onLocationChanged(location: Location) {
         lastLocation = location
         locationChange.onNext(location)
+        lastLocationChange.onNext(location)
     }
 }

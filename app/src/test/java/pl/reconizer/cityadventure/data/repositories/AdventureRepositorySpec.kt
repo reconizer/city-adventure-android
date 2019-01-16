@@ -4,20 +4,17 @@ import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Single
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import pl.reconizer.cityadventure.data.entities.ClueResponse
-import pl.reconizer.cityadventure.data.mappers.ClueMapper
+import pl.reconizer.cityadventure.data.entities.AdventurePointWithCluesResponse
+import pl.reconizer.cityadventure.data.mappers.AdventurePointWithCluesMapper
 import pl.reconizer.cityadventure.data.network.api.IAdventureApi
-import pl.reconizer.cityadventure.domain.entities.Adventure
-import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
-import pl.reconizer.cityadventure.domain.entities.Clue
-import pl.reconizer.cityadventure.domain.entities.Position
+import pl.reconizer.cityadventure.domain.entities.*
 
 class AdventureRepositorySpec : Spek({
 
     describe("AdventureRepository") {
         val api = mock<IAdventureApi>()
-        val clueMapper = mock<ClueMapper>()
-        val repository = AdventureRepository(api, clueMapper)
+        val adventurePointWithCluesMapper = mock<AdventurePointWithCluesMapper>()
+        val repository = AdventureRepository(api, adventurePointWithCluesMapper)
 
         describe("getAdventures") {
             val adventures = listOf(Adventure(
@@ -59,18 +56,18 @@ class AdventureRepositorySpec : Spek({
 
         describe("getAdventureDiscoveredClues") {
             val adventureId = "test-id"
-            val clueResponse = mock<ClueResponse>()
-            val clue = mock<Clue>()
+            val adventurePointWithCluesResponse = mock<AdventurePointWithCluesResponse>()
+            val adventurePointWithClues = mock<AdventurePointWithClues>()
 
             before {
-                whenever(api.getAdventureDiscoveredClues(adventureId)).thenReturn(Single.just(listOf(clueResponse)))
-                whenever(clueMapper.map(any())).thenReturn(clue)
+                whenever(api.getAdventureDiscoveredClues(adventureId)).thenReturn(Single.just(listOf(adventurePointWithCluesResponse)))
+                whenever(adventurePointWithCluesMapper.map(any())).thenReturn(adventurePointWithClues)
             }
 
             it("performs correct api call") {
                 val testObservable = repository.getAdventureDiscoveredClues(adventureId).test()
                 verify(api, atLeastOnce()).getAdventureDiscoveredClues(adventureId)
-                testObservable.assertValue(listOf(clue))
+                testObservable.assertValue(listOf(adventurePointWithClues))
                 testObservable.assertComplete()
             }
         }
