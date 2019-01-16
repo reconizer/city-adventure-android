@@ -1,5 +1,8 @@
 package pl.reconizer.cityadventure.presentation.adventure.journal.clues
 
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,10 +45,7 @@ class CluesPagesAdapter : PagerAdapter() {
         cluesAdapter.notifyDataSetChanged()
         container.addView(view)
 
-        view.pointHeader.text = points[position].discoveryDateString
-        view.pointHeaderContainer.setOnClickListener {
-            pointClickListener?.invoke(points[position].id)
-        }
+        preparePointHeader(view, points[position])
 
         view.journalPageView.turnableLeft = position != 0
         view.journalPageView.turnableRight = position < points.size - 1
@@ -61,6 +61,15 @@ class CluesPagesAdapter : PagerAdapter() {
 
     override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
         container.removeView(view as View)
+    }
+
+    private fun preparePointHeader(view: View, point: AdventurePointWithClues) {
+        view.pointHeader.text = SpannableString(point.discoveryDateString).apply {
+            setSpan(UnderlineSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        view.pointHeaderContainer.setOnClickListener {
+            pointClickListener?.invoke(point.id)
+        }
     }
 
 }
