@@ -72,6 +72,12 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
 
         adventureStartPoint?.let {
             journalAdventureDescriptionView.adventureStartPoint = it
+            journalAdventureDescriptionView.galleryImageClickListener = {imageIndex ->
+                navigator.openOver(GalleryFragment.newInstance(
+                        it.gallery,
+                        imageIndex
+                ))
+            }
         }
 
         journalTabs.tabChangeListener = {
