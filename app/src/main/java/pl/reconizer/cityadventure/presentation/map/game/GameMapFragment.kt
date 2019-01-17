@@ -25,6 +25,7 @@ import pl.reconizer.cityadventure.presentation.map.IMapView
 import pl.reconizer.cityadventure.presentation.map.IPinMapper
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.PinProvider
+import pl.reconizer.cityadventure.presentation.puzzle.TextPuzzleFragment
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -103,6 +104,9 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
                 is Adventure -> {
                     navigator.leaveMap()
                     navigator.goTo(StartPointFragment.newInstance(it))
+                }
+                is AdventurePoint -> {
+                    navigator.openOver(TextPuzzleFragment.newInstance())
                 }
             }
         }

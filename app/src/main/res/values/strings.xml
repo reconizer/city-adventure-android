@@ -9,9 +9,11 @@
     <string name="adventure_user_ranking_completion_time">Twój czas:</string>
     <string name="app_name">cityadventure</string>
     <string name="common_close">Zamknij</string>
+    <string name="common_confirm">Zatwierdź</string>
     <string name="common_no">nie</string>
     <string name="common_no_translation">brak tłumaczenia</string>
     <string name="common_ok">OK</string>
+    <string name="common_reset">Wyczyść</string>
     <string name="common_yes">tak</string>
     <string name="difficulty_level_easy">łatwy</string>
     <string name="difficulty_level_hard">trudny</string>
@@ -21,4 +23,5 @@
     <string name="location_access_explaination">Lokalizacja jest potrzebna do poprawnego działania aplikacji.</string>
     <string name="location_error_occured">Wystąpił błąd podczas pobierania lokalizacji.</string>
     <string name="login_submit">Zaloguj się</string>
+    <string name="puzzle_input_label">Hasło:</string>
 </resources>
