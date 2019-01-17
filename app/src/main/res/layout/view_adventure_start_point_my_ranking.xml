@@ -9,7 +9,7 @@
         android:id="@+id/rankingBackground"
         android:layout_width="245dp"
         android:layout_height="70dp"
-        android:src="@drawable/start_point_user_ranking_background"
+        tools:src="@drawable/start_point_user_ranking_background"
         app:layout_constraintBottom_toBottomOf="@+id/frame"
         app:layout_constraintEnd_toEndOf="@+id/frame"
         app:layout_constraintStart_toStartOf="@+id/frame"
@@ -19,7 +19,7 @@
         android:id="@+id/frame"
         android:layout_width="265dp"
         android:layout_height="80dp"
-        android:src="@drawable/start_point_user_ranking_frame"
+        tools:src="@drawable/start_point_user_ranking_frame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -52,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ranking_avatar_background"
+        tools:src="@drawable/ranking_avatar_background"
         app:layout_constraintBottom_toTopOf="@id/backgroundBottomMargin"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintStart_toEndOf="@id/backgroundLeftMargin"
@@ -89,7 +89,7 @@
         android:layout_width="109dp"
         android:layout_height="41dp"
         android:layout_marginStart="4dp"
-        android:src="@drawable/start_point_ranking_user_time_frame"
+        tools:src="@drawable/start_point_ranking_user_time_frame"
         app:layout_constraintBottom_toTopOf="@+id/backgroundBottomMargin"
         app:layout_constraintStart_toEndOf="@+id/avatarBackground" />
 

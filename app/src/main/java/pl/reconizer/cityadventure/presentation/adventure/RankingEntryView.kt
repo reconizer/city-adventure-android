@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_ranking_entry.view.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toPrettyTimeString
@@ -24,9 +25,9 @@ class RankingEntryView @JvmOverloads constructor(
             placementTextView.text = value.toString()
             placementDecoration.isVisible = true
             when (value) {
-                1 -> placementDecoration.setImageResource(R.drawable.ranking_first_place)
-                2 -> placementDecoration.setImageResource(R.drawable.ranking_second_place)
-                3 -> placementDecoration.setImageResource(R.drawable.ranking_third_place)
+                1 -> showPlacementDecoration(R.drawable.ranking_first_place)
+                2 -> showPlacementDecoration(R.drawable.ranking_second_place)
+                3 -> showPlacementDecoration(R.drawable.ranking_third_place)
                 else -> placementDecoration.isVisible = false
             }
         }
@@ -40,6 +41,14 @@ class RankingEntryView @JvmOverloads constructor(
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.view_ranking_entry, this, true)
+
+        Picasso.get()
+                .load(R.drawable.ranking_user_frame)
+                .into(frame)
+
+        Picasso.get()
+                .load(R.drawable.ranking_avatar_background_small)
+                .into(avatarBackground)
     }
 
     fun setAvatar(@DrawableRes avatarResId: Int) {
@@ -58,5 +67,11 @@ class RankingEntryView @JvmOverloads constructor(
         avatarImageView.isVisible = false
         usernameTextView.isVisible = false
         timeTextView.isVisible = false
+    }
+
+    private fun showPlacementDecoration(@DrawableRes decoration: Int) {
+        Picasso.get()
+                .load(decoration)
+                .into(placementDecoration)
     }
 }

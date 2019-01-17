@@ -11,7 +11,7 @@ import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.domain.usecases.adventure.GetAdventureStartPoint
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 
-class StartPointPresenterSpek : Spek({
+class StartPointPresenterSpec : Spek({
 
     describe("StartPointPresenter") {
         lateinit var presenter: StartPointPresenter

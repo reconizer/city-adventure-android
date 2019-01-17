@@ -9,14 +9,17 @@ import io.reactivex.subjects.PublishSubject
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
-import pl.reconizer.cityadventure.domain.usecases.adventure.GetAdventures
+import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.common.rx.CallbackWrapper
+import pl.reconizer.cityadventure.presentation.common.rx.MaybeCallbackWrapper
+import pl.reconizer.cityadventure.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
 import pl.reconizer.cityadventure.presentation.map.CameraDetails
+import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.mvp.BasePresenter
-import java.lang.IllegalArgumentException
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
@@ -24,11 +27,15 @@ class GameMapPresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val locationProvider: ILocationProvider,
-        private val getAdventures: GetAdventures,
+        private val adventureRepository: IAdventureRepository,
         private val errorHandler: ErrorHandler<Error>
 ) : BasePresenter<IGameMapView>() {
 
     private var previousCameraDetails: CameraDetails? = null
+
+    private lateinit var mapMode: MapMode
+
+    var adventure: Adventure? = null
 
     val cameraPositionObserver: PublishSubject<CameraDetails> = PublishSubject.create()
 
@@ -48,27 +55,26 @@ class GameMapPresenter(
                         SphericalUtil.computeDistanceBetween(it.position, previousCameraDetails!!.position) > DISTANCE_CHANGE ||
                         it.zoom != previousCameraDetails!!.zoom
             }
-            .doOnNext {
-                Log.d("GameMap", "Camera: ${Thread.currentThread().name}")
-                previousCameraDetails = it
-            }
+            .doOnNext { previousCameraDetails = it }
             .map { it.position.toPosition() }
             .share()
 
     private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
             .observeOn(backgroundScheduler)
             .filter { previousCameraDetails != null }
-            .map {
-                Log.d("GameMap", "Loading: ${Thread.currentThread().name}")
-                previousCameraDetails!!.position.toPosition()
-            }
+            .map { previousCameraDetails!!.position.toPosition() }
             .share()
+
+    fun subscribe(view: IGameMapView, mode: MapMode) {
+        mapMode = mode
+        subscribe(view)
+    }
 
     override fun subscribe(view: IGameMapView) {
         super.subscribe(view)
         errorHandler.view = WeakReference(view)
         if (locationProvider.hasPermission) {
-            val locationChangeObservable = locationProvider.locationChange.share()
+            val locationChangeObservable = locationProvider.lastLocationChange.share()
             disposables.add(
                     locationChangeObservable
                         .subscribeOn(backgroundScheduler)
@@ -88,11 +94,15 @@ class GameMapPresenter(
                             cameraMovedByDistanceObservable,
                             loadingIntervalsObservable
                     )
+                            .filter { mapMode == MapMode.ADVENTURES }
                             .subscribeOn(backgroundScheduler)
                             .observeOn(backgroundScheduler)
                             .flatMapSingle {
                                 Log.d("GameMapPresenter", "Checking pins")
-                                getAdventures(it)
+                                adventureRepository.getAdventures(
+                                        lat = it.lat,
+                                        lng = it.lng
+                                )
                             }
                             .observeOn(mainScheduler)
                             .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorHandler) {
@@ -103,6 +113,39 @@ class GameMapPresenter(
                                 override fun onComplete() {}
                             })
             )
+            disposables.add(
+                    locationChangeObservable.firstElement()
+                            .filter { mapMode == MapMode.ADVENTURES }
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(backgroundScheduler)
+                            .flatMap {
+                                Log.d("GameMapPresenter", "Checking pins")
+                                adventureRepository.getAdventures(
+                                        lat = it.latitude,
+                                        lng = it.longitude
+                                ).toMaybe()
+                            }
+                            .observeOn(mainScheduler)
+                            .subscribeWith(object : MaybeCallbackWrapper<List<Adventure>, Error>(errorHandler) {
+                                override fun onComplete() {}
+
+                                override fun onSuccess(t: List<Adventure>) {
+                                    this@GameMapPresenter.view?.showAdventures(t)
+                                }
+                            })
+            )
+            if (mapMode == MapMode.STARTED_ADVENTURE && adventure != null) {
+                disposables.add(
+                        adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
+                                .subscribeOn(backgroundScheduler)
+                                .observeOn(mainScheduler)
+                                .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorHandler) {
+                                    override fun onSuccess(t: List<AdventurePoint>) {
+                                        this@GameMapPresenter.view?.showAdventurePoints(t)
+                                    }
+                                })
+                )
+            }
             locationProvider.enable()
         } else {
             this@GameMapPresenter.view?.requestLocationPermission()

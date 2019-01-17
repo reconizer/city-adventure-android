@@ -6,7 +6,7 @@ import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.Position
 
-class AdventurePinMapperSpek : Spek({
+class AdventurePinMapperSpec : Spek({
 
     fun adventureFactory(purchasable: Boolean, completed: Boolean, started: Boolean): Adventure {
         return Adventure(

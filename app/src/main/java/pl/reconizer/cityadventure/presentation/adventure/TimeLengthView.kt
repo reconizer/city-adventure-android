@@ -34,6 +34,14 @@ class TimeLengthView @JvmOverloads constructor(
     }
 
     private fun updateTextView() {
-        timeTextView.text = "${minLength.toPrettyTimeString()} - ${maxLength.toPrettyTimeString()}"
+        if (minLength > 0 && maxLength > 0) {
+            if (minLength == maxLength) {
+                timeTextView.text = minLength.toPrettyTimeString()
+            } else {
+                timeTextView.text = "${minLength.toPrettyTimeString()} - ${maxLength.toPrettyTimeString()}"
+            }
+        } else {
+            timeTextView.text = "? ? ?"
+        }
     }
 }

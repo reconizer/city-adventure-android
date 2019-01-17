@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.google.maps.android.SphericalUtil
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.cityadventure.common.extensions.toLatLng
 
@@ -23,6 +24,7 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
 
     override val statusChange: PublishSubject<GpsInterfaceStatus> = PublishSubject.create<GpsInterfaceStatus>()
     override val locationChange: PublishSubject<Location> = PublishSubject.create<Location>()
+    override val lastLocationChange: BehaviorSubject<Location> = BehaviorSubject.create()
 
     override var isEnabled = false
         private set
@@ -60,6 +62,7 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
         previousLocation = lastLocation
         lastLocation = location
         locationChange.onNext(location)
+        lastLocationChange.onNext(location)
     }
 
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {

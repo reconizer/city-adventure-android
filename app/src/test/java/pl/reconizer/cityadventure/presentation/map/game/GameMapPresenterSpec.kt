@@ -8,16 +8,18 @@ import com.winterbe.expekt.expect
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
+import org.mockito.ArgumentMatchers.anyDouble
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
-import pl.reconizer.cityadventure.domain.usecases.adventure.GetAdventures
+import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
 import pl.reconizer.cityadventure.presentation.map.CameraDetails
+import pl.reconizer.cityadventure.presentation.map.MapMode
 import java.util.concurrent.TimeUnit
 
 class GameMapPresenterSpec : Spek({
@@ -25,10 +27,10 @@ class GameMapPresenterSpec : Spek({
     describe("GameMapPresenter") {
         lateinit var testScheduler: TestScheduler
         lateinit var simplePresenter: GameMapPresenter
+        lateinit var adventureRepository: IAdventureRepository
+        lateinit var errorHandler: ErrorHandler<Error>
 
         val locationProvider = mock<ILocationProvider>()
-        val getAdventures =  mock<GetAdventures>()
-        val errorHandler = mock<ErrorHandler<Error>>()
 
         val view = mock<IGameMapView>()
 
@@ -41,14 +43,14 @@ class GameMapPresenterSpec : Spek({
         }
 
         beforeEachTest {
-            reset(getAdventures, errorHandler)
-            reset(errorHandler)
+            errorHandler = mock()
+            adventureRepository =  mock()
             testScheduler = TestScheduler()
             simplePresenter = GameMapPresenter(
                     Schedulers.trampoline(),
                     Schedulers.trampoline(),
                     locationProvider,
-                    getAdventures,
+                    adventureRepository,
                     errorHandler
             )
         }
@@ -110,7 +112,7 @@ class GameMapPresenterSpec : Spek({
                             testScheduler,
                             testScheduler,
                             customLocationProvider,
-                            getAdventures,
+                            adventureRepository,
                             errorHandler
                     )
                 }
@@ -118,18 +120,44 @@ class GameMapPresenterSpec : Spek({
                 afterEachTest { presenter.unsubscribe() }
 
                 it("enables location provider") {
-                    presenter.subscribe(view)
+                    presenter.subscribe(view, MapMode.ADVENTURES)
                     verify(customLocationProvider, atLeastOnce()).enable()
                 }
 
                 context("when location provider emits new location") {
 
                     it("notifies view about new location") {
-                        presenter.subscribe(view)
+                        presenter.subscribe(view, MapMode.ADVENTURES)
                         testScheduler.triggerActions()
                         customLocationProvider.onLocationChanged(location)
                         testScheduler.triggerActions()
                         verify(view, atLeastOnce()).showCurrentLocation(position)
+                    }
+
+                }
+
+                context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
+                    val adventurePoints = emptyList<AdventurePoint>()
+                    val adventure = mock<Adventure>()
+                    val adventureId = "adv-id"
+
+                    beforeEachTest {
+                        reset(view)
+                        whenever(adventureRepository.getAdventureCompletedPoints(adventureId)).thenReturn(Single.just(adventurePoints))
+                        whenever(adventure.adventureId).thenReturn(adventureId)
+                        presenter.adventure = adventure
+                        presenter.subscribe(view, MapMode.STARTED_ADVENTURE)
+                        testScheduler.triggerActions()
+                    }
+
+                    it("fetches adventure points") {
+                        verify(adventureRepository, atLeastOnce()).getAdventureCompletedPoints(
+                                adventureId
+                        )
+                    }
+
+                    it("passes adventure points to the view") {
+                        verify(view, atLeastOnce()).showAdventurePoints(adventurePoints)
                     }
 
                 }
@@ -140,21 +168,47 @@ class GameMapPresenterSpec : Spek({
                     context("when it is the first change emit") {
                         val cameraDetails = CameraDetails(LatLng(1.0, 1.0), 15f)
 
-                        beforeEachTest {
-                            reset(view)
-                            whenever(getAdventures.invoke(any())).thenReturn(Single.just(adventures))
-                            presenter.subscribe(view)
-                            testScheduler.triggerActions()
-                            presenter.cameraPositionObserver.onNext(cameraDetails)
-                            testScheduler.triggerActions()
+                        context("when in ${MapMode.ADVENTURES.name} map mode") {
+
+                            beforeEachTest {
+                                reset(view)
+                                whenever(adventureRepository.getAdventures(cameraDetails.position.latitude, cameraDetails.position.longitude)).thenReturn(Single.just(adventures))
+                                presenter.subscribe(view, MapMode.ADVENTURES)
+                                testScheduler.triggerActions()
+                                presenter.cameraPositionObserver.onNext(cameraDetails)
+                                testScheduler.triggerActions()
+                            }
+
+                            it("fetches adventures") {
+                                verify(adventureRepository, atLeastOnce()).getAdventures(
+                                        lat = position.lat,
+                                        lng = position.lng
+                                )
+                            }
+
+                            it("passes adventures to the view") {
+                                verify(view, atLeastOnce()).showAdventures(adventures)
+                            }
+
                         }
 
-                        it("fetches adventures") {
-                            verify(getAdventures, atLeastOnce()).invoke(position)
-                        }
+                        context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
 
-                        it("passes adventures to the view") {
-                            verify(view, atLeastOnce()).showAdventures(adventures)
+                            beforeEachTest {
+                                reset(view)
+                                presenter.subscribe(view, MapMode.STARTED_ADVENTURE)
+                                testScheduler.triggerActions()
+                                presenter.cameraPositionObserver.onNext(cameraDetails)
+                                testScheduler.triggerActions()
+                            }
+
+                            it("doesnt fetches adventures") {
+                                verify(adventureRepository, never()).getAdventures(
+                                        anyDouble(),
+                                        anyDouble()
+                                )
+                            }
+
                         }
 
                     }
@@ -162,33 +216,59 @@ class GameMapPresenterSpec : Spek({
                     context("when it is another change emit") {
                         val initialCameraDetails = CameraDetails(LatLng(0.0, 0.0), 15f)
 
-                        beforeEachTest {
-                            reset(view)
-                            whenever(getAdventures.invoke(any())).thenReturn(Single.just(adventures))
-                            presenter.subscribe(view)
-                            testScheduler.triggerActions()
-                            presenter.cameraPositionObserver.onNext(initialCameraDetails)
-                            testScheduler.triggerActions()
-                        }
-
                         context("when the map camera is moved by at least ${GameMapPresenter.DISTANCE_CHANGE} meters") {
                             val cameraDetails = CameraDetails(
                                     SphericalUtil.computeOffset(initialCameraDetails.position, 1 + GameMapPresenter.DISTANCE_CHANGE.toDouble(), 0.0),
                                     initialCameraDetails.zoom
                             )
 
-                            beforeEachTest {
-                                presenter.cameraPositionObserver.onNext(cameraDetails)
-                                testScheduler.triggerActions()
+                            context("when in ${MapMode.ADVENTURES.name} map mode") {
+
+                                beforeEachTest {
+                                    presenter.subscribe(view, MapMode.ADVENTURES)
+                                    whenever(adventureRepository.getAdventures(initialCameraDetails.position.latitude, initialCameraDetails.position.longitude)).thenReturn(Single.just(adventures))
+                                    whenever(adventureRepository.getAdventures(cameraDetails.position.latitude, cameraDetails.position.longitude)).thenReturn(Single.just(adventures))
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(initialCameraDetails)
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(cameraDetails)
+                                    testScheduler.triggerActions()
+                                }
+
+                                it("fetches adventures") {
+                                    verify(adventureRepository, atLeast(2)).getAdventures(
+                                            anyDouble(),
+                                            anyDouble()
+                                    )
+                                    verify(adventureRepository, atLeastOnce()).getAdventures(
+                                            lat = cameraDetails.position.latitude,
+                                            lng = cameraDetails.position.longitude
+                                    )
+                                }
+
+                                it("passes adventures to the view") {
+                                    verify(view, atLeast(2)).showAdventures(adventures)
+                                }
                             }
 
-                            it("fetches adventures") {
-                                verify(getAdventures, atLeast(2)).invoke(any())
-                                verify(getAdventures, atLeastOnce()).invoke(cameraDetails.position.toPosition())
-                            }
+                            context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
 
-                            it("passes adventures to the view") {
-                                verify(view, atLeast(2)).showAdventures(adventures)
+                                beforeEachTest {
+                                    presenter.subscribe(view, MapMode.STARTED_ADVENTURE)
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(initialCameraDetails)
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(cameraDetails)
+                                    testScheduler.triggerActions()
+                                }
+
+                                it("doesnt fetches adventures") {
+                                    verify(adventureRepository, never()).getAdventures(
+                                            anyDouble(),
+                                            anyDouble()
+                                    )
+                                }
+
                             }
 
                         }
@@ -199,21 +279,58 @@ class GameMapPresenterSpec : Spek({
                                     initialCameraDetails.zoom + 1
                             )
 
-                            beforeEachTest {
-                                presenter.cameraPositionObserver.onNext(cameraDetails)
-                                testScheduler.triggerActions()
+                            context("when in ${MapMode.ADVENTURES.name} map mode") {
+
+                                beforeEachTest {
+                                    presenter.subscribe(view, MapMode.ADVENTURES)
+                                    whenever(adventureRepository.getAdventures(initialCameraDetails.position.latitude, initialCameraDetails.position.longitude)).thenReturn(Single.just(adventures))
+                                    whenever(adventureRepository.getAdventures(cameraDetails.position.latitude, cameraDetails.position.longitude)).thenReturn(Single.just(adventures))
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(initialCameraDetails)
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(cameraDetails)
+                                    testScheduler.triggerActions()
+                                }
+
+                                it("fetches adventures") {
+                                    verify(adventureRepository, atLeast(2)).getAdventures(
+                                            anyDouble(),
+                                            anyDouble()
+                                    )
+                                    verify(adventureRepository, atLeastOnce()).getAdventures(
+                                            lat = cameraDetails.position.latitude,
+                                            lng = cameraDetails.position.longitude
+                                    )
+                                }
+
+                                it("passes adventures to the view") {
+                                    verify(view, atLeast(2)).showAdventures(adventures)
+                                }
+
                             }
 
-                            it("fetches adventures") {
-                                verify(getAdventures, atLeast(2)).invoke(any())
-                                verify(getAdventures, atLeastOnce()).invoke(cameraDetails.position.toPosition())
-                            }
+                            context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
 
-                            it("passes adventures to the view") {
-                                verify(view, atLeast(2)).showAdventures(adventures)
+                                beforeEachTest {
+                                    presenter.subscribe(view, MapMode.STARTED_ADVENTURE)
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(initialCameraDetails)
+                                    testScheduler.triggerActions()
+                                    presenter.cameraPositionObserver.onNext(cameraDetails)
+                                    testScheduler.triggerActions()
+                                }
+
+                                it("doesnt fetches adventures") {
+                                    verify(adventureRepository, never()).getAdventures(
+                                            anyDouble(),
+                                            anyDouble()
+                                    )
+                                }
+
                             }
 
                         }
+
                     }
                 }
 
@@ -221,29 +338,53 @@ class GameMapPresenterSpec : Spek({
                     val adventures = emptyList<Adventure>()
                     val cameraDetails = CameraDetails(LatLng(1.0, 1.0), 15f)
 
-                    beforeEachTest {
-                        reset(view)
-                        whenever(getAdventures.invoke(any())).thenReturn(Single.just(adventures))
-                        presenter.subscribe(view)
-                        testScheduler.triggerActions()
-                        presenter.cameraPositionObserver.onNext(cameraDetails) // first emit
-                    }
-
-                    afterEachTest { presenter.unsubscribe() }
-
                     context("when ${GameMapPresenter.LOAD_ADVENTURES_TIMEOUT} seconds passed") {
 
-                        beforeEachTest {
-                            testScheduler.advanceTimeBy(GameMapPresenter.LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS)
+                        context("when in ${MapMode.ADVENTURES.name} map mode") {
+
+                            beforeEachTest {
+                                reset(view)
+                                whenever(adventureRepository.getAdventures(any(), any())).thenReturn(Single.just(adventures))
+                                presenter.subscribe(view, MapMode.ADVENTURES)
+                                testScheduler.triggerActions()
+                                presenter.cameraPositionObserver.onNext(cameraDetails) // first emit
+                                testScheduler.advanceTimeBy(GameMapPresenter.LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS)
+
+                            }
+
+                            it("fetches adventures") {
+                                verify(adventureRepository, atLeast(2)).getAdventures(
+                                        anyDouble(),
+                                        anyDouble()
+                                )
+                                verify(adventureRepository, atLeastOnce()).getAdventures(
+                                        lat = cameraDetails.position.latitude,
+                                        lng = cameraDetails.position.longitude
+                                )
+                            }
+
+                            it("passes adventures to the view") {
+                                verify(view, atLeast(2)).showAdventures(adventures)
+                            }
+
                         }
 
-                        it("fetches adventures") {
-                            verify(getAdventures, atLeast(2)).invoke(any())
-                            verify(getAdventures, atLeastOnce()).invoke(cameraDetails.position.toPosition())
-                        }
+                        context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
 
-                        it("passes adventures to the view") {
-                            verify(view, atLeast(2)).showAdventures(adventures)
+                            beforeEachTest {
+                                presenter.subscribe(view, MapMode.STARTED_ADVENTURE)
+                                testScheduler.triggerActions()
+                                presenter.cameraPositionObserver.onNext(cameraDetails) // first emit
+                                testScheduler.advanceTimeBy(GameMapPresenter.LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS)
+                            }
+
+                            it("doesnt fetches adventures") {
+                                verify(adventureRepository, never()).getAdventures(
+                                        anyDouble(),
+                                        anyDouble()
+                                )
+                            }
+
                         }
 
                     }

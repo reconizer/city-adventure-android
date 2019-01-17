@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/progressTabButton"
+        android:layout_width="148dp"
+        android:layout_height="97dp"
+        android:translationZ="1px"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@drawable/journal_tab_progress_active" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/overflowSpace"
+        android:layout_width="35dp"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="@id/progressTabButton"/>
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/descriptionTabButton"
+        android:layout_width="178dp"
+        android:layout_height="97dp"
+        android:translationZ="0px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/overflowSpace"
+        tools:src="@drawable/journal_tab_description_inactive" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/progressTabTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText.JournalTabTitle"
+        android:text="@string/adventure_journal_progress_tab"
+        android:translationZ="2px"
+        app:layout_constraintStart_toStartOf="@id/progressTabButton"
+        app:layout_constraintTop_toTopOf="@id/progressTabButton"
+        app:layout_constraintEnd_toEndOf="@id/progressTabButton"
+        app:layout_constraintBottom_toBottomOf="@id/progressTabButton" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/descriptionTabTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText.JournalTabTitle"
+        android:text="@string/adventure_journal_desc_tab"
+        android:translationZ="2px"
+        app:layout_constraintStart_toStartOf="@id/descriptionTabButton"
+        app:layout_constraintTop_toTopOf="@id/descriptionTabButton"
+        app:layout_constraintEnd_toEndOf="@id/descriptionTabButton"
+        app:layout_constraintBottom_toBottomOf="@id/descriptionTabButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

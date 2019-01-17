@@ -7,7 +7,7 @@ import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.di.modules.ErrorHandlersModule
 import pl.reconizer.cityadventure.di.modules.usecases.AdventureUsecasesModule
 import pl.reconizer.cityadventure.di.scopes.ViewScope
-import pl.reconizer.cityadventure.domain.usecases.adventure.GetAdventures
+import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
 import javax.inject.Named
@@ -24,14 +24,14 @@ class GameMapModule {
             @Named("background") backgroundScheduler: Scheduler,
             @Named("main") mainScheduler: Scheduler,
             locationProvider: ILocationProvider,
-            getAdventures: GetAdventures,
+            adventureRepository: IAdventureRepository,
             errorHandler: ErrorHandler<Error>
     ): GameMapPresenter {
         return GameMapPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 locationProvider,
-                getAdventures,
+                adventureRepository,
                 errorHandler
         )
     }

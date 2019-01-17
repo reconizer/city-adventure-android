@@ -1,11 +1,15 @@
 package pl.reconizer.cityadventure.presentation.map
 
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
-import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.IPositionable
 
 interface IMapView {
 
-    var adventurePinClickListener: ((adventure: Adventure) -> Unit)?
+    var pinMapper: IPinMapper?
+    var userPin: BitmapDescriptor?
+
+    var pinClickListener: ((pin: IPositionable) -> Unit)?
     var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)?
     var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)?
 
@@ -15,6 +19,7 @@ interface IMapView {
     fun moveToLocation(location: LatLng)
     fun handleNewUserLocation(location: LatLng)
 
-    fun showAdventureMarkers(adventures: List<Adventure>)
+    fun showMarkers(positionables: List<IPositionable>)
+    fun clearMarkers()
 
 }

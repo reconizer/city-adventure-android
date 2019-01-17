@@ -5,21 +5,26 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 
 class AdventurePinMapper(
         private val provider: PinProvider
-) {
+): IPinMapper {
 
-    fun determinePin(adventure: Adventure): BitmapDescriptor {
-        return if (adventure.purchasable) {
-            when {
-                adventure.completed -> provider.purchasableFinishedPin
-                adventure.started -> provider.purchasableStartedPin
-                else -> provider.purchasablePin
+    override fun determinePin(t: Any): BitmapDescriptor? {
+        return when(t) {
+            is Adventure -> {
+                if (t.purchasable) {
+                    when {
+                        t.completed -> provider.purchasableFinishedPin
+                        t.started -> provider.purchasableStartedPin
+                        else -> provider.purchasablePin
+                    }
+                } else {
+                    when {
+                        t.completed -> provider.freeFinishedPin
+                        t.started -> provider.freeStartedPin
+                        else -> provider.freePin
+                    }
+                }
             }
-        } else {
-            when {
-                adventure.completed -> provider.freeFinishedPin
-                adventure.started -> provider.freeStartedPin
-                else -> provider.freePin
-            }
+            else -> null
         }
     }
 

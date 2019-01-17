@@ -2,8 +2,6 @@
 <resources>
     <dimen name="map_ui_margin">14dp</dimen>
 
-    <dimen name="map_buttons_margin">10dp</dimen>
-
     <dimen name="space_xs">4dp</dimen>
     <dimen name="space_sm">8dp</dimen>
     <dimen name="space_md">16dp</dimen>
@@ -15,4 +13,9 @@
     <dimen name="banner_padding_top">10dp</dimen>
     <dimen name="banner_padding_end">36dp</dimen>
     <dimen name="banner_padding_bottom">40dp</dimen>
+
+    <dimen name="journalClueIdFontSize">21dp</dimen>
+    <dimen name="journalClueFontSize">14dp</dimen>
+    <dimen name="journalClueNumberSpace">50dp</dimen>
+    <dimen name="journalClueOffset">16dp</dimen>
 </resources>

@@ -9,8 +9,6 @@
         android:id="@+id/difficultyIcon"
         android:layout_width="73dp"
         android:layout_height="81dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

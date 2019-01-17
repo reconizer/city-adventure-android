@@ -33,6 +33,14 @@ class AuthorInfoView @JvmOverloads constructor(
             typedArray.recycle()
         }
 
+        Picasso.get()
+                .load(R.drawable.start_point_creator_background)
+                .into(authorBackground)
+
+        Picasso.get()
+                .load(R.drawable.start_point_creator_background_tape)
+                .into(authorBackgroundTape)
+
     }
 
     fun setLogo(imageUrl: String) {

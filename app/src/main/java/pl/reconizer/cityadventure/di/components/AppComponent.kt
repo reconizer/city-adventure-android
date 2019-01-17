@@ -7,6 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
+    UtilsModule::class,
     ContextModule::class,
     SchedulersModule::class,
     DataModule::class,

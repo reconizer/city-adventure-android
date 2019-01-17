@@ -56,7 +56,7 @@ class ShadowView @JvmOverloads constructor(
         if (!isInEditMode) {
             canvas?.let {
                 val newRect = it.clipBounds
-                if (!isShadowPrepared) {
+                if (!isShadowPrepared && newRect.width() > 0 && newRect.height() > 0) {
                     isShadowPrepared = true
                     shadowGenerator?.generateShadowAsync(
                             newRect.width(),
@@ -69,7 +69,6 @@ class ShadowView @JvmOverloads constructor(
                     }
                 }
                 if (shadowBitmap != null) {
-                    Log.d("ShadowView", "DRAW SHADOW")
                     it.drawBitmap(shadowBitmap!!, newRect.left.toFloat(), newRect.top.toFloat(), null)
                 }
             }

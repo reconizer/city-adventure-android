@@ -9,7 +9,43 @@
 
     <style name="TypeWriterText">
         <item name="android:fontFamily">@font/veterantypewriter</item>
-        <item name="android:textColor">@color/fontBlack</item>
+        <item name="android:textColor">@color/fontDark</item>
+    </style>
+
+    <style name="TypeWriterText.JournalTabTitle">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">#41382f</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog.MinWidth">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimAmount">0.7</item>
+    </style>
+
+    <style name="DialogText" parent="TypeWriterText">
+        <item name="android:textColor">#453c32</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="DialogHeaderText" parent="TypeWriterText">
+        <item name="android:textColor">#984242</item>
+        <item name="android:textSize">28dp</item>
+    </style>
+
+    <style name="DialogButton">
+        <item name="android:background">@drawable/dialog_button</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#ead5b6</item>
+        <item name="android:paddingStart">@dimen/space_md</item>
+        <item name="android:paddingEnd">@dimen/space_md</item>
+        <item name="android:paddingTop">@dimen/space_sm</item>
+        <item name="android:paddingBottom">@dimen/space_sm</item>
+    </style>
+
+    <style name="DialogButton.Spacious">
+        <item name="android:paddingStart">@dimen/space_lg</item>
+        <item name="android:paddingEnd">@dimen/space_lg</item>
     </style>
 
 </resources>

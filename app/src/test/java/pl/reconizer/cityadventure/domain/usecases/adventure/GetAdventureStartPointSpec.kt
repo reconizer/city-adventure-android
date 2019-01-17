@@ -7,7 +7,7 @@ import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 
-class GetAdventureStartPointSpek : Spek({
+class GetAdventureStartPointSpec : Spek({
 
     describe("get adventure's start point usecase") {
         val repository = mock<IAdventureRepository>()
