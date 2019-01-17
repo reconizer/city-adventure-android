@@ -122,7 +122,7 @@ class MapFragment : SupportMapFragment(), IMapView {
                     googleMap!!.cameraPosition.target,
                     googleMap!!.cameraPosition.zoom
             ))
-            if (shouldUpdateOverlays()) {
+            if (view != null && shouldUpdateOverlays()) {
                 updateOverlays()
             }
         }
