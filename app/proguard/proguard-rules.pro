@@ -74,3 +74,6 @@
 -keepclassmembers class **$WhenMappings {
     <fields>;
 }
+
+-keep class pl.reconizer.cityadventure.app.data.** { *; }
+-keep class pl.reconizer.cityadventure.app.domain.** { *; }
