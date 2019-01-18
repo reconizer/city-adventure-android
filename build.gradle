@@ -2,24 +2,24 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.3.10'
-        kotlinExtensionsVersion = '1.0.0'
+        kotlinVersion = '1.3.11'
+        kotlinExtensionsVersion = '1.0.1'
 
         androidXVersion = '1.0.0'
         materialVersion = '1.0.0'
-        constraintLayoutVersion = '2.0.0-alpha2'
+        constraintLayoutVersion = '2.0.0-alpha3'
 
         mapsServicesVersion = '16.0.0'
         mapUtilsVersion = '0.5'
 
-        retrofitVersion = '2.4.0'
-        okhttpVersion = '3.11.0'
+        retrofitVersion = '2.5.0'
+        okhttpVersion = '3.12.1'
         gsonVersion = '2.8.2'
 
-        rxKotlinVersion = '2.2.0'
-        rxAndroidVersion = '2.0.2'
+        rxKotlinVersion = '2.3.0'
+        rxAndroidVersion = '2.1.0'
 
-        daggerVersion = '2.15'
+        daggerVersion = '2.21'
 
         picassoVersion = '2.71828'
         propertyAnimatorVersion = '1.4.5'
@@ -36,10 +36,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.google.gms:google-services:4.0.0'
-        classpath "de.mannodermaus.gradle.plugins:android-junit5:1.0.32"
+        classpath 'com.google.gms:google-services:4.2.0'
+        classpath "de.mannodermaus.gradle.plugins:android-junit5:1.3.2.0"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
