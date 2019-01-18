@@ -106,7 +106,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                     navigator.goTo(StartPointFragment.newInstance(it))
                 }
                 is AdventurePoint -> {
-                    navigator.openOver(TextPuzzleFragment.newInstance())
+                    navigator.openOver(TextPuzzleFragment.newInstance(
+                            presenter.adventure!!,
+                            it
+                    ))
                 }
             }
         }

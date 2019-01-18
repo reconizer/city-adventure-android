@@ -32,4 +32,8 @@ class AdventureRepository(
         return adventureApi.getAdventureCompletedPoints(adventureId)
     }
 
+    override fun resolvePoint(form: PuzzleAnswerForm): Single<PuzzleResponse> {
+        return adventureApi.resolvePoint(form)
+    }
+
 }

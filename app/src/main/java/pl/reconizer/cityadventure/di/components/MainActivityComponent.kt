@@ -12,6 +12,8 @@ import pl.reconizer.cityadventure.presentation.authentication.login.LoginCompone
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
 import pl.reconizer.cityadventure.presentation.map.game.GameMapModule
+import pl.reconizer.cityadventure.presentation.puzzle.PuzzleComponent
+import pl.reconizer.cityadventure.presentation.puzzle.PuzzleModule
 
 @Subcomponent(modules = [
     MainActivityModule::class
@@ -25,5 +27,6 @@ interface MainActivityComponent {
     fun gameMapComponent(module: GameMapModule): GameMapComponent
     fun adventureStartPointComponent(module: StartPointModule): StartPointComponent
     fun journalComponent(module: JournalModule): JournalComponent
+    fun puzzleComponent(module: PuzzleModule): PuzzleComponent
 
 }

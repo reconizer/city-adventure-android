@@ -9,6 +9,7 @@ import pl.reconizer.cityadventure.di.components.MainActivityComponent
 import pl.reconizer.cityadventure.di.modules.ContextModule
 import pl.reconizer.cityadventure.di.modules.MainActivityModule
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.presentation.adventure.journal.JournalComponent
 import pl.reconizer.cityadventure.presentation.adventure.journal.JournalModule
@@ -18,6 +19,8 @@ import pl.reconizer.cityadventure.presentation.authentication.login.LoginCompone
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
 import pl.reconizer.cityadventure.presentation.map.game.GameMapModule
+import pl.reconizer.cityadventure.presentation.puzzle.PuzzleComponent
+import pl.reconizer.cityadventure.presentation.puzzle.PuzzleModule
 
 object Injector {
 
@@ -27,6 +30,7 @@ object Injector {
     private var gameMapComponent: GameMapComponent? = null
     private var adventureStartPointComponent: StartPointComponent? = null
     private var journalComponent: JournalComponent? = null
+    private var puzzleComponent: PuzzleComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -67,6 +71,13 @@ object Injector {
         return journalComponent!!
     }
 
+    fun buildPuzzleComponent(adventure: Adventure, adventurePoint: AdventurePoint): PuzzleComponent {
+        puzzleComponent = mainActivityComponent!!.puzzleComponent(
+                PuzzleModule(adventure, adventurePoint)
+        )
+        return puzzleComponent!!
+    }
+
     fun clearAppComponent() {
         appComponent = null
     }
@@ -89,5 +100,9 @@ object Injector {
 
     fun clearJournalComponent() {
         journalComponent = null
+    }
+
+    fun clearPuzzleComponent() {
+        puzzleComponent = null
     }
 }

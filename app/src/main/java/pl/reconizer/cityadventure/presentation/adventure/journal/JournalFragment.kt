@@ -150,6 +150,11 @@ class JournalFragment : BaseFragment(), IJournalView {
         presenter.unsubscribe()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearJournalComponent()
+    }
+
     override fun goBack(): Boolean {
         showExitAdventureDialog()
         return true
