@@ -24,7 +24,7 @@ import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
 
-class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListener {
+class StartPointFragment : BaseFragment(), IStartPointView {
 
     @Inject
     lateinit var presenter: StartPointPresenter

@@ -6,10 +6,9 @@ import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
 import pl.reconizer.cityadventure.domain.repositories.IUserRepository
 
 class UserRepository(
-        private val authenticationApi: IAuthenticationApi
+        private val authenticationApi: IAuthenticationApi,
+        private val tokenMapper: TokenMapper
 ) : IUserRepository{
-
-    private val tokenMapper = TokenMapper()
 
     override fun login(email: String, password: String): Single<String> {
         return authenticationApi.login(email, password)

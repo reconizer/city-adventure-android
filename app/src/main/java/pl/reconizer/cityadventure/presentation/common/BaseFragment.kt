@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import pl.reconizer.cityadventure.MainActivity
+import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginFragment
 import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
 import pl.reconizer.cityadventure.presentation.mvp.IView
 import pl.reconizer.cityadventure.presentation.navigation.INavigator
 
-open class BaseFragment : Fragment(), IView {
+open class BaseFragment : Fragment(), IView, OnBackPressedListener {
 
     private var errorDialog: PrettyDialog? = null
 
@@ -52,5 +53,10 @@ open class BaseFragment : Fragment(), IView {
 
     open fun withStatusBar(): Boolean {
         return false
+    }
+
+    override fun goBack(): Boolean {
+        navigator.goBack()
+        return true
     }
 }

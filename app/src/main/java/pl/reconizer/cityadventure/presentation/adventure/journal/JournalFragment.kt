@@ -26,7 +26,7 @@ import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companio
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
 
-class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
+class JournalFragment : BaseFragment(), IJournalView {
 
     val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
     val adventureStartPoint by lazy { arguments?.get(ADVENTURE_START_POINT_PARAM) as AdventureStartPoint? }

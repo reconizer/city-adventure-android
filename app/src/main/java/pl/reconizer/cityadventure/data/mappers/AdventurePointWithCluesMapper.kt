@@ -5,7 +5,9 @@ import pl.reconizer.cityadventure.domain.common.Mapper
 import pl.reconizer.cityadventure.domain.entities.AdventurePointWithClues
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AdventurePointWithCluesMapper @Inject constructor(
         private val clueMapper: ClueMapper
 ) : Mapper<AdventurePointWithCluesResponse, AdventurePointWithClues>() {

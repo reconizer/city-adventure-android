@@ -35,12 +35,18 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         if (fragment != null && fragment is OnBackPressedListener) {
-            if (!fragment.goBack()) {
+            if (!fragment.goBack() && !navigator.isRoot()) {
                 super.onBackPressed()
+            } else {
+                handleExit()
             }
         } else {
-            super.onBackPressed()
+            handleExit()
         }
+    }
+
+    private fun handleExit() {
+        // TODO double tap to exit
     }
 
     fun showStatusBar() {

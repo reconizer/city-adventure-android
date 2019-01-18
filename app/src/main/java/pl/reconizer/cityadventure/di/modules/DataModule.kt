@@ -7,6 +7,7 @@ import pl.reconizer.cityadventure.data.local.ILocalStorage
 import pl.reconizer.cityadventure.data.local.SharedPreferencesStorage
 import pl.reconizer.cityadventure.data.mappers.AdventurePointWithCluesMapper
 import pl.reconizer.cityadventure.data.mappers.ClueMapper
+import pl.reconizer.cityadventure.data.mappers.TokenMapper
 import pl.reconizer.cityadventure.data.network.api.IAdventureApi
 import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
 import pl.reconizer.cityadventure.data.repositories.AdventureRepository
@@ -34,8 +35,11 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(authenticationApi: IAuthenticationApi): IUserRepository {
-        return UserRepository(authenticationApi)
+    fun provideUserRepository(
+            authenticationApi: IAuthenticationApi,
+            tokenMapper: TokenMapper
+    ): IUserRepository {
+        return UserRepository(authenticationApi, tokenMapper)
     }
 
     @Provides

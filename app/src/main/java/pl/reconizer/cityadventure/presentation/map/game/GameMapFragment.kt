@@ -29,7 +29,7 @@ import pl.reconizer.cityadventure.presentation.puzzle.TextPuzzleFragment
 import javax.inject.Inject
 import javax.inject.Named
 
-class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
+class GameMapFragment : BaseFragment(), IGameMapView {
 
     @Inject
     lateinit var pinProvider: PinProvider
@@ -123,10 +123,13 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
     }
 
     override fun goBack(): Boolean {
-        if (!navigator.isRoot()) {
+        return if (!navigator.isRoot()) {
             navigator.leaveMap()
+            navigator.goBack()
+            true
+        } else {
+            false
         }
-        return !navigator.isRoot()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

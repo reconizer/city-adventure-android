@@ -5,7 +5,9 @@ import pl.reconizer.cityadventure.domain.common.Mapper
 import pl.reconizer.cityadventure.domain.entities.Clue
 import pl.reconizer.cityadventure.domain.entities.ClueType
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ClueMapper @Inject constructor(
         private val videoResourceMapper: VideoResourceMapper
 ) : Mapper<ClueResponse, Clue>() {
