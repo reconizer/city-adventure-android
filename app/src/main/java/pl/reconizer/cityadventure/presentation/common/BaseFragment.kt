@@ -7,7 +7,8 @@ import pl.reconizer.cityadventure.MainActivity
 import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginFragment
-import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
+import pl.reconizer.cityadventure.presentation.customviews.dialogs.ErrorDialogBuilder
+import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.cityadventure.presentation.mvp.IView
 import pl.reconizer.cityadventure.presentation.navigation.INavigator
 
@@ -30,7 +31,7 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
     override fun showGenericError() {
         context?.let {
             errorDialog?.dismiss()
-            errorDialog = PrettyDialog.ErrorDialogBuilder(it).build()
+            errorDialog = ErrorDialogBuilder(it).build()
             errorDialog?.show(childFragmentManager, "error")
         }
     }

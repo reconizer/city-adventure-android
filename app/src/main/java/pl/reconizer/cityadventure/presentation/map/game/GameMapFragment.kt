@@ -1,26 +1,23 @@
 package pl.reconizer.cityadventure.presentation.map.game
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_game_map.*
-import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
+import pl.reconizer.cityadventure.domain.entities.PuzzleResponse
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.map.IMapView
 import pl.reconizer.cityadventure.presentation.map.IPinMapper
 import pl.reconizer.cityadventure.presentation.map.MapMode
@@ -106,10 +103,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                     navigator.goTo(StartPointFragment.newInstance(it))
                 }
                 is AdventurePoint -> {
-                    navigator.openOver(TextPuzzleFragment.newInstance(
-                            presenter.adventure!!,
-                            it
-                    ))
+                    presenter.resolvePoint(it)
                 }
             }
         }
@@ -135,34 +129,24 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == LOCATION_PERMISSION_REQUEST) {
-            if (grantResults.size != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                // TODO permissions not granted
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        }
+    override fun requestLocationPermission() {
+        (activity as IViewWithLocation?)?.requestLocationPermission()
     }
 
-    override fun requestLocationPermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            context?.let {
-                if (locationPermissionDialog == null) {
-                    locationPermissionDialog = AlertDialog.Builder(it)
-                            .setMessage(R.string.location_access_explaination)
-                            .setPositiveButton(R.string.common_ok) { _, _ ->
-                                requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST)
-                            }
-                            .setNegativeButton(R.string.common_close) { _, _ ->
-                                activity?.finish() // close the app for now
-                            }.create()
-                }
-                locationPermissionDialog!!.show()
-            }
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST)
-        }
+    override fun gpsUnavailable() {
+        (activity as IViewWithLocation?)?.gpsUnavailable()
+    }
+
+    override fun gpsAvailableAgain() {
+        (activity as IViewWithLocation?)?.gpsAvailableAgain()
+    }
+
+    override fun goToLocationPermissionsSettings() {
+        (activity as IViewWithLocation?)?.goToLocationPermissionsSettings()
+    }
+
+    override fun goToLocationInterfaceSettings() {
+        (activity as IViewWithLocation?)?.goToLocationInterfaceSettings()
     }
 
     override fun showCurrentLocation(position: Position) {
@@ -176,13 +160,20 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     override fun showAdventurePoints(points: List<AdventurePoint>) {
         mapView.showMarkers(points)
         adventurePointId?.let {id ->
-            val centeredPooint = points.find { point ->
+            val centeredPoint = points.find { point ->
                 point.id == id
             }
-            centeredPooint?.let {
+            centeredPoint?.let {
                 mapView.moveToLocation(it.position.toLatLng())
             }
         }
+    }
+
+    override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
+        navigator.openOver(TextPuzzleFragment.newInstance(
+            presenter.adventure!!,
+            point
+        ))
     }
 
     override fun showLocationUnavailable() {

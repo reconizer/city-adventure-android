@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_adventure_journal.*
-import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
@@ -18,10 +17,9 @@ import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPage
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.AudioPlayerFragment
-import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
+import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
 import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.ADVENTURE_POINT_ID_PARAM
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
@@ -180,7 +178,7 @@ class JournalFragment : BaseFragment(), IJournalView {
 
     private fun showExitAdventureDialog() {
         PrettyDialog().apply {
-            headerText = this@JournalFragment.resources.getString(R.string.adventure_journal_exit)
+            headerText = this@JournalFragment.resources.getString(R.string.journal_exit)
             contentText = this@JournalFragment.resources.getString(R.string.journal_exit_info)
             firstButtonText = this@JournalFragment.resources.getString(R.string.common_yes)
             secondButtonText = this@JournalFragment.resources.getString(R.string.common_no)

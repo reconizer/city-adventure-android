@@ -32,7 +32,7 @@
         android:gravity="top|center"
         android:padding="10dp"
         android:src="@drawable/journal_exit_button"
-        android:text="@string/adventure_journal_exit"
+        android:text="@string/journal_exit"
         android:textAllCaps="true"
         android:textAppearance="@style/TypeWriterText"
         android:textColor="#41382f"
