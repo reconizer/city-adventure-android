@@ -9,6 +9,6 @@ import pl.reconizer.cityadventure.di.scopes.ViewScope
 @ViewScope
 interface PuzzleComponent {
 
-    fun inject(target: IPuzzleView)
+    fun inject(target: BasePuzzleFragment)
 
 }

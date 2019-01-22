@@ -10,7 +10,6 @@ import pl.reconizer.cityadventure.presentation.mvp.IView
 interface IGameMapView : IView, IViewWithLocation {
 
     fun showCurrentLocation(position: Position)
-    fun showLocationUnavailable()
 
     fun showAdventures(adventures: List<Adventure>)
     fun showAdventurePoints(points: List<AdventurePoint>)

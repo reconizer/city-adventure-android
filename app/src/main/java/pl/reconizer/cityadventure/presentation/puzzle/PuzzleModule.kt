@@ -10,6 +10,7 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.cityadventure.presentation.location.ILocationProvider
 import javax.inject.Named
 
 @Module(includes = [
@@ -26,12 +27,14 @@ class PuzzleModule(
             @Named("background") backgroundScheduler: Scheduler,
             @Named("main") mainScheduler: Scheduler,
             adventureRepository: IAdventureRepository,
+            locationProvider: ILocationProvider,
             errorHandler: ErrorHandler<Error>
     ): PuzzlePresenter {
         return PuzzlePresenter(
                 backgroundScheduler,
                 mainScheduler,
                 adventureRepository,
+                locationProvider,
                 errorHandler,
                 adventure,
                 adventurePoint

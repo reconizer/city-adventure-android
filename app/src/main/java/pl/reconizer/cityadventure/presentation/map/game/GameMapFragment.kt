@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_game_map.*
@@ -48,8 +47,6 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     private val mapView: IMapView
         get() { return childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
-
-    private var locationPermissionDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,15 +173,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         ))
     }
 
-    override fun showLocationUnavailable() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     companion object {
         const val MAP_MODE_PARAM = "map_mode"
         const val ADVENTURE_PARAM = "adventure"
         const val ADVENTURE_POINT_ID_PARAM = "adventure_point_id"
-        const val LOCATION_PERMISSION_REQUEST = 1
     }
 
 }

@@ -13,20 +13,7 @@ import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import javax.inject.Inject
 
-class TextPuzzleFragment : BaseFragment(), IPuzzleView {
-
-    @Inject
-    lateinit var presenter: PuzzlePresenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val adventure = arguments?.get(ADVENTURE_PARAM) as Adventure?
-        val adventurePoint = arguments?.get(ADVENTURE_POINT_PARAM) as AdventurePoint?
-        Injector.buildPuzzleComponent(
-            adventure!!,
-            adventurePoint!!
-        ).inject(this)
-    }
+class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,14 +28,34 @@ class TextPuzzleFragment : BaseFragment(), IPuzzleView {
             answerInput.setText("")
         }
         confirmButton.setOnClickListener {
-
+            presenter.resolvePoint(answerInput.text.toString())
         }
         answerInput.requestFocus()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.subscribe(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
+    override fun correctAnswer() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun wrongAnswer() {
+        showWrongAnswerDialog()
+    }
+
+    override fun completedAdventure() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     companion object {
-        const val ADVENTURE_PARAM = "adventure"
-        const val ADVENTURE_POINT_PARAM = "adventure_point"
 
         fun newInstance(adventure: Adventure, adventurePoint: AdventurePoint): TextPuzzleFragment {
             return TextPuzzleFragment().apply {

@@ -25,4 +25,5 @@
     <string name="location_error_occured">Wystąpił błąd podczas pobierania lokalizacji.</string>
     <string name="login_submit">Zaloguj się</string>
     <string name="puzzle_input_label">Hasło:</string>
+    <string name="puzzle_wrong_answer">Podana odpowiedź jest nieprawidłowa.</string>
 </resources>

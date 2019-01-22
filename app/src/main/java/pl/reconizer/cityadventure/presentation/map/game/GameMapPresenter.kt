@@ -39,11 +39,7 @@ class GameMapPresenter(
 
     val lastLocation: Position?
         get() {
-            return if (locationProvider.lastLocation == null) {
-                null
-            } else {
-                locationProvider.lastLocation!!.toPosition()
-            }
+            return locationProvider.lastLocation?.toPosition()
         }
 
     private val cameraMovedByDistanceObservable = cameraPositionObserver
