@@ -1,5 +1,6 @@
 package pl.reconizer.cityadventure.presentation.puzzle
 
+import io.reactivex.Maybe
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
@@ -53,32 +54,29 @@ class PuzzlePresenter(
     }
 
     fun resolvePoint(answer: String) {
-        disposables.add(
-                locationProvider.lastLocationChange.firstElement()
-                        .flatMap {
-                            adventureRepository.resolvePoint(PuzzleAnswerForm(
-                                adventure.adventureId,
-                                adventurePoint.id,
-                                it.toPosition(),
-                                answer,
-                                null
-                            )).toMaybe()
-                        }
-                        .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
-                        .subscribeWith(object : MaybeCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
-                            override fun onSuccess(t: PuzzleResponse) {
-                                if (t.isCompleted) {
+        locationProvider.lastLocation?.let {location ->
+            disposables.add(
+                    adventureRepository.resolvePoint(PuzzleAnswerForm(
+                            adventure.adventureId,
+                            adventurePoint.id,
+                            location.toPosition(),
+                            answer,
+                            null
+                    ))
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(mainScheduler)
+                            .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
+                                override fun onSuccess(t: PuzzleResponse) {
+                                    if (t.isCompleted) {
 
-                                } else {
-                                    view?.wrongAnswer()
+                                    } else {
+                                        view?.completedAdventure()
+                                        //view?.wrongAnswer()
+                                    }
                                 }
-                            }
+                            })
 
-                            override fun onComplete() {}
-
-                        })
-
-        )
+            )
+        }
     }
 }

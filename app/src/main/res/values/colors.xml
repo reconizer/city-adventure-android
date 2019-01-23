@@ -11,6 +11,8 @@
     <color name="fontDark">#332d26</color>
     <color name="fontLighter">#41382f</color>
 
+    <color name="fontHeaderColor">#984242</color>
+
     <color name="basicShadow">#d94a4135</color>
 
     <color name="galleryImageOverlayColor">#d94a4135</color>

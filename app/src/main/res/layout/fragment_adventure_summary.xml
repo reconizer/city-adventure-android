@@ -35,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/adventure_summary_content_paper_background"
+        android:src="@drawable/adventure_summary_content_paper_background"
         app:layout_constraintTop_toBottomOf="@id/topMargin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,18 +52,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomContentMargin"/>
 
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_lg"
+        android:text="@string/adventure_summary_title"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="@color/fontHeaderColor"
+        android:textSize="43dp"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground"
+        app:layout_constraintStart_toStartOf="@id/contentBackground"
+        app:layout_constraintTop_toTopOf="@id/contentBackground" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/ratingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_md"
+        android:text="@string/adventure_add_rating"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingView"
+        app:layout_constraintEnd_toEndOf="@id/ratingFrame"
+        app:layout_constraintStart_toStartOf="@id/ratingFrame" />
+
+    <pl.reconizer.cityadventure.presentation.adventure.RatingView
+        android:id="@+id/ratingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toBottomOf="@id/ratingFrame"
+        app:layout_constraintEnd_toEndOf="@id/ratingFrame"
+        app:layout_constraintStart_toStartOf="@id/ratingFrame" />
+
+    <ImageView
+        android:id="@+id/ratingFrame"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_md"
+        android:layout_marginTop="@dimen/space_sm"
+        android:layout_marginEnd="@dimen/space_lg"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/adventure_summary_rating_background"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground"
+        app:layout_constraintStart_toStartOf="@id/contentBackground"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <pl.reconizer.cityadventure.presentation.adventure.RankingEntryView
+        android:id="@+id/userRankingEntryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_sm"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground"
+        app:layout_constraintStart_toStartOf="@id/contentBackground"
+        app:layout_constraintTop_toBottomOf="@id/ratingFrame" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rankingRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/contentBackground"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground"
+        app:layout_constraintTop_toBottomOf="@id/topListBorder"
+        app:layout_constraintBottom_toTopOf="@id/bottomListBorder" />
+
+    <View
+        android:id="@+id/topListBorder"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="@dimen/space_sm"
+        android:background="@drawable/list_border"
+        app:layout_constraintEnd_toEndOf="@id/userRankingEntryView"
+        app:layout_constraintStart_toStartOf="@id/userRankingEntryView"
+        app:layout_constraintTop_toBottomOf="@id/userRankingEntryView" />
+
+    <View
+        android:id="@+id/bottomListBorder"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:background="@drawable/list_border"
+        android:layout_marginBottom="@dimen/space_xl"
+        app:layout_constraintStart_toStartOf="@id/userRankingEntryView"
+        app:layout_constraintEnd_toEndOf="@id/userRankingEntryView"
+        app:layout_constraintBottom_toBottomOf="@id/contentBackground" />
+
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/clipMargin"
         android:layout_width="1dp"
         android:layout_height="10dp"
-        app:layout_constraintTop_toTopOf="@id/summaryBackground" />
-    
+        app:layout_constraintBottom_toTopOf="@id/contentBackground" />
+
     <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/clipDecorator"
         android:layout_width="24dp"
         android:layout_height="45dp"
+        android:layout_marginStart="@dimen/space_lg"
         android:src="@drawable/adventure_summary_clip"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/clipMargin"/>
+        app:layout_constraintTop_toTopOf="@id/clipMargin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

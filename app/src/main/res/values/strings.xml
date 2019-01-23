@@ -3,6 +3,8 @@
     <string name="adventure_add_rating">Oceń przygodę:</string>
     <string name="adventure_author">Author:</string>
     <string name="adventure_position">Miejsce:</string>
+    <string name="adventure_summary_finish">Zakończ przygodę</string>
+    <string name="adventure_summary_title">Posumowanie</string>
     <string name="adventure_user_ranking_completion_time">Twój czas:</string>
     <string name="common_close">Zamknij</string>
     <string name="common_confirm">Zatwierdź</string>

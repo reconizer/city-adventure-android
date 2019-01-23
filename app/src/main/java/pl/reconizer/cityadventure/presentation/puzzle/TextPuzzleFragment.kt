@@ -10,6 +10,7 @@ import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
+import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import javax.inject.Inject
 
@@ -52,7 +53,7 @@ class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
     }
 
     override fun completedAdventure() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        navigator.goTo(AdventureSummaryFragment.newInstance())
     }
 
     companion object {
