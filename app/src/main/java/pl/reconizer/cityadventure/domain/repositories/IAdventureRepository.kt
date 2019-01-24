@@ -15,4 +15,8 @@ interface IAdventureRepository {
 
     fun resolvePoint(form: PuzzleAnswerForm): Single<PuzzleResponse>
 
+    fun userAdventureRanking(adventureId: String): Single<RankingEntry>
+
+    fun getSummary(adventureId: String): Single<List<RankingEntry>>
+
 }

@@ -1,9 +1,7 @@
 package pl.reconizer.cityadventure.data.repositories
 
 import io.reactivex.Single
-import pl.reconizer.cityadventure.data.entities.ClueResponse
 import pl.reconizer.cityadventure.data.mappers.AdventurePointWithCluesMapper
-import pl.reconizer.cityadventure.data.mappers.ClueMapper
 import pl.reconizer.cityadventure.data.network.api.IAdventureApi
 import pl.reconizer.cityadventure.domain.entities.*
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
@@ -34,6 +32,14 @@ class AdventureRepository(
 
     override fun resolvePoint(form: PuzzleAnswerForm): Single<PuzzleResponse> {
         return adventureApi.resolvePoint(form)
+    }
+
+    override fun userAdventureRanking(adventureId: String): Single<RankingEntry> {
+        return adventureApi.userAdventureRanking(adventureId)
+    }
+
+    override fun getSummary(adventureId: String): Single<List<RankingEntry>> {
+        return adventureApi.getSummary(adventureId)
     }
 
 }

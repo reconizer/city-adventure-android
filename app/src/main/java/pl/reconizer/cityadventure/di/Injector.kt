@@ -15,6 +15,8 @@ import pl.reconizer.cityadventure.presentation.adventure.journal.JournalComponen
 import pl.reconizer.cityadventure.presentation.adventure.journal.JournalModule
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointComponent
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointModule
+import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryComponent
+import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
@@ -31,6 +33,7 @@ object Injector {
     private var adventureStartPointComponent: StartPointComponent? = null
     private var journalComponent: JournalComponent? = null
     private var puzzleComponent: PuzzleComponent? = null
+    private var adventureSummaryComponent: AdventureSummaryComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -78,6 +81,13 @@ object Injector {
         return puzzleComponent!!
     }
 
+    fun buildAdventureSummaryComponent(adventure: Adventure): AdventureSummaryComponent {
+        adventureSummaryComponent = mainActivityComponent!!.adventureSummaryComponent(AdventureSummaryModule(
+                adventure
+        ))
+        return adventureSummaryComponent!!
+    }
+
     fun clearAppComponent() {
         appComponent = null
     }
@@ -104,5 +114,9 @@ object Injector {
 
     fun clearPuzzleComponent() {
         puzzleComponent = null
+    }
+
+    fun clearAdventureSummaryComponent() {
+        adventureSummaryComponent = null
     }
 }

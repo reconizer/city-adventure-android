@@ -53,7 +53,9 @@ class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
     }
 
     override fun completedAdventure() {
-        navigator.goTo(AdventureSummaryFragment.newInstance())
+        navigator.goTo(AdventureSummaryFragment.newInstance(
+                arguments?.get(ADVENTURE_PARAM) as Adventure
+        ))
     }
 
     companion object {

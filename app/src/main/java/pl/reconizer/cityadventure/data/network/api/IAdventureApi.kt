@@ -33,4 +33,14 @@ interface IAdventureApi {
             @Body form: PuzzleAnswerForm
     ): Single<PuzzleResponse>
 
+    @GET("api/adventures/{id}/current_user_ranking")
+    fun userAdventureRanking(
+            @Path("id") adventureId: String
+    ): Single<RankingEntry>
+
+    @GET("/api/adventures/summary/{id}")
+    fun getSummary(
+            @Path("id") adventureId: String
+    ): Single<List<RankingEntry>>
+
 }

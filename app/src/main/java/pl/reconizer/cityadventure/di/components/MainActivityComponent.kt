@@ -8,6 +8,8 @@ import pl.reconizer.cityadventure.presentation.adventure.journal.JournalComponen
 import pl.reconizer.cityadventure.presentation.adventure.journal.JournalModule
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointComponent
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointModule
+import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryComponent
+import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
@@ -28,5 +30,6 @@ interface MainActivityComponent {
     fun adventureStartPointComponent(module: StartPointModule): StartPointComponent
     fun journalComponent(module: JournalModule): JournalComponent
     fun puzzleComponent(module: PuzzleModule): PuzzleComponent
+    fun adventureSummaryComponent(module: AdventureSummaryModule): AdventureSummaryComponent
 
 }

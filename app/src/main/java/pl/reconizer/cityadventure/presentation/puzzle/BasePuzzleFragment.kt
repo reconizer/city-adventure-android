@@ -33,6 +33,11 @@ open class BasePuzzleFragment : BaseFragment(), IViewWithLocation {
         wrongAnswerInfoDialog?.dismiss()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearPuzzleComponent()
+    }
+
     override fun requestLocationPermission() {
         (activity as IViewWithLocation?)?.requestLocationPermission()
     }
