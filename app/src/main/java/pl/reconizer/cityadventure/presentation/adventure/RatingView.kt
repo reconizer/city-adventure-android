@@ -28,10 +28,11 @@ class RatingView @JvmOverloads constructor(
             val star = ImageView(context).apply {
                 setImageResource(R.drawable.rating_star_off)
                 adjustViewBounds = true
-                scaleType = ImageView.ScaleType.FIT_XY
+                scaleType = ImageView.ScaleType.FIT_CENTER
                 layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1f
                 ).apply {
                     val margin = resources.getDimensionPixelOffset(R.dimen.space_sm)
                     setMargins(margin, 0, margin, 0)
