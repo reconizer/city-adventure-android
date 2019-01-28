@@ -1,7 +1,7 @@
 package pl.reconizer.cityadventure.presentation.navigation
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
+import pl.reconizer.cityadventure.domain.entities.Adventure
 
 interface INavigator {
 
@@ -10,8 +10,7 @@ interface INavigator {
     fun goBack()
     fun isRoot(): Boolean
 
-    fun showMap(bundle: Bundle)
-    fun openMapRoot(bundle: Bundle)
-    fun leaveMap()
+    fun showAdventuresMap()
+    fun showAdventureMap(adventure: Adventure, adventurePointId: String? = null)
 
 }

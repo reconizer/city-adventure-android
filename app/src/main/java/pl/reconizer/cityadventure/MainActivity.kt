@@ -9,32 +9,44 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
+import com.zhuinden.simplestack.*
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.LocationInfoDialogBuilder
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
-import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
-import pl.reconizer.cityadventure.presentation.navigation.INavigator
+import pl.reconizer.cityadventure.presentation.navigation.FragmentStateChanger
+import pl.reconizer.cityadventure.presentation.navigation.MapKey
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), IViewWithLocation {
+class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
 
     @Inject
-    lateinit var navigator: INavigator
+    lateinit var backstackDelegate: BackstackDelegate
+
+    @Inject
+    lateinit var fragmentStateChanger: FragmentStateChanger
+
+
+    val navigator: Backstack
+        get() { return backstackDelegate.backstack }
 
     private var locationInfoDialog: PrettyDialog? = null
     private var locationDeniedCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Injector.buildMainActivityComponent(R.id.fragmentContainer, this).inject(this)
-        navigator.openMapRoot(bundleOf(
-                MAP_MODE_PARAM to MapMode.ADVENTURES
-        ))
+        //navigator.showAdventuresMap()
 
+        backstackDelegate.onCreate(savedInstanceState, //
+                lastCustomNonConfigurationInstance, //
+                History.single(MapKey.Builder.buildAdventuresMapKey()))
+
+        backstackDelegate.registerForLifecycleCallbacks(this)
+
+        super.onCreate(savedInstanceState)
+
+        backstackDelegate.setStateChanger(this)
     }
 
     override fun onDestroy() {
@@ -45,11 +57,12 @@ class MainActivity : AppCompatActivity(), IViewWithLocation {
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         if (fragment != null && fragment is OnBackPressedListener) {
-            if (!fragment.goBack() && !navigator.isRoot()) {
-                super.onBackPressed()
-            } else {
-                handleExit()
-            }
+//            if (!fragment.goBack() && !navigator.isRoot()) {
+//                super.onBackPressed()
+//            } else {
+//                handleExit()
+//            }
+            fragment.goBack()
         } else {
             handleExit()
         }
@@ -123,6 +136,21 @@ class MainActivity : AppCompatActivity(), IViewWithLocation {
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         }
+    }
+
+    override fun onRetainCustomNonConfigurationInstance(): Any =
+            backstackDelegate.onRetainCustomNonConfigurationInstance()
+
+    override fun handleStateChange(stateChange: StateChange, completionCallback: StateChanger.Callback) {
+        if (stateChange.topNewState<Any>() == stateChange.topPreviousState()) {
+            // no-op
+            completionCallback.stateChangeComplete()
+            return
+        }
+
+        fragmentStateChanger.handleStateChange(stateChange)
+
+        completionCallback.stateChangeComplete()
     }
 
     companion object {

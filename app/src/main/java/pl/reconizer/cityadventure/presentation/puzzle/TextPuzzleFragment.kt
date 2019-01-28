@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import kotlinx.android.synthetic.main.fragment_text_puzzle.*
 import pl.reconizer.cityadventure.R
-import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryFragment
-import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.navigation.AdventureSummaryKey
 import javax.inject.Inject
 
 class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
@@ -53,7 +51,7 @@ class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
     }
 
     override fun completedAdventure() {
-        navigator.goTo(AdventureSummaryFragment.newInstance(
+        navigator.goTo(AdventureSummaryKey(
                 arguments?.get(ADVENTURE_PARAM) as Adventure
         ))
     }

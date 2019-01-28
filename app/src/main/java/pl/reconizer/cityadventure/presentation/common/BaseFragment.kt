@@ -3,6 +3,7 @@ package pl.reconizer.cityadventure.presentation.common
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.zhuinden.simplestack.Backstack
 import pl.reconizer.cityadventure.MainActivity
 import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.data.entities.Error
@@ -16,7 +17,7 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
 
     private var errorDialog: PrettyDialog? = null
 
-    val navigator: INavigator
+    val navigator: Backstack
         get() = (activity as MainActivity).navigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +42,7 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
     }
 
     override fun showAuthorizationError() {
-        navigator.goTo(LoginFragment.newInstance())
+        //navigator.goTo(LoginFragment.newInstance())
     }
 
     override fun showParametrizedError(errorEntity: Error) {

@@ -76,6 +76,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
 
+    implementation "com.github.Zhuinden:simple-stack:$rootProject.ext.simpleStackNavigationVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
     implementation "com.bartoszlipinski:viewpropertyobjectanimator:$rootProject.ext.propertyAnimatorVersion"
     implementation "com.github.chrisbanes:PhotoView:$rootProject.ext.imageViewWithGesturesVersion"

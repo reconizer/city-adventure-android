@@ -16,12 +16,10 @@ import pl.reconizer.cityadventure.domain.entities.ClueType
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPagesAdapter
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
-import pl.reconizer.cityadventure.presentation.customviews.AudioPlayerFragment
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
-import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
-import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.ADVENTURE_POINT_ID_PARAM
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
+import pl.reconizer.cityadventure.presentation.navigation.AudioPlayerKey
+import pl.reconizer.cityadventure.presentation.navigation.GalleryKey
+import pl.reconizer.cityadventure.presentation.navigation.MapKey
 import javax.inject.Inject
 
 class JournalFragment : BaseFragment(), IJournalView {
@@ -71,7 +69,7 @@ class JournalFragment : BaseFragment(), IJournalView {
         adventureStartPoint?.let {
             journalAdventureDescriptionView.adventureStartPoint = it
             journalAdventureDescriptionView.galleryImageClickListener = {imageIndex ->
-                navigator.openOver(GalleryFragment.newInstance(
+                navigator.goTo(GalleryKey(
                         it.gallery,
                         imageIndex
                 ))
@@ -97,7 +95,7 @@ class JournalFragment : BaseFragment(), IJournalView {
                 when (clue.type) {
                     ClueType.IMAGE -> {
                         clue.originalResourceUrl?.let {
-                            navigator.openOver(GalleryFragment.newInstance(
+                            navigator.goTo(GalleryKey(
                                     listOf(it),
                                     0
                             ))
@@ -106,7 +104,7 @@ class JournalFragment : BaseFragment(), IJournalView {
                     }
                     ClueType.AUDIO -> {
                         clue.originalResourceUrl?.let {
-                            navigator.goTo(AudioPlayerFragment.newInstance(it))
+                            navigator.goTo(AudioPlayerKey(it))
                         }
                     }
                 }
@@ -114,10 +112,9 @@ class JournalFragment : BaseFragment(), IJournalView {
             }
             pointClickListener = { pointId ->
                 adventure?.let {
-                    navigator.showMap(bundleOf(
-                            MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
-                            ADVENTURE_PARAM to it,
-                            ADVENTURE_POINT_ID_PARAM to pointId
+                    navigator.goTo(MapKey.Builder.buildAdventureMapKey(
+                             adventure = it,
+                             adventurePointId = pointId
                     ))
                 }
             }
@@ -129,9 +126,8 @@ class JournalFragment : BaseFragment(), IJournalView {
 
         goToMapButton.setOnClickListener { _ ->
             adventure?.let {
-                navigator.showMap(bundleOf(
-                        MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
-                        ADVENTURE_PARAM to it
+                navigator.goTo(MapKey.Builder.buildAdventureMapKey(
+                        it
                 ))
             }
         }
@@ -186,9 +182,7 @@ class JournalFragment : BaseFragment(), IJournalView {
         }.apply {
             firstButtonClickListener = {
                 dismiss()
-                navigator.openMapRoot(bundleOf(
-                        MAP_MODE_PARAM to MapMode.ADVENTURES
-                ))
+                navigator.jumpToRoot()
             }
             secondButtonClickListener = { dismiss() }
         }

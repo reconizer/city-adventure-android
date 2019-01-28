@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import com.squareup.picasso.Picasso
+import com.zhuinden.simplestack.StateChange
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_ranking.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
@@ -22,6 +23,8 @@ import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
+import pl.reconizer.cityadventure.presentation.navigation.GalleryKey
+import pl.reconizer.cityadventure.presentation.navigation.JournalKey
 import javax.inject.Inject
 
 class StartPointFragment : BaseFragment(), IStartPointView {
@@ -52,7 +55,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
 
         adventureInfoView.galleryImageClickListener = { imageIndex ->
             presenter.adventureStartPoint?.let {
-                navigator.openOver(GalleryFragment.newInstance(it.gallery, imageIndex))
+                navigator.goTo(GalleryKey(it.gallery, imageIndex))
             }
         }
 
@@ -108,9 +111,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     }
 
     override fun goBack(): Boolean {
-        navigator.openMapRoot(bundleOf(
-                MAP_MODE_PARAM to MapMode.ADVENTURES
-        ))
+        navigator.goBack()
         return true
     }
 
@@ -179,9 +180,9 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         //TODO: need to be changed - for testing, only starting a adventure
         actionButton.setOnClickListener {
             if (adventure != null && presenter.adventureStartPoint != null) {
-                navigator.goTo(
-                        JournalFragment.newInstance(adventure!!, presenter.adventureStartPoint!!),
-                        false
+                navigator.replaceTop(
+                        JournalKey(adventure!!, presenter.adventureStartPoint!!),
+                        StateChange.REPLACE
                 )
             }
         }

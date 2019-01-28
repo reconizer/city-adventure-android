@@ -14,14 +14,14 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
 import pl.reconizer.cityadventure.domain.entities.PuzzleResponse
-import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.map.IMapView
 import pl.reconizer.cityadventure.presentation.map.IPinMapper
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.PinProvider
-import pl.reconizer.cityadventure.presentation.puzzle.TextPuzzleFragment
+import pl.reconizer.cityadventure.presentation.navigation.AdventureStartPointKey
+import pl.reconizer.cityadventure.presentation.navigation.TextPuzzleKey
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -39,7 +39,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     @Inject
     lateinit var presenter: GameMapPresenter
 
-    private val mapMode: MapMode
+    val mapMode: MapMode
         get() { return (arguments?.get(MAP_MODE_PARAM) as MapMode?) ?: MapMode.ADVENTURES }
 
     private val adventurePointId: String?
@@ -65,7 +65,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 mapView.moveToLocation(it.toLatLng())
             }
         }
-        journalButton.setOnClickListener { navigator.leaveMap() }
+        journalButton.setOnClickListener { navigator.goBack() }
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
             journalButton.isGone = true
@@ -96,8 +96,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         mapView.pinClickListener = {
             when (it) {
                 is Adventure -> {
-                    navigator.leaveMap()
-                    navigator.goTo(StartPointFragment.newInstance(it))
+                    //navigator.leaveMap()
+                    navigator.goTo(AdventureStartPointKey(it))
                 }
                 is AdventurePoint -> {
                     presenter.resolvePoint(it)
@@ -117,8 +117,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     }
 
     override fun goBack(): Boolean {
-        return if (!navigator.isRoot()) {
-            navigator.leaveMap()
+        return if (mapMode == MapMode.STARTED_ADVENTURE) {
+            //navigator.leaveMap()
             navigator.goBack()
             true
         } else {
@@ -167,7 +167,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     }
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
-        navigator.openOver(TextPuzzleFragment.newInstance(
+        navigator.goTo(TextPuzzleKey(
             presenter.adventure!!,
             point
         ))

@@ -21,6 +21,7 @@ buildscript {
 
         daggerVersion = '2.21'
 
+        simpleStackNavigationVersion = '1.13.1'
         picassoVersion = '2.71828'
         propertyAnimatorVersion = '1.4.5'
         imageViewWithGesturesVersion = '2.0.0'

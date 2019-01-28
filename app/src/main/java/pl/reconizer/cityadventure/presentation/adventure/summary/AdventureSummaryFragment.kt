@@ -10,8 +10,6 @@ import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
-import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import javax.inject.Inject
 
 class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
@@ -33,9 +31,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
         super.onViewCreated(view, savedInstanceState)
 
         exitButton.setOnClickListener {
-            navigator.openMapRoot(bundleOf(
-                    MAP_MODE_PARAM to MapMode.ADVENTURES
-            ))
+            navigator.jumpToRoot()
         }
     }
 
