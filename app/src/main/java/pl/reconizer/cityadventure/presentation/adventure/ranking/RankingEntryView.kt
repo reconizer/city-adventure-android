@@ -1,4 +1,4 @@
-package pl.reconizer.cityadventure.presentation.adventure
+package pl.reconizer.cityadventure.presentation.adventure.ranking
 
 import android.content.Context
 import android.util.AttributeSet

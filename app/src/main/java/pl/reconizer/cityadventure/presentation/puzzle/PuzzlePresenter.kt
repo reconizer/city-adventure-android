@@ -4,10 +4,7 @@ import io.reactivex.Maybe
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
-import pl.reconizer.cityadventure.domain.entities.Adventure
-import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.domain.entities.PuzzleAnswerForm
-import pl.reconizer.cityadventure.domain.entities.PuzzleResponse
+import pl.reconizer.cityadventure.domain.entities.*
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.cityadventure.presentation.common.rx.SingleCallbackWrapper
@@ -60,6 +57,7 @@ class PuzzlePresenter(
                             adventure.adventureId,
                             adventurePoint.id,
                             location.toPosition(),
+                            //Position(53.01077,18.608834),
                             answer,
                             null
                     ))

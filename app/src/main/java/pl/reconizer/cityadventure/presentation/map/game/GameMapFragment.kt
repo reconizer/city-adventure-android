@@ -21,6 +21,7 @@ import pl.reconizer.cityadventure.presentation.map.IPinMapper
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.PinProvider
 import pl.reconizer.cityadventure.presentation.navigation.AdventureStartPointKey
+import pl.reconizer.cityadventure.presentation.navigation.AdventureSummaryKey
 import pl.reconizer.cityadventure.presentation.navigation.TextPuzzleKey
 import javax.inject.Inject
 import javax.inject.Named
@@ -171,6 +172,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
             presenter.adventure!!,
             point
         ))
+    }
+
+    override fun showSummary() {
+        navigator.goTo(AdventureSummaryKey(presenter.adventure!!))
     }
 
     companion object {

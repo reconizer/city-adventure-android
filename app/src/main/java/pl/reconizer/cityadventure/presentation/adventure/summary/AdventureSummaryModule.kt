@@ -8,6 +8,7 @@ import pl.reconizer.cityadventure.di.modules.ErrorHandlersModule
 import pl.reconizer.cityadventure.di.scopes.ViewScope
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
+import pl.reconizer.cityadventure.presentation.adventure.ranking.RankingAdapter
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import javax.inject.Named
 
@@ -33,6 +34,12 @@ class AdventureSummaryModule(
                 errorHandler,
                 adventure
         )
+    }
+
+    @Provides
+    @ViewScope
+    fun provideRankingAdapter(): RankingAdapter {
+        return RankingAdapter()
     }
 
 }

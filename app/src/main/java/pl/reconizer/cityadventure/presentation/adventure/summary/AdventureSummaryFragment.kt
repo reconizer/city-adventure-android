@@ -5,17 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_adventure_summary.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.presentation.adventure.ranking.RankingAdapter
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.common.recyclerview.ItemOffsetDecorator
 import javax.inject.Inject
 
 class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
 
     @Inject
     lateinit var presenter: AdventureSummaryPresenter
+
+    @Inject
+    lateinit var rankingAdapter: RankingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,12 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        rankingRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = rankingAdapter
+            addItemDecoration(ItemOffsetDecorator(context, R.dimen.space_sm))
+        }
+
         exitButton.setOnClickListener {
             navigator.jumpToRoot()
         }
@@ -39,6 +51,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
         super.onResume()
         presenter.subscribe(this)
         presenter.fetchUserRanking()
+        presenter.fetchSummary()
     }
 
     override fun onDestroy() {
@@ -47,11 +60,18 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
     }
 
     override fun showUserRanking() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        presenter.userRanking?.let {
+            userRankingEntryView.apply {
+                username = it.nick
+                position = it.position
+                completionTime = it.completionTime
+            }
+        }
     }
 
     override fun showSummary() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        rankingAdapter.ranking = presenter.summary
+        rankingAdapter.notifyDataSetChanged()
     }
 
     companion object {

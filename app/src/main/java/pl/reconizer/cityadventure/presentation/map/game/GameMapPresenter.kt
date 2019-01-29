@@ -169,6 +169,7 @@ class GameMapPresenter(
                         adventure!!.adventureId,
                         point.id,
                         locationProvider.lastLocation!!.toPosition(),
+                        //Position(53.01077,18.608834),
                         answer, null
                 ))
                         .subscribeOn(backgroundScheduler)
@@ -176,7 +177,9 @@ class GameMapPresenter(
                         .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
                             override fun onSuccess(t: PuzzleResponse) {
                                 if (t.isCompleted) {
-                                    // TODO refresh points list or show adventure summary
+                                    if (t.isLastPoint) {
+                                        view?.showSummary()
+                                    }
                                 } else {
                                     view?.showPuzzle(point, t)
                                 }
