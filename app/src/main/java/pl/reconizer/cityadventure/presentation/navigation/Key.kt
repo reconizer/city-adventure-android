@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 interface Key : Parcelable {
 
     val fragmentTag: String
+
+    val isIdentifiedByTag: Boolean
+        get() = false
+
     val hasNewArguments: Boolean
         get() = false
 

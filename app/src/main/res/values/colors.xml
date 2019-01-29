@@ -15,7 +15,7 @@
 
     <color name="basicShadow">#d94a4135</color>
 
-    <color name="galleryImageOverlayColor">#d94a4135</color>
+    <color name="galleryImageOverlayColor">#4a4135</color>
 
     <color name="puzzleInputFontColor">#15100e</color>
 </resources>

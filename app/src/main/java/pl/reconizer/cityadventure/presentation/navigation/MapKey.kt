@@ -21,6 +21,9 @@ open class MapKey(
                 ADVENTURE_POINT_ID_PARAM to adventurePointId
 )) {
 
+    override val isIdentifiedByTag: Boolean
+        get() = true
+
     override val hasNewArguments: Boolean
         get() = true
 

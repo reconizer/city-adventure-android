@@ -38,9 +38,11 @@ class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
         Injector.buildMainActivityComponent(R.id.fragmentContainer, this).inject(this)
         //navigator.showAdventuresMap()
 
-        backstackDelegate.onCreate(savedInstanceState, //
-                lastCustomNonConfigurationInstance, //
-                History.single(MapKey.Builder.buildAdventuresMapKey()))
+        backstackDelegate.onCreate(
+                savedInstanceState,
+                lastCustomNonConfigurationInstance,
+                History.single(MapKey.Builder.buildAdventuresMapKey())
+        )
 
         backstackDelegate.registerForLifecycleCallbacks(this)
 

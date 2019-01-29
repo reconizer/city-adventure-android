@@ -122,8 +122,9 @@
                 android:id="@+id/journalAdventureDescriptionView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleX="0.79"
-                android:scaleY="0.79" />
+                android:paddingTop="@dimen/space_lg"
+                android:scaleX="0.9"
+                android:scaleY="0.9" />
 
         </androidx.core.widget.NestedScrollView>
 

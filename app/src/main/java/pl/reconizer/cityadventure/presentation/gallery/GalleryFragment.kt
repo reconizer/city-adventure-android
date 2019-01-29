@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
-import androidx.transition.ChangeBounds
-import androidx.transition.Fade
-import androidx.transition.TransitionInflater
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import pl.reconizer.cityadventure.R
