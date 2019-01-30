@@ -1,5 +1,6 @@
 package pl.reconizer.cityadventure.domain.repositories
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.cityadventure.domain.entities.*
 
@@ -12,6 +13,8 @@ interface IAdventureRepository {
     fun getAdventureDiscoveredClues(adventureId: String): Single<List<AdventurePointWithClues>>
 
     fun getAdventureCompletedPoints(adventureId: String): Single<List<AdventurePoint>>
+
+    fun startAdventure(adventureId: String): Completable
 
     fun resolvePoint(form: PuzzleAnswerForm): Single<PuzzleResponse>
 

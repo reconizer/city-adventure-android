@@ -163,14 +163,32 @@ class GameMapPresenter(
         previousCameraDetails = null
     }
 
+    fun checkLocation() {
+        disposables.add(
+                adventureRepository.resolvePoint(PuzzleAnswerForm(
+                        locationProvider.lastLocation!!.toPosition(),
+                        adventure!!.adventureId
+                ))
+                        .flatMap {
+                            adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
+                        }
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorHandler) {
+                            override fun onSuccess(t: List<AdventurePoint>) {
+                                this@GameMapPresenter.view?.showAdventurePoints(t)
+                            }
+                        })
+        )
+    }
+
     fun resolvePoint(point: AdventurePoint, answer: String? = null) {
         disposables.add(
                 adventureRepository.resolvePoint(PuzzleAnswerForm(
+                        locationProvider.lastLocation!!.toPosition(),
                         adventure!!.adventureId,
                         point.id,
-                        locationProvider.lastLocation!!.toPosition(),
-                        //Position(53.01077,18.608834),
-                        answer, null
+                        answer
                 ))
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)

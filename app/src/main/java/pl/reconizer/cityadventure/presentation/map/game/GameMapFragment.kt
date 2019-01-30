@@ -67,18 +67,15 @@ class GameMapFragment : BaseFragment(), IGameMapView {
             }
         }
         journalButton.setOnClickListener { navigator.goBack() }
+        locationCheckerButton.setOnClickListener { presenter.checkLocation() }
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
-            journalButton.isGone = true
-            menuButton.isVisible = true
-            scannerButton.isVisible = true
-            searchButton.isVisible = true
+            adventuresButtonsGroup.isVisible = true
+            adventureButtonsGroup.isGone = true
         } else {
             mapView.pinMapper = startedAdventurePinMapper
-            journalButton.isVisible = true
-            menuButton.isGone = true
-            scannerButton.isGone = true
-            searchButton.isGone = true
+            adventuresButtonsGroup.isGone = true
+            adventureButtonsGroup.isVisible = true
         }
         mapView.userPin = pinProvider.userPin
         mapView.clearMarkers()
@@ -119,7 +116,6 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun goBack(): Boolean {
         return if (mapMode == MapMode.STARTED_ADVENTURE) {
-            //navigator.leaveMap()
             navigator.goBack()
             true
         } else {

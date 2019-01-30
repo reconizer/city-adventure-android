@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.zhuinden.simplestack.StateChange
 import kotlinx.android.synthetic.main.fragment_login.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.navigation.MapKey
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), ILoginView {
@@ -54,7 +56,7 @@ class LoginFragment : BaseFragment(), ILoginView {
 
     override fun successfulSignIn() {
         Toast.makeText(context, "Logged in", Toast.LENGTH_LONG).show()
-        navigator.goBack()
+        navigator.replaceTop(MapKey.Builder.buildAdventuresMapKey(), StateChange.REPLACE)
     }
 
     companion object {

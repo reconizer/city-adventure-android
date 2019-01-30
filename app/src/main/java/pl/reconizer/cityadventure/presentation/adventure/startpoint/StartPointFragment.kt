@@ -12,17 +12,12 @@ import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_ranking.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
 import kotlinx.android.synthetic.main.view_ranking_title.*
-import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
-import pl.reconizer.cityadventure.presentation.adventure.journal.JournalFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
-import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
-import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 import pl.reconizer.cityadventure.presentation.navigation.GalleryKey
 import pl.reconizer.cityadventure.presentation.navigation.JournalKey
 import javax.inject.Inject
@@ -123,6 +118,10 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         showTopFiveRanking(adventureStartPoint)
     }
 
+    override fun adventureStarted() {
+        goToJournal()
+    }
+
     private fun showCurrentUserRanking(adventureStartPoint: AdventureStartPoint) {
         if (adventureStartPoint.currentUserRanking == null) {
             userRankingView.isGone = true
@@ -177,14 +176,24 @@ class StartPointFragment : BaseFragment(), IStartPointView {
                 }
             }
         }
-        //TODO: need to be changed - for testing, only starting a adventure
+
         actionButton.setOnClickListener {
-            if (adventure != null && presenter.adventureStartPoint != null) {
-                navigator.replaceTop(
-                        JournalKey(adventure!!, presenter.adventureStartPoint!!),
-                        StateChange.REPLACE
-                )
+            when {
+                presenter.adventure.started -> goToJournal()
+                presenter.adventure.purchasable && presenter.adventure.purchased -> {
+                    // TODO start buying process
+                }
+                else -> presenter.startAdventure()
             }
+        }
+    }
+
+    private fun goToJournal() {
+        if (adventure != null && presenter.adventureStartPoint != null) {
+            navigator.replaceTop(
+                    JournalKey(adventure!!, presenter.adventureStartPoint!!),
+                    StateChange.REPLACE
+            )
         }
     }
 

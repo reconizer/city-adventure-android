@@ -10,11 +10,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
+        android:src="@drawable/journal_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/journal_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace

@@ -54,12 +54,10 @@ class PuzzlePresenter(
         locationProvider.lastLocation?.let {location ->
             disposables.add(
                     adventureRepository.resolvePoint(PuzzleAnswerForm(
+                            location.toPosition(),
                             adventure.adventureId,
                             adventurePoint.id,
-                            location.toPosition(),
-                            //Position(53.01077,18.608834),
-                            answer,
-                            null
+                            answer
                     ))
                             .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)

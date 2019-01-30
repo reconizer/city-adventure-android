@@ -3,7 +3,7 @@ package pl.reconizer.cityadventure.presentation.navigation
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
-abstract class BaseKey(override val arguments: Bundle) : Key {
+abstract class BaseKey(override val arguments: Bundle? = null) : Key {
 
 
 

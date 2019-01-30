@@ -1,5 +1,6 @@
 package pl.reconizer.cityadventure.data.network.api
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.cityadventure.data.entities.AdventurePointWithCluesResponse
 import pl.reconizer.cityadventure.domain.entities.*
@@ -27,6 +28,11 @@ interface IAdventureApi {
     fun getAdventureCompletedPoints(
             @Path("id") adventureId: String
     ): Single<List<AdventurePoint>>
+
+    @POST("api/adventures/start")
+    fun startAdventure(
+            @Query("adventure_id") adventureId: String
+    ): Completable
 
     @POST("api/points/resolve_point")
     fun resolvePoint(

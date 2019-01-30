@@ -55,11 +55,6 @@ class JournalFragment : BaseFragment(), IJournalView {
         }
 
         Picasso.get()
-                .load(R.drawable.journal_background)
-                .noFade()
-                .into(backgroundImage)
-
-        Picasso.get()
                 .load(R.drawable.journal_content_background_cover)
                 .noFade()
                 .into(journalCover)
