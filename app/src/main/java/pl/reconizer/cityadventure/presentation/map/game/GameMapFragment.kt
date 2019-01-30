@@ -98,7 +98,9 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                     navigator.goTo(AdventureStartPointKey(it))
                 }
                 is AdventurePoint -> {
-                    presenter.resolvePoint(it)
+                    if (!it.isCompleted) {
+                        presenter.resolvePoint(it)
+                    }
                 }
             }
         }

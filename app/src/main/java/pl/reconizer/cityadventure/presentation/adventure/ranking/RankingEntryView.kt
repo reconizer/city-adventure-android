@@ -69,6 +69,12 @@ class RankingEntryView @JvmOverloads constructor(
         timeTextView.isVisible = false
     }
 
+    fun setAvatar(url: String?) {
+        Picasso.get()
+                .load(url)
+                .into(avatarImageView)
+    }
+
     private fun showPlacementDecoration(@DrawableRes decoration: Int) {
         Picasso.get()
                 .load(decoration)

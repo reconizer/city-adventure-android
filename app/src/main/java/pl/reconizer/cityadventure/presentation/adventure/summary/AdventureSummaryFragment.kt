@@ -65,6 +65,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
                 username = it.nick
                 position = it.position
                 completionTime = it.completionTime
+                setAvatar(it.avatarUrl)
             }
         }
     }

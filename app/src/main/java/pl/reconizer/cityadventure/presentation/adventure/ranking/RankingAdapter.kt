@@ -22,6 +22,7 @@ class RankingAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 username = entry.nick
                 this.position = entry.position
                 completionTime = entry.completionTime
+                setAvatar(entry.avatarUrl)
             }
         }
     }

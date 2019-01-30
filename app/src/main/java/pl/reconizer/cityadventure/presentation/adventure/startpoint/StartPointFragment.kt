@@ -131,7 +131,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
                 username = adventureStartPoint.currentUserRanking.nick
                 position = adventureStartPoint.currentUserRanking.position
                 completionTime = adventureStartPoint.currentUserRanking.completionTime
-                setAvatar(R.drawable.test_avatar)
+                setAvatar(adventureStartPoint.currentUserRanking.avatarUrl)
             }
         }
 
@@ -157,7 +157,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
                     position = rankingEntryEntity.position
                     username = rankingEntryEntity.nick
                     completionTime = rankingEntryEntity.completionTime
-                    setAvatar(R.drawable.test_avatar)
+                    setAvatar(rankingEntryEntity.avatarUrl)
                 }
             }
         }
