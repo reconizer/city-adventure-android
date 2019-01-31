@@ -3,14 +3,18 @@ package pl.reconizer.cityadventure.presentation.customviews
 import android.content.Context
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.view.Display
-import android.view.WindowManager
 import androidx.appcompat.widget.AppCompatTextView
 import pl.reconizer.cityadventure.R
 
 class ScalableTextView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
+
+    private val displayMetrics: DisplayMetrics? by lazy {
+        val metrics = DisplayMetrics()
+        display?.getMetrics(metrics)
+        metrics
+    }
 
     private var baseScreenSize: Int = DEFAULT_BASE_SCREEN_SIZE
 
@@ -21,12 +25,11 @@ class ScalableTextView @JvmOverloads constructor(
             typedArray.recycle()
         }
 
-        val displayMetrics = DisplayMetrics()
-        val display: Display? = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
-        display?.getMetrics(displayMetrics)
-        if (displayMetrics.widthPixels > 0) {
-            val baseScreenSizeInPixels = displayMetrics.density * baseScreenSize
-            textSize = textSize * displayMetrics.widthPixels / baseScreenSizeInPixels / displayMetrics.density
+        displayMetrics?.let {
+            if (it.widthPixels > 0) {
+                val baseScreenSizeInPixels = it.density * baseScreenSize
+                textSize = textSize * it.widthPixels / baseScreenSizeInPixels / it.density
+            }
         }
     }
 

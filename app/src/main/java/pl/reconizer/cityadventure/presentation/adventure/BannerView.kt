@@ -2,6 +2,7 @@ package pl.reconizer.cityadventure.presentation.adventure
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -44,16 +45,16 @@ class BannerView @JvmOverloads constructor(
             typedArray.recycle()
         }
 
-        Picasso.get()
-                .load(R.drawable.banner_background)
-                .into(bannerImageBackground)
-
-        Picasso.get()
-                .load(R.drawable.image_corner_top)
-                .into(topBannerCorner)
-        Picasso.get()
-                .load(R.drawable.image_corner_bottom)
-                .into(bottomBannerCorner)
+//        Picasso.get()
+//                .load(R.drawable.banner_background)
+//                .into(bannerImageBackground)
+//
+//        Picasso.get()
+//                .load(R.drawable.image_corner_top)
+//                .into(topBannerCorner)
+//        Picasso.get()
+//                .load(R.drawable.image_corner_bottom)
+//                .into(bottomBannerCorner)
 
     }
 
@@ -91,6 +92,11 @@ class BannerView @JvmOverloads constructor(
             }
         }
         ratingTextView.text = String.format("%.1f", rating ?: 0f)
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        Log.d("BannerView", "measure")
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
     private fun buildStarView(): ImageView {

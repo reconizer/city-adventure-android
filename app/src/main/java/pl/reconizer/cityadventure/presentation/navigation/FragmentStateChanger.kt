@@ -13,10 +13,13 @@ class FragmentStateChanger(
         val fragmentTransaction = fragmentManager.beginTransaction().apply {
             when (stateChange.direction) {
                 StateChange.FORWARD -> {
-                    setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                    setCustomAnimations(R.anim.push_from_right, R.anim.push_out_left, R.anim.push_from_left, R.anim.push_out_right)
                 }
                 StateChange.BACKWARD -> {
-                    setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                    setCustomAnimations(R.anim.push_from_left, R.anim.push_out_right, R.anim.push_from_left, R.anim.push_out_right)
+                }
+                StateChange.REPLACE -> {
+                    setCustomAnimations(R.anim.push_from_right, R.anim.push_out_left, R.anim.push_from_left, R.anim.push_out_right)
                 }
             }
             val previousState = stateChange.getPreviousState<BaseKey>()
