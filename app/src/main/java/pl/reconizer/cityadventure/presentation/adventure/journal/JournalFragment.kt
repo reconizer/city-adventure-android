@@ -54,16 +54,6 @@ class JournalFragment : BaseFragment(), IJournalView {
             turnableLeft = false
         }
 
-        Picasso.get()
-                .load(R.drawable.journal_content_background_cover)
-                .noFade()
-                .into(journalCover)
-
-        Picasso.get()
-                .load(R.drawable.journal_content_background)
-                .noFade()
-                .into(journalContentBackground)
-
         adventureStartPoint?.let {
             journalAdventureDescriptionView.adventureStartPoint = it
             journalAdventureDescriptionView.galleryImageClickListener = {imageIndex ->
@@ -134,7 +124,9 @@ class JournalFragment : BaseFragment(), IJournalView {
     override fun onStart() {
         super.onStart()
         presenter.subscribe(this)
-        presenter.fetchClues()
+        view?.postDelayed({
+            presenter.fetchClues()
+        }, 200)
     }
 
     override fun onStop() {

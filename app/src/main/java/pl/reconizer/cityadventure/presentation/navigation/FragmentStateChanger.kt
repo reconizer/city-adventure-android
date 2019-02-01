@@ -11,19 +11,21 @@ class FragmentStateChanger(
 ) {
     fun handleStateChange(stateChange: StateChange) {
         val fragmentTransaction = fragmentManager.beginTransaction().apply {
-            when (stateChange.direction) {
-                StateChange.FORWARD -> {
-                    setCustomAnimations(R.anim.push_from_right, R.anim.push_out_left, R.anim.push_from_left, R.anim.push_out_right)
-                }
-                StateChange.BACKWARD -> {
-                    setCustomAnimations(R.anim.push_from_left, R.anim.push_out_right, R.anim.push_from_left, R.anim.push_out_right)
-                }
-                StateChange.REPLACE -> {
-                    setCustomAnimations(R.anim.push_from_right, R.anim.push_out_left, R.anim.push_from_left, R.anim.push_out_right)
-                }
-            }
             val previousState = stateChange.getPreviousState<BaseKey>()
             val newState = stateChange.getNewState<BaseKey>()
+            val customAnimationSet =  when(stateChange.direction) {
+                StateChange.FORWARD -> {
+                    stateChange.topNewState<BaseKey>().customAnimations(stateChange.direction)
+                }
+                StateChange.BACKWARD -> {
+                    stateChange.topPreviousState<BaseKey>()?.customAnimations(stateChange.direction) ?: BaseKey.DEFAULT_ANIMATION_SET
+                }
+                StateChange.REPLACE -> {
+                    stateChange.topNewState<BaseKey>().customAnimations(stateChange.direction)
+                }
+                else -> throw IllegalArgumentException("Invalid state change direction")
+            }
+            setCustomAnimations(customAnimationSet.enter, customAnimationSet.exit, customAnimationSet.popEnter, customAnimationSet.popExit)
             for (oldKey in previousState) {
                 val fragment = fragmentManager.findFragmentByTag(oldKey.fragmentTag)
                 if (fragment != null) {

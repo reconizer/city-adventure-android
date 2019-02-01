@@ -45,7 +45,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adventureInfoView.isGone = true
+        // I'm hiding ranking section but showing adventure info section without data.
         rankingContainer.isGone = true
 
         adventureInfoView.galleryImageClickListener = { imageIndex ->
@@ -94,10 +94,12 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        if (presenter.adventureStartPoint != null) {
-            show(presenter.adventureStartPoint!!)
-        }
-        presenter.fetchData()
+        view?.postDelayed({
+            if (presenter.adventureStartPoint != null) {
+                show(presenter.adventureStartPoint!!)
+            }
+            presenter.fetchData()
+        }, resources.getInteger(R.integer.transitionDuration).toLong())
     }
 
     override fun onDestroy() {

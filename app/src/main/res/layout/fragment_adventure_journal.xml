@@ -67,11 +67,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/journal_content_background_cover"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topJournalMargin" />
+        app:layout_constraintTop_toBottomOf="@id/topJournalMargin"
+        android:src="@drawable/journal_content_background_cover" />
 
     <pl.reconizer.cityadventure.presentation.adventure.journal.JournalTabsView
         android:id="@+id/journalTabs"
@@ -85,7 +85,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/journal_content_background"
+        android:src="@drawable/journal_content_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
