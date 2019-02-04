@@ -34,28 +34,28 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="10" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
-        android:id="@+id/audioIcon"
-        android:layout_width="40.5dp"
-        android:layout_height="51dp"
-        android:src="@drawable/journal_audio_clue"
-        app:layout_constraintStart_toEndOf="@id/indexSpace"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
-        android:id="@+id/audioNameTextView"
+        android:id="@+id/contentText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_sm"
-        android:ellipsize="middle"
-        android:singleLine="true"
         android:textAppearance="@style/TypeWriterText"
-        android:textColor="@color/fontLighter"
-        android:textSize="@dimen/space_md"
-        app:layout_constraintBottom_toBottomOf="@id/audioIcon"
+        android:textColor="@color/fontDarker"
+        android:textSize="@dimen/journalClueFontSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/audioIcon"
-        app:layout_constraintTop_toTopOf="@id/audioIcon"
-        tools:text="Proin vulputate neque in erat condimentum fringilla. Sed vitae consequat nunc, eu lacinia velit" />
+        app:layout_constraintStart_toEndOf="@+id/indexSpace"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at urna quis tellus faucibus tincidunt sed nec dolor. Vestibulum non leo tincidunt, cursus felis a, viverra sem. Duis laoreet tortor quis nibh laoreet tincidunt." />
+
+    <ImageView
+        android:id="@+id/startAudioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_md"
+        android:adjustViewBounds="true"
+        android:src="@drawable/journal_audio_clue"
+        app:layout_constraintStart_toStartOf="@id/contentText"
+        app:layout_constraintEnd_toEndOf="@id/contentText"
+        app:layout_constraintTop_toBottomOf="@id/contentText"
+        app:layout_goneMarginTop="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

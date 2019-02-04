@@ -15,6 +15,10 @@ class AudioPlayerKey(
         )
 ) {
 
+    override fun customAnimations(changeDirection: Int): AnimationSet {
+        return DEFAULT_ANIMATION_SET
+    }
+
     override fun createFragment(): Fragment {
         return AudioPlayerFragment()
     }

@@ -51,8 +51,7 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
 
     private fun onBindAudioClue(holder: AudioClueViewHolder, position: Int) {
         holder.bind(getClue(position), flipPosition(position))
-        holder.fileName.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
-        holder.icon.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
+        holder.startButton.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindVideoClue(holder: VideoClueViewHolder, position: Int) {
