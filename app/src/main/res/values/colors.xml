@@ -20,4 +20,6 @@
     <color name="puzzleInputFontColor">#15100e</color>
 
     <color name="menuItemFontColor">#4b4135</color>
+
+    <color name="authenticationButtonColor">#ab842a</color>
 </resources>
