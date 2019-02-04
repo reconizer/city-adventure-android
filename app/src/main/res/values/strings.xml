@@ -6,6 +6,16 @@
     <string name="adventure_summary_finish">Zakończ przygodę</string>
     <string name="adventure_summary_title">Posumowanie</string>
     <string name="adventure_user_ranking_completion_time">Twój czas:</string>
+    <string name="authentication_code_label">kod</string>
+    <string name="authentication_email_label">email</string>
+    <string name="authentication_have_code">mam już kod</string>
+    <string name="authentication_login">zaloguj</string>
+    <string name="authentication_new_password_label">nowe hasło</string>
+    <string name="authentication_password_confirmation_label">powtórz hasło</string>
+    <string name="authentication_password_label">hasło</string>
+    <string name="authentication_send_code">wyślij kod</string>
+    <string name="authentication_signin">logowanie</string>
+    <string name="authentication_signup">rejestracja</string>
     <string name="common_close">Zamknij</string>
     <string name="common_confirm">Zatwierdź</string>
     <string name="common_no">nie</string>
