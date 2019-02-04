@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_adventure_journal.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
@@ -17,9 +16,9 @@ import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPage
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
-import pl.reconizer.cityadventure.presentation.navigation.AudioPlayerKey
-import pl.reconizer.cityadventure.presentation.navigation.GalleryKey
-import pl.reconizer.cityadventure.presentation.navigation.MapKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.AudioPlayerKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.GalleryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
 class JournalFragment : BaseFragment(), IJournalView {

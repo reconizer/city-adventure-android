@@ -18,8 +18,8 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
-import pl.reconizer.cityadventure.presentation.navigation.GalleryKey
-import pl.reconizer.cityadventure.presentation.navigation.JournalKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.GalleryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.JournalKey
 import javax.inject.Inject
 
 class StartPointFragment : BaseFragment(), IStartPointView {

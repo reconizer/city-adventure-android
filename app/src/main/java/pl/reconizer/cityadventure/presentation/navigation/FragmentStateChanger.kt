@@ -3,7 +3,7 @@ package pl.reconizer.cityadventure.presentation.navigation
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.zhuinden.simplestack.StateChange
-import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.presentation.navigation.keys.BaseKey
 
 class FragmentStateChanger(
         private val fragmentManager: FragmentManager,

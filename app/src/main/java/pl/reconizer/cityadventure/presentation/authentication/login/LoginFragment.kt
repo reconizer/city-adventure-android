@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
-import pl.reconizer.cityadventure.presentation.navigation.MapKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), ILoginView {

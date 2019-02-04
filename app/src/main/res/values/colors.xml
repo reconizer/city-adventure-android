@@ -18,4 +18,6 @@
     <color name="galleryImageOverlayColor">#4a4135</color>
 
     <color name="puzzleInputFontColor">#15100e</color>
+
+    <color name="menuItemFontColor">#4b4135</color>
 </resources>

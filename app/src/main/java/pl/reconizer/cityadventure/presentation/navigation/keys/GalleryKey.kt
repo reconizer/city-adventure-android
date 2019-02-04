@@ -1,10 +1,10 @@
-package pl.reconizer.cityadventure.presentation.navigation
+package pl.reconizer.cityadventure.presentation.navigation.keys
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import kotlinx.android.parcel.Parcelize
-import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
+import pl.reconizer.cityadventure.presentation.navigation.AnimationSet
 
 @Parcelize
 class GalleryKey(

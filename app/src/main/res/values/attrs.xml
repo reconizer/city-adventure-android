@@ -39,4 +39,8 @@
         <attr name="name" />
     </declare-styleable>
 
+    <declare-styleable name="MenuItem">
+        <attr name="android:text" />
+    </declare-styleable>
+
 </resources>

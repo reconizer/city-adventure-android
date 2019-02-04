@@ -9,8 +9,7 @@ import kotlinx.android.synthetic.main.fragment_text_puzzle.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.presentation.navigation.AdventureSummaryKey
-import javax.inject.Inject
+import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
 
 class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
 

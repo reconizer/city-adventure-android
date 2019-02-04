@@ -26,6 +26,13 @@
     <string name="location_access_explanation">Aby działać poprawnie, aplikacja wymaga dostępu do lokalizacji.</string>
     <string name="location_error_occured">Wystąpił błąd podczas pobierania lokalizacji.</string>
     <string name="login_submit">Zaloguj się</string>
+    <string name="menu_about">O aplikacji</string>
+    <string name="menu_adventure_list">Lista przygód</string>
+    <string name="menu_faq">FAQ</string>
+    <string name="menu_logout">Wyloguj</string>
+    <string name="menu_notifications">Notyfikacje</string>
+    <string name="menu_shop">Sklep</string>
+    <string name="menu_username">Nickname:</string>
     <string name="puzzle_input_label">Hasło:</string>
     <string name="puzzle_wrong_answer">Podana odpowiedź jest nieprawidłowa.</string>
 </resources>

@@ -11,7 +11,7 @@ import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.ErrorDialogBuilder
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.cityadventure.presentation.mvp.IView
-import pl.reconizer.cityadventure.presentation.navigation.LoginKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.LoginKey
 
 open class BaseFragment : Fragment(), IView, OnBackPressedListener {
 

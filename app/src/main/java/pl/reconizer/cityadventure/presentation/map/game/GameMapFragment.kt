@@ -20,9 +20,10 @@ import pl.reconizer.cityadventure.presentation.map.IMapView
 import pl.reconizer.cityadventure.presentation.map.IPinMapper
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.PinProvider
-import pl.reconizer.cityadventure.presentation.navigation.AdventureStartPointKey
-import pl.reconizer.cityadventure.presentation.navigation.AdventureSummaryKey
-import pl.reconizer.cityadventure.presentation.navigation.TextPuzzleKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureStartPointKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MenuKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.TextPuzzleKey
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -68,6 +69,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
         journalButton.setOnClickListener { navigator.goBack() }
         locationCheckerButton.setOnClickListener { presenter.checkLocation() }
+        menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
             adventuresButtonsGroup.isVisible = true
@@ -167,8 +169,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
         navigator.goTo(TextPuzzleKey(
-            presenter.adventure!!,
-            point
+                presenter.adventure!!,
+                point
         ))
     }
 

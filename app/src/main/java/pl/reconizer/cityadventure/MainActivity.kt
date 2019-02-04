@@ -15,7 +15,7 @@ import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.LocationInfoDialogBuilder
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.cityadventure.presentation.navigation.FragmentStateChanger
-import pl.reconizer.cityadventure.presentation.navigation.MapKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {

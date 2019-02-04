@@ -1,4 +1,4 @@
-package pl.reconizer.cityadventure.presentation.navigation
+package pl.reconizer.cityadventure.presentation.navigation.keys
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment

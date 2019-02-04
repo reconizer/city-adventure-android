@@ -1,9 +1,11 @@
-package pl.reconizer.cityadventure.presentation.navigation
+package pl.reconizer.cityadventure.presentation.navigation.keys
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.zhuinden.simplestack.StateChange
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.presentation.navigation.AnimationSet
+import pl.reconizer.cityadventure.presentation.navigation.Key
 
 abstract class BaseKey(override val arguments: Bundle? = null) : Key {
 
