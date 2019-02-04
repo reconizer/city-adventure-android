@@ -14,7 +14,11 @@
         <item name="android:textColor">@color/fontDark</item>
     </style>
 
-    <style name="TextMedium">
+    <style name="Text">
+        <item name="android:fontFamily">@font/oswald_regular</item>
+    </style>
+
+    <style name="Text.Medium">
         <item name="android:fontFamily">@font/oswald_medium</item>
     </style>
 
@@ -56,12 +60,24 @@
 
     <style name="AuthenticationButton">
         <item name="android:background">@drawable/button_authentication</item>
-        <item name="android:textAppearance">@style/TextMedium</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/authenticationButtonColor</item>
+        <item name="android:textColor">@color/authenticationColor</item>
         <item name="android:textSize">22dp</item>
         <item name="android:textAlignment">gravity</item>
         <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="AuthenticationInput">
+        <item name="android:background">@drawable/input_authentication</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textColor">@color/authenticationColor</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">center_vertical|start</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 

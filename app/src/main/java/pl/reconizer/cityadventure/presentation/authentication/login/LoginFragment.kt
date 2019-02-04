@@ -33,10 +33,12 @@ class LoginFragment : BaseFragment(), ILoginView {
 
         submit.setOnClickListener {
             presenter.login(Form(
-                    emailInput.text.toString(),
-                    passwordInput.text.toString()
+                    emailInput.text,
+                    passwordInput.text
             ))
         }
+
+        closeButton.setOnClickListener { navigator.goBack() }
     }
 
     override fun onResume() {

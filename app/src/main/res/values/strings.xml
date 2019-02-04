@@ -13,6 +13,7 @@
     <string name="authentication_new_password_label">nowe hasło</string>
     <string name="authentication_password_confirmation_label">powtórz hasło</string>
     <string name="authentication_password_label">hasło</string>
+    <string name="authentication_reset_password">Resetuj hasło</string>
     <string name="authentication_send_code">wyślij kod</string>
     <string name="authentication_signin">logowanie</string>
     <string name="authentication_signup">rejestracja</string>

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#d0a137</color>
 
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
@@ -21,5 +21,7 @@
 
     <color name="menuItemFontColor">#4b4135</color>
 
-    <color name="authenticationButtonColor">#ab842a</color>
+    <color name="authenticationColor">#ab842a</color>
+    <color name="authenticationColorLighter">#d0a137</color>
+    <color name="authenticationLabelColor">#9696a9</color>
 </resources>
