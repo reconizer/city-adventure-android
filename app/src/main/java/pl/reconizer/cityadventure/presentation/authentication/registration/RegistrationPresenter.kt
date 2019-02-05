@@ -22,7 +22,7 @@ class RegistrationPresenter(
     fun register(form: Form) {
         if (form.isValid()) {
             disposables.add(
-                signUp(form.email, form.password)
+                signUp(form.email, form.username, form.password)
                         .observeOn(mainScheduler)
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {

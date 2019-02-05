@@ -15,7 +15,11 @@ class UserRepository(
                 .flatMap { tokenMapper.asyncMap(it) }
     }
 
-    override fun register(email: String, password: String): Single<String> {
+    override fun register(
+            email: String,
+            username: String,
+            password: String
+    ): Single<String> {
         return Single.just("dev")
     }
 

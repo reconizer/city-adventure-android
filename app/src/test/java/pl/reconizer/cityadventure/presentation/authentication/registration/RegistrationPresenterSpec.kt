@@ -38,17 +38,18 @@ class RegistrationPresenterSpec : Spek({
             context("when form is valid") {
                 val form = Form(
                         email = "test@test.com",
+                        username = "testname",
                         password = "test",
                         passwordConfirmation = "test"
                 )
 
                 beforeEachTest {
-                    whenever(signUp.invoke(form.email, form.password)).thenReturn(Completable.complete())
+                    whenever(signUp.invoke(form.email, form.username, form.password)).thenReturn(Completable.complete())
                     presenter.register(form)
                 }
 
                 it("signs user up") {
-                    verify(signUp, atLeastOnce()).invoke(any(), any())
+                    verify(signUp, atLeastOnce()).invoke(any(), any(), any())
                 }
 
                 it("notifies view") {

@@ -17,6 +17,7 @@
     <string name="authentication_send_code">wyślij kod</string>
     <string name="authentication_signin">logowanie</string>
     <string name="authentication_signup">rejestracja</string>
+    <string name="authentication_username_label">nick</string>
     <string name="common_close">Zamknij</string>
     <string name="common_confirm">Zatwierdź</string>
     <string name="common_no">nie</string>

@@ -34,6 +34,7 @@ class RegistrationFragment : BaseFragment(), IRegistrationView {
         submit.setOnClickListener {
             presenter.register(Form(
                     emailInput.text,
+                    usernameInput.text,
                     passwordInput.text,
                     passwordConfirmationInput.text
             ))

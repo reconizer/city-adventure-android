@@ -11,8 +11,11 @@ class SignUp(
         private val authenticationRepository: IAuthenticationRepository
 ) {
 
-    operator fun invoke(email: String, password: String): Completable {
-        return userRepository.register(email, password)
+    operator fun invoke(
+            email: String,
+            username: String,
+            password: String): Completable {
+        return userRepository.register(email, username, password)
                 .flatMapCompletable { authenticationRepository.saveToken(it) }
                 .subscribeOn(scheduler)
     }

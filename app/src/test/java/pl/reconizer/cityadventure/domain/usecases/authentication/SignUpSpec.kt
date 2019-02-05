@@ -13,6 +13,7 @@ class SignUpSpec : Spek({
 
     describe("sign up usecase") {
         val email = "test@test.com"
+        val username = "testuser"
         val password = "test"
         val token = "token"
         val scheduler = Schedulers.trampoline()
@@ -25,13 +26,13 @@ class SignUpSpec : Spek({
         )
 
         before {
-            whenever(userRepository.register(any(), any())).thenReturn(Single.just(token))
+            whenever(userRepository.register(any(), any(), any())).thenReturn(Single.just(token))
             whenever(authenticationRepository.saveToken(any())).thenReturn(Completable.complete())
         }
 
         it("signs up a user") {
-            signUp(email, password).test().assertNoErrors()
-            verify(userRepository, atLeastOnce()).register(email, password)
+            signUp(email, username, password).test().assertNoErrors()
+            verify(userRepository, atLeastOnce()).register(email, username, password)
             verify(authenticationRepository, atLeastOnce()).saveToken(token)
         }
     }

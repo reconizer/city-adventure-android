@@ -32,8 +32,9 @@ class UserRepositorySpec : Spek({
 
         describe("register") {
             val email = "testEmail"
+            val username = "test-user"
             val password = "password"
-            val testObservable = repository.register(email, password).test()
+            val testObservable = repository.register(email, username, password).test()
             testObservable.assertValue("dev")
             testObservable.assertComplete()
         }

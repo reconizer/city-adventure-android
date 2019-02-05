@@ -6,6 +6,10 @@ interface IUserRepository {
 
     fun login(email: String, password: String): Single<String>
 
-    fun register(email: String, password: String): Single<String>
+    fun register(
+            email: String,
+            username: String,
+            password: String
+    ): Single<String>
 
 }
