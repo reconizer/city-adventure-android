@@ -6,4 +6,6 @@ interface IMenuView : IView {
 
     fun showProfile()
 
+    fun successfulLogout()
+
 }

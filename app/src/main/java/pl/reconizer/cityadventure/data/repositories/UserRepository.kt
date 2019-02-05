@@ -14,4 +14,9 @@ class UserRepository(
         return authenticationApi.login(email, password)
                 .flatMap { tokenMapper.asyncMap(it) }
     }
+
+    override fun register(email: String, password: String): Single<String> {
+        return Single.just("dev")
+    }
+
 }

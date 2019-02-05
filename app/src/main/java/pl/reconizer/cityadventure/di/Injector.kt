@@ -19,6 +19,8 @@ import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummar
 import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
+import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationComponent
+import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
 import pl.reconizer.cityadventure.presentation.map.game.GameMapModule
 import pl.reconizer.cityadventure.presentation.menu.MenuComponent
@@ -31,6 +33,7 @@ object Injector {
     private var appComponent: AppComponent? = null
     private var mainActivityComponent: MainActivityComponent? = null
     private var loginComponent: LoginComponent? = null
+    private var registrationComponent: RegistrationComponent? = null
     private var menuComponent: MenuComponent? = null
     private var gameMapComponent: GameMapComponent? = null
     private var adventureStartPointComponent: StartPointComponent? = null
@@ -56,6 +59,11 @@ object Injector {
     fun buildLoginComponent(): LoginComponent {
         loginComponent = mainActivityComponent!!.loginComponent(LoginModule())
         return loginComponent!!
+    }
+
+    fun buildRegistrationComponent(): RegistrationComponent {
+        registrationComponent = mainActivityComponent!!.registrationComponent(RegistrationModule())
+        return registrationComponent!!
     }
 
     fun buildMenuComponent(): MenuComponent {
@@ -106,6 +114,10 @@ object Injector {
 
     fun clearLoginComponent() {
         loginComponent = null
+    }
+
+    fun clearRegistrationComponent() {
+        registrationComponent = null
     }
 
     fun clearMenuComponent() {

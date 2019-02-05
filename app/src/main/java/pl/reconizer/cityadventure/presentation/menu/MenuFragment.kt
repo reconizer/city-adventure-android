@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.zhuinden.simplestack.StateChange
 import kotlinx.android.synthetic.main.fragment_menu.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.navigation.keys.AuthenticationStartKey
 import javax.inject.Inject
 
 class MenuFragment : BaseFragment(), IMenuView {
@@ -31,6 +33,8 @@ class MenuFragment : BaseFragment(), IMenuView {
         usernameTextView.text = "Luck 1"
 
         closeButton.setOnClickListener { navigator.goBack() }
+
+        logoutMenuItem.setOnClickListener { presenter.logout() }
     }
 
     override fun onResume() {
@@ -51,6 +55,13 @@ class MenuFragment : BaseFragment(), IMenuView {
 
     override fun showProfile() {
 
+    }
+
+    override fun successfulLogout() {
+        navigator.setHistory(
+                mutableListOf(AuthenticationStartKey()),
+                StateChange.REPLACE
+        )
     }
 
 }

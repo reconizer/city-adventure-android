@@ -1,42 +1,37 @@
-package pl.reconizer.cityadventure.presentation.menu
+package pl.reconizer.cityadventure.presentation.authentication.registration
 
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.data.entities.Error
-import pl.reconizer.cityadventure.domain.repositories.IUserRepository
-import pl.reconizer.cityadventure.domain.usecases.authentication.Logout
+import pl.reconizer.cityadventure.domain.usecases.authentication.SignUp
 import pl.reconizer.cityadventure.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
-class MenuPresenter(
-        private val backgroundScheduler: Scheduler,
+class RegistrationPresenter(
         private val mainScheduler: Scheduler,
-        private val userRepository: IUserRepository,
-        private val logout: Logout,
+        private val signUp: SignUp,
         private val errorHandler: ErrorHandler<Error>
-) : BasePresenter<IMenuView>() {
+) : BasePresenter<IRegistrationView>() {
 
-    override fun subscribe(view: IMenuView) {
+    override fun subscribe(view: IRegistrationView) {
         super.subscribe(view)
         errorHandler.view = WeakReference(view)
     }
 
-    fun fetchProfile() {
-        view?.showProfile()
-    }
-
-    fun logout () {
-        disposables.add(
-                logout.invoke()
+    fun register(form: Form) {
+        if (form.isValid()) {
+            disposables.add(
+                signUp(form.email, form.password)
                         .observeOn(mainScheduler)
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
-                                view?.successfulLogout()
+                                view?.successfulSignUp()
                             }
-
                         })
-        )
+            )
+        } else {
+            // show errors
+        }
     }
-
 }

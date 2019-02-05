@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_authentication.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.navigation.keys.LoginKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.RegistrationKey
 
 class AuthenticationStartFragment : BaseFragment() {
 
@@ -21,6 +22,6 @@ class AuthenticationStartFragment : BaseFragment() {
 
         signinButton.setOnClickListener { navigator.goTo(LoginKey()) }
 
-        signupButton.setOnClickListener {  }
+        signupButton.setOnClickListener { navigator.goTo(RegistrationKey()) }
     }
 }

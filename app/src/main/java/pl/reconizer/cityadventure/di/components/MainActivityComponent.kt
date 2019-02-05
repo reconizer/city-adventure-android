@@ -12,6 +12,8 @@ import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummar
 import pl.reconizer.cityadventure.presentation.adventure.summary.AdventureSummaryModule
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginComponent
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
+import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationComponent
+import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
 import pl.reconizer.cityadventure.presentation.map.game.GameMapModule
 import pl.reconizer.cityadventure.presentation.menu.MenuComponent
@@ -28,6 +30,7 @@ interface MainActivityComponent {
     fun inject(target: MainActivity)
 
     fun loginComponent(module: LoginModule): LoginComponent
+    fun registrationComponent(module: RegistrationModule): RegistrationComponent
     fun menuComponent(module: MenuModule): MenuComponent
     fun gameMapComponent(module: GameMapModule): GameMapComponent
     fun adventureStartPointComponent(module: StartPointModule): StartPointComponent

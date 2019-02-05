@@ -1,4 +1,4 @@
-package pl.reconizer.cityadventure.presentation.authentication.login
+package pl.reconizer.cityadventure.presentation.authentication.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,35 +6,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.zhuinden.simplestack.StateChange
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_registration.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), ILoginView {
+class RegistrationFragment : BaseFragment(), IRegistrationView {
 
     @Inject
-    lateinit var presenter: LoginPresenter
+    lateinit var presenter: RegistrationPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildLoginComponent().inject(this)
+        Injector.buildRegistrationComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         submit.setOnClickListener {
-            presenter.login(Form(
+            presenter.register(Form(
                     emailInput.text,
-                    passwordInput.text
+                    passwordInput.text,
+                    passwordConfirmationInput.text
             ))
         }
 
@@ -53,10 +54,10 @@ class LoginFragment : BaseFragment(), ILoginView {
 
     override fun onDestroy() {
         super.onDestroy()
-        Injector.clearLoginComponent()
+        Injector.clearRegistrationComponent()
     }
 
-    override fun successfulSignIn() {
+    override fun successfulSignUp() {
         Toast.makeText(context, "Logged in", Toast.LENGTH_LONG).show()
         navigator.setHistory(
                 mutableListOf(MapKey.Builder.buildAdventuresMapKey()),
@@ -65,8 +66,8 @@ class LoginFragment : BaseFragment(), ILoginView {
     }
 
     companion object {
-        fun newInstance(): LoginFragment {
-            return LoginFragment()
+        fun newInstance(): RegistrationFragment {
+            return RegistrationFragment()
         }
     }
 
