@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import kotlinx.android.synthetic.main.fragment_adventure_journal.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.common.extensions.openInBrowser
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
@@ -92,6 +93,11 @@ class JournalFragment : BaseFragment(), IJournalView {
                     ClueType.AUDIO -> {
                         clue.originalResourceUrl?.let {
                             navigator.goTo(AudioPlayerKey(it))
+                        }
+                    }
+                    ClueType.URL -> {
+                        clue.originalResourceUrl?.let {
+                            openInBrowser(it, resources.getString(R.string.journal_cannot_open_url))
                         }
                     }
                 }
