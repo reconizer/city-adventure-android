@@ -1,5 +1,6 @@
 package pl.reconizer.cityadventure.data.repositories
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.cityadventure.data.mappers.TokenMapper
 import pl.reconizer.cityadventure.data.network.api.IAuthenticationApi
@@ -21,6 +22,14 @@ class UserRepository(
             password: String
     ): Single<String> {
         return Single.just("dev")
+    }
+
+    override fun sendResetPasswordCode(email: String): Completable {
+        return Completable.complete()
+    }
+
+    override fun resetPassword(code: String, newPassword: String): Completable {
+        return Completable.complete()
     }
 
 }

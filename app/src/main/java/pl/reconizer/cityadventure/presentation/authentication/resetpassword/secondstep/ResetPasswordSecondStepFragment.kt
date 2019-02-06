@@ -1,45 +1,42 @@
-package pl.reconizer.cityadventure.presentation.authentication.login
+package pl.reconizer.cityadventure.presentation.authentication.resetpassword.secondstep
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.zhuinden.simplestack.StateChange
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_reset_password_second_step.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
-import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
-import pl.reconizer.cityadventure.presentation.navigation.keys.ResetPasswordFirstStepKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.AuthenticationStartKey
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), ILoginView {
+class ResetPasswordSecondStepFragment : BaseFragment(), IResetPasswordSecondStepView {
 
     @Inject
-    lateinit var presenter: LoginPresenter
+    lateinit var presenter: ResetPasswordSecondStepPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildLoginComponent().inject(this)
+        Injector.buildResetPasswordSecondStepComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.fragment_reset_password_second_step, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         submit.setOnClickListener {
-            presenter.login(Form(
-                    emailInput.text,
-                    passwordInput.text
+            presenter.resetPassword(Form(
+                    codeInput.text,
+                    passwordInput.text,
+                    passwordConfirmationInput.text
             ))
         }
-
-        resetPasswordButton.setOnClickListener { navigator.goTo(ResetPasswordFirstStepKey()) }
 
         closeButton.setOnClickListener { navigator.goBack() }
     }
@@ -56,21 +53,14 @@ class LoginFragment : BaseFragment(), ILoginView {
 
     override fun onDestroy() {
         super.onDestroy()
-        Injector.clearLoginComponent()
+        Injector.clearResetPasswordSecondStepComponent()
     }
 
-    override fun successfulSignIn() {
-        Toast.makeText(context, "Logged in", Toast.LENGTH_LONG).show()
+    override fun successfulPasswordReset() {
         navigator.setHistory(
-                mutableListOf(MapKey.Builder.buildAdventuresMapKey()),
+                mutableListOf(AuthenticationStartKey()),
                 StateChange.REPLACE
         )
-    }
-
-    companion object {
-        fun newInstance(): LoginFragment {
-            return LoginFragment()
-        }
     }
 
 }

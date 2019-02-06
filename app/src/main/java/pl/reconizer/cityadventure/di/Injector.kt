@@ -21,6 +21,10 @@ import pl.reconizer.cityadventure.presentation.authentication.login.LoginCompone
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationComponent
 import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationModule
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepComponent
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
 import pl.reconizer.cityadventure.presentation.map.game.GameMapModule
 import pl.reconizer.cityadventure.presentation.menu.MenuComponent
@@ -34,6 +38,8 @@ object Injector {
     private var mainActivityComponent: MainActivityComponent? = null
     private var loginComponent: LoginComponent? = null
     private var registrationComponent: RegistrationComponent? = null
+    private var resetPasswordFirstStepComponent: ResetPasswordFirstStepComponent? = null
+    private var resetPasswordSecondStepComponent: ResetPasswordSecondStepComponent? = null
     private var menuComponent: MenuComponent? = null
     private var gameMapComponent: GameMapComponent? = null
     private var adventureStartPointComponent: StartPointComponent? = null
@@ -64,6 +70,16 @@ object Injector {
     fun buildRegistrationComponent(): RegistrationComponent {
         registrationComponent = mainActivityComponent!!.registrationComponent(RegistrationModule())
         return registrationComponent!!
+    }
+
+    fun buildResetPasswordFirstStepComponent(): ResetPasswordFirstStepComponent {
+        resetPasswordFirstStepComponent = mainActivityComponent!!.resetPasswordFirstStepComponent(ResetPasswordFirstStepModule())
+        return resetPasswordFirstStepComponent!!
+    }
+
+    fun buildResetPasswordSecondStepComponent(): ResetPasswordSecondStepComponent {
+        resetPasswordSecondStepComponent = mainActivityComponent!!.resetPasswordSecondStepComponent(ResetPasswordSecondStepModule())
+        return resetPasswordSecondStepComponent!!
     }
 
     fun buildMenuComponent(): MenuComponent {
@@ -118,6 +134,14 @@ object Injector {
 
     fun clearRegistrationComponent() {
         registrationComponent = null
+    }
+
+    fun clearResetPasswordFirstStepComponent() {
+        resetPasswordFirstStepComponent = null
+    }
+
+    fun clearResetPasswordSecondStepComponent() {
+        resetPasswordSecondStepComponent = null
     }
 
     fun clearMenuComponent() {

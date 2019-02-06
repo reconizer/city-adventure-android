@@ -31,12 +31,37 @@ class UserRepositorySpec : Spek({
         }
 
         describe("register") {
-            val email = "testEmail"
-            val username = "test-user"
-            val password = "password"
-            val testObservable = repository.register(email, username, password).test()
-            testObservable.assertValue("dev")
-            testObservable.assertComplete()
+
+            it ("completes") {
+                val email = "testEmail"
+                val username = "test-user"
+                val password = "password"
+                val testObservable = repository.register(email, username, password).test()
+                testObservable.assertValue("dev")
+                testObservable.assertComplete()
+            }
+
+        }
+
+        describe("sendResetPasswordCode") {
+
+            it ("completes") {
+                val email = "testEmail"
+                val testObservable = repository.sendResetPasswordCode(email).test()
+                testObservable.assertComplete()
+            }
+
+        }
+
+        describe("resetPassword") {
+
+            it ("completes") {
+                val code = "code"
+                val password = "password"
+                val testObservable = repository.resetPassword(code, password).test()
+                testObservable.assertComplete()
+            }
+
         }
 
     }

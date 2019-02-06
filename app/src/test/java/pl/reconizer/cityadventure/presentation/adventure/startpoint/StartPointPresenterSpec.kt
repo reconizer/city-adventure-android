@@ -73,4 +73,5 @@ class StartPointPresenterSpec : Spek({
 
         }
     }
+
 })

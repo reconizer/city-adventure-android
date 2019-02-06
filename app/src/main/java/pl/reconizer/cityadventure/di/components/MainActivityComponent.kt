@@ -14,6 +14,10 @@ import pl.reconizer.cityadventure.presentation.authentication.login.LoginCompone
 import pl.reconizer.cityadventure.presentation.authentication.login.LoginModule
 import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationComponent
 import pl.reconizer.cityadventure.presentation.authentication.registration.RegistrationModule
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepComponent
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
+import pl.reconizer.cityadventure.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
 import pl.reconizer.cityadventure.presentation.map.game.GameMapComponent
 import pl.reconizer.cityadventure.presentation.map.game.GameMapModule
 import pl.reconizer.cityadventure.presentation.menu.MenuComponent
@@ -31,6 +35,8 @@ interface MainActivityComponent {
 
     fun loginComponent(module: LoginModule): LoginComponent
     fun registrationComponent(module: RegistrationModule): RegistrationComponent
+    fun resetPasswordFirstStepComponent(module: ResetPasswordFirstStepModule): ResetPasswordFirstStepComponent
+    fun resetPasswordSecondStepComponent(module: ResetPasswordSecondStepModule): ResetPasswordSecondStepComponent
     fun menuComponent(module: MenuModule): MenuComponent
     fun gameMapComponent(module: GameMapModule): GameMapComponent
     fun adventureStartPointComponent(module: StartPointModule): StartPointComponent

@@ -49,7 +49,7 @@ class RegistrationPresenterSpec : Spek({
                 }
 
                 it("signs user up") {
-                    verify(signUp, atLeastOnce()).invoke(any(), any(), any())
+                    verify(signUp, atLeastOnce()).invoke(form.email, form.username, form.password)
                 }
 
                 it("notifies view") {
