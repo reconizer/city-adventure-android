@@ -2,9 +2,15 @@ package pl.reconizer.cityadventure.presentation.navigation
 
 import android.os.Bundle
 import androidx.annotation.IdRes
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import pl.reconizer.cityadventure.domain.entities.Adventure
+import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.ADVENTURE_PARAM
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.ADVENTURE_POINT_ID_PARAM
+import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 
 class Navigator(
         @IdRes private val container: Int,
@@ -49,48 +55,87 @@ class Navigator(
         return fragmentManager.backStackEntryCount <= 1
     }
 
-    override fun showMap(bundle: Bundle) {
-        mapFragment.arguments = bundle
-        if (mapFragment.isDetached) {
-            attachMap()
-        } else {
-            openMapRoot(bundle)
-        }
-
-    }
-
-    override fun leaveMap() {
-        if (mapFragment.isAdded) {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .detach(mapFragment)
-                    .commit()
-        }
-    }
-
-    override fun openMapRoot(bundle: Bundle) {
-        mapFragment.arguments = bundle
+    override fun showAdventuresMap() {
+        mapFragment.arguments = bundleOf(
+                MAP_MODE_PARAM to MapMode.ADVENTURES
+        )
         clearUntilMap()
-        if (mapFragment.isDetached) {
-            attachMap()
-        } else {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .addToBackStack(MAP_ROOT_TAG)
-                    .replace(container, mapFragment)
-                    .commit()
-        }
+        goToMap()
     }
+
+    override fun showAdventureMap(adventure: Adventure, adventurePointId: String?) {
+        mapFragment.arguments = bundleOf(
+                MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
+                ADVENTURE_PARAM to adventure,
+                ADVENTURE_POINT_ID_PARAM to adventurePointId
+        )
+        goToMap()
+    }
+
+//    override fun showMap(bundle: Bundle) {
+//        mapFragment.arguments = bundle
+//        goTo(mapFragment)
+////        if (mapFragment.isDetached) {
+////            attachMap()
+////        } else {
+////            openMapRoot(bundle)
+////        }
+//
+//    }
+//
+//    override fun leaveMap() {
+//        if (mapFragment.isAdded) {
+////            fragmentManager.beginTransaction()
+////                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+////                    .detach(mapFragment)
+////                    .commit()
+//        }
+//    }
+//
+//    override fun openMapRoot(bundle: Bundle) {
+//        mapFragment.arguments = bundle
+//        clearUntilMap()
+//        if (mapFragment.isDetached) {
+//            attachMap()
+//        } else {
+//            fragmentManager.beginTransaction()
+//                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+//                    .addToBackStack(MAP_ROOT_TAG)
+//                    .replace(container, mapFragment)
+//                    .commit()
+//        }
+//    }
 
     private fun clearUntilMap() {
         // clears back-stack until map
-        fragmentManager.popBackStackImmediate(MAP_ROOT_TAG, 0)
+//        while (fragmentManager.backStackEntryCount > 1) {
+//            fragmentManager.popBackStackImmediate()
+//        }
+
+        fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     private fun attachMap() {
         fragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .attach(mapFragment)
+                //.addToBackStack(null)
+                .commit()
+    }
+
+    private fun goToMap() {
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                .apply {
+                    if (mapFragment.mapMode == MapMode.ADVENTURES) {
+                        addToBackStack(MAP_ROOT_TAG)
+                        replace(container, mapFragment)
+                    } else {
+                        addToBackStack(MAP_ROOT_TAG)
+                        replace(container, mapFragment)
+//                        add(container, mapFragment)
+                    }
+                }
                 .commit()
     }
 

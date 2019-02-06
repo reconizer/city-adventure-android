@@ -20,6 +20,7 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
             ClueType.IMAGE -> ImageClueViewHolder(inflater.inflate(R.layout.view_journal_clue_with_image, parent, false))
             ClueType.AUDIO -> AudioClueViewHolder(inflater.inflate(R.layout.view_journal_clue_with_audio, parent, false))
             ClueType.VIDEO -> VideoClueViewHolder(inflater.inflate(R.layout.view_journal_clue_with_video, parent, false))
+            ClueType.URL -> UrlClueViewHolder(inflater.inflate(R.layout.view_journal_clue_with_url, parent, false))
         }
     }
 
@@ -37,6 +38,7 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
             is ImageClueViewHolder -> onBindImageClue(holder, position)
             is AudioClueViewHolder -> onBindAudioClue(holder, position)
             is VideoClueViewHolder -> onBindVideoClue(holder, position)
+            is UrlClueViewHolder -> onBindUrlClue(holder, position)
         }
     }
 
@@ -51,13 +53,19 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
 
     private fun onBindAudioClue(holder: AudioClueViewHolder, position: Int) {
         holder.bind(getClue(position), flipPosition(position))
-        holder.fileName.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
-        holder.icon.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
+        holder.startButton.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindVideoClue(holder: VideoClueViewHolder, position: Int) {
         holder.bind(getClue(position), flipPosition(position))
         holder.thumbnail.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
+    }
+
+    private fun onBindUrlClue(holder: UrlClueViewHolder, position: Int) {
+        holder.bind(getClue(position), flipPosition(position))
+        holder.url.setOnClickListener {
+            clueClickListener?.invoke(getClue(position))
+        }
     }
 
     private fun getClue(position: Int): Clue {

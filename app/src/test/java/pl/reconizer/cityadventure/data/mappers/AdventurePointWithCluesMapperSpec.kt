@@ -38,5 +38,6 @@ class AdventurePointWithCluesMapperSpec : Spek({
             expect(point.discoveryDate).to == date
             verify(clueMapper, atLeastOnce()).map(any())
         }
+
     }
 })

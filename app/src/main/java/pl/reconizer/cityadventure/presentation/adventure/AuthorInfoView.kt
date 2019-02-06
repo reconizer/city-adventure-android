@@ -29,16 +29,17 @@ class AuthorInfoView @JvmOverloads constructor(
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.AuthorInfoView)
             name = typedArray.getString(R.styleable.AuthorInfoView_android_text) ?: ""
-            authorImage.setImageResource(typedArray.getResourceId(R.styleable.AuthorInfoView_android_src, R.drawable.test_banner))
             typedArray.recycle()
         }
 
         Picasso.get()
                 .load(R.drawable.start_point_creator_background)
+                .noFade()
                 .into(authorBackground)
 
         Picasso.get()
                 .load(R.drawable.start_point_creator_background_tape)
+                .noFade()
                 .into(authorBackgroundTape)
 
     }

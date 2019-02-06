@@ -10,11 +10,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
+        android:src="@drawable/journal_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/journal_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
@@ -31,11 +31,10 @@
         android:background="@drawable/journal_exit_button"
         android:gravity="top|center"
         android:padding="10dp"
-        android:src="@drawable/journal_exit_button"
-        android:text="@string/adventure_journal_exit"
+        android:text="@string/journal_exit"
         android:textAllCaps="true"
         android:textAppearance="@style/TypeWriterText"
-        android:textColor="#41382f"
+        android:textColor="@color/fontLighter"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/exitButtonSpace"
         app:layout_constraintEnd_toEndOf="@id/exitButtonSpace"
@@ -68,11 +67,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/journal_content_background_cover"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topJournalMargin" />
+        app:layout_constraintTop_toBottomOf="@id/topJournalMargin"
+        android:src="@drawable/journal_content_background_cover" />
 
     <pl.reconizer.cityadventure.presentation.adventure.journal.JournalTabsView
         android:id="@+id/journalTabs"
@@ -86,7 +85,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/journal_content_background"
+        android:src="@drawable/journal_content_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,8 +122,9 @@
                 android:id="@+id/journalAdventureDescriptionView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleX="0.79"
-                android:scaleY="0.79" />
+                android:paddingTop="@dimen/space_lg"
+                android:scaleX="0.9"
+                android:scaleY="0.9" />
 
         </androidx.core.widget.NestedScrollView>
 

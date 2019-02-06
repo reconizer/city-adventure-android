@@ -2,11 +2,9 @@ package pl.reconizer.cityadventure.presentation.customviews
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.DisplayMetrics
-import android.view.Display
-import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
+import pl.reconizer.cityadventure.common.extensions.getDisplayMetrics
 
 class ScalableImageView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -22,11 +20,8 @@ class ScalableImageView @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val width = MeasureSpec.getSize(widthMeasureSpec)
         val height = MeasureSpec.getSize(heightMeasureSpec)
-        val displayMetrics = DisplayMetrics()
-        val display: Display? = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
-        display?.getMetrics(displayMetrics)
-        if (displayMetrics.widthPixels > 0) {
-            val multiplier = displayMetrics.widthPixels / (displayMetrics.density * baseScreenSize)
+        if (getDisplayMetrics().widthPixels > 0) {
+            val multiplier = getDisplayMetrics().widthPixels / (getDisplayMetrics().density * baseScreenSize)
             setMeasuredDimension((width * multiplier).toInt(), (height * multiplier).toInt())
         } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)

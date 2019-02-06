@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/menuItemFrame"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:src="@drawable/menu_item_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/menuItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        tools:text="@string/menu_adventure_list"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="@color/menuItemFontColor"
+        android:textSize="@dimen/menuItemFontSize"
+        app:layout_constraintBottom_toBottomOf="@id/menuItemFrame"
+        app:layout_constraintEnd_toEndOf="@id/menuItemFrame"
+        app:layout_constraintStart_toStartOf="@id/menuItemFrame"
+        app:layout_constraintTop_toTopOf="@id/menuItemFrame" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,11 @@ package pl.reconizer.cityadventure.presentation.adventure
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator
 import kotlinx.android.synthetic.main.view_adventure_info.view.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_rating.view.*
@@ -26,6 +26,7 @@ class AdventureInfoView @JvmOverloads constructor(
 
     var shadowGenerator: ShadowGenerator? = null
         set(value) {
+            field = value
             authorInfo.shadowGenerator = shadowGenerator
             galleryPreview.shadowGenerator = shadowGenerator
         }
@@ -45,6 +46,12 @@ class AdventureInfoView @JvmOverloads constructor(
             rateListener?.invoke(it)
         }
         pivotY = 0f
+
+        ratingViewContainer.isGone = true
+        ratingStamp.isGone = true
+        difficultyLevel.isGone = true
+        timeLength.isGone = true
+        galleryPreview.isGone = true
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -60,7 +67,7 @@ class AdventureInfoView @JvmOverloads constructor(
             showGallery(adventureStartPoint!!)
             showCurrentUserRating(adventureStartPoint!!)
 
-            difficultyLevel.isGone = false
+            difficultyLevel.isVisible = true
             difficultyLevel.level = adventureStartPoint!!.difficultyLevel
 
             adventureDescription.text = adventureStartPoint!!.description
@@ -82,14 +89,14 @@ class AdventureInfoView @JvmOverloads constructor(
     private fun showFinishTime(adventureStartPoint: AdventureStartPoint) {
         timeLength.minLength = adventureStartPoint.minFinishTime
         timeLength.maxLength = adventureStartPoint.maxFinishTime
-        timeLength.isGone = false
+        timeLength.isVisible = true
     }
 
     private fun showGallery(adventureStartPoint: AdventureStartPoint) {
         if (adventureStartPoint.gallery.isEmpty()) {
             galleryPreview.isGone = true
         } else {
-            galleryPreview.isGone = false
+            galleryPreview.isVisible = true
             galleryPreview.setImages(adventureStartPoint.gallery)
             galleryPreview.thumbClickListener = {idx, _ ->
                 galleryImageClickListener?.invoke(idx)

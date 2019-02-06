@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="transitionDuration">200</integer>
+
+    <fraction name="authenticationFormLeftPercentageOffset">0.0833</fraction>
+    <fraction name="authenticationFormRightPercentageOffset">0.9167</fraction>
+    <fraction name="authenticationFormTopPercentageOffset">0.1369</fraction>
+</resources>

@@ -3,6 +3,7 @@
 
     <declare-styleable name="GlobalAttrs">
         <attr name="name" format="string" />
+        <attr name="label" format="string" />
     </declare-styleable>
 
     <declare-styleable name="Scalables">
@@ -37,6 +38,16 @@
     <declare-styleable name="BannerView">
         <attr name="android:src" />
         <attr name="name" />
+    </declare-styleable>
+
+    <declare-styleable name="MenuItem">
+        <attr name="android:text" />
+    </declare-styleable>
+
+    <declare-styleable name="AuthenticationInput">
+        <attr name="android:text" />
+        <attr name="android:inputType" />
+        <attr name="label" />
     </declare-styleable>
 
 </resources>

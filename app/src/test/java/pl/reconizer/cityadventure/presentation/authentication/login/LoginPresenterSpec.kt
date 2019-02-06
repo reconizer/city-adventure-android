@@ -54,6 +54,8 @@ class LoginPresenterSpec : Spek({
                     verify(view, atLeastOnce()).successfulSignIn()
                 }
             }
+
         }
     }
+
 })

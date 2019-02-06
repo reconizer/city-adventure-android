@@ -7,4 +7,6 @@ interface IStartPointView : IView {
 
     fun show(adventureStartPoint: AdventureStartPoint)
 
+    fun adventureStarted()
+
 }

@@ -55,7 +55,9 @@ class UserRankingView @JvmOverloads constructor(
                 .into(timeFrame)
     }
 
-    fun setAvatar(@DrawableRes avatarResId: Int) {
-        avatar.setImageResource(avatarResId)
+    fun setAvatar(url: String?) {
+        Picasso.get()
+                .load(url)
+                .into(avatar)
     }
 }

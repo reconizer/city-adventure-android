@@ -7,24 +7,22 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import com.squareup.picasso.Picasso
+import com.zhuinden.simplestack.StateChange
 import kotlinx.android.synthetic.main.fragment_adventure_start_point.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_ranking.*
 import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
 import kotlinx.android.synthetic.main.view_ranking_title.*
-import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
-import pl.reconizer.cityadventure.presentation.adventure.journal.JournalFragment
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.customviews.ShadowGenerator
-import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
-import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
+import pl.reconizer.cityadventure.presentation.navigation.keys.GalleryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.JournalKey
 import javax.inject.Inject
 
-class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListener {
+class StartPointFragment : BaseFragment(), IStartPointView {
 
     @Inject
     lateinit var presenter: StartPointPresenter
@@ -47,12 +45,12 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adventureInfoView.isGone = true
+        // I'm hiding ranking section but showing adventure info section without data.
         rankingContainer.isGone = true
 
         adventureInfoView.galleryImageClickListener = { imageIndex ->
             presenter.adventureStartPoint?.let {
-                navigator.openOver(GalleryFragment.newInstance(it.gallery, imageIndex))
+                navigator.goTo(GalleryKey(it.gallery, imageIndex))
             }
         }
 
@@ -96,10 +94,12 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        if (presenter.adventureStartPoint != null) {
-            show(presenter.adventureStartPoint!!)
-        }
-        presenter.fetchData()
+        view?.postDelayed({
+            if (presenter.adventureStartPoint != null) {
+                show(presenter.adventureStartPoint!!)
+            }
+            presenter.fetchData()
+        }, resources.getInteger(R.integer.transitionDuration).toLong())
     }
 
     override fun onDestroy() {
@@ -108,9 +108,7 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
     }
 
     override fun goBack(): Boolean {
-        navigator.openMapRoot(bundleOf(
-                MAP_MODE_PARAM to MapMode.ADVENTURES
-        ))
+        navigator.goBack()
         return true
     }
 
@@ -122,6 +120,10 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
         showTopFiveRanking(adventureStartPoint)
     }
 
+    override fun adventureStarted() {
+        goToJournal()
+    }
+
     private fun showCurrentUserRanking(adventureStartPoint: AdventureStartPoint) {
         if (adventureStartPoint.currentUserRanking == null) {
             userRankingView.isGone = true
@@ -131,7 +133,7 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
                 username = adventureStartPoint.currentUserRanking.nick
                 position = adventureStartPoint.currentUserRanking.position
                 completionTime = adventureStartPoint.currentUserRanking.completionTime
-                setAvatar(R.drawable.test_avatar)
+                setAvatar(adventureStartPoint.currentUserRanking.avatarUrl)
             }
         }
 
@@ -157,7 +159,7 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
                     position = rankingEntryEntity.position
                     username = rankingEntryEntity.nick
                     completionTime = rankingEntryEntity.completionTime
-                    setAvatar(R.drawable.test_avatar)
+                    setAvatar(rankingEntryEntity.avatarUrl)
                 }
             }
         }
@@ -176,14 +178,24 @@ class StartPointFragment : BaseFragment(), IStartPointView, OnBackPressedListene
                 }
             }
         }
-        //TODO: need to be changed - for testing, only starting a adventure
+
         actionButton.setOnClickListener {
-            if (adventure != null && presenter.adventureStartPoint != null) {
-                navigator.goTo(
-                        JournalFragment.newInstance(adventure!!, presenter.adventureStartPoint!!),
-                        false
-                )
+            when {
+                presenter.adventure.started -> goToJournal()
+                presenter.adventure.purchasable && presenter.adventure.purchased -> {
+                    // TODO start buying process
+                }
+                else -> presenter.startAdventure()
             }
+        }
+    }
+
+    private fun goToJournal() {
+        if (adventure != null && presenter.adventureStartPoint != null) {
+            navigator.replaceTop(
+                    JournalKey(adventure!!, presenter.adventureStartPoint!!),
+                    StateChange.REPLACE
+            )
         }
     }
 

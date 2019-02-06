@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_adventure_journal.*
-import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.common.extensions.openInBrowser
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
@@ -17,16 +16,13 @@ import pl.reconizer.cityadventure.domain.entities.ClueType
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.CluesPagesAdapter
 import pl.reconizer.cityadventure.presentation.adventure.journal.clues.ViewPagerStack
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
-import pl.reconizer.cityadventure.presentation.customviews.AudioPlayerFragment
-import pl.reconizer.cityadventure.presentation.customviews.PrettyDialog
-import pl.reconizer.cityadventure.presentation.gallery.GalleryFragment
-import pl.reconizer.cityadventure.presentation.map.MapMode
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.ADVENTURE_POINT_ID_PARAM
-import pl.reconizer.cityadventure.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
+import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
+import pl.reconizer.cityadventure.presentation.navigation.keys.AudioPlayerKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.GalleryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
-class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
+class JournalFragment : BaseFragment(), IJournalView {
 
     val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
     val adventureStartPoint by lazy { arguments?.get(ADVENTURE_START_POINT_PARAM) as AdventureStartPoint? }
@@ -58,22 +54,10 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
             turnableLeft = false
         }
 
-        Picasso.get()
-                .load(R.drawable.journal_background)
-                .into(backgroundImage)
-
-        Picasso.get()
-                .load(R.drawable.journal_content_background_cover)
-                .into(journalCover)
-
-        Picasso.get()
-                .load(R.drawable.journal_content_background)
-                .into(journalContentBackground)
-
         adventureStartPoint?.let {
             journalAdventureDescriptionView.adventureStartPoint = it
             journalAdventureDescriptionView.galleryImageClickListener = {imageIndex ->
-                navigator.openOver(GalleryFragment.newInstance(
+                navigator.goTo(GalleryKey(
                         it.gallery,
                         imageIndex
                 ))
@@ -99,7 +83,7 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
                 when (clue.type) {
                     ClueType.IMAGE -> {
                         clue.originalResourceUrl?.let {
-                            navigator.openOver(GalleryFragment.newInstance(
+                            navigator.goTo(GalleryKey(
                                     listOf(it),
                                     0
                             ))
@@ -108,7 +92,12 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
                     }
                     ClueType.AUDIO -> {
                         clue.originalResourceUrl?.let {
-                            navigator.goTo(AudioPlayerFragment.newInstance(it))
+                            navigator.goTo(AudioPlayerKey(it))
+                        }
+                    }
+                    ClueType.URL -> {
+                        clue.originalResourceUrl?.let {
+                            openInBrowser(it, resources.getString(R.string.journal_cannot_open_url))
                         }
                     }
                 }
@@ -116,10 +105,9 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
             }
             pointClickListener = { pointId ->
                 adventure?.let {
-                    navigator.showMap(bundleOf(
-                            MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
-                            ADVENTURE_PARAM to it,
-                            ADVENTURE_POINT_ID_PARAM to pointId
+                    navigator.goTo(MapKey.Builder.buildAdventureMapKey(
+                             adventure = it,
+                             adventurePointId = pointId
                     ))
                 }
             }
@@ -131,9 +119,8 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
 
         goToMapButton.setOnClickListener { _ ->
             adventure?.let {
-                navigator.showMap(bundleOf(
-                        MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
-                        ADVENTURE_PARAM to it
+                navigator.goTo(MapKey.Builder.buildAdventureMapKey(
+                        it
                 ))
             }
         }
@@ -142,12 +129,19 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
     override fun onStart() {
         super.onStart()
         presenter.subscribe(this)
-        presenter.fetchClues()
+        view?.postDelayed({
+            presenter.fetchClues()
+        }, 200)
     }
 
     override fun onStop() {
         super.onStop()
         presenter.unsubscribe()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearJournalComponent()
     }
 
     override fun goBack(): Boolean {
@@ -175,7 +169,7 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
 
     private fun showExitAdventureDialog() {
         PrettyDialog().apply {
-            headerText = this@JournalFragment.resources.getString(R.string.adventure_journal_exit)
+            headerText = this@JournalFragment.resources.getString(R.string.journal_exit)
             contentText = this@JournalFragment.resources.getString(R.string.journal_exit_info)
             firstButtonText = this@JournalFragment.resources.getString(R.string.common_yes)
             secondButtonText = this@JournalFragment.resources.getString(R.string.common_no)
@@ -183,9 +177,7 @@ class JournalFragment : BaseFragment(), IJournalView, OnBackPressedListener {
         }.apply {
             firstButtonClickListener = {
                 dismiss()
-                navigator.openMapRoot(bundleOf(
-                        MAP_MODE_PARAM to MapMode.ADVENTURES
-                ))
+                navigator.jumpToRoot()
             }
             secondButtonClickListener = { dismiss() }
         }

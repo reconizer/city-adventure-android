@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/frame"
         android:layout_width="288dp"
         android:layout_height="30dp"
-        tools:src="@drawable/ranking_user_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        tools:src="@drawable/ranking_user_frame" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
         android:id="@+id/placementSpace"
@@ -47,27 +47,27 @@
         app:layout_constraintTop_toTopOf="@id/placementSpace"
         app:layout_constraintVertical_bias="0.6"
         tools:text="1" />
-    
+
     <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/avatarBackground"
         android:layout_width="23dp"
         android:layout_height="23dp"
-        tools:src="@drawable/ranking_avatar_background_small"
+        app:layout_constraintBottom_toBottomOf="@id/frame"
         app:layout_constraintStart_toEndOf="@id/placementSpace"
         app:layout_constraintTop_toTopOf="@id/frame"
-        app:layout_constraintBottom_toBottomOf="@id/frame"/>
+        tools:src="@drawable/ranking_avatar_background_small" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/avatarImageView"
         android:layout_width="21dp"
         android:layout_height="21dp"
-        android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        tools:src="@drawable/test_avatar"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/avatarBackground"
+        app:layout_constraintEnd_toEndOf="@id/avatarBackground"
         app:layout_constraintStart_toStartOf="@id/avatarBackground"
         app:layout_constraintTop_toTopOf="@id/avatarBackground"
-        app:layout_constraintEnd_toEndOf="@id/avatarBackground"
-        app:layout_constraintBottom_toBottomOf="@id/avatarBackground" />
+        tools:src="@drawable/test_avatar" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
         android:id="@+id/usernameTextView"

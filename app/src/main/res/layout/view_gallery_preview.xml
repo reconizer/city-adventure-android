@@ -147,4 +147,28 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/firstImageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="firstImageShadow,firstImage" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/secondImageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="secondImageShadow,secondImage" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/thirdImageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="thirdImageShadow,thirdImage" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/fourthImageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="fourthImageShadow,moreImagesContainer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

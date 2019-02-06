@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        android:id="@+id/indexSpace"
+        android:layout_width="@dimen/journalClueNumberSpace"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+        android:id="@+id/clueIdIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/icon_journal_clue"
+        app:layout_constraintBottom_toBottomOf="@id/clueIdTextView"
+        app:layout_constraintStart_toStartOf="@id/indexSpace"
+        app:layout_constraintTop_toTopOf="@id/clueIdTextView" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/clueIdTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_xs"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="@color/fontLighter"
+        android:textSize="@dimen/journalClueIdFontSize"
+        app:layout_constraintEnd_toEndOf="@id/indexSpace"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/clueIdIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10" />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/contentText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="@color/fontDarker"
+        android:textSize="@dimen/journalClueFontSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/indexSpace"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at urna quis tellus faucibus tincidunt sed nec dolor. Vestibulum non leo tincidunt, cursus felis a, viverra sem. Duis laoreet tortor quis nibh laoreet tincidunt." />
+
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/contentUrl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="@color/fontDarker"
+        android:textSize="@dimen/journalClueFontSize"
+        android:layout_marginTop="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/indexSpace"
+        app:layout_constraintTop_toBottomOf="@id/contentText"
+        tools:text="http://test.com" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

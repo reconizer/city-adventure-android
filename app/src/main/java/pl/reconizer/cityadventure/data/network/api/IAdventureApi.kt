@@ -1,13 +1,10 @@
 package pl.reconizer.cityadventure.data.network.api
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.cityadventure.data.entities.AdventurePointWithCluesResponse
-import pl.reconizer.cityadventure.domain.entities.Adventure
-import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import pl.reconizer.cityadventure.domain.entities.*
+import retrofit2.http.*
 
 interface IAdventureApi {
 
@@ -31,5 +28,25 @@ interface IAdventureApi {
     fun getAdventureCompletedPoints(
             @Path("id") adventureId: String
     ): Single<List<AdventurePoint>>
+
+    @POST("api/adventures/start")
+    fun startAdventure(
+            @Query("adventure_id") adventureId: String
+    ): Completable
+
+    @POST("api/points/resolve_point")
+    fun resolvePoint(
+            @Body form: PuzzleAnswerForm
+    ): Single<PuzzleResponse>
+
+    @GET("api/adventures/{id}/current_user_ranking")
+    fun userAdventureRanking(
+            @Path("id") adventureId: String
+    ): Single<RankingEntry>
+
+    @GET("/api/adventures/summary/{id}")
+    fun getSummary(
+            @Path("id") adventureId: String
+    ): Single<List<RankingEntry>>
 
 }

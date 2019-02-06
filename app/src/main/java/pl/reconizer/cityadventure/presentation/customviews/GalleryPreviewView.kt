@@ -34,6 +34,11 @@ class GalleryPreviewView @JvmOverloads constructor(
         secondImage.setOnClickListener { thumbClickListener?.invoke(1, it) }
         thirdImage.setOnClickListener { thumbClickListener?.invoke(2, it) }
         moreImagesContainer.setOnClickListener { thumbClickListener?.invoke(3, fourthImage) }
+
+        firstImageGroup.isGone = true
+        secondImageGroup.isGone = true
+        thirdImageGroup.isGone = true
+        fourthImageGroup.isGone = true
     }
 
     fun setImages(newImages: List<String>) {
@@ -42,15 +47,10 @@ class GalleryPreviewView @JvmOverloads constructor(
     }
 
     private fun updateGrid() {
-        firstImage.isGone = images.isEmpty()
-        secondImage.isGone = images.size < 2
-        thirdImage.isGone = images.size < 3
-        moreImagesContainer.isGone = images.size < 4
-        firstImageShadow.isGone = firstImage.isGone
-        secondImageShadow.isGone = secondImage.isGone
-        thirdImageShadow.isGone = thirdImage.isGone
-        fourthImageShadow.isGone = moreImagesContainer.isGone
-        fourthImage.isGone = images.size < 4
+        firstImageGroup.isGone = images.isEmpty()
+        secondImageGroup.isGone = images.size < 2
+        thirdImageGroup.isGone = images.size < 3
+        fourthImageGroup.isGone = images.size < 4
         if (images.size > 4) {
             imageOverlay.isGone = false
             galleryImageCount.isGone = false

@@ -4,7 +4,9 @@ import pl.reconizer.cityadventure.data.entities.VideoResourceResponse
 import pl.reconizer.cityadventure.domain.common.Mapper
 import pl.reconizer.cityadventure.domain.entities.VideoResource
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class VideoResourceMapper @Inject constructor() : Mapper<VideoResourceResponse, VideoResource>() {
 
     override fun map(from: VideoResourceResponse): VideoResource {

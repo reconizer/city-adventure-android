@@ -1,34 +1,33 @@
 package pl.reconizer.cityadventure.presentation.map.game
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_game_map.*
-import pl.reconizer.cityadventure.OnBackPressedListener
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.Position
-import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointFragment
+import pl.reconizer.cityadventure.domain.entities.PuzzleResponse
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.map.IMapView
 import pl.reconizer.cityadventure.presentation.map.IPinMapper
 import pl.reconizer.cityadventure.presentation.map.MapMode
 import pl.reconizer.cityadventure.presentation.map.PinProvider
+import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureStartPointKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MenuKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.TextPuzzleKey
 import javax.inject.Inject
 import javax.inject.Named
 
-class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
+class GameMapFragment : BaseFragment(), IGameMapView {
 
     @Inject
     lateinit var pinProvider: PinProvider
@@ -42,7 +41,7 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
     @Inject
     lateinit var presenter: GameMapPresenter
 
-    private val mapMode: MapMode
+    val mapMode: MapMode
         get() { return (arguments?.get(MAP_MODE_PARAM) as MapMode?) ?: MapMode.ADVENTURES }
 
     private val adventurePointId: String?
@@ -50,8 +49,6 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
 
     private val mapView: IMapView
         get() { return childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
-
-    private var locationPermissionDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,19 +67,17 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
                 mapView.moveToLocation(it.toLatLng())
             }
         }
-        journalButton.setOnClickListener { navigator.leaveMap() }
+        journalButton.setOnClickListener { navigator.goBack() }
+        locationCheckerButton.setOnClickListener { presenter.checkLocation() }
+        menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
-            journalButton.isGone = true
-            menuButton.isVisible = true
-            scannerButton.isVisible = true
-            searchButton.isVisible = true
+            adventuresButtonsGroup.isVisible = true
+            adventureButtonsGroup.isGone = true
         } else {
             mapView.pinMapper = startedAdventurePinMapper
-            journalButton.isVisible = true
-            menuButton.isGone = true
-            scannerButton.isGone = true
-            searchButton.isGone = true
+            adventuresButtonsGroup.isGone = true
+            adventureButtonsGroup.isVisible = true
         }
         mapView.userPin = pinProvider.userPin
         mapView.clearMarkers()
@@ -101,8 +96,13 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
         mapView.pinClickListener = {
             when (it) {
                 is Adventure -> {
-                    navigator.leaveMap()
-                    navigator.goTo(StartPointFragment.newInstance(it))
+                    //navigator.leaveMap()
+                    navigator.goTo(AdventureStartPointKey(it))
+                }
+                is AdventurePoint -> {
+                    if (!it.isCompleted) {
+                        presenter.resolvePoint(it)
+                    }
                 }
             }
         }
@@ -119,40 +119,32 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
     }
 
     override fun goBack(): Boolean {
-        if (!navigator.isRoot()) {
-            navigator.leaveMap()
-        }
-        return !navigator.isRoot()
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == LOCATION_PERMISSION_REQUEST) {
-            if (grantResults.size != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                // TODO permissions not granted
-            }
+        return if (mapMode == MapMode.STARTED_ADVENTURE) {
+            navigator.goBack()
+            true
         } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            false
         }
     }
 
     override fun requestLocationPermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            context?.let {
-                if (locationPermissionDialog == null) {
-                    locationPermissionDialog = AlertDialog.Builder(it)
-                            .setMessage(R.string.location_access_explaination)
-                            .setPositiveButton(R.string.common_ok) { _, _ ->
-                                requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST)
-                            }
-                            .setNegativeButton(R.string.common_close) { _, _ ->
-                                activity?.finish() // close the app for now
-                            }.create()
-                }
-                locationPermissionDialog!!.show()
-            }
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST)
-        }
+        (activity as IViewWithLocation?)?.requestLocationPermission()
+    }
+
+    override fun gpsUnavailable() {
+        (activity as IViewWithLocation?)?.gpsUnavailable()
+    }
+
+    override fun gpsAvailableAgain() {
+        (activity as IViewWithLocation?)?.gpsAvailableAgain()
+    }
+
+    override fun goToLocationPermissionsSettings() {
+        (activity as IViewWithLocation?)?.goToLocationPermissionsSettings()
+    }
+
+    override fun goToLocationInterfaceSettings() {
+        (activity as IViewWithLocation?)?.goToLocationInterfaceSettings()
     }
 
     override fun showCurrentLocation(position: Position) {
@@ -166,24 +158,30 @@ class GameMapFragment : BaseFragment(), IGameMapView, OnBackPressedListener {
     override fun showAdventurePoints(points: List<AdventurePoint>) {
         mapView.showMarkers(points)
         adventurePointId?.let {id ->
-            val centeredPooint = points.find { point ->
+            val centeredPoint = points.find { point ->
                 point.id == id
             }
-            centeredPooint?.let {
+            centeredPoint?.let {
                 mapView.moveToLocation(it.position.toLatLng())
             }
         }
     }
 
-    override fun showLocationUnavailable() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
+        navigator.goTo(TextPuzzleKey(
+                presenter.adventure!!,
+                point
+        ))
+    }
+
+    override fun showSummary() {
+        navigator.goTo(AdventureSummaryKey(presenter.adventure!!))
     }
 
     companion object {
         const val MAP_MODE_PARAM = "map_mode"
         const val ADVENTURE_PARAM = "adventure"
         const val ADVENTURE_POINT_ID_PARAM = "adventure_point_id"
-        const val LOCATION_PERMISSION_REQUEST = 1
     }
 
 }

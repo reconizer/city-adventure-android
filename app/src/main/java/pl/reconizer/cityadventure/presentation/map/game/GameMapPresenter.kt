@@ -4,18 +4,16 @@ import android.util.Log
 import com.google.maps.android.SphericalUtil
 import io.reactivex.Observable
 import io.reactivex.Scheduler
-import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
-import pl.reconizer.cityadventure.domain.entities.Adventure
-import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.domain.entities.Position
+import pl.reconizer.cityadventure.domain.entities.*
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.common.rx.CallbackWrapper
 import pl.reconizer.cityadventure.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.cityadventure.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.cityadventure.presentation.location.GpsInterfaceStatus
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
 import pl.reconizer.cityadventure.presentation.map.CameraDetails
 import pl.reconizer.cityadventure.presentation.map.MapMode
@@ -41,11 +39,7 @@ class GameMapPresenter(
 
     val lastLocation: Position?
         get() {
-            return if (locationProvider.lastLocation == null) {
-                null
-            } else {
-                locationProvider.lastLocation!!.toPosition()
-            }
+            return locationProvider.lastLocation?.toPosition()
         }
 
     private val cameraMovedByDistanceObservable = cameraPositionObserver
@@ -75,6 +69,17 @@ class GameMapPresenter(
         errorHandler.view = WeakReference(view)
         if (locationProvider.hasPermission) {
             val locationChangeObservable = locationProvider.lastLocationChange.share()
+            disposables.add(
+                    locationProvider.statusChange
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(mainScheduler)
+                            .subscribe {
+                                when(it) {
+                                    GpsInterfaceStatus.DOWN -> this@GameMapPresenter.view?.gpsUnavailable()
+                                    GpsInterfaceStatus.UP -> this@GameMapPresenter.view?.gpsAvailableAgain()
+                                }
+                            }
+            )
             disposables.add(
                     locationChangeObservable
                         .subscribeOn(backgroundScheduler)
@@ -156,6 +161,49 @@ class GameMapPresenter(
         super.unsubscribe()
         locationProvider.disable()
         previousCameraDetails = null
+    }
+
+    fun checkLocation() {
+        disposables.add(
+                adventureRepository.resolvePoint(PuzzleAnswerForm(
+                        locationProvider.lastLocation!!.toPosition(),
+                        adventure!!.adventureId
+                ))
+                        .flatMap {
+                            adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
+                        }
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorHandler) {
+                            override fun onSuccess(t: List<AdventurePoint>) {
+                                this@GameMapPresenter.view?.showAdventurePoints(t)
+                            }
+                        })
+        )
+    }
+
+    fun resolvePoint(point: AdventurePoint, answer: String? = null) {
+        disposables.add(
+                adventureRepository.resolvePoint(PuzzleAnswerForm(
+                        locationProvider.lastLocation!!.toPosition(),
+                        adventure!!.adventureId,
+                        point.id,
+                        answer
+                ))
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
+                            override fun onSuccess(t: PuzzleResponse) {
+                                if (t.isCompleted) {
+                                    if (t.isLastPoint) {
+                                        view?.showSummary()
+                                    }
+                                } else {
+                                    view?.showPuzzle(point, t)
+                                }
+                            }
+                        })
+        )
     }
 
     companion object {

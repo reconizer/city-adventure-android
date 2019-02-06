@@ -3,9 +3,12 @@ package pl.reconizer.cityadventure.data.mappers
 import pl.reconizer.cityadventure.data.entities.AdventurePointWithCluesResponse
 import pl.reconizer.cityadventure.domain.common.Mapper
 import pl.reconizer.cityadventure.domain.entities.AdventurePointWithClues
+import pl.reconizer.cityadventure.domain.entities.PuzzleType
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AdventurePointWithCluesMapper @Inject constructor(
         private val clueMapper: ClueMapper
 ) : Mapper<AdventurePointWithCluesResponse, AdventurePointWithClues>() {

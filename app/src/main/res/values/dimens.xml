@@ -18,4 +18,8 @@
     <dimen name="journalClueFontSize">14dp</dimen>
     <dimen name="journalClueNumberSpace">50dp</dimen>
     <dimen name="journalClueOffset">16dp</dimen>
+
+    <dimen name="menuItemFontSize">22dp</dimen>
+    
+    <dimen name="authenticationButtonSize">246dp</dimen>
 </resources>
