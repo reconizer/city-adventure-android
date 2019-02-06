@@ -46,6 +46,18 @@
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        android:id="@+id/contentText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textColor="@color/fontDarker"
+        android:textSize="@dimen/journalClueFontSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/indexSpace"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at urna quis tellus faucibus tincidunt sed nec dolor. Vestibulum non leo tincidunt, cursus felis a, viverra sem. Duis laoreet tortor quis nibh laoreet tincidunt." />
+
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="0dp"
@@ -53,9 +65,10 @@
         android:adjustViewBounds="true"
         android:foreground="@color/basicShadow"
         android:scaleType="fitXY"
+        android:layout_marginTop="@dimen/space_md"
         app:layout_constraintEnd_toStartOf="@id/imageRightMargin"
         app:layout_constraintStart_toEndOf="@id/imageLeftMargin"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contentText"
         tools:src="@drawable/difficulty_level_medium" />
 
     <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
