@@ -45,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/AuthenticationButton"
-        android:text="@string/authentication_signin"
+        android:text="@string/authentication_login"
         android:layout_marginTop="67dp"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
