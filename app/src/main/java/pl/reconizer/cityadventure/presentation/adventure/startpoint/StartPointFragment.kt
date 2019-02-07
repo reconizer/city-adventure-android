@@ -94,10 +94,10 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
+        if (presenter.adventureStartPoint != null) {
+            show(presenter.adventureStartPoint!!)
+        }
         view?.postDelayed({
-            if (presenter.adventureStartPoint != null) {
-                show(presenter.adventureStartPoint!!)
-            }
             presenter.fetchData()
         }, resources.getInteger(R.integer.transitionDuration).toLong())
     }

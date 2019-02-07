@@ -1,5 +1,8 @@
 package pl.reconizer.cityadventure.presentation.adventure.journal.clues
 
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.isGone
@@ -13,7 +16,9 @@ class UrlClueViewHolder(view: View) : ClueViewHolder(view) {
 
     override fun bind(clue: Clue, idx: Int) {
         super.bind(clue, idx)
-        content.text = clue.description
+        content.text = SpannableString(clue.description).apply {
+            setSpan(UnderlineSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
         content.isGone = clue.description.isNullOrEmpty()
         url.text = clue.originalResourceUrl
     }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.maps.android.SphericalUtil
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
@@ -170,25 +171,31 @@ class GameMapPresenter(
                         adventure!!.adventureId
                 ))
                         .flatMap {
-                            adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
+                            if (it.isCompleted && it.isLastPoint) {
+                                Single.just(it)
+                            } else {
+                                adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
+                            }
                         }
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorHandler) {
-                            override fun onSuccess(t: List<AdventurePoint>) {
-                                this@GameMapPresenter.view?.showAdventurePoints(t)
+                        .subscribeWith(object : SingleCallbackWrapper<Any, Error>(errorHandler) {
+                            override fun onSuccess(t: Any) {
+                                when(t) {
+                                    is List<*> -> this@GameMapPresenter.view?.showAdventurePoints(t as List<AdventurePoint>)
+                                    is PuzzleResponse -> view?.showSummary()
+                                }
+
                             }
                         })
         )
     }
 
-    fun resolvePoint(point: AdventurePoint, answer: String? = null) {
+    fun resolvePoint(point: AdventurePoint) {
         disposables.add(
                 adventureRepository.resolvePoint(PuzzleAnswerForm(
                         locationProvider.lastLocation!!.toPosition(),
-                        adventure!!.adventureId,
-                        point.id,
-                        answer
+                        adventure!!.adventureId
                 ))
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)

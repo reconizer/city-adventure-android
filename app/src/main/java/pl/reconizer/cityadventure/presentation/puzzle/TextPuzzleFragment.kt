@@ -11,7 +11,7 @@ import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
 
-class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
+class TextPuzzleFragment : BasePuzzleFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,20 +39,6 @@ class TextPuzzleFragment : BasePuzzleFragment(), IPuzzleView {
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
-    }
-
-    override fun correctAnswer() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun wrongAnswer() {
-        showWrongAnswerDialog()
-    }
-
-    override fun completedAdventure() {
-        navigator.goTo(AdventureSummaryKey(
-                arguments?.get(ADVENTURE_PARAM) as Adventure
-        ))
     }
 
     companion object {

@@ -9,9 +9,11 @@ import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.ErrorDialogBuilder
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
+import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
-open class BasePuzzleFragment : BaseFragment(), IViewWithLocation {
+open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
 
     @Inject
     lateinit var presenter: PuzzlePresenter
@@ -56,6 +58,23 @@ open class BasePuzzleFragment : BaseFragment(), IViewWithLocation {
 
     override fun goToLocationInterfaceSettings() {
         (activity as IViewWithLocation?)?.goToLocationInterfaceSettings()
+    }
+
+    override fun correctAnswer() {
+        navigator.goTo(MapKey.Builder.buildAdventureMapKey(
+                adventure = presenter.adventure,
+                adventurePointId = presenter.adventurePoint.id
+        ))
+    }
+
+    override fun wrongAnswer() {
+        showWrongAnswerDialog()
+    }
+
+    override fun completedAdventure() {
+        navigator.goTo(AdventureSummaryKey(
+                arguments?.get(ADVENTURE_PARAM) as Adventure
+        ))
     }
 
     fun showWrongAnswerDialog() {

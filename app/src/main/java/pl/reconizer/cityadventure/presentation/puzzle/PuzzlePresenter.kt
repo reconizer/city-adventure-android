@@ -1,12 +1,10 @@
 package pl.reconizer.cityadventure.presentation.puzzle
 
-import io.reactivex.Maybe
 import io.reactivex.Scheduler
 import pl.reconizer.cityadventure.common.extensions.toPosition
 import pl.reconizer.cityadventure.data.entities.Error
 import pl.reconizer.cityadventure.domain.entities.*
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
-import pl.reconizer.cityadventure.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.cityadventure.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.GpsInterfaceStatus
@@ -20,8 +18,8 @@ class PuzzlePresenter(
         private val adventureRepository: IAdventureRepository,
         private val locationProvider: ILocationProvider,
         private val errorHandler: ErrorHandler<Error>,
-        private val adventure: Adventure,
-        private val adventurePoint: AdventurePoint
+        val adventure: Adventure,
+        val adventurePoint: AdventurePoint
 ) : BasePresenter<IPuzzleView>() {
 
     override fun subscribe(view: IPuzzleView) {
@@ -56,18 +54,21 @@ class PuzzlePresenter(
                     adventureRepository.resolvePoint(PuzzleAnswerForm(
                             location.toPosition(),
                             adventure.adventureId,
-                            adventurePoint.id,
-                            answer
+                            answer,
+                            "text"
                     ))
                             .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)
                             .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
                                 override fun onSuccess(t: PuzzleResponse) {
                                     if (t.isCompleted) {
-
+                                        if (t.isLastPoint) {
+                                            view?.completedAdventure()
+                                        } else {
+                                            view?.correctAnswer()
+                                        }
                                     } else {
-                                        view?.completedAdventure()
-                                        //view?.wrongAnswer()
+                                        view?.wrongAnswer()
                                     }
                                 }
                             })
