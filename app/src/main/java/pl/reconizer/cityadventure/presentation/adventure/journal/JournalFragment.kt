@@ -131,7 +131,7 @@ class JournalFragment : BaseFragment(), IJournalView {
         presenter.subscribe(this)
         view?.postDelayed({
             presenter.fetchClues()
-        }, 200)
+        }, resources.getInteger(R.integer.transitionDuration).toLong())
     }
 
     override fun onStop() {

@@ -50,8 +50,11 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        presenter.fetchUserRanking()
-        presenter.fetchSummary()
+        view?.postDelayed({
+            presenter.fetchUserRanking()
+            presenter.fetchSummary()
+        }, resources.getInteger(R.integer.transitionDuration).toLong())
+
     }
 
     override fun onDestroy() {
