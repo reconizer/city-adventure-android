@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:button="@drawable/puzzle_number_push_lock_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Space
+        android:id="@+id/leftValueSpace"
+        android:layout_width="37dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/button"
+        app:layout_constraintEnd_toStartOf="@id/button"
+        app:layout_constraintTop_toTopOf="@id/button" />
+
+    <Space
+        android:id="@+id/rightValueSpace"
+        android:layout_width="37dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/button"
+        app:layout_constraintStart_toEndOf="@id/button"
+        app:layout_constraintTop_toTopOf="@id/button" />
+
+    <ImageView
+        android:id="@+id/leftValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/button"
+        app:layout_constraintEnd_toEndOf="@id/leftValueSpace"
+        app:layout_constraintStart_toStartOf="@id/leftValueSpace"
+        app:layout_constraintTop_toTopOf="@id/button"
+        tools:src="@drawable/puzzle_number_push_lock_3" />
+
+    <ImageView
+        android:id="@+id/rightValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/button"
+        app:layout_constraintEnd_toEndOf="@id/rightValueSpace"
+        app:layout_constraintStart_toStartOf="@id/rightValueSpace"
+        app:layout_constraintTop_toTopOf="@id/button"
+        tools:src="@drawable/puzzle_number_push_lock_3" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/leftValueGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="leftValueSpace,leftValue" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/rightValueGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="rightValueSpace,rightValue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
     <declare-styleable name="GlobalAttrs">
         <attr name="name" format="string" />
         <attr name="label" format="string" />
+        <attr name="integerValue" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="Scalables">
@@ -49,5 +50,15 @@
         <attr name="android:inputType" />
         <attr name="label" />
     </declare-styleable>
+
+    <declare-styleable name="PushLockButton">
+        <attr name="pushLockValueSide" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="integerValue" />
+    </declare-styleable>
+
+
 
 </resources>

@@ -25,7 +25,9 @@ class FragmentStateChanger(
                 }
                 else -> throw IllegalArgumentException("Invalid state change direction")
             }
-            setCustomAnimations(customAnimationSet.enter, customAnimationSet.exit, customAnimationSet.popEnter, customAnimationSet.popExit)
+            customAnimationSet?.let {
+                setCustomAnimations(it.enter, it.exit, it.popEnter, it.popExit)
+            }
             for (oldKey in previousState) {
                 val fragment = fragmentManager.findFragmentByTag(oldKey.fragmentTag)
                 if (fragment != null) {

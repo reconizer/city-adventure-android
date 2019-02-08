@@ -5,4 +5,5 @@
     <fraction name="authenticationFormLeftPercentageOffset">0.0833</fraction>
     <fraction name="authenticationFormRightPercentageOffset">0.9167</fraction>
     <fraction name="authenticationFormTopPercentageOffset">0.1369</fraction>
+    <integer name="authenticationStartAnimationFrameDuration">40</integer>
 </resources>

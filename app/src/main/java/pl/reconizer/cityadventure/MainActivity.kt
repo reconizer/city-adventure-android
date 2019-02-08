@@ -16,6 +16,7 @@ import pl.reconizer.cityadventure.presentation.customviews.dialogs.LocationInfoD
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.cityadventure.presentation.navigation.FragmentStateChanger
 import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.SplashKey
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
@@ -41,7 +42,8 @@ class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
         backstackDelegate.onCreate(
                 savedInstanceState,
                 lastCustomNonConfigurationInstance,
-                History.single(MapKey.Builder.buildAdventuresMapKey())
+//                History.single(MapKey.Builder.buildAdventuresMapKey())
+                History.single(SplashKey())
         )
 
         backstackDelegate.registerForLifecycleCallbacks(this)

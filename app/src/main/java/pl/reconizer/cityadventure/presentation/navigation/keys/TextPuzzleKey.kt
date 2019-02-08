@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.presentation.puzzle.BasePuzzleFragment
-import pl.reconizer.cityadventure.presentation.puzzle.TextPuzzleFragment
+import pl.reconizer.cityadventure.presentation.puzzle.text.TextPuzzleFragment
 
 @Parcelize
 class TextPuzzleKey(

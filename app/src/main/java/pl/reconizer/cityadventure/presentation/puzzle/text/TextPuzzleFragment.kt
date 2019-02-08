@@ -1,4 +1,4 @@
-package pl.reconizer.cityadventure.presentation.puzzle
+package pl.reconizer.cityadventure.presentation.puzzle.text
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_text_puzzle.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
+import pl.reconizer.cityadventure.presentation.puzzle.BasePuzzleFragment
 
 class TextPuzzleFragment : BasePuzzleFragment() {
 
