@@ -9,18 +9,46 @@
         android:id="@+id/lockTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:src="@drawable/puzzle_number_push_lock_top"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/lockBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/puzzle_number_push_lock_3_bottom"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="fitStart"
+        android:src="@drawable/puzzle_number_push_lock_5_bottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lockTop"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lockTop" />
+
+    <Button
+        android:id="@+id/resetButton"
+        style="@style/DialogButton"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_lg"
+        android:text="@string/common_reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/confirmButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        style="@style/DialogButton"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_xxl"
+        android:layout_marginBottom="@dimen/space_lg"
+        android:text="@string/common_confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/resetButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
