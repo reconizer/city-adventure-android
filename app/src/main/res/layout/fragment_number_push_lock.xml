@@ -15,15 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/lockBottom"
+    <pl.reconizer.cityadventure.presentation.puzzle.numberpushlock.PushLock
+        android:id="@+id/pushLock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitStart"
-        android:src="@drawable/puzzle_number_push_lock_5_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lockTop" />
+        app:layout_constraintTop_toBottomOf="@id/lockTop"/>
 
     <Button
         android:id="@+id/resetButton"
@@ -50,5 +48,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/resetButton" />
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_md"
+        android:paddingTop="@dimen/space_md"
+        android:paddingEnd="@dimen/space_sm"
+        android:paddingBottom="@dimen/space_sm"
+        android:src="@drawable/icon_close_puzzle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/helpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/space_md"
+        android:paddingTop="@dimen/space_md"
+        android:paddingStart="@dimen/space_sm"
+        android:paddingBottom="@dimen/space_sm"
+        android:src="@drawable/icon_help_puzzle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

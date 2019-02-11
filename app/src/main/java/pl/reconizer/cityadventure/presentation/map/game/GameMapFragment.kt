@@ -23,7 +23,8 @@ import pl.reconizer.cityadventure.presentation.map.PinProvider
 import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureStartPointKey
 import pl.reconizer.cityadventure.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.cityadventure.presentation.navigation.keys.MenuKey
-import pl.reconizer.cityadventure.presentation.navigation.keys.TextPuzzleKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.puzzles.NumberPushLockPuzzleKey
+import pl.reconizer.cityadventure.presentation.navigation.keys.puzzles.TextPuzzleKey
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -168,7 +169,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     }
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
-        navigator.goTo(TextPuzzleKey(
+        navigator.goTo(NumberPushLockPuzzleKey(
                 presenter.adventure!!,
                 point
         ))

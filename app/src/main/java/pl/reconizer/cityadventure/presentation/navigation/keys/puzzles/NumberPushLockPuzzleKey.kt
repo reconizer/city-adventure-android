@@ -1,15 +1,17 @@
-package pl.reconizer.cityadventure.presentation.navigation.keys
+package pl.reconizer.cityadventure.presentation.navigation.keys.puzzles
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import kotlinx.android.parcel.Parcelize
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
+import pl.reconizer.cityadventure.presentation.navigation.keys.BaseKey
 import pl.reconizer.cityadventure.presentation.puzzle.BasePuzzleFragment
+import pl.reconizer.cityadventure.presentation.puzzle.numberpushlock.NumberPushLockPuzzleFragment
 import pl.reconizer.cityadventure.presentation.puzzle.text.TextPuzzleFragment
 
 @Parcelize
-class TextPuzzleKey(
+class NumberPushLockPuzzleKey(
         val adventure: Adventure,
         val adventurePoint: AdventurePoint
 ) : BaseKey(
@@ -20,6 +22,6 @@ class TextPuzzleKey(
 ) {
 
     override fun createFragment(): Fragment {
-        return TextPuzzleFragment()
+        return NumberPushLockPuzzleFragment()
     }
 }

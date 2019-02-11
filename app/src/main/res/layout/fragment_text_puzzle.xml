@@ -154,7 +154,7 @@
         android:paddingTop="@dimen/space_md"
         android:paddingEnd="@dimen/space_sm"
         android:paddingBottom="@dimen/space_sm"
-        android:src="@drawable/icon_close_white"
+        android:src="@drawable/icon_close_puzzle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
