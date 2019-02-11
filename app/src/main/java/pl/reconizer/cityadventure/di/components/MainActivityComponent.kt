@@ -24,6 +24,8 @@ import pl.reconizer.cityadventure.presentation.menu.MenuComponent
 import pl.reconizer.cityadventure.presentation.menu.MenuModule
 import pl.reconizer.cityadventure.presentation.puzzle.PuzzleComponent
 import pl.reconizer.cityadventure.presentation.puzzle.PuzzleModule
+import pl.reconizer.cityadventure.presentation.splash.SplashComponent
+import pl.reconizer.cityadventure.presentation.splash.SplashModule
 
 @Subcomponent(modules = [
     MainActivityModule::class
@@ -33,6 +35,7 @@ interface MainActivityComponent {
 
     fun inject(target: MainActivity)
 
+    fun splashComponent(module: SplashModule): SplashComponent
     fun loginComponent(module: LoginModule): LoginComponent
     fun registrationComponent(module: RegistrationModule): RegistrationComponent
     fun resetPasswordFirstStepComponent(module: ResetPasswordFirstStepModule): ResetPasswordFirstStepComponent

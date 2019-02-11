@@ -10,10 +10,21 @@ import androidx.transition.*
 import com.zhuinden.simplestack.StateChange
 import kotlinx.android.synthetic.main.fragment_splash_start.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
+import pl.reconizer.cityadventure.presentation.navigation.keys.AuthenticationStartKey
 import pl.reconizer.cityadventure.presentation.navigation.keys.MapKey
+import javax.inject.Inject
 
-class SplashFragment : BaseFragment() {
+class SplashFragment : BaseFragment(), ISplashView {
+
+    @Inject
+    lateinit var presenter: SplashPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Injector.buildSplashComponent().inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,11 +50,11 @@ class SplashFragment : BaseFragment() {
             }
             transitions.addListener(object : Transition.TransitionListener {
                 override fun onTransitionEnd(transition: Transition) {
-                    this@SplashFragment.openApp()
+                    presenter.notifyViewAboutUserState()
                 }
 
                 override fun onTransitionCancel(transition: Transition) {
-                    this@SplashFragment.openApp()
+                    presenter.notifyViewAboutUserState()
                 }
 
                 override fun onTransitionResume(transition: Transition) {}
@@ -57,9 +68,32 @@ class SplashFragment : BaseFragment() {
 
     }
 
-    fun openApp() {
+    override fun onResume() {
+        super.onResume()
+        presenter.subscribe(this)
+        presenter.checkUser()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearSplashComponent()
+    }
+
+    override fun authenticatedUser() {
         navigator.setHistory(
                 mutableListOf(MapKey.Builder.buildAdventuresMapKey()),
+                StateChange.REPLACE
+        )
+    }
+
+    override fun unauthenticatedUser() {
+        navigator.setHistory(
+                mutableListOf(AuthenticationStartKey()),
                 StateChange.REPLACE
         )
     }

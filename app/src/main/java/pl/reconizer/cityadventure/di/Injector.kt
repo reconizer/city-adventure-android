@@ -31,11 +31,14 @@ import pl.reconizer.cityadventure.presentation.menu.MenuComponent
 import pl.reconizer.cityadventure.presentation.menu.MenuModule
 import pl.reconizer.cityadventure.presentation.puzzle.PuzzleComponent
 import pl.reconizer.cityadventure.presentation.puzzle.PuzzleModule
+import pl.reconizer.cityadventure.presentation.splash.SplashComponent
+import pl.reconizer.cityadventure.presentation.splash.SplashModule
 
 object Injector {
 
     private var appComponent: AppComponent? = null
     private var mainActivityComponent: MainActivityComponent? = null
+    private var splashComponent: SplashComponent? = null
     private var loginComponent: LoginComponent? = null
     private var registrationComponent: RegistrationComponent? = null
     private var resetPasswordFirstStepComponent: ResetPasswordFirstStepComponent? = null
@@ -60,6 +63,11 @@ object Injector {
                 activity
         ))
         return mainActivityComponent!!
+    }
+
+    fun buildSplashComponent(): SplashComponent {
+        splashComponent = mainActivityComponent!!.splashComponent(SplashModule())
+        return splashComponent!!
     }
 
     fun buildLoginComponent(): LoginComponent {
@@ -126,6 +134,10 @@ object Injector {
 
     fun clearMainActivityComponent() {
         mainActivityComponent = null
+    }
+
+    fun clearSplashComponent() {
+        splashComponent = null
     }
 
     fun clearLoginComponent() {
