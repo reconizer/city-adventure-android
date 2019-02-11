@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.fragment_authentication.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
@@ -23,5 +24,9 @@ class AuthenticationStartFragment : BaseFragment() {
         signinButton.setOnClickListener { navigator.goTo(LoginKey()) }
 
         signupButton.setOnClickListener { navigator.goTo(RegistrationKey()) }
+
+        backgroundImageLight.startAnimation(
+                AnimationUtils.loadAnimation(context, R.anim.torch_light)
+        )
     }
 }
