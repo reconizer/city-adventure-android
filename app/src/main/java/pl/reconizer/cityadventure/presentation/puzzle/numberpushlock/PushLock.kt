@@ -2,12 +2,14 @@ package pl.reconizer.cityadventure.presentation.puzzle.numberpushlock
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_number_push_lock.view.*
 import pl.reconizer.cityadventure.R
+import pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
 
 class PushLock @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -38,6 +40,15 @@ class PushLock @JvmOverloads constructor(
             buttonsContainer.addView(
                     createRow(i + 1)
             )
+            if (i < numberOfRows - 2) {
+                val rowMargin = ScalableSpace(context).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                            1,
+                            resources.getDimensionPixelOffset(R.dimen.numberPushLockButtonsRowOffset)
+                    )
+                }
+                buttonsContainer.addView(rowMargin)
+            }
         }
     }
 
@@ -84,7 +95,15 @@ class PushLock @JvmOverloads constructor(
                     LinearLayout.LayoutParams.WRAP_CONTENT
             )
         }
+
+        val columnMargin = ScalableSpace(context).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                    resources.getDimensionPixelOffset(R.dimen.numberPushLockButtonsColumnOffset),
+                    1
+            )
+        }
         rowContainer.addView(leftButton)
+        rowContainer.addView(columnMargin)
         rowContainer.addView(rightButton)
         return rowContainer
     }

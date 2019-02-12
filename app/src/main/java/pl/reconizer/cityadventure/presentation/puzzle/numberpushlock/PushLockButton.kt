@@ -70,7 +70,6 @@ class PushLockButton @JvmOverloads constructor(
                 rightValueGroup.isVisible = true
             }
         }
-
     }
 
     private fun updateValue() {

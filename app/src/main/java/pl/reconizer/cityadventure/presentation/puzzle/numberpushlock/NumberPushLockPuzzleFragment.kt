@@ -22,15 +22,8 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         closeButton.setOnClickListener { navigator.goBack() }
-//        resetButton.setOnClickListener {
-//            answerInput.setText("")
-//        }
-//        confirmButton.setOnClickListener {
-//            presenter.resolvePoint(answerInput.text.toString())
-//        }
-//        answerInput.requestFocus()
 
-        pushLock.numberOfRows = 4
+        pushLock.numberOfRows = arguments?.get(NUMBER_OF_ROWS_PARAM) as Int? ?: 5
     }
 
     override fun onResume() {
@@ -44,15 +37,7 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
     }
 
     companion object {
-
-        fun newInstance(adventure: Adventure, adventurePoint: AdventurePoint): NumberPushLockPuzzleFragment {
-            return NumberPushLockPuzzleFragment().apply {
-                arguments = bundleOf(
-                        ADVENTURE_PARAM to adventure,
-                        ADVENTURE_POINT_PARAM to adventurePoint
-                )
-            }
-        }
+        const val NUMBER_OF_ROWS_PARAM = "number_of_rows"
     }
 
 }

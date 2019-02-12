@@ -10,10 +10,7 @@ import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.common.extensions.toLatLng
 import pl.reconizer.cityadventure.di.Injector
-import pl.reconizer.cityadventure.domain.entities.Adventure
-import pl.reconizer.cityadventure.domain.entities.AdventurePoint
-import pl.reconizer.cityadventure.domain.entities.Position
-import pl.reconizer.cityadventure.domain.entities.PuzzleResponse
+import pl.reconizer.cityadventure.domain.entities.*
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.map.IMapView
@@ -169,10 +166,12 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     }
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
-        navigator.goTo(NumberPushLockPuzzleKey(
-                presenter.adventure!!,
-                point
-        ))
+        navigator.goTo(when(puzzleResponse.puzzleType) {
+            PuzzleType.NUMBER_PUSH_LOCK_3 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, 3)
+            PuzzleType.NUMBER_PUSH_LOCK_4 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, 4)
+            PuzzleType.NUMBER_PUSH_LOCK_5 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, 5)
+            else -> TextPuzzleKey(presenter.adventure!!, point)
+        })
     }
 
     override fun showSummary() {

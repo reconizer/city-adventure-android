@@ -8,14 +8,17 @@ import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.presentation.navigation.keys.BaseKey
 import pl.reconizer.cityadventure.presentation.puzzle.BasePuzzleFragment
 import pl.reconizer.cityadventure.presentation.puzzle.numberpushlock.NumberPushLockPuzzleFragment
+import pl.reconizer.cityadventure.presentation.puzzle.numberpushlock.NumberPushLockPuzzleFragment.Companion.NUMBER_OF_ROWS_PARAM
 import pl.reconizer.cityadventure.presentation.puzzle.text.TextPuzzleFragment
 
 @Parcelize
 class NumberPushLockPuzzleKey(
         val adventure: Adventure,
-        val adventurePoint: AdventurePoint
+        val adventurePoint: AdventurePoint,
+        val numberOfRows: Int
 ) : BaseKey(
         bundleOf(
+                NUMBER_OF_ROWS_PARAM to numberOfRows,
                 BasePuzzleFragment.ADVENTURE_PARAM to adventure,
                 BasePuzzleFragment.ADVENTURE_POINT_PARAM to adventurePoint
         )

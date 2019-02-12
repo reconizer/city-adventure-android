@@ -23,7 +23,9 @@
     
     <dimen name="authenticationButtonSize">246dp</dimen>
     
-    <dimen name="numberPushLockTopMargin">30dp</dimen>
+    <dimen name="numberPushLockTopMargin">87dp</dimen>
+    <dimen name="numberPushLockButtonsTopMargin">30dp</dimen>
     <dimen name="numberPushLockButtonsRowOffset">6dp</dimen>
     <dimen name="numberPushLockButtonsColumnOffset">12dp</dimen>
+    <dimen name="numberPushLockButtonWidth">66dp</dimen>
 </resources>

@@ -8,12 +8,13 @@ data class PuzzleResponse(
         @SerializedName("answer_type") val puzzleTypeName: String?
 ) {
 
-    val puzzleType: PuzzleType? by lazy {
-        if (puzzleTypeName == null) {
-            null
-        } else {
-            PuzzleType.fromName(puzzleTypeName)
+    val puzzleType: PuzzleType?
+        get() {
+            return if (puzzleTypeName == null) {
+                null
+            } else {
+                PuzzleType.fromName(puzzleTypeName)
+            }
         }
-    }
 
 }

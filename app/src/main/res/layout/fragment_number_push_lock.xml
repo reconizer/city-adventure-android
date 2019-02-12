@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/number_push_lock_background">
 
-    <ImageView
+    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
         android:id="@+id/lockTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="276dp"
+        android:layout_height="195dp"
         android:src="@drawable/puzzle_number_push_lock_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
     <pl.reconizer.cityadventure.presentation.puzzle.numberpushlock.PushLock
         android:id="@+id/pushLock"
@@ -21,7 +20,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lockTop"/>
+        app:layout_constraintTop_toBottomOf="@id/lockTop" />
 
     <Button
         android:id="@+id/resetButton"
@@ -65,12 +64,19 @@
         android:id="@+id/helpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/space_md"
-        android:paddingTop="@dimen/space_md"
         android:paddingStart="@dimen/space_sm"
+        android:paddingTop="@dimen/space_md"
+        android:paddingEnd="@dimen/space_md"
         android:paddingBottom="@dimen/space_sm"
         android:src="@drawable/icon_help_puzzle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1367" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

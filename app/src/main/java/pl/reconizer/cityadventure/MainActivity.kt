@@ -37,12 +37,10 @@ class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         Injector.buildMainActivityComponent(R.id.fragmentContainer, this).inject(this)
-        //navigator.showAdventuresMap()
 
         backstackDelegate.onCreate(
                 savedInstanceState,
                 lastCustomNonConfigurationInstance,
-//                History.single(MapKey.Builder.buildAdventuresMapKey())
                 History.single(SplashKey())
         )
 
@@ -61,11 +59,6 @@ class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         if (fragment != null && fragment is OnBackPressedListener) {
-//            if (!fragment.goBack() && !navigator.isRoot()) {
-//                super.onBackPressed()
-//            } else {
-//                handleExit()
-//            }
             fragment.goBack()
         } else {
             handleExit()
