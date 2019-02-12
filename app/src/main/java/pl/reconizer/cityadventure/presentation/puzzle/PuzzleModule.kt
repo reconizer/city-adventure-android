@@ -8,6 +8,7 @@ import pl.reconizer.cityadventure.di.modules.ErrorHandlersModule
 import pl.reconizer.cityadventure.di.scopes.ViewScope
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
+import pl.reconizer.cityadventure.domain.entities.PuzzleType
 import pl.reconizer.cityadventure.domain.repositories.IAdventureRepository
 import pl.reconizer.cityadventure.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.cityadventure.presentation.location.ILocationProvider
@@ -18,7 +19,8 @@ import javax.inject.Named
 ])
 class PuzzleModule(
         private val adventure: Adventure,
-        private val adventurePoint: AdventurePoint
+        private val adventurePoint: AdventurePoint,
+        private val puzzleType: PuzzleType
 ) {
 
     @Provides
@@ -37,7 +39,8 @@ class PuzzleModule(
                 locationProvider,
                 errorHandler,
                 adventure,
-                adventurePoint
+                adventurePoint,
+                puzzleType
         )
     }
 

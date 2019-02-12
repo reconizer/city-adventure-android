@@ -19,7 +19,8 @@ class PuzzlePresenter(
         private val locationProvider: ILocationProvider,
         private val errorHandler: ErrorHandler<Error>,
         val adventure: Adventure,
-        val adventurePoint: AdventurePoint
+        val adventurePoint: AdventurePoint,
+        val puzzleType: PuzzleType
 ) : BasePresenter<IPuzzleView>() {
 
     override fun subscribe(view: IPuzzleView) {
@@ -55,7 +56,7 @@ class PuzzlePresenter(
                             location.toPosition(),
                             adventure.adventureId,
                             answer,
-                            "text"
+                            puzzleType.name.toLowerCase()
                     ))
                             .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)

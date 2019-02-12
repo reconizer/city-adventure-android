@@ -5,6 +5,7 @@ import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.di.Injector
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
+import pl.reconizer.cityadventure.domain.entities.PuzzleType
 import pl.reconizer.cityadventure.presentation.common.BaseFragment
 import pl.reconizer.cityadventure.presentation.common.IViewWithLocation
 import pl.reconizer.cityadventure.presentation.customviews.dialogs.ErrorDialogBuilder
@@ -24,9 +25,11 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
         super.onCreate(savedInstanceState)
         val adventure = arguments?.get(ADVENTURE_PARAM) as Adventure?
         val adventurePoint = arguments?.get(ADVENTURE_POINT_PARAM) as AdventurePoint?
+        val puzzleType = arguments?.get(PUZZLE_TYPE_PARAM) as PuzzleType?
         Injector.buildPuzzleComponent(
                 adventure!!,
-                adventurePoint!!
+                adventurePoint!!,
+                puzzleType!!
         ).inject(this)
     }
 
@@ -90,5 +93,6 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     companion object {
         const val ADVENTURE_PARAM = "adventure"
         const val ADVENTURE_POINT_PARAM = "adventure_point"
+        const val PUZZLE_TYPE_PARAM = "puzzle_type"
     }
 }

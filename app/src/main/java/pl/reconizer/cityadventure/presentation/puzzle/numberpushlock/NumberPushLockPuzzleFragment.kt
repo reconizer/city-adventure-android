@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import kotlinx.android.synthetic.main.fragment_number_push_lock.*
 import pl.reconizer.cityadventure.R
-import pl.reconizer.cityadventure.domain.entities.Adventure
-import pl.reconizer.cityadventure.domain.entities.AdventurePoint
+import pl.reconizer.cityadventure.domain.entities.PuzzleType
 import pl.reconizer.cityadventure.presentation.puzzle.BasePuzzleFragment
 
 class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
@@ -22,8 +20,19 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         closeButton.setOnClickListener { navigator.goBack() }
+        resetButton.setOnClickListener {
+            pushLock?.clearSelection()
+        }
+        confirmButton.setOnClickListener {
+            presenter.resolvePoint(pushLock.valuesStack.joinToString(""))
+        }
 
-        pushLock.numberOfRows = arguments?.get(NUMBER_OF_ROWS_PARAM) as Int? ?: 5
+        pushLock.numberOfRows = when(presenter.puzzleType) {
+            PuzzleType.NUMBER_PUSH_LOCK_3 -> 3
+            PuzzleType.NUMBER_PUSH_LOCK_4 -> 4
+            PuzzleType.NUMBER_PUSH_LOCK_5 -> 5
+            else -> 5
+        }
     }
 
     override fun onResume() {
@@ -34,10 +43,6 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
-    }
-
-    companion object {
-        const val NUMBER_OF_ROWS_PARAM = "number_of_rows"
     }
 
 }

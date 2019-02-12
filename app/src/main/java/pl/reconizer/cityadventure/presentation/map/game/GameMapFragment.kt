@@ -166,12 +166,14 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     }
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
-        navigator.goTo(when(puzzleResponse.puzzleType) {
-            PuzzleType.NUMBER_PUSH_LOCK_3 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, 3)
-            PuzzleType.NUMBER_PUSH_LOCK_4 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, 4)
-            PuzzleType.NUMBER_PUSH_LOCK_5 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, 5)
-            else -> TextPuzzleKey(presenter.adventure!!, point)
-        })
+        puzzleResponse.puzzleType?.let {
+            navigator.goTo(when(it) {
+                PuzzleType.NUMBER_PUSH_LOCK_3 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.NUMBER_PUSH_LOCK_4 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.NUMBER_PUSH_LOCK_5 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
+                else -> TextPuzzleKey(presenter.adventure!!, point, PuzzleType.TEXT)
+            })
+        }
     }
 
     override fun showSummary() {

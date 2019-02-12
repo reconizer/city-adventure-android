@@ -21,16 +21,25 @@ class PushLock @JvmOverloads constructor(
             initView()
         }
 
-    val _valuesStack: MutableList<Int> = mutableListOf()
+    private val _valuesStack: MutableList<Int> = mutableListOf()
     val valuesStack: List<Int>
         get() = _valuesStack
+
+    private val buttons: MutableList<PushLockButton> = mutableListOf()
 
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.view_number_push_lock, this, true)
     }
 
+    fun clearSelection() {
+        _valuesStack.clear()
+        buttons.forEach { it.isChecked = false }
+    }
+
     private fun initView() {
+        _valuesStack.clear()
+        buttons.clear()
         when(numberOfRows) {
             3 -> lockBackground.setImageResource(R.drawable.puzzle_number_push_lock_3_bottom)
             4 -> lockBackground.setImageResource(R.drawable.puzzle_number_push_lock_4_bottom)
@@ -105,6 +114,10 @@ class PushLock @JvmOverloads constructor(
         rowContainer.addView(leftButton)
         rowContainer.addView(columnMargin)
         rowContainer.addView(rightButton)
+        buttons.apply {
+            add(leftButton)
+            add(rightButton)
+        }
         return rowContainer
     }
 }

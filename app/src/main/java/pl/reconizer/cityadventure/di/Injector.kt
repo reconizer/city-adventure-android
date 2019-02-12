@@ -11,6 +11,7 @@ import pl.reconizer.cityadventure.di.modules.MainActivityModule
 import pl.reconizer.cityadventure.domain.entities.Adventure
 import pl.reconizer.cityadventure.domain.entities.AdventurePoint
 import pl.reconizer.cityadventure.domain.entities.AdventureStartPoint
+import pl.reconizer.cityadventure.domain.entities.PuzzleType
 import pl.reconizer.cityadventure.presentation.adventure.journal.JournalComponent
 import pl.reconizer.cityadventure.presentation.adventure.journal.JournalModule
 import pl.reconizer.cityadventure.presentation.adventure.startpoint.StartPointComponent
@@ -114,9 +115,13 @@ object Injector {
         return journalComponent!!
     }
 
-    fun buildPuzzleComponent(adventure: Adventure, adventurePoint: AdventurePoint): PuzzleComponent {
+    fun buildPuzzleComponent(
+            adventure: Adventure,
+            adventurePoint: AdventurePoint,
+            puzzleType: PuzzleType
+    ): PuzzleComponent {
         puzzleComponent = mainActivityComponent!!.puzzleComponent(
-                PuzzleModule(adventure, adventurePoint)
+                PuzzleModule(adventure, adventurePoint, puzzleType)
         )
         return puzzleComponent!!
     }
