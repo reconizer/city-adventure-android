@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topMargin"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topMargin" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.UserRankingView
+    <pl.reconizer.unfold.presentation.adventure.UserRankingView
         android:id="@+id/userRankingView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

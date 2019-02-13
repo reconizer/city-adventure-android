@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/number_push_lock_background">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/lockTop"
         android:layout_width="276dp"
         android:layout_height="195dp"
@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/topGuideline" />
 
-    <pl.reconizer.cityadventure.presentation.puzzle.numberpushlock.PushLock
+    <pl.reconizer.unfold.presentation.puzzle.numberpushlock.PushLock
         android:id="@+id/pushLock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/indexSpace"
         android:layout_width="@dimen/journalClueNumberSpace"
         android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/clueIdIcon"
         android:layout_width="15dp"
         android:layout_height="15dp"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="@id/indexSpace"
         app:layout_constraintTop_toTopOf="@id/clueIdTextView" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/clueIdTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="10" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

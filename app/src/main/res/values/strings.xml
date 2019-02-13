@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cityadventure</string>
+    <string name="app_name">Unfold</string>
     <string name="adventure_add_rating">Oceń przygodę:</string>
     <string name="adventure_author">Author:</string>
     <string name="adventure_position">Miejsce:</string>

@@ -6,38 +6,38 @@
     android:layout_height="match_parent"
     android:background="@drawable/adventure_summary_background">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topMargin"
         android:layout_width="1dp"
         android:layout_height="43.5dp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topContentMargin"
         android:layout_width="1dp"
         android:layout_height="11dp"
         app:layout_constraintTop_toBottomOf="@id/topMargin" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/rightContentMargin"
         android:layout_width="20dp"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/bottomContentMargin"
         android:layout_width="1dp"
         android:layout_height="22.5dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/exitButtonSpace"
         android:layout_width="118dp"
         android:layout_height="71dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/exitButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topContentMargin" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,31 +91,31 @@
         app:layout_constraintStart_toStartOf="@id/contentBackground"
         app:layout_constraintTop_toTopOf="@id/contentBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/ratingLeftPadding"
         android:layout_width="22.5dp"
         android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="@id/ratingFrame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/ratingRightPadding"
         android:layout_width="22.5dp"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="@id/ratingFrame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/ratingTopPadding"
         android:layout_width="1dp"
         android:layout_height="19dp"
         app:layout_constraintTop_toTopOf="@id/ratingFrame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/ratingBottomPadding"
         android:layout_width="1dp"
         android:layout_height="8dp"
         app:layout_constraintBottom_toBottomOf="@id/ratingFrame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/ratingLabel"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -131,7 +131,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ratingTopPadding"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.RatingView
+    <pl.reconizer.unfold.presentation.adventure.RatingView
         android:id="@+id/ratingView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -144,7 +144,7 @@
         app:layout_constraintStart_toEndOf="@id/ratingLeftPadding"
         app:layout_constraintTop_toBottomOf="@+id/ratingLabel" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/ratingFrame"
         android:layout_width="276dp"
         android:layout_height="109dp"
@@ -156,7 +156,7 @@
         app:layout_constraintStart_toStartOf="@id/contentBackground"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.ranking.RankingEntryView
+    <pl.reconizer.unfold.presentation.adventure.ranking.RankingEntryView
         android:id="@+id/userRankingEntryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
         app:layout_constraintEnd_toEndOf="@id/userRankingEntryView"
         app:layout_constraintStart_toStartOf="@id/userRankingEntryView" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/clipDecorator"
         android:layout_width="24dp"
         android:layout_height="45dp"

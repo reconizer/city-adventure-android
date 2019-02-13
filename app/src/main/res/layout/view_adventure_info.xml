@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <pl.reconizer.cityadventure.presentation.adventure.BannerView
+    <pl.reconizer.unfold.presentation.adventure.BannerView
         android:id="@+id/banner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/test_banner" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.AuthorInfoView
+    <pl.reconizer.unfold.presentation.adventure.AuthorInfoView
         android:id="@+id/authorInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/authorInfo"
         app:layout_goneMarginTop="0dp" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.DifficultyLevelView
+    <pl.reconizer.unfold.presentation.adventure.DifficultyLevelView
         android:id="@+id/difficultyLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ratingViewContainer" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.TimeLengthView
+    <pl.reconizer.unfold.presentation.adventure.TimeLengthView
         android:id="@+id/timeLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         app:layout_constraintStart_toEndOf="@+id/difficultyLevel"
         app:layout_constraintTop_toBottomOf="@id/ratingViewContainer" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/adventureDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/difficultyLevel" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.GalleryPreviewView
+    <pl.reconizer.unfold.presentation.customviews.GalleryPreviewView
         android:id="@+id/galleryPreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@id/adventureDescription" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.RatingStampView
+    <pl.reconizer.unfold.presentation.adventure.RatingStampView
         android:id="@+id/ratingStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

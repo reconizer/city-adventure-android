@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background">
 
-    <pl.reconizer.cityadventure.presentation.customviews.DialogHeader
+    <pl.reconizer.unfold.presentation.customviews.DialogHeader
         android:id="@+id/dialogHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -22,16 +22,14 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="2.3334dp"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/dialog_content"
         android:paddingStart="@dimen/space_lg"
         android:paddingTop="@dimen/space_lg"
         android:paddingEnd="@dimen/space_lg"
-        android:paddingBottom="@dimen/space_xl"
+        android:paddingBottom="53dp"
+        android:background="@drawable/dialog_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialogHeader">
-
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/dialogHeader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pl.reconizer.cityadventure.presentation.adventure.journal.JournalPageView xmlns:android="http://schemas.android.com/apk/res/android"
+<pl.reconizer.unfold.presentation.adventure.journal.JournalPageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,14 +23,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+                <pl.reconizer.unfold.presentation.customviews.ScalableImageView
                     android:id="@+id/pointHeaderArrow"
                     android:layout_width="27dp"
                     android:layout_height="20dp"
                     android:src="@drawable/journal_point_arrow"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-                <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+                <pl.reconizer.unfold.presentation.customviews.ScalableTextView
                     android:id="@+id/pointHeader"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -67,4 +67,4 @@
     </androidx.core.widget.NestedScrollView>
 
 
-</pl.reconizer.cityadventure.presentation.adventure.journal.JournalPageView>
+</pl.reconizer.unfold.presentation.adventure.journal.JournalPageView>

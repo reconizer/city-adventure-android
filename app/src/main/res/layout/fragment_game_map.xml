@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mapContainer"
-        android:name="pl.reconizer.cityadventure.presentation.map.MapFragment"
+        android:name="pl.reconizer.unfold.presentation.map.MapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

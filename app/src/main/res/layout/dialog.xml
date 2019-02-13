@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background">
 
-    <pl.reconizer.cityadventure.presentation.customviews.DialogHeader
+    <pl.reconizer.unfold.presentation.customviews.DialogHeader
         android:id="@+id/dialogHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
