@@ -16,11 +16,11 @@ class UrlClueViewHolder(view: View) : ClueViewHolder(view) {
 
     override fun bind(clue: Clue, idx: Int) {
         super.bind(clue, idx)
-        content.text = SpannableString(clue.description).apply {
+        url.text = SpannableString(clue.originalResourceUrl).apply {
             setSpan(UnderlineSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         content.isGone = clue.description.isNullOrEmpty()
-        url.text = clue.originalResourceUrl
+        content.text = clue.description
     }
     
 }

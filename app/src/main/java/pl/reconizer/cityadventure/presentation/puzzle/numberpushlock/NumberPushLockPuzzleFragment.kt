@@ -7,9 +7,15 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_number_push_lock.*
 import pl.reconizer.cityadventure.R
 import pl.reconizer.cityadventure.domain.entities.PuzzleType
+import pl.reconizer.cityadventure.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.cityadventure.presentation.puzzle.BasePuzzleFragment
 
 class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
+
+    private val tutorialDialog = PuzzleTutorialDialog().apply {
+        contentLayoutResId = R.layout.view_number_push_lock_tutorial
+        headerTextResId = R.string.puzzle_number_push_lock_tutorial_title
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -20,6 +26,9 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         closeButton.setOnClickListener { navigator.goBack() }
+        helpButton.setOnClickListener {
+            tutorialDialog.show(childFragmentManager, "number_push_lock_tutorial")
+        }
         resetButton.setOnClickListener {
             pushLock?.clearSelection()
         }
