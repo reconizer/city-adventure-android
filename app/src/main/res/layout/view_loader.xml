@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/loaderBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loader_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!--left feet-->
+    
+    <ImageView
+        android:id="@+id/loaderFootLeft1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="0"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="30"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="30"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="60"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="60"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="90"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="90"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="120"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="120"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="150"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="150"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="180"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="180"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="210"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="210"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="240"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="240"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="270"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="270"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="300"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="300"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootLeft12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="330"
+        android:src="@drawable/loader_foot_left"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="330"
+        app:layout_constraintCircleRadius="@dimen/loaderLeftFeetRadius" />
+    
+    <!--right feet-->
+
+    <ImageView
+        android:id="@+id/loaderFootRight1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loader_foot_right"
+        android:rotation="15"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="15"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="45"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="45"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="75"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="75"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="105"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="105"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="135"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="135"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="165"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="165"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="195"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="195"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="225"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="225"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="255"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="255"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="285"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="285"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="315"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="315"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+    <ImageView
+        android:id="@+id/loaderFootRight12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="345"
+        android:src="@drawable/loader_foot_right"
+        android:alpha="0.0"
+        app:layout_constraintCircle="@id/loaderBackground"
+        app:layout_constraintCircleAngle="345"
+        app:layout_constraintCircleRadius="@dimen/loaderRightFeetRadius" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

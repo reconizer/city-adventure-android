@@ -131,11 +131,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="166" />
-                            <entry key="outputName" value="ic_launcher_foreground" />
+                            <entry key="height" value="46" />
+                            <entry key="outputName" value="loader_left_foot" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../city-adventure-stuff/icon_foreground.svg" />
-                            <entry key="width" value="166" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/app/src/main/res/drawable/loader_left_foot.svg" />
+                            <entry key="width" value="21" />
                           </map>
                         </option>
                       </PersistentState>

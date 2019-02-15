@@ -9,6 +9,7 @@ import pl.reconizer.unfold.MainActivity
 import pl.reconizer.unfold.OnBackPressedListener
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.presentation.customviews.dialogs.ErrorDialogBuilder
+import pl.reconizer.unfold.presentation.customviews.dialogs.LoadingDialog
 import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.unfold.presentation.mvp.IView
 import pl.reconizer.unfold.presentation.navigation.keys.AuthenticationStartKey
@@ -17,16 +18,26 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
 
     private var errorDialog: PrettyDialog? = null
 
+    private lateinit var loaderDialog: LoadingDialog
+
     val navigator: Backstack
         get() = (activity as MainActivity).navigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        loaderDialog = LoadingDialog(requireContext())
+
         if (withStatusBar()) {
             (activity as MainActivity).showStatusBar()
         } else {
             (activity as MainActivity).hideStatusBar()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        loaderDialog.hideDialog()
     }
 
     override fun showGenericError() {
@@ -63,5 +74,15 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
     override fun goBack(): Boolean {
         navigator.goBack()
         return true
+    }
+
+    fun showLoader() {
+        if (!loaderDialog.isShowing()) {
+            loaderDialog.showDialog()
+        }
+    }
+
+    fun hideLoader() {
+        loaderDialog.hideDialog()
     }
 }

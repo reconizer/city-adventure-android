@@ -29,4 +29,12 @@ class AuthenticationStartFragment : BaseFragment() {
                 AnimationUtils.loadAnimation(context, R.anim.torch_light)
         )
     }
+
+    override fun onResume() {
+        super.onResume()
+        view?.postDelayed({
+            showLoader()
+
+        }, 1000)
+    }
 }
