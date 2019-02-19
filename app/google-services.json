@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "96631751914",
+    "firebase_url": "https://unfold-74635.firebaseio.com",
+    "project_id": "unfold-74635",
+    "storage_bucket": "unfold-74635.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96631751914:android:0a16bc426081524f",
+        "android_client_info": {
+          "package_name": "pl.reconizer.unfold"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96631751914-tsnpqjqshpm2s9drlgvjqhiqt94ijaob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClazvR6mHBSuMhQ_iNN7F358CkREG1mKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

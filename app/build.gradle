@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mannodermaus.android-junit5'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
 
 androidExtensions {
     experimental = true
@@ -54,6 +56,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlinVersion"
     implementation "androidx.core:core-ktx:$rootProject.ext.kotlinExtensionsVersion"
 
+    implementation "com.google.firebase:firebase-core:$rootProject.ext.firebaseVersion"
+    implementation "com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlyticsVersion"
     implementation "com.google.android.gms:play-services-maps:$rootProject.ext.mapsServicesVersion"
     implementation "com.google.maps.android:android-maps-utils:$rootProject.ext.mapUtilsVersion"
 
