@@ -47,6 +47,11 @@ class ResetPasswordFirstStepPresenterSpec : Spek({
                     presenter.sendCode(email)
                 }
 
+                it("shows and hides loader") {
+                    verify(view, atLeastOnce()).showLoader()
+                    verify(view, atLeastOnce()).hideLoader()
+                }
+
                 it("sends a code to user") {
                     verify(repository, atLeastOnce()).sendResetPasswordCode(email)
                 }

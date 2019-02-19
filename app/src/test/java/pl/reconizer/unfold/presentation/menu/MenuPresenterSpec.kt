@@ -56,6 +56,13 @@ class MenuPresenterSpec : Spek({
 
         describe("logout") {
 
+            it("shows and hides loader") {
+                presenter.subscribe(view)
+                presenter.logout()
+                verify(view, atLeastOnce()).showLoader()
+                verify(view, atLeastOnce()).hideLoader()
+            }
+
             it("notifies view about successful logout") {
                 presenter.subscribe(view)
                 presenter.logout()

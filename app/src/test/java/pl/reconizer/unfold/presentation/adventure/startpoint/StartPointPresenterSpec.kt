@@ -53,6 +53,13 @@ class StartPointPresenterSpec : Spek({
 
         describe("fetchData") {
 
+            it("shows and hides loader") {
+                presenter.subscribe(view)
+                presenter.fetchData()
+                verify(view, atLeastOnce()).showLoader()
+                verify(view, atLeastOnce()).hideLoader()
+            }
+
             it("notifies view about fetched start point data") {
                 presenter.subscribe(view)
                 presenter.fetchData()
@@ -63,6 +70,13 @@ class StartPointPresenterSpec : Spek({
         }
 
         describe("startAdventure") {
+
+            it("shows and hides loader") {
+                presenter.subscribe(view)
+                presenter.startAdventure()
+                verify(view, atLeastOnce()).showLoader()
+                verify(view, atLeastOnce()).hideLoader()
+            }
 
             it("notifies view about successfully started adventure") {
                 presenter.subscribe(view)

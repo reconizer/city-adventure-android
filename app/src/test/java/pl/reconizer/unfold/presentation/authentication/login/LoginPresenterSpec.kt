@@ -46,6 +46,11 @@ class LoginPresenterSpec : Spek({
                     presenter.login(form)
                 }
 
+                it("shows and hides loader") {
+                    verify(view, atLeastOnce()).showLoader()
+                    verify(view, atLeastOnce()).hideLoader()
+                }
+
                 it("signs user in") {
                     verify(signIn, atLeastOnce()).invoke(any(), any())
                 }

@@ -56,6 +56,13 @@ class JournalPresenterSpec : Spek({
 
         describe("fetchClues") {
 
+            it("shows and hides loader") {
+                presenter.subscribe(view)
+                presenter.fetchClues()
+                verify(view, atLeastOnce()).showLoader()
+                verify(view, atLeastOnce()).hideLoader()
+            }
+
             it("notifies view about fetched clues") {
                 presenter.subscribe(view)
                 presenter.fetchClues()

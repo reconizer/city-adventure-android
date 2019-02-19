@@ -30,6 +30,8 @@ class MenuPresenter(
         disposables.add(
                 logout.invoke()
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
                                 view?.successfulLogout()

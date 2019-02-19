@@ -48,6 +48,11 @@ class RegistrationPresenterSpec : Spek({
                     presenter.register(form)
                 }
 
+                it("shows and hides loader") {
+                    verify(view, atLeastOnce()).showLoader()
+                    verify(view, atLeastOnce()).hideLoader()
+                }
+
                 it("signs user up") {
                     verify(signUp, atLeastOnce()).invoke(form.email, form.username, form.password)
                 }

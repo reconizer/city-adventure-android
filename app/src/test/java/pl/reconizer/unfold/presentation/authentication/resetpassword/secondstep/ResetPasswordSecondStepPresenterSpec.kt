@@ -51,6 +51,11 @@ class ResetPasswordSecondStepPresenterSpec : Spek({
                     presenter.resetPassword(form)
                 }
 
+                it("shows and hides loader") {
+                    verify(view, atLeastOnce()).showLoader()
+                    verify(view, atLeastOnce()).hideLoader()
+                }
+
                 it("resets a password") {
                     verify(repository, atLeastOnce()).resetPassword(form.code, form.password)
                 }
