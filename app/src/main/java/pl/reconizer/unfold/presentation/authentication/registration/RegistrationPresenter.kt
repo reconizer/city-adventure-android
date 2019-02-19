@@ -24,6 +24,8 @@ class RegistrationPresenter(
             disposables.add(
                 signUp(form.email, form.username, form.password)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
                                 view?.successfulSignUp()

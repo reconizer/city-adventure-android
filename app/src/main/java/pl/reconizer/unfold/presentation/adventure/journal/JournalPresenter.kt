@@ -33,6 +33,8 @@ class JournalPresenter(
                 adventureRepository.getAdventureDiscoveredClues(adventure.adventureId)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : SingleCallbackWrapper<List<AdventurePointWithClues>, Error>(errorHandler) {
                             override fun onSuccess(t: List<AdventurePointWithClues>) {
                                 points = t

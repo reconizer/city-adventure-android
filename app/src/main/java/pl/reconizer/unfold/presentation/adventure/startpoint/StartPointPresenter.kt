@@ -32,6 +32,8 @@ class StartPointPresenter(
                 adventureRepository.getAdventure(adventure.adventureId)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint, Error>(errorHandler) {
                             override fun onSuccess(t: AdventureStartPoint) {
                                 adventureStartPoint = t
@@ -46,6 +48,8 @@ class StartPointPresenter(
                 adventureRepository.startAdventure(adventure.adventureId)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
                                 view?.adventureStarted()

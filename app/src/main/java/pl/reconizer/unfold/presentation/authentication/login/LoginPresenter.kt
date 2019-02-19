@@ -24,6 +24,8 @@ class LoginPresenter(
             disposables.add(
                 signIn(form.email, form.password)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
                                 view?.successfulSignIn()

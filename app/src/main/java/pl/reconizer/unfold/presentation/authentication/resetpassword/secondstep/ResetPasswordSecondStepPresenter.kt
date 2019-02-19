@@ -26,6 +26,8 @@ class ResetPasswordSecondStepPresenter(
                 userRepository.resetPassword(form.code, form.password)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
                                 view?.successfulPasswordReset()

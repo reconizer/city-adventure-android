@@ -26,6 +26,8 @@ class ResetPasswordFirstStepPresenter(
                 userRepository.sendResetPasswordCode(email)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
                         .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
                             override fun onComplete() {
                                 view?.codeSent()

@@ -76,13 +76,13 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
         return true
     }
 
-    fun showLoader() {
+    override fun showLoader() {
         if (!loaderDialog.isShowing()) {
             loaderDialog.showDialog()
         }
     }
 
-    fun hideLoader() {
+    override fun hideLoader() {
         loaderDialog.hideDialog()
     }
 }

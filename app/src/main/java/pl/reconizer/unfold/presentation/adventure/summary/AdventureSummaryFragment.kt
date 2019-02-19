@@ -51,8 +51,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
         super.onResume()
         presenter.subscribe(this)
         view?.postDelayed({
-            presenter.fetchUserRanking()
-            presenter.fetchSummary()
+            presenter.fetchData()
         }, resources.getInteger(R.integer.transitionDuration).toLong())
 
     }

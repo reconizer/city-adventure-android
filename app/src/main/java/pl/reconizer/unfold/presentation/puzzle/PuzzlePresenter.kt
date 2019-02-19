@@ -60,6 +60,8 @@ class PuzzlePresenter(
                     ))
                             .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)
+                            .doOnSubscribe { view?.showLoader() }
+                            .doFinally { view?.hideLoader() }
                             .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
                                 override fun onSuccess(t: PuzzleResponse) {
                                     if (t.isCompleted) {

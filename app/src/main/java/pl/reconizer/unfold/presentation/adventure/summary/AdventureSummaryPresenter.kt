@@ -1,6 +1,8 @@
 package pl.reconizer.unfold.presentation.adventure.summary
 
 import io.reactivex.Scheduler
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
@@ -26,33 +28,31 @@ class AdventureSummaryPresenter(
         errorHandler.view = WeakReference(view)
     }
 
-    fun fetchUserRanking() {
+    fun fetchData() {
         disposables.add(
-                adventureRepository.userAdventureRanking(adventure.adventureId)
+                Single.zip(
+                        adventureRepository.userAdventureRanking(adventure.adventureId)
+                                .observeOn(mainScheduler)
+                                .doOnSuccess {
+                                    userRanking = it
+                                    view?.showUserRanking()
+                                },
+                        adventureRepository.getSummary(adventure.adventureId)
+                                .observeOn(mainScheduler)
+                                .doOnSuccess {
+                                    summary = it
+                                    view?.showSummary()
+                                },
+                        BiFunction {ranking: RankingEntry, summary: List<RankingEntry> -> Pair(ranking, summary)}
+                )
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<RankingEntry, Error>(errorHandler) {
-                            override fun onSuccess(t: RankingEntry) {
-                                userRanking = t
-                                view?.showUserRanking()
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
+                        .subscribeWith(object : SingleCallbackWrapper<Pair<RankingEntry, List<RankingEntry>>, Error>(errorHandler) {
+                            override fun onSuccess(t: Pair<RankingEntry, List<RankingEntry>>) {
                             }
                         })
-
-        )
-    }
-
-    fun fetchSummary() {
-        disposables.add(
-                adventureRepository.getSummary(adventure.adventureId)
-                        .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<List<RankingEntry>, Error>(errorHandler) {
-                            override fun onSuccess(t: List<RankingEntry>) {
-                                summary = t
-                                view?.showSummary()
-                            }
-                        })
-
         )
     }
 

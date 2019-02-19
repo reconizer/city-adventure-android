@@ -30,11 +30,4 @@ class AuthenticationStartFragment : BaseFragment() {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        view?.postDelayed({
-            showLoader()
-
-        }, 1000)
-    }
 }

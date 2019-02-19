@@ -10,4 +10,7 @@ interface IView {
     fun showParametrizedError(errorEntity: Error)
     fun showServerError()
 
+    fun showLoader()
+    fun hideLoader()
+
 }

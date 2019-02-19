@@ -11,7 +11,7 @@ class LoadingDialog(private val context: Context) {
     private var dialog: Dialog? = null
 
     fun showDialog() {
-        dialog = Dialog(context, R.style.FullScreenCustomDialog)
+        dialog = Dialog(context, R.style.FullScreenCustomDialog_Loader)
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)
         dialog?.setContentView(R.layout.dialog_loader)
