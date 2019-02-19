@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/outerFrame"
         android:layout_width="311dp"
         android:layout_height="175dp"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userRankingView" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/innerFrame"
         android:layout_width="297dp"
         android:layout_height="166dp"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="@id/innerFrame"
         app:layout_constraintEnd_toEndOf="@id/innerFrame" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.ranking.RankingEntryView
+    <pl.reconizer.unfold.presentation.adventure.ranking.RankingEntryView
         android:id="@+id/firstPlaceEntryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topMarginFrame"
         app:layout_constraintVertical_chainStyle="spread" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.ranking.RankingEntryView
+    <pl.reconizer.unfold.presentation.adventure.ranking.RankingEntryView
         android:id="@+id/secondPlaceEntryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         app:layout_constraintStart_toStartOf="@id/innerFrame"
         app:layout_constraintTop_toBottomOf="@+id/firstPlaceEntryView" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.ranking.RankingEntryView
+    <pl.reconizer.unfold.presentation.adventure.ranking.RankingEntryView
         android:id="@+id/thirdPlaceEntryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="@id/innerFrame"
         app:layout_constraintTop_toBottomOf="@+id/secondPlaceEntryView" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.ranking.RankingEntryView
+    <pl.reconizer.unfold.presentation.adventure.ranking.RankingEntryView
         android:id="@+id/fourthPlaceEntryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="@id/innerFrame"
         app:layout_constraintTop_toBottomOf="@+id/thirdPlaceEntryView" />
 
-    <pl.reconizer.cityadventure.presentation.adventure.ranking.RankingEntryView
+    <pl.reconizer.unfold.presentation.adventure.ranking.RankingEntryView
         android:id="@+id/fifthPlaceEntryView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

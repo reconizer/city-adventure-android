@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/lockBackgroundSpace"
+        android:layout_width="276dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/lockBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="@id/lockBackgroundSpace"
+        app:layout_constraintStart_toStartOf="@id/lockBackgroundSpace"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/puzzle_number_push_lock_3_bottom" />
+
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/numberPushLockButtonsTopMargin"
+        app:layout_constraintBottom_toBottomOf="@id/lockBackground"
+        app:layout_constraintEnd_toEndOf="@id/lockBackground"
+        app:layout_constraintStart_toStartOf="@id/lockBackground"
+        app:layout_constraintTop_toTopOf="@id/lockBackground"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

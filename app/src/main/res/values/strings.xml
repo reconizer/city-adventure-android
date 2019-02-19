@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cityadventure</string>
+    <string name="app_name">Unfold</string>
     <string name="adventure_add_rating">Oceń przygodę:</string>
     <string name="adventure_author">Author:</string>
     <string name="adventure_position">Miejsce:</string>
@@ -47,5 +47,8 @@
     <string name="menu_shop">Sklep</string>
     <string name="menu_username">Nickname:</string>
     <string name="puzzle_input_label">Hasło:</string>
+    <string name="puzzle_number_push_lock_tutorial_1">W celu rozwiązania tej zagadki należy wcisnąć odpowiednią kombinację cyfr.</string>
+    <string name="puzzle_number_push_lock_tutorial_2">Kolejność wciskania cyfr nie ma znaczenia, ważne jest wciśnięcie odpowiednich cyfr na mechaniźmie.</string>
+    <string name="puzzle_number_push_lock_tutorial_title">Kłódka z kodem numerycznym</string>
     <string name="puzzle_wrong_answer">Podana odpowiedź jest nieprawidłowa.</string>
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/bannerImageBackground"
         android:layout_width="304dp"
         android:layout_height="192dp"
@@ -25,25 +25,25 @@
         app:layout_constraintStart_toEndOf="@id/leftBannerMargin"
         app:layout_constraintTop_toBottomOf="@id/topBannerMargin" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topBannerMargin"
         android:layout_width="1dp"
         android:layout_height="11dp"
         app:layout_constraintTop_toTopOf="@id/bannerImageBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/bottomBannerMargin"
         android:layout_width="1dp"
         android:layout_height="41dp"
         app:layout_constraintBottom_toBottomOf="@id/bannerImageBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/leftBannerMargin"
         android:layout_width="39dp"
         android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="@id/bannerImageBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/rightBannerMargin"
         android:layout_width="37dp"
         android:layout_height="1dp"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/bannerImageBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/adventureName"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -100,7 +100,7 @@
         app:layout_constraintStart_toEndOf="@id/leftBannerMargin"
         app:layout_constraintTop_toBottomOf="@+id/adventureName">
         
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        <pl.reconizer.unfold.presentation.customviews.ScalableSpace
             android:id="@+id/starsSpace"
             android:layout_width="1dp"
             android:layout_height="12dp"
@@ -120,7 +120,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/starsSpace" />
 
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        <pl.reconizer.unfold.presentation.customviews.ScalableTextView
             android:id="@+id/ratingTextView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -136,7 +136,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="5.0" />
 
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        <pl.reconizer.unfold.presentation.customviews.ScalableTextView
             android:id="@+id/ratingCount"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -152,7 +152,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/topBannerCorner"
         android:layout_width="72dp"
         android:layout_height="72dp"
@@ -160,7 +160,7 @@
         app:layout_constraintTop_toTopOf="@id/topMargin"
         android:src="@drawable/image_corner_top" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/bottomBannerCorner"
         android:layout_width="72dp"
         android:layout_height="72dp"

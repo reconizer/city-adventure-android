@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/rankingBackground"
         android:layout_width="245dp"
         android:layout_height="70dp"
@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="@+id/frame"
         app:layout_constraintTop_toTopOf="@+id/frame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/frame"
         android:layout_width="265dp"
         android:layout_height="80dp"
@@ -58,7 +58,7 @@
         app:layout_constraintStart_toEndOf="@id/backgroundLeftMargin"
         app:layout_constraintTop_toBottomOf="@id/backgroundTopMargin" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+    <pl.reconizer.unfold.presentation.customviews.ShadowView
         android:id="@+id/avatarShadow"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -84,7 +84,7 @@
         app:layout_constraintStart_toStartOf="@id/avatarBackground"
         app:layout_constraintTop_toTopOf="@id/avatarBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/timeFrame"
         android:layout_width="109dp"
         android:layout_height="41dp"
@@ -100,7 +100,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.57" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/timeTitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -115,7 +115,7 @@
         app:layout_constraintStart_toStartOf="@+id/timeFrame"
         app:layout_constraintTop_toTopOf="@+id/timeFrame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/timeTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -130,7 +130,7 @@
         app:layout_constraintTop_toBottomOf="@+id/timeFrameGuideline"
         tools:text="1d 14h 20m" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
         app:layout_constraintStart_toStartOf="@id/timeFrame"
         tools:text="Michał Szpak" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/positionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
         app:layout_constraintEnd_toEndOf="@id/rankingBackground"
         app:layout_constraintBottom_toTopOf="@id/timeFrameGuideline" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/positionTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"

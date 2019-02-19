@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/difficultyIcon"
         android:layout_width="73dp"
         android:layout_height="81dp"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/difficulty_level_hard" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/margin"
         android:layout_width="0dp"
         android:layout_height="7dp"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="@+id/difficultyIcon"
         app:layout_constraintTop_toBottomOf="@id/difficultyIcon" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/difficultyLevelName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/stampSpace"
         android:layout_width="69dp"
         android:layout_height="69dp" />
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="@+id/stampSpace"
         app:layout_constraintBottom_toBottomOf="@id/stampSpace"/>
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
         android:id="@+id/ratingValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

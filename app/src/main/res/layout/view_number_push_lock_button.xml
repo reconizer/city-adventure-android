@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/buttonSpace"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        app:layout_constraintEnd_toStartOf="@+id/rightValueSpace"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/leftValueSpace"/>
+
+    <CheckBox
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/puzzle_number_push_lock_button"
+        android:button="@null"
+        app:layout_constraintStart_toStartOf="@id/buttonSpace"
+        app:layout_constraintTop_toTopOf="@id/buttonSpace"
+        app:layout_constraintEnd_toEndOf="@id/buttonSpace"
+        app:layout_constraintBottom_toBottomOf="@id/buttonSpace"/>
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/leftValueSpace"
+        android:layout_width="37dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@id/buttonSpace"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSpace"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/buttonSpace" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rightValueSpace"
+        android:layout_width="37dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@id/buttonSpace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonSpace"
+        app:layout_constraintTop_toTopOf="@id/buttonSpace" />
+
+    <ImageView
+        android:id="@+id/leftValue"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/leftValueSpace"
+        app:layout_constraintEnd_toEndOf="@id/leftValueSpace"
+        app:layout_constraintStart_toStartOf="@id/leftValueSpace"
+        app:layout_constraintTop_toTopOf="@id/leftValueSpace"
+        tools:src="@drawable/puzzle_number_push_lock_3" />
+
+    <ImageView
+        android:id="@+id/rightValue"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/rightValueSpace"
+        app:layout_constraintEnd_toEndOf="@id/rightValueSpace"
+        app:layout_constraintStart_toStartOf="@id/rightValueSpace"
+        app:layout_constraintTop_toTopOf="@id/rightValueSpace"
+        tools:src="@drawable/puzzle_number_push_lock_3" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/leftValueGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="leftValueSpace,leftValue" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/rightValueGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="rightValueSpace,rightValue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
