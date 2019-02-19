@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/tutorialFirstImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/puzzle_number_push_lock_tutorial_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tutorialFirstInstruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_xs"
+        android:text="@string/puzzle_number_push_lock_tutorial_1"
+        android:textAppearance="@style/TutorialDialogText"
+        app:layout_constraintStart_toEndOf="@id/tutorialFirstImage"
+        app:layout_constraintTop_toTopOf="@id/tutorialFirstImage"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/firstInstructionIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="43dp"
+        android:src="@drawable/puzzle_number_push_lock_tutorial_hand"
+        app:layout_constraintStart_toStartOf="@id/tutorialFirstImage"
+        app:layout_constraintTop_toTopOf="@+id/tutorialFirstImage" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/firstInstructionBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tutorialFirstImage,tutorialFirstInstruction" />
+
+    <ImageView
+        android:id="@+id/tutorialSecondImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/puzzle_number_push_lock_tutorial_2"
+        android:layout_marginTop="@dimen/space_xxl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/firstInstructionBarrier" />
+
+    <TextView
+        android:id="@+id/tutorialSecondInstruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_xs"
+        android:text="@string/puzzle_number_push_lock_tutorial_1"
+        android:textAppearance="@style/TutorialDialogText"
+        app:layout_constraintStart_toEndOf="@id/tutorialSecondImage"
+        app:layout_constraintTop_toTopOf="@id/tutorialSecondImage" />
+
+    <ImageView
+        android:id="@+id/secondInstructionIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/puzzle_number_push_lock_tutorial_hand"
+        app:layout_constraintStart_toStartOf="@id/tutorialSecondImage"
+        app:layout_constraintTop_toTopOf="@+id/tutorialSecondImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

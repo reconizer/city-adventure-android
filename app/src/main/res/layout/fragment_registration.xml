@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/authentication_background">
 
-            <pl.reconizer.cityadventure.presentation.authentication.AuthenticationInput
+            <pl.reconizer.unfold.presentation.authentication.AuthenticationInput
                 android:id="@+id/emailInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 app:layout_constraintTop_toTopOf="@id/topGuideline"/>
 
-            <pl.reconizer.cityadventure.presentation.authentication.AuthenticationInput
+            <pl.reconizer.unfold.presentation.authentication.AuthenticationInput
                 android:id="@+id/usernameInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 app:layout_constraintTop_toBottomOf="@id/emailInput"/>
 
-            <pl.reconizer.cityadventure.presentation.authentication.AuthenticationInput
+            <pl.reconizer.unfold.presentation.authentication.AuthenticationInput
                 android:id="@+id/passwordInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 app:layout_constraintTop_toBottomOf="@id/usernameInput" />
 
-            <pl.reconizer.cityadventure.presentation.authentication.AuthenticationInput
+            <pl.reconizer.unfold.presentation.authentication.AuthenticationInput
                 android:id="@+id/passwordConfirmationInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

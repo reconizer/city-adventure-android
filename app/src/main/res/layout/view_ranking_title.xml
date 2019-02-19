@@ -5,13 +5,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/rankingTitleFrame"
         android:layout_width="219dp"
         android:layout_height="63dp"
         tools:src="@drawable/ranking_title_frame" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/rankingTitleText"
         android:layout_width="122dp"
         android:layout_height="32dp"

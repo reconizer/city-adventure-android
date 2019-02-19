@@ -7,7 +7,7 @@
     android:clipToPadding="false"
     android:padding="8dp">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+    <pl.reconizer.unfold.presentation.customviews.ShadowView
         android:id="@+id/firstImageShadow"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -19,7 +19,7 @@
         app:shadowOffsetY="1dp"
         app:shadowRadius="2dp" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+    <pl.reconizer.unfold.presentation.customviews.ShadowView
         android:id="@+id/secondImageShadow"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -31,7 +31,7 @@
         app:shadowOffsetY="1dp"
         app:shadowRadius="2dp" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+    <pl.reconizer.unfold.presentation.customviews.ShadowView
         android:id="@+id/thirdImageShadow"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -43,7 +43,7 @@
         app:shadowOffsetY="1dp"
         app:shadowRadius="2dp" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+    <pl.reconizer.unfold.presentation.customviews.ShadowView
         android:id="@+id/fourthImageShadow"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -129,7 +129,7 @@
             app:layout_constraintStart_toStartOf="@id/fourthImage"
             app:layout_constraintTop_toTopOf="@id/fourthImage" />
 
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        <pl.reconizer.unfold.presentation.customviews.ScalableTextView
             android:id="@+id/galleryImageCount"
             android:layout_width="0dp"
             android:layout_height="0dp"

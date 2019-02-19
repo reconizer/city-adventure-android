@@ -6,31 +6,31 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topMargin"
         android:layout_width="1dp"
         android:layout_height="12dp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/authorImageLeftMargin"
         android:layout_width="22dp"
         android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="@id/authorBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/authorImageTopMargin"
         android:layout_width="1dp"
         android:layout_height="19dp"
         app:layout_constraintTop_toTopOf="@id/authorBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/authorImageBottomMargin"
         android:layout_width="1dp"
         android:layout_height="18dp"
         app:layout_constraintBottom_toBottomOf="@id/authorBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/authorBackground"
         android:layout_width="265dp"
         android:layout_height="99dp"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:src="@drawable/start_point_creator_background" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ScalableImageView
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
         android:id="@+id/authorBackgroundTape"
         android:layout_width="81dp"
         android:layout_height="26dp"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="@+id/authorBackground"
         app:layout_constraintTop_toTopOf="@+id/authorBackground" />
 
-    <pl.reconizer.cityadventure.presentation.customviews.ShadowView
+    <pl.reconizer.unfold.presentation.customviews.ShadowView
         android:id="@+id/authorImageShadow"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -82,13 +82,13 @@
         app:layout_constraintEnd_toEndOf="@+id/authorBackground"
         app:layout_constraintBottom_toBottomOf="@+id/authorBackground">
         
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        <pl.reconizer.unfold.presentation.customviews.ScalableSpace
             android:id="@+id/leftDetailsMargin"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableSpace
+        <pl.reconizer.unfold.presentation.customviews.ScalableSpace
             android:id="@+id/rightDetailsMargin"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3535" />
 
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        <pl.reconizer.unfold.presentation.customviews.ScalableTextView
             android:id="@+id/authorTitle"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -115,7 +115,7 @@
             app:layout_constraintStart_toEndOf="@id/leftDetailsMargin"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <pl.reconizer.cityadventure.presentation.customviews.ScalableTextView
+        <pl.reconizer.unfold.presentation.customviews.ScalableTextView
             android:id="@+id/authorName"
             android:layout_width="0dp"
             android:layout_height="0dp"

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/background_tile_repeat">
 
-            <pl.reconizer.cityadventure.presentation.adventure.AdventureInfoView
+            <pl.reconizer.unfold.presentation.adventure.AdventureInfoView
                 android:id="@+id/adventureInfoView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

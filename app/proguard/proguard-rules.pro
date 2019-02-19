@@ -75,5 +75,5 @@
     <fields>;
 }
 
--keep class pl.reconizer.cityadventure.app.data.** { *; }
--keep class pl.reconizer.cityadventure.app.domain.** { *; }
+-keep class unfold.app.data.** { *; }
+-keep class unfold.app.domain.** { *; }
