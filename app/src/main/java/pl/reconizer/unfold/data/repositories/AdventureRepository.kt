@@ -47,4 +47,8 @@ class AdventureRepository(
         return adventureApi.getSummary(adventureId)
     }
 
+    override fun rate(adventureId: String, rating: Int): Completable {
+        return adventureApi.rate(adventureId, rating).ignoreElement()
+    }
+
 }

@@ -22,4 +22,6 @@ interface IAdventureRepository {
 
     fun getSummary(adventureId: String): Single<List<RankingEntry>>
 
+    fun rate(adventureId: String, rating: Int): Completable
+
 }

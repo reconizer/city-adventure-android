@@ -57,4 +57,21 @@ class StartPointPresenter(
                         })
         )
     }
+
+    fun rateAdventure(rating: Int) {
+        disposables.add(
+                adventureRepository.rate(adventure.adventureId, rating)
+                        .andThen(adventureRepository.getAdventure(adventure.adventureId))
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
+                        .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint, Error>(errorHandler) {
+                            override fun onSuccess(t: AdventureStartPoint) {
+                                adventureStartPoint = t
+                                view?.show(t)
+                            }
+                        })
+        )
+    }
 }

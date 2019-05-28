@@ -55,7 +55,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         }
 
         adventureInfoView.rateListener = { rateValue ->
-
+            presenter.rateAdventure(rateValue)
         }
 
         adventureInfoView.shadowGenerator = shadowGenerator

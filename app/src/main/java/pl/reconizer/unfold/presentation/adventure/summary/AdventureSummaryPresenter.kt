@@ -6,6 +6,7 @@ import io.reactivex.functions.BiFunction
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
@@ -51,6 +52,21 @@ class AdventureSummaryPresenter(
                         .doFinally { view?.hideLoader() }
                         .subscribeWith(object : SingleCallbackWrapper<Pair<RankingEntry, List<RankingEntry>>, Error>(errorHandler) {
                             override fun onSuccess(t: Pair<RankingEntry, List<RankingEntry>>) {
+                            }
+                        })
+        )
+    }
+
+    fun rateAdventure(rating: Int) {
+        disposables.add(
+                adventureRepository.rate(adventure.adventureId, rating)
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
+                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
+                            override fun onComplete() {
+
                             }
                         })
         )

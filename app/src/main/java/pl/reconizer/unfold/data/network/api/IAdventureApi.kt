@@ -3,6 +3,7 @@ package pl.reconizer.unfold.data.network.api
 import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.unfold.data.entities.AdventurePointWithCluesResponse
+import pl.reconizer.unfold.data.entities.RatingResponse
 import pl.reconizer.unfold.domain.entities.*
 import retrofit2.http.*
 
@@ -48,5 +49,11 @@ interface IAdventureApi {
     fun getSummary(
             @Path("id") adventureId: String
     ): Single<List<RankingEntry>>
+
+    @POST("api/adventures/rating")
+    fun rate(
+            @Query("adventure_id") adventureId: String,
+            @Query("rating") rating: Int
+    ): Single<RatingResponse>
 
 }

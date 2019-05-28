@@ -42,6 +42,10 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
             addItemDecoration(ItemOffsetDecorator(context, R.dimen.space_sm))
         }
 
+        ratingView.rateListener = { rating ->
+            presenter.rateAdventure(rating)
+        }
+
         exitButton.setOnClickListener {
             navigator.jumpToRoot()
         }

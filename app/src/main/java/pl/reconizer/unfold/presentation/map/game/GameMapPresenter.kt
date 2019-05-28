@@ -111,8 +111,6 @@ class GameMapPresenter(
                                 )
                             }
                             .observeOn(mainScheduler)
-                            .doOnSubscribe { this@GameMapPresenter.view?.showLoader() }
-                            .doFinally { this@GameMapPresenter.view?.hideLoader() }
                             .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorHandler) {
                                 override fun onNext(t: List<Adventure>) {
                                     this@GameMapPresenter.view?.showAdventures(t)
