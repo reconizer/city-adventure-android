@@ -22,7 +22,7 @@
         android:textAppearance="@style/TutorialDialogText"
         app:layout_constraintStart_toEndOf="@id/tutorialFirstImage"
         app:layout_constraintTop_toTopOf="@id/tutorialFirstImage"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/firstInstructionIndicator"
@@ -58,7 +58,8 @@
         android:text="@string/puzzle_number_push_lock_tutorial_1"
         android:textAppearance="@style/TutorialDialogText"
         app:layout_constraintStart_toEndOf="@id/tutorialSecondImage"
-        app:layout_constraintTop_toTopOf="@id/tutorialSecondImage" />
+        app:layout_constraintTop_toTopOf="@id/tutorialSecondImage"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/secondInstructionIndicator"

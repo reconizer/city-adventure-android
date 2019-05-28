@@ -94,7 +94,6 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         mapView.pinClickListener = {
             when (it) {
                 is Adventure -> {
-                    //navigator.leaveMap()
                     navigator.goTo(AdventureStartPointKey(it))
                 }
                 is AdventurePoint -> {

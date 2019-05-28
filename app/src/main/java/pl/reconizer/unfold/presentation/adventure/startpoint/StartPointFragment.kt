@@ -59,7 +59,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         }
 
         adventureInfoView.shadowGenerator = shadowGenerator
-        adventureInfoView.rateable = true
+        adventureInfoView.rateable = adventure?.completed ?: false
         adventureInfoView.isCompleted = adventure?.completed ?: false
 
         closeButton.setOnClickListener {
