@@ -1,6 +1,7 @@
 package pl.reconizer.unfold.presentation.puzzle
 
 import android.os.Bundle
+import com.zhuinden.simplestack.StateChange
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.Adventure
@@ -64,10 +65,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun correctAnswer() {
-        navigator.goTo(MapKey.Builder.buildAdventureMapKey(
-                adventure = presenter.adventure,
-                adventurePointId = presenter.adventurePoint.id
-        ))
+        navigator.goBack() // opens the map
     }
 
     override fun wrongAnswer() {
@@ -75,9 +73,11 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun completedAdventure() {
-        navigator.goTo(AdventureSummaryKey(
-                arguments?.get(ADVENTURE_PARAM) as Adventure
-        ))
+        // replaces in order to prevent going back to a puzzle screen
+        navigator.replaceTop(
+                AdventureSummaryKey(arguments?.get(ADVENTURE_PARAM) as Adventure),
+                StateChange.REPLACE
+        )
     }
 
     fun showWrongAnswerDialog() {

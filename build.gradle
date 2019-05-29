@@ -7,7 +7,7 @@ buildscript {
 
         androidXVersion = '1.0.0'
         materialVersion = '1.0.0'
-        constraintLayoutVersion = '2.0.0-beta1'
+        constraintLayoutVersion = '2.0.0-alpha3'
 
         mapsServicesVersion = '16.0.0'
         mapUtilsVersion = '0.5'
