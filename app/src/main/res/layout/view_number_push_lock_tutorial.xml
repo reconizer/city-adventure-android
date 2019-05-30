@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/puzzle_number_push_lock_tutorial_2"
-        android:layout_marginTop="@dimen/space_xxl"
+        android:layout_marginTop="@dimen/space_5x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/firstInstructionBarrier" />
 

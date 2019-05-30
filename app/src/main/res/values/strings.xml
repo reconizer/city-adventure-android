@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Unfold</string>
+    <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non est vulputate augue elementum euismod. Donec luctus, augue vitae sollicitudin volutpat, sapien felis egestas nibh, eu volutpat purus ligula id erat. Phasellus viverra, lorem sed rutrum ultrices, nisi nulla pharetra ipsum, id tempor eros velit eget quam. Pellentesque non massa purus. Ut elit tellus, scelerisque ac tincidunt et, dignissim vitae sapien. Pellentesque venenatis metus ut turpis commodo hendrerit. Proin ex nunc, ultricies at ornare ut, blandit sit amet enim. Pellentesque tempor eros magna, eget porttitor ipsum lobortis eu. Aenean suscipit sodales magna a rutrum. Suspendisse vel ligula eleifend, sodales nibh quis, mattis tortor. Phasellus luctus leo dolor, at pretium augue varius sit amet. Fusce aliquam sapien vitae leo malesuada gravida. Nunc nec justo vel nibh molestie hendrerit ut sit amet est. Curabitur ut rutrum tellus.</string>
+
     <string name="adventure_add_rating">Oceń przygodę:</string>
     <string name="adventure_author">Author:</string>
     <string name="adventure_position">Miejsce:</string>

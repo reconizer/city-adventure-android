@@ -33,7 +33,7 @@
         style="@style/AuthenticationButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_lg"
+        android:layout_marginBottom="@dimen/space_3x"
         android:text="@string/authentication_signin"
         app:layout_constraintBottom_toTopOf="@id/signupButton"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"

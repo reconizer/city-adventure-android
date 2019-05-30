@@ -1,32 +1,29 @@
-package pl.reconizer.unfold.presentation.menu
+package pl.reconizer.unfold.presentation.userprofile
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
-import com.zhuinden.simplestack.StateChange
-import kotlinx.android.synthetic.main.fragment_menu.*
+import kotlinx.android.synthetic.main.fragment_user_profile.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.presentation.common.BaseFragment
-import pl.reconizer.unfold.presentation.navigation.keys.AuthenticationStartKey
-import pl.reconizer.unfold.presentation.navigation.keys.UserProfileKey
 import javax.inject.Inject
 
-class MenuFragment : BaseFragment(), IMenuView {
+class UserProfileFragment : BaseFragment(), IUserProfileView {
 
     @Inject
-    lateinit var presenter: MenuPresenter
+    lateinit var presenter: UserProfilePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildMenuComponent().inject(this)
+        Injector.buildUserProfileComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        return inflater.inflate(R.layout.fragment_user_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,9 +31,6 @@ class MenuFragment : BaseFragment(), IMenuView {
 
         closeButton.setOnClickListener { navigator.goBack() }
 
-        avatarBackground.setOnClickListener { navigator.goTo(UserProfileKey()) }
-
-        logoutMenuItem.setOnClickListener { presenter.logout() }
     }
 
     override fun onResume() {
@@ -64,13 +58,6 @@ class MenuFragment : BaseFragment(), IMenuView {
                     .load(it.avatarUrl)
                     .into(avatar)
         }
-    }
-
-    override fun successfulLogout() {
-        navigator.setHistory(
-                mutableListOf(AuthenticationStartKey()),
-                StateChange.REPLACE
-        )
     }
 
 }

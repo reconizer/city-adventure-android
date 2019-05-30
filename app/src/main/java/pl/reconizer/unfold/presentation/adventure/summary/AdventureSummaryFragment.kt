@@ -39,7 +39,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
         rankingRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = rankingAdapter
-            addItemDecoration(ItemOffsetDecorator(context, R.dimen.space_sm))
+            addItemDecoration(ItemOffsetDecorator(context, R.dimen.space_1x))
         }
 
         ratingView.rateListener = { rating ->

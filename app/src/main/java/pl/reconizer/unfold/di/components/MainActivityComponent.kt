@@ -26,6 +26,8 @@ import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
+import pl.reconizer.unfold.presentation.userprofile.UserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.UserProfileModule
 
 @Subcomponent(modules = [
     MainActivityModule::class
@@ -46,5 +48,6 @@ interface MainActivityComponent {
     fun journalComponent(module: JournalModule): JournalComponent
     fun puzzleComponent(module: PuzzleModule): PuzzleComponent
     fun adventureSummaryComponent(module: AdventureSummaryModule): AdventureSummaryComponent
+    fun userProfileComponent(module: UserProfileModule): UserProfileComponent
 
 }
