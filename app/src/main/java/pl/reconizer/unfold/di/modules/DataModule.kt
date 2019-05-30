@@ -9,6 +9,7 @@ import pl.reconizer.unfold.data.mappers.AdventurePointWithCluesMapper
 import pl.reconizer.unfold.data.mappers.TokenMapper
 import pl.reconizer.unfold.data.network.api.IAdventureApi
 import pl.reconizer.unfold.data.network.api.IAuthenticationApi
+import pl.reconizer.unfold.data.network.api.IUserApi
 import pl.reconizer.unfold.data.repositories.AdventureRepository
 import pl.reconizer.unfold.data.repositories.AuthenticationRepository
 import pl.reconizer.unfold.data.repositories.UserRepository
@@ -36,9 +37,14 @@ class DataModule {
     @Singleton
     fun provideUserRepository(
             authenticationApi: IAuthenticationApi,
+            userApi: IUserApi,
             tokenMapper: TokenMapper
     ): IUserRepository {
-        return UserRepository(authenticationApi, tokenMapper)
+        return UserRepository(
+                authenticationApi,
+                userApi,
+                tokenMapper
+        )
     }
 
     @Provides
