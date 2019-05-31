@@ -20,12 +20,15 @@
     <string name="authentication_signin">logowanie</string>
     <string name="authentication_signup">rejestracja</string>
     <string name="authentication_username_label">nick</string>
+    <string name="common_change">Zmień</string>
     <string name="common_close">Zamknij</string>
     <string name="common_confirm">Zatwierdź</string>
+    <string name="common_go_back">Wróć</string>
     <string name="common_no">nie</string>
     <string name="common_no_translation">brak tłumaczenia</string>
     <string name="common_ok">OK</string>
     <string name="common_reset">Wyczyść</string>
+    <string name="common_save">Zapisz</string>
     <string name="common_settings">Ustawienia</string>
     <string name="common_yes">tak</string>
     <string name="difficulty_level_easy">łatwy</string>
@@ -53,4 +56,8 @@
     <string name="puzzle_number_push_lock_tutorial_2">Kolejność wciskania cyfr nie ma znaczenia, ważne jest wciśnięcie odpowiednich cyfr na mechaniźmie.</string>
     <string name="puzzle_number_push_lock_tutorial_title">Kłódka z kodem numerycznym</string>
     <string name="puzzle_wrong_answer">Podana odpowiedź jest nieprawidłowa.</string>
+    <string name="user_profile_avatar_label">Avatar</string>
+    <string name="user_profile_edit">Edytuj profil</string>
+    <string name="user_profile_finished_adventures">Skończone trasy</string>
+    <string name="user_profile_username_label">Nazwa użytkownika</string>
 </resources>

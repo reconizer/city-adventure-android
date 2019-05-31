@@ -71,23 +71,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/usernameTextView"
+        <View
+            android:id="@+id/usernameFrame"
             android:layout_width="0dp"
             android:layout_height="@dimen/space_5x"
             android:layout_margin="@dimen/frame_offset_with_thickness"
             android:background="@drawable/frame_medium"
-            android:ellipsize="end"
-            android:gravity="center_horizontal|center_vertical"
-            android:maxLines="1"
-            android:paddingStart="@dimen/space_4x"
-            android:paddingEnd="@dimen/space_4x"
-            android:textAlignment="gravity"
-            android:textColor="@color/fontHeaderColor"
-            android:textSize="21dp"
             app:layout_constraintEnd_toEndOf="@id/backgroundFrame"
             app:layout_constraintStart_toStartOf="@id/backgroundFrame"
-            app:layout_constraintTop_toTopOf="@id/backgroundFrame"
+            app:layout_constraintTop_toTopOf="@id/backgroundFrame" />
+
+        <TextView
+            android:id="@+id/usernameTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/frame_offset_with_thickness"
+            android:ellipsize="end"
+            android:gravity="center_horizontal|center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textAlignment="gravity"
+            android:textAppearance="@style/TypeWriterText"
+            android:textColor="@color/fontHeaderColor"
+            android:textSize="21dp"
+            app:layout_constraintBottom_toBottomOf="@id/usernameFrame"
+            app:layout_constraintEnd_toStartOf="@id/headerRightDecorator"
+            app:layout_constraintStart_toEndOf="@id/headerLeftDecorator"
+            app:layout_constraintTop_toTopOf="@id/usernameFrame"
             tools:text="@string/lorem_long" />
 
         <ImageView
@@ -96,9 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/frame_offset"
             android:src="@drawable/user_profile_nick_decorator"
-            app:layout_constraintBottom_toBottomOf="@id/usernameTextView"
-            app:layout_constraintStart_toStartOf="@id/usernameTextView"
-            app:layout_constraintTop_toTopOf="@id/usernameTextView" />
+            app:layout_constraintBottom_toBottomOf="@id/usernameFrame"
+            app:layout_constraintStart_toStartOf="@id/usernameFrame"
+            app:layout_constraintTop_toTopOf="@id/usernameFrame" />
 
         <ImageView
             android:id="@+id/headerRightDecorator"
@@ -106,9 +116,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/frame_offset"
             android:src="@drawable/user_profile_nick_decorator"
-            app:layout_constraintBottom_toBottomOf="@id/usernameTextView"
-            app:layout_constraintEnd_toEndOf="@id/usernameTextView"
-            app:layout_constraintTop_toTopOf="@id/usernameTextView" />
+            app:layout_constraintBottom_toBottomOf="@id/usernameFrame"
+            app:layout_constraintEnd_toEndOf="@id/usernameFrame"
+            app:layout_constraintTop_toTopOf="@id/usernameFrame" />
 
 
         <ImageView
@@ -161,6 +171,17 @@
             app:layout_constraintTop_toTopOf="@id/avatarBackground"
             app:layout_constraintEnd_toEndOf="@id/avatarBackground"
             app:layout_constraintBottom_toBottomOf="@id/avatarBackground" />
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_edit"
+            style="@style/FramedButton"
+            android:layout_marginTop="@dimen/space_xs"
+            app:layout_constraintStart_toStartOf="@id/backgroundFrame"
+            app:layout_constraintEnd_toEndOf="@id/backgroundFrame"
+            app:layout_constraintTop_toBottomOf="@id/avatarBackground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -106,4 +106,12 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="FramedButton">
+        <item name="android:background">@drawable/frame_button</item>
+        <item name="android:textAppearance">@style/TypeWriterText</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
 </resources>
