@@ -28,6 +28,8 @@ import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
 import pl.reconizer.unfold.presentation.userprofile.UserProfileComponent
 import pl.reconizer.unfold.presentation.userprofile.UserProfileModule
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileModule
 
 @Subcomponent(modules = [
     MainActivityModule::class
@@ -49,5 +51,6 @@ interface MainActivityComponent {
     fun puzzleComponent(module: PuzzleModule): PuzzleComponent
     fun adventureSummaryComponent(module: AdventureSummaryModule): AdventureSummaryComponent
     fun userProfileComponent(module: UserProfileModule): UserProfileComponent
+    fun editUserProfileComponent(module: EditUserProfileModule): EditUserProfileComponent
 
 }

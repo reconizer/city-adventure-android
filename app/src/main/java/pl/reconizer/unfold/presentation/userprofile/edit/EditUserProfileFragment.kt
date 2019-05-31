@@ -1,36 +1,34 @@
-package pl.reconizer.unfold.presentation.userprofile
+package pl.reconizer.unfold.presentation.userprofile.edit
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_user_profile.*
+import kotlinx.android.synthetic.main.fragment_user_profile_edit.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.presentation.common.BaseFragment
-import pl.reconizer.unfold.presentation.navigation.keys.EditUserProfileKey
 import javax.inject.Inject
 
-class UserProfileFragment : BaseFragment(), IUserProfileView {
+class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
 
     @Inject
-    lateinit var presenter: UserProfilePresenter
+    lateinit var presenter: EditUserProfilePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildUserProfileComponent().inject(this)
+        Injector.buildEditUserProfileComponent().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_user_profile, container, false)
+        return inflater.inflate(R.layout.fragment_user_profile_edit, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        editButton.setOnClickListener { navigator.goTo(EditUserProfileKey()) }
 
         closeButton.setOnClickListener { navigator.goBack() }
 
@@ -39,7 +37,9 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        presenter.fetchProfile()
+        if (presenter.profile == null) {
+            presenter.fetchProfile()
+        }
         showProfile()
     }
 
@@ -50,12 +50,12 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
 
     override fun onDestroy() {
         super.onDestroy()
-        Injector.clearUserProfileComponent()
+        Injector.clearEditUserProfileComponent()
     }
 
     override fun showProfile() {
         presenter.profile?.let {
-            usernameTextView.text = it.nick
+            usernameTextView.setText(it.nick)
 
             Picasso.get()
                     .load(it.avatarUrl)

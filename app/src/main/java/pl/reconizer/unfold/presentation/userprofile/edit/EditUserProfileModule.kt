@@ -1,4 +1,4 @@
-package pl.reconizer.unfold.presentation.userprofile
+package pl.reconizer.unfold.presentation.userprofile.edit
 
 import dagger.Module
 import dagger.Provides
@@ -13,7 +13,7 @@ import javax.inject.Named
 @Module(includes = [
     ErrorHandlersModule::class
 ])
-class UserProfileModule {
+class EditUserProfileModule {
 
     @Provides
     @ViewScope
@@ -22,8 +22,8 @@ class UserProfileModule {
             @Named("main") mainScheduler: Scheduler,
             userRepository: IUserRepository,
             errorHandler: ErrorHandler<Error>
-    ): UserProfilePresenter {
-        return UserProfilePresenter(
+    ): EditUserProfilePresenter {
+        return EditUserProfilePresenter(
                 backgroundScheduler,
                 mainScheduler,
                 userRepository,

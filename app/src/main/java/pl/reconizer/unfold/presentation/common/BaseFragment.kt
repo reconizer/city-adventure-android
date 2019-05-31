@@ -23,6 +23,14 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
     val navigator: Backstack
         get() = (activity as MainActivity).navigator
 
+    open val softInputMode: Int by lazy { (activity as MainActivity).defaultSoftInputMode }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        activity?.window?.setSoftInputMode(softInputMode)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

@@ -36,6 +36,8 @@ import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
 import pl.reconizer.unfold.presentation.userprofile.UserProfileComponent
 import pl.reconizer.unfold.presentation.userprofile.UserProfileModule
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileModule
 
 object Injector {
 
@@ -53,6 +55,7 @@ object Injector {
     private var puzzleComponent: PuzzleComponent? = null
     private var adventureSummaryComponent: AdventureSummaryComponent? = null
     private var userProfileComponent: UserProfileComponent? = null
+    private var editUserProfileComponent: EditUserProfileComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -141,6 +144,11 @@ object Injector {
         return userProfileComponent!!
     }
 
+    fun buildEditUserProfileComponent(): EditUserProfileComponent {
+        editUserProfileComponent = mainActivityComponent!!.editUserProfileComponent(EditUserProfileModule())
+        return editUserProfileComponent!!
+    }
+
     fun clearAppComponent() {
         appComponent = null
     }
@@ -196,4 +204,9 @@ object Injector {
     fun clearUserProfileComponent() {
         userProfileComponent = null
     }
+
+    fun clearEditUserProfileComponent() {
+        editUserProfileComponent = null
+    }
+
 }

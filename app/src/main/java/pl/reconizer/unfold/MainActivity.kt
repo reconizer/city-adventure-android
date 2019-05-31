@@ -30,12 +30,17 @@ class MainActivity : AppCompatActivity(), IViewWithLocation, StateChanger {
     val navigator: Backstack
         get() { return backstackDelegate.backstack }
 
+    var defaultSoftInputMode: Int = 0
+        private set
+
     private var locationInfoDialog: PrettyDialog? = null
     private var locationDeniedCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         Injector.buildMainActivityComponent(R.id.fragmentContainer, this).inject(this)
+
+        defaultSoftInputMode = window.attributes.softInputMode
 
         backstackDelegate.onCreate(
                 savedInstanceState,
