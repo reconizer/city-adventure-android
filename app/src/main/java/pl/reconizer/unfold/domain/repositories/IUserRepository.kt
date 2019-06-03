@@ -3,6 +3,7 @@ package pl.reconizer.unfold.domain.repositories
 import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.unfold.domain.entities.UserProfile
+import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
 
 interface IUserRepository {
 
@@ -19,5 +20,7 @@ interface IUserRepository {
     fun resetPassword(code: String, newPassword: String): Completable
 
     fun getProfile(): Single<UserProfile>
+
+    fun updateProfile(form: UserProfileForm): Completable
 
 }

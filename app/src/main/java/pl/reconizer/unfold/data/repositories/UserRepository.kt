@@ -6,6 +6,7 @@ import pl.reconizer.unfold.data.mappers.TokenMapper
 import pl.reconizer.unfold.data.network.api.IAuthenticationApi
 import pl.reconizer.unfold.data.network.api.IUserApi
 import pl.reconizer.unfold.domain.entities.UserProfile
+import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 
 class UserRepository(
@@ -37,6 +38,10 @@ class UserRepository(
 
     override fun getProfile(): Single<UserProfile> {
         return userApi.getProfile()
+    }
+
+    override fun updateProfile(form: UserProfileForm): Completable {
+        return userApi.updateProfile(form)
     }
 
 }

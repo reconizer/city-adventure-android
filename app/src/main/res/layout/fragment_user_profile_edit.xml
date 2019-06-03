@@ -7,25 +7,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/user_profile_background">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/closeButton"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingStart="@dimen/space_2x"-->
-        <!--android:paddingTop="@dimen/space_2x"-->
-        <!--android:paddingEnd="@dimen/space_1x"-->
-        <!--android:paddingBottom="@dimen/space_1x"-->
-        <!--android:src="@drawable/icon_close_with_background"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--<androidx.constraintlayout.widget.Barrier-->
-        <!--android:id="@+id/topBarrier"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:barrierDirection="bottom"-->
-        <!--app:constraint_referenced_ids="closeButton" />-->
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -164,13 +145,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_2x"
                     android:text="@string/user_profile_username_label"
-                    app:layout_constraintEnd_toEndOf="@id/usernameTextView"
+                    app:layout_constraintEnd_toEndOf="@id/usernameInput"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@id/usernameTextView"
+                    app:layout_constraintStart_toStartOf="@id/usernameInput"
                     app:layout_constraintTop_toBottomOf="@id/changeAvatarButton" />
 
                 <EditText
-                    android:id="@+id/usernameTextView"
+                    android:id="@+id/usernameInput"
                     style="@style/FramedInput"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -184,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="usernameTextView"
+                    app:constraint_referenced_ids="usernameInput"
                     tools:layout_editor_absoluteX="2dp"
                     tools:layout_editor_absoluteY="321dp" />
 

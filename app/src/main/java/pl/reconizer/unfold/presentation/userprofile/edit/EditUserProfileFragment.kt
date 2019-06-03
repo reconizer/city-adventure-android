@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_user_profile_edit.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
+import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import javax.inject.Inject
 
@@ -31,6 +32,11 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
         super.onViewCreated(view, savedInstanceState)
 
         closeButton.setOnClickListener { navigator.goBack() }
+        goBackButton.setOnClickListener { navigator.goBack() }
+
+        saveButton.setOnClickListener {
+            presenter.updateProfile(UserProfileForm(usernameInput.text.toString(), null))
+        }
 
     }
 
@@ -55,12 +61,16 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
 
     override fun showProfile() {
         presenter.profile?.let {
-            usernameTextView.setText(it.nick)
+            usernameInput.setText(it.nick)
 
             Picasso.get()
                     .load(it.avatarUrl)
                     .into(avatar)
         }
+    }
+
+    override fun profileUpdated() {
+        Toast.makeText(context, R.string.user_profile_updated, Toast.LENGTH_SHORT).show()
     }
 
 }

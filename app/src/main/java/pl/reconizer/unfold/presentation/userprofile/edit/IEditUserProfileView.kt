@@ -6,4 +6,6 @@ interface IEditUserProfileView : IView {
 
     fun showProfile()
 
+    fun profileUpdated()
+
 }

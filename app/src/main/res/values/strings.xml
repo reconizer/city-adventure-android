@@ -59,5 +59,6 @@
     <string name="user_profile_avatar_label">Avatar</string>
     <string name="user_profile_edit">Edytuj profil</string>
     <string name="user_profile_finished_adventures">Skończone trasy</string>
+    <string name="user_profile_updated">Zaktualizowano profil</string>
     <string name="user_profile_username_label">Nazwa użytkownika</string>
 </resources>
