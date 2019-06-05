@@ -6,4 +6,6 @@ interface IUserProfileView : IView {
 
     fun showProfile()
 
+    fun showAdventures()
+
 }

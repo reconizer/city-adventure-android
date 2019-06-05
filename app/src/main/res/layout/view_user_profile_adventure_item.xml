@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="94dp"
+    android:background="@drawable/frame_small">
+
+    <ImageView
+        android:id="@+id/coverImageBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/frame_offset"
+        android:layout_marginTop="@dimen/frame_offset"
+        android:layout_marginBottom="@dimen/frame_offset"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,16:9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/coverImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/frame_offset"
+        app:layout_constraintBottom_toBottomOf="@id/coverImageBackground"
+        app:layout_constraintEnd_toEndOf="@id/coverImageBackground"
+        app:layout_constraintStart_toStartOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="@id/coverImageBackground"
+        tools:src="@drawable/author_default_logo" />
+
+    <View
+        android:id="@+id/contentBorder"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/frame_thickness"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:background="@drawable/border_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <TextView
+        android:id="@+id/adventureName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@id/contentBorder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem/random" />
+
+    <ImageView
+        android:id="@+id/rankingIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_user_ranking"
+        app:layout_constraintBottom_toTopOf="@+id/rankingPosition"
+        app:layout_constraintEnd_toStartOf="@+id/completionTimeIcon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/coverImageBackground"
+        app:layout_constraintTop_toBottomOf="@+id/contentBorder" />
+
+    <TextView
+        android:id="@+id/rankingPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textAlignment="center"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/rankingPositionLabel"
+        app:layout_constraintEnd_toEndOf="@id/rankingIcon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/rankingIcon"
+        app:layout_constraintTop_toBottomOf="@+id/rankingIcon"
+        tools:text="1234" />
+
+    <TextView
+        android:id="@+id/rankingPositionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="@string/common_place"
+        android:textAlignment="center"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rankingIcon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/rankingIcon"
+        app:layout_constraintTop_toBottomOf="@+id/rankingPosition" />
+
+    <ImageView
+        android:id="@+id/completionTimeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_completion_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rankingIcon"
+        app:layout_constraintTop_toTopOf="@id/rankingIcon" />
+
+    <TextView
+        android:id="@+id/completionTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textAlignment="center"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@id/completionTimeIcon"
+        app:layout_constraintStart_toStartOf="@id/completionTimeIcon"
+        app:layout_constraintTop_toBottomOf="@id/completionTimeIcon"
+        tools:text="1d 8h 43m" />
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/rankingContainer"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center"-->
+    <!--app:layout_constraintStart_toEndOf="@id/coverImageBackground"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/contentBorder"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/icon_user_ranking" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/rankingPosition"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:includeFontPadding="false"-->
+    <!--android:textAppearance="@style/TypeWriterText"-->
+    <!--android:textSize="15dp"-->
+    <!--tools:text="1234" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:includeFontPadding="false"-->
+    <!--android:text="@string/common_place"-->
+    <!--android:textAppearance="@style/TypeWriterText"-->
+    <!--android:textSize="12dp" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/completionTimeContainer"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/contentBorder">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/icon_completion_time" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/completionTime"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:includeFontPadding="false"-->
+    <!--android:textAppearance="@style/TypeWriterText"-->
+    <!--android:textSize="15dp"-->
+    <!--tools:text="1d 8h 43m" />-->
+
+    <!--</LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

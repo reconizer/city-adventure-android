@@ -4,18 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.presentation.common.BaseFragment
+import pl.reconizer.unfold.presentation.common.recyclerview.ItemOffsetDecorator
 import pl.reconizer.unfold.presentation.navigation.keys.EditUserProfileKey
+import pl.reconizer.unfold.presentation.userprofile.adventures.UserAdventuresAdapter
 import javax.inject.Inject
 
 class UserProfileFragment : BaseFragment(), IUserProfileView {
 
     @Inject
     lateinit var presenter: UserProfilePresenter
+
+    @Inject
+    lateinit var adapter: UserAdventuresAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +41,25 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
 
         closeButton.setOnClickListener { navigator.goBack() }
 
+        adventuresRecyclerView.apply {
+            if (itemDecorationCount == 0) {
+                addItemDecoration(ItemOffsetDecorator(
+                        context,
+                        R.dimen.frame_offset_with_thickness,
+                        ItemOffsetDecorator.OFFSET_BOTTOM or ItemOffsetDecorator.OFFSET_LEFT or ItemOffsetDecorator.OFFSET_RIGHT
+                ))
+            }
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = this@UserProfileFragment.adapter
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
         presenter.fetchProfile()
+        presenter.fetchAdventures()
         showProfile()
     }
 
@@ -61,6 +81,10 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
                     .load(it.avatarUrl)
                     .into(avatar)
         }
+    }
+
+    override fun showAdventures() {
+        adapter.submitList(presenter.adventures)
     }
 
 }

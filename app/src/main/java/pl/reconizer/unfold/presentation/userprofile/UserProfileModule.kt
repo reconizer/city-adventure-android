@@ -8,6 +8,7 @@ import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.userprofile.adventures.UserAdventuresAdapter
 import javax.inject.Named
 
 @Module(includes = [
@@ -29,6 +30,12 @@ class UserProfileModule {
                 userRepository,
                 errorHandler
         )
+    }
+
+    @Provides
+    @ViewScope
+    fun provideAdapter(): UserAdventuresAdapter {
+        return UserAdventuresAdapter()
     }
 
 }

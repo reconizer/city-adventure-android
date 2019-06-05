@@ -2,6 +2,7 @@ package pl.reconizer.unfold.presentation.userprofile
 
 import io.reactivex.Scheduler
 import pl.reconizer.unfold.data.entities.Error
+import pl.reconizer.unfold.domain.entities.UserAdventure
 import pl.reconizer.unfold.domain.entities.UserProfile
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
@@ -17,6 +18,10 @@ class UserProfilePresenter(
 ) : BasePresenter<IUserProfileView>() {
 
     var profile: UserProfile? = null
+        private set
+
+    var adventures: List<UserAdventure> = emptyList()
+        private set
 
     override fun subscribe(view: IUserProfileView) {
         super.subscribe(view)
@@ -32,6 +37,20 @@ class UserProfilePresenter(
                             override fun onSuccess(t: UserProfile) {
                                 profile = t
                                 view?.showProfile()
+                            }
+                        })
+        )
+    }
+
+    fun fetchAdventures() {
+        disposables.add(
+                userRepository.getCompletedAdventures()
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribeWith(object : SingleCallbackWrapper<List<UserAdventure>, Error>(errorHandler) {
+                            override fun onSuccess(t: List<UserAdventure>) {
+                                adventures = t
+                                view?.showAdventures()
                             }
                         })
         )
