@@ -13,7 +13,7 @@ import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.common.rx.CallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.GpsInterfaceStatus
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.map.CameraDetails
@@ -27,7 +27,7 @@ class GameMapPresenter(
         private val mainScheduler: Scheduler,
         private val locationProvider: ILocationProvider,
         private val adventureRepository: IAdventureRepository,
-        private val errorHandler: ErrorHandler<Error>
+        private val errorsHandler: ErrorsHandler<Error>
 ) : BasePresenter<IGameMapView>() {
 
     private var previousCameraDetails: CameraDetails? = null
@@ -67,7 +67,7 @@ class GameMapPresenter(
 
     override fun subscribe(view: IGameMapView) {
         super.subscribe(view)
-        errorHandler.view = WeakReference(view)
+        errorsHandler.view = WeakReference(view)
         if (locationProvider.hasPermission) {
             val locationChangeObservable = locationProvider.lastLocationChange.share()
             disposables.add(
@@ -86,7 +86,7 @@ class GameMapPresenter(
                         .subscribeOn(backgroundScheduler)
                         .map { it.toPosition() }
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : CallbackWrapper<Position, Error>(errorHandler) {
+                        .subscribeWith(object : CallbackWrapper<Position, Error>(errorsHandler) {
                             override fun onComplete() {}
 
                             override fun onNext(t: Position) {
@@ -111,7 +111,7 @@ class GameMapPresenter(
                                 )
                             }
                             .observeOn(mainScheduler)
-                            .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorHandler) {
+                            .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorsHandler) {
                                 override fun onNext(t: List<Adventure>) {
                                     this@GameMapPresenter.view?.showAdventures(t)
                                 }
@@ -132,7 +132,7 @@ class GameMapPresenter(
                                 ).toMaybe()
                             }
                             .observeOn(mainScheduler)
-                            .subscribeWith(object : MaybeCallbackWrapper<List<Adventure>, Error>(errorHandler) {
+                            .subscribeWith(object : MaybeCallbackWrapper<List<Adventure>, Error>(errorsHandler) {
                                 override fun onComplete() {}
 
                                 override fun onSuccess(t: List<Adventure>) {
@@ -145,7 +145,7 @@ class GameMapPresenter(
                         adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
                                 .subscribeOn(backgroundScheduler)
                                 .observeOn(mainScheduler)
-                                .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorHandler) {
+                                .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorsHandler) {
                                     override fun onSuccess(t: List<AdventurePoint>) {
                                         this@GameMapPresenter.view?.showAdventurePoints(t)
                                     }
@@ -179,7 +179,7 @@ class GameMapPresenter(
                         }
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<Any, Error>(errorHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<Any, Error>(errorsHandler) {
                             override fun onSuccess(t: Any) {
                                 when(t) {
                                     is List<*> -> this@GameMapPresenter.view?.showAdventurePoints(t as List<AdventurePoint>)
@@ -199,7 +199,7 @@ class GameMapPresenter(
                 ))
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorsHandler) {
                             override fun onSuccess(t: PuzzleResponse) {
                                 if (t.isCompleted) {
                                     if (t.isLastPoint) {

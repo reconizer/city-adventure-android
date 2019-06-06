@@ -8,7 +8,7 @@ import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -16,7 +16,7 @@ class AdventureSummaryPresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
-        private val errorHandler: ErrorHandler<Error>,
+        private val errorsHandler: ErrorsHandler<Error>,
         private val adventure: Adventure
 ) : BasePresenter<IAdventureSummaryView>() {
 
@@ -26,7 +26,7 @@ class AdventureSummaryPresenter(
 
     override fun subscribe(view: IAdventureSummaryView) {
         super.subscribe(view)
-        errorHandler.view = WeakReference(view)
+        errorsHandler.view = WeakReference(view)
     }
 
     fun fetchData() {
@@ -50,7 +50,7 @@ class AdventureSummaryPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : SingleCallbackWrapper<Pair<RankingEntry, List<RankingEntry>>, Error>(errorHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<Pair<RankingEntry, List<RankingEntry>>, Error>(errorsHandler) {
                             override fun onSuccess(t: Pair<RankingEntry, List<RankingEntry>>) {
                             }
                         })
@@ -64,7 +64,7 @@ class AdventureSummaryPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
+                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorsHandler) {
                             override fun onComplete() {
 
                             }

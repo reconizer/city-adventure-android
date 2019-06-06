@@ -7,7 +7,7 @@ import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import javax.inject.Named
 
@@ -23,14 +23,14 @@ class GameMapModule {
             @Named("main") mainScheduler: Scheduler,
             locationProvider: ILocationProvider,
             adventureRepository: IAdventureRepository,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): GameMapPresenter {
         return GameMapPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 locationProvider,
                 adventureRepository,
-                errorHandler
+                errorsHandler
         )
     }
 

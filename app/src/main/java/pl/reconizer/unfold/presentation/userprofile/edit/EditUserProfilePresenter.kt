@@ -7,7 +7,7 @@ import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -15,14 +15,14 @@ class EditUserProfilePresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val userRepository: IUserRepository,
-        private val errorHandler: ErrorHandler<Error>
+        private val errorsHandler: ErrorsHandler<Error>
 ) : BasePresenter<IEditUserProfileView>() {
 
     var profile: UserProfile? = null
 
     override fun subscribe(view: IEditUserProfileView) {
         super.subscribe(view)
-        errorHandler.view = WeakReference(view)
+        errorsHandler.view = WeakReference(view)
     }
 
     fun fetchProfile() {
@@ -30,7 +30,7 @@ class EditUserProfilePresenter(
                 userRepository.getProfile()
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<UserProfile, Error>(errorHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<UserProfile, Error>(errorsHandler) {
                             override fun onSuccess(t: UserProfile) {
                                 profile = t
                                 view?.showProfile()
@@ -50,7 +50,7 @@ class EditUserProfilePresenter(
                                 view?.showLoader()
                             }
                             .doFinally { view?.hideLoader() }
-                            .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
+                            .subscribeWith(object : CompletableCallbackWrapper<Error>(errorsHandler) {
                                 override fun onComplete() {
                                     view?.profileUpdated()
                                 }

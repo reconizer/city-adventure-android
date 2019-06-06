@@ -10,7 +10,7 @@ import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.entities.Adventure
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.customviews.ShadowGenerator
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
@@ -26,13 +26,13 @@ class StartPointModule(
             @Named("background") backgroundScheduler: Scheduler,
             @Named("main") mainScheduler: Scheduler,
             repository: IAdventureRepository,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): StartPointPresenter {
         return StartPointPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 repository,
-                errorHandler,
+                errorsHandler,
                 adventure
         )
     }

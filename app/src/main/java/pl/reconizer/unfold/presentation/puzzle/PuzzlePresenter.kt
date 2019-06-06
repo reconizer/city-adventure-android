@@ -6,7 +6,7 @@ import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.GpsInterfaceStatus
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
@@ -17,7 +17,7 @@ class PuzzlePresenter(
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
         private val locationProvider: ILocationProvider,
-        private val errorHandler: ErrorHandler<Error>,
+        private val errorsHandler: ErrorsHandler<Error>,
         val adventure: Adventure,
         val adventurePoint: AdventurePoint,
         val puzzleType: PuzzleType
@@ -25,7 +25,7 @@ class PuzzlePresenter(
 
     override fun subscribe(view: IPuzzleView) {
         super.subscribe(view)
-        errorHandler.view = WeakReference(view)
+        errorsHandler.view = WeakReference(view)
         if (locationProvider.hasPermission) {
             locationProvider.enable()
             disposables.add(
@@ -62,7 +62,7 @@ class PuzzlePresenter(
                             .observeOn(mainScheduler)
                             .doOnSubscribe { view?.showLoader() }
                             .doFinally { view?.hideLoader() }
-                            .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorHandler) {
+                            .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorsHandler) {
                                 override fun onSuccess(t: PuzzleResponse) {
                                     if (t.isCompleted) {
                                         if (t.isLastPoint) {

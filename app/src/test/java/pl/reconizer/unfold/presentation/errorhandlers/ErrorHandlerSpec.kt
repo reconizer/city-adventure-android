@@ -20,11 +20,11 @@ class ErrorHandlerSpec : Spek({
         val gson = mock<Gson>()
         val view = mock<IView>()
 
-        lateinit var errorHandler: ErrorHandler<Error>
+        lateinit var errorsHandler: ErrorsHandler<Error>
 
         beforeEachTest {
-            errorHandler = spy(ErrorHandler.build(gson))
-            errorHandler.view = WeakReference(view)
+            errorsHandler = spy(ErrorsHandler.build(gson))
+            errorsHandler.view = WeakReference(view)
         }
 
         afterEachTest {
@@ -49,8 +49,8 @@ class ErrorHandlerSpec : Spek({
 
                     it("handles status") {
                         whenever(gson.fromJson(any<String>(), any<Class<Error>>())).thenReturn(Error(null))
-                        errorHandler.onError(exception)
-                        verify(errorHandler, atLeastOnce()).handleUnprocessableEntityError(any())
+                        errorsHandler.onError(exception)
+                        verify(errorsHandler, atLeastOnce()).handleUnprocessableEntityError(any())
                     }
                 }
 
@@ -60,8 +60,8 @@ class ErrorHandlerSpec : Spek({
                     }
 
                     it("handles status") {
-                        errorHandler.onError(exception)
-                        verify(errorHandler, atLeastOnce()).handleUnauthorizedError()
+                        errorsHandler.onError(exception)
+                        verify(errorsHandler, atLeastOnce()).handleUnauthorizedError()
                     }
                 }
 
@@ -71,8 +71,8 @@ class ErrorHandlerSpec : Spek({
                     }
 
                     it("handles status") {
-                        errorHandler.onError(exception)
-                        verify(errorHandler, atLeastOnce()).handleServerError()
+                        errorsHandler.onError(exception)
+                        verify(errorsHandler, atLeastOnce()).handleServerError()
                     }
                 }
 
@@ -82,8 +82,8 @@ class ErrorHandlerSpec : Spek({
                 val exception = IOException()
 
                 it("handles error") {
-                    errorHandler.onError(exception)
-                    verify(errorHandler, atLeastOnce()).handleNetworkError()
+                    errorsHandler.onError(exception)
+                    verify(errorsHandler, atLeastOnce()).handleNetworkError()
                 }
             }
 
@@ -91,8 +91,8 @@ class ErrorHandlerSpec : Spek({
                 val exception = Exception()
 
                 it("handles error") {
-                    errorHandler.onError(exception)
-                    verify(errorHandler, atLeastOnce()).handleUnknownError(exception)
+                    errorsHandler.onError(exception)
+                    verify(errorsHandler, atLeastOnce()).handleUnknownError(exception)
                 }
             }
 
@@ -102,7 +102,7 @@ class ErrorHandlerSpec : Spek({
             val exception = Throwable()
 
             it("calls showGenericError in view") {
-                errorHandler.handleUnknownError(exception)
+                errorsHandler.handleUnknownError(exception)
                 verify(view, atLeastOnce()).showGenericError()
             }
         }
@@ -110,7 +110,7 @@ class ErrorHandlerSpec : Spek({
         describe("handleNetworkError") {
 
             it("calls showConnectionError in view") {
-                errorHandler.handleNetworkError()
+                errorsHandler.handleNetworkError()
                 verify(view, atLeastOnce()).showConnectionError()
             }
 
@@ -119,7 +119,7 @@ class ErrorHandlerSpec : Spek({
         describe("handleUnauthorizedError") {
 
             it("calls showAuthorizationError in view") {
-                errorHandler.handleUnauthorizedError()
+                errorsHandler.handleUnauthorizedError()
                 verify(view, atLeastOnce()).showAuthorizationError()
             }
 
@@ -139,7 +139,7 @@ class ErrorHandlerSpec : Spek({
 
                 it("calls showParametrizedError in view with correct entity") {
                     whenever(gson.fromJson(errorJson, Error::class.java)).thenReturn(errorEntity)
-                    errorHandler.handleUnprocessableEntityError(exception)
+                    errorsHandler.handleUnprocessableEntityError(exception)
                     verify(view, atLeastOnce()).showParametrizedError(errorEntity)
                 }
             }
@@ -149,7 +149,7 @@ class ErrorHandlerSpec : Spek({
                     val emptyError = Error(null)
                     whenever(gson.fromJson(errorJson, Error::class.java)).thenThrow(JsonSyntaxException::class.java)
                     whenever(gson.fromJson("{}", Error::class.java)).thenReturn(emptyError)
-                    errorHandler.handleUnprocessableEntityError(exception)
+                    errorsHandler.handleUnprocessableEntityError(exception)
                     verify(view, atLeastOnce()).showParametrizedError(emptyError)
                 }
             }
@@ -158,7 +158,7 @@ class ErrorHandlerSpec : Spek({
         describe("handleServerError") {
 
             it("calls showServerError in view") {
-                errorHandler.handleServerError()
+                errorsHandler.handleServerError()
                 verify(view, atLeastOnce()).showServerError()
             }
 

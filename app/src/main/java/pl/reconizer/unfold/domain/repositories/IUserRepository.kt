@@ -2,6 +2,7 @@ package pl.reconizer.unfold.domain.repositories
 
 import io.reactivex.Completable
 import io.reactivex.Single
+import pl.reconizer.unfold.domain.entities.ICollectionContainer
 import pl.reconizer.unfold.domain.entities.UserAdventure
 import pl.reconizer.unfold.domain.entities.UserProfile
 import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
@@ -24,6 +25,6 @@ interface IUserRepository {
 
     fun updateProfile(form: UserProfileForm): Completable
 
-    fun getCompletedAdventures(page: Int = 1): Single<List<UserAdventure>>
+    fun getCompletedAdventures(page: Int = 1): Single<ICollectionContainer<UserAdventure>>
 
 }

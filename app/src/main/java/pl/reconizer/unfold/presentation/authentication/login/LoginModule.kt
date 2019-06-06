@@ -8,7 +8,7 @@ import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.modules.usecases.authentication.AuthenticationUsecasesModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.usecases.authentication.SignIn
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
@@ -22,12 +22,12 @@ class LoginModule {
     fun providePresenter(
             @Named("main") scheduler: Scheduler,
             signInUsecase: SignIn,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): LoginPresenter {
         return LoginPresenter(
                 scheduler,
                 signInUsecase,
-                errorHandler
+                errorsHandler
         )
     }
 

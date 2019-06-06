@@ -16,7 +16,7 @@ import pl.reconizer.unfold.domain.entities.Adventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.Position
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.map.CameraDetails
 import pl.reconizer.unfold.presentation.map.MapMode
@@ -28,7 +28,7 @@ class GameMapPresenterSpec : Spek({
         lateinit var testScheduler: TestScheduler
         lateinit var simplePresenter: GameMapPresenter
         lateinit var adventureRepository: IAdventureRepository
-        lateinit var errorHandler: ErrorHandler<Error>
+        lateinit var errorsHandler: ErrorsHandler<Error>
 
         val locationProvider = mock<ILocationProvider>()
 
@@ -43,7 +43,7 @@ class GameMapPresenterSpec : Spek({
         }
 
         beforeEachTest {
-            errorHandler = mock()
+            errorsHandler = mock()
             adventureRepository =  mock()
             testScheduler = TestScheduler()
             simplePresenter = GameMapPresenter(
@@ -51,7 +51,7 @@ class GameMapPresenterSpec : Spek({
                     Schedulers.trampoline(),
                     locationProvider,
                     adventureRepository,
-                    errorHandler
+                    errorsHandler
             )
         }
 
@@ -87,7 +87,7 @@ class GameMapPresenterSpec : Spek({
 
             it("sets view for error handler") {
                 simplePresenter.subscribe(view)
-                verify(errorHandler, atLeastOnce()).view = any()
+                verify(errorsHandler, atLeastOnce()).view = any()
             }
 
             context("when location permissions are not granted") {
@@ -113,7 +113,7 @@ class GameMapPresenterSpec : Spek({
                             testScheduler,
                             customLocationProvider,
                             adventureRepository,
-                            errorHandler
+                            errorsHandler
                     )
                 }
 

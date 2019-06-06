@@ -4,19 +4,19 @@ import io.reactivex.Scheduler
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.usecases.authentication.SignIn
 import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
 class LoginPresenter(
         private val mainScheduler: Scheduler,
         private val signIn: SignIn,
-        private val errorHandler: ErrorHandler<Error>
+        private val errorsHandler: ErrorsHandler<Error>
 ) : BasePresenter<ILoginView>() {
 
     override fun subscribe(view: ILoginView) {
         super.subscribe(view)
-        errorHandler.view = WeakReference(view)
+        errorsHandler.view = WeakReference(view)
     }
 
     fun login(form: Form) {
@@ -26,7 +26,7 @@ class LoginPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorHandler) {
+                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorsHandler) {
                             override fun onComplete() {
                                 view?.successfulSignIn()
                             }

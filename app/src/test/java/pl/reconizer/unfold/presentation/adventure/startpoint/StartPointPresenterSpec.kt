@@ -10,7 +10,7 @@ import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.data.repositories.AdventureRepository
 import pl.reconizer.unfold.domain.entities.Adventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
 class StartPointPresenterSpec : Spek({
 
@@ -18,7 +18,7 @@ class StartPointPresenterSpec : Spek({
         lateinit var presenter: StartPointPresenter
         lateinit var view: IStartPointView
         lateinit var adventureRepository: AdventureRepository
-        lateinit var errorHandler: ErrorHandler<Error>
+        lateinit var errorsHandler: ErrorsHandler<Error>
 
         var adventureStartPoint = mock<AdventureStartPoint>()
         var adventure = mock<Adventure>()
@@ -28,12 +28,12 @@ class StartPointPresenterSpec : Spek({
         beforeEachTest {
             view = mock()
             adventureRepository = mock()
-            errorHandler = mock()
+            errorsHandler = mock()
             presenter = StartPointPresenter(
                     Schedulers.trampoline(),
                     Schedulers.trampoline(),
                     adventureRepository,
-                    errorHandler,
+                    errorsHandler,
                     adventure
             )
             whenever(adventureRepository.getAdventure(any())).thenReturn(Single.just(adventureStartPoint))
@@ -46,7 +46,7 @@ class StartPointPresenterSpec : Spek({
 
             it("sets view for error handler") {
                 presenter.subscribe(view)
-                verify(errorHandler, atLeastOnce()).view = any()
+                verify(errorsHandler, atLeastOnce()).view = any()
             }
 
         }

@@ -8,14 +8,14 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.lang.ref.WeakReference
 
-open class ErrorHandler<TErrorEntity>(
+open class ErrorsHandler<TErrorEntity>(
     private val gson: Gson,
     private val errorEntityType: Class<TErrorEntity>
 ) {
 
     companion object {
-        inline fun <reified T> build(gson: Gson): ErrorHandler<T> {
-            return ErrorHandler(gson, T::class.java)
+        inline fun <reified T> build(gson: Gson): ErrorsHandler<T> {
+            return ErrorsHandler(gson, T::class.java)
         }
     }
 

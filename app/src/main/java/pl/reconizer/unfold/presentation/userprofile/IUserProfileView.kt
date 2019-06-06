@@ -1,11 +1,10 @@
 package pl.reconizer.unfold.presentation.userprofile
 
-import pl.reconizer.unfold.presentation.mvp.IView
+import pl.reconizer.unfold.domain.entities.UserAdventure
+import pl.reconizer.unfold.presentation.mvp.IListView
 
-interface IUserProfileView : IView {
+interface IUserProfileView : IListView<UserAdventure> {
 
     fun showProfile()
-
-    fun showAdventures()
 
 }
