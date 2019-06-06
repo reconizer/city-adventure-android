@@ -26,6 +26,8 @@ import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.R
 import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileComponent
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileModule
 import pl.reconizer.unfold.presentation.map.game.GameMapComponent
 import pl.reconizer.unfold.presentation.map.game.GameMapModule
 import pl.reconizer.unfold.presentation.menu.MenuComponent
@@ -56,6 +58,7 @@ object Injector {
     private var adventureSummaryComponent: AdventureSummaryComponent? = null
     private var userProfileComponent: UserProfileComponent? = null
     private var editUserProfileComponent: EditUserProfileComponent? = null
+    private var creatorProfileComponent: CreatorProfileComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -149,6 +152,11 @@ object Injector {
         return editUserProfileComponent!!
     }
 
+    fun buildCreatorProfileComponent(): CreatorProfileComponent {
+        creatorProfileComponent = mainActivityComponent!!.creatorProfileComponent(CreatorProfileModule())
+        return creatorProfileComponent!!
+    }
+
     fun clearAppComponent() {
         appComponent = null
     }
@@ -207,6 +215,10 @@ object Injector {
 
     fun clearEditUserProfileComponent() {
         editUserProfileComponent = null
+    }
+
+    fun clearCreatorProfileComponent() {
+        creatorProfileComponent = null
     }
 
 }

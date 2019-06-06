@@ -18,6 +18,7 @@ import pl.reconizer.unfold.domain.entities.Adventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.customviews.ShadowGenerator
+import pl.reconizer.unfold.presentation.navigation.keys.CreatorProfileKey
 import pl.reconizer.unfold.presentation.navigation.keys.GalleryKey
 import pl.reconizer.unfold.presentation.navigation.keys.JournalKey
 import javax.inject.Inject
@@ -65,6 +66,8 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         closeButton.setOnClickListener {
             goBack()
         }
+
+        adventureInfoView.onAuthorClickListener = { navigator.goTo(CreatorProfileKey()) }
 
         updateActionButton()
 

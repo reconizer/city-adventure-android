@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/creator_profile_background">
+    
+    <!--<pl.reconizer.unfold.presentation.customviews.ScalableSpace-->
+        <!--android:id="@+id/topSpace"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/space_5x"-->
+        <!--app:scaleDirection="height"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent" />-->
+
+    <!--<pl.reconizer.unfold.presentation.customviews.ScalableSpace-->
+        <!--android:id="@+id/bottomSpace"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/space_4x"-->
+        <!--app:scaleDirection="height"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent" />-->
+
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/contentBackgroundSpace"
+        android:layout_width="360dp"
+        android:layout_height="577dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/contentBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/creator_profile_content_background"
+        app:layout_constraintBottom_toBottomOf="@id/contentBackgroundSpace"
+        app:layout_constraintEnd_toEndOf="@id/contentBackgroundSpace"
+        app:layout_constraintStart_toStartOf="@id/contentBackgroundSpace"
+        app:layout_constraintTop_toTopOf="@id/contentBackgroundSpace" />
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_with_background"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

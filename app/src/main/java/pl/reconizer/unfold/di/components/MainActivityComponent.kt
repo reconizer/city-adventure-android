@@ -18,6 +18,8 @@ import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.R
 import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileComponent
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileModule
 import pl.reconizer.unfold.presentation.map.game.GameMapComponent
 import pl.reconizer.unfold.presentation.map.game.GameMapModule
 import pl.reconizer.unfold.presentation.menu.MenuComponent
@@ -52,5 +54,6 @@ interface MainActivityComponent {
     fun adventureSummaryComponent(module: AdventureSummaryModule): AdventureSummaryComponent
     fun userProfileComponent(module: UserProfileModule): UserProfileComponent
     fun editUserProfileComponent(module: EditUserProfileModule): EditUserProfileComponent
+    fun creatorProfileComponent(module: CreatorProfileModule): CreatorProfileComponent
 
 }
