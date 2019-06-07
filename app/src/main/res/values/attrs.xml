@@ -10,9 +10,9 @@
     <declare-styleable name="Scalables">
         <attr name="baseScreenWidth" format="integer" />
         <attr name="baseScreenHeight" format="integer" />
-        <attr name="scaleDirection" format="enum">
-            <enum name="height" value="1" />
-            <enum name="width" value="2" />
+        <attr name="scaleDirection" format="flags">
+            <flag name="height" value="1" />
+            <flag name="width" value="2" />
         </attr>
     </declare-styleable>
     

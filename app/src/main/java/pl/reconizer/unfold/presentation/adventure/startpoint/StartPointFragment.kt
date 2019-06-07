@@ -67,7 +67,11 @@ class StartPointFragment : BaseFragment(), IStartPointView {
             goBack()
         }
 
-        adventureInfoView.onAuthorClickListener = { navigator.goTo(CreatorProfileKey()) }
+        adventureInfoView.onAuthorClickListener = {
+            presenter.adventureStartPoint?.let {
+                navigator.goTo(CreatorProfileKey(it.authorId))
+            }
+        }
 
         updateActionButton()
 

@@ -29,15 +29,16 @@
         app:layout_constraintEnd_toEndOf="@id/coverImageBackground"
         app:layout_constraintStart_toStartOf="@id/coverImageBackground"
         app:layout_constraintTop_toTopOf="@id/coverImageBackground"
-        tools:src="@drawable/author_default_logo" />
+        tools:src="@drawable/test_banner" />
 
-    <View
+    <ImageView
         android:id="@+id/contentBorder"
         android:layout_width="0dp"
         android:layout_height="@dimen/frame_thickness"
         android:layout_marginStart="@dimen/space_1x"
         android:layout_marginEnd="@dimen/space_1x"
-        android:background="@drawable/border_horizontal"
+        android:src="@drawable/border_horizontal"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/coverImageBackground"
@@ -64,16 +65,16 @@
 
     <ImageView
         android:id="@+id/rankingIcon"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_user_ranking"
         app:layout_constraintBottom_toTopOf="@+id/rankingPosition"
         app:layout_constraintEnd_toStartOf="@+id/completionTimeIcon"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/coverImageBackground"
-        app:layout_constraintTop_toBottomOf="@+id/contentBorder" />
+        app:layout_constraintTop_toBottomOf="@+id/contentBorder"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/rankingPosition"
@@ -107,7 +108,7 @@
 
     <ImageView
         android:id="@+id/completionTimeIcon"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_completion_time"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,64 +128,5 @@
         app:layout_constraintStart_toStartOf="@id/completionTimeIcon"
         app:layout_constraintTop_toBottomOf="@id/completionTimeIcon"
         tools:text="1d 8h 43m" />
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/rankingContainer"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:gravity="center"-->
-    <!--app:layout_constraintStart_toEndOf="@id/coverImageBackground"-->
-    <!--app:layout_constraintTop_toBottomOf="@id/contentBorder"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/icon_user_ranking" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/rankingPosition"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:includeFontPadding="false"-->
-    <!--android:textAppearance="@style/TypeWriterText"-->
-    <!--android:textSize="15dp"-->
-    <!--tools:text="1234" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:includeFontPadding="false"-->
-    <!--android:text="@string/common_place"-->
-    <!--android:textAppearance="@style/TypeWriterText"-->
-    <!--android:textSize="12dp" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/completionTimeContainer"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@id/contentBorder">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/icon_completion_time" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/completionTime"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:includeFontPadding="false"-->
-    <!--android:textAppearance="@style/TypeWriterText"-->
-    <!--android:textSize="15dp"-->
-    <!--tools:text="1d 8h 43m" />-->
-
-    <!--</LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

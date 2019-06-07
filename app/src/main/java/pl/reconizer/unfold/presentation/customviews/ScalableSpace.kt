@@ -27,7 +27,10 @@ class ScalableSpace @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val width = MeasureSpec.getSize(widthMeasureSpec)
         val height = MeasureSpec.getSize(heightMeasureSpec)
-        if (getDisplayMetrics().widthPixels > 0 && getDisplayMetrics().heightPixels > 0) {
+        val widthPixels = getDisplayMetrics().widthPixels
+        val heightPixels = getDisplayMetrics().heightPixels
+        if (!(scaleDirection and WIDTH_SCALE_DIRECTION_TYPE == WIDTH_SCALE_DIRECTION_TYPE && widthPixels <= 0) && !(scaleDirection and HEIGHT_SCALE_DIRECTION_TYPE == HEIGHT_SCALE_DIRECTION_TYPE && heightPixels <= 0)) {
+//        if (getDisplayMetrics().widthPixels > 0 && getDisplayMetrics().heightPixels > 0) {
             setMeasuredDimension((width * calculateWidthMultiplier()).toInt(), (height * calculateHeightMultiplier()).toInt())
         } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)

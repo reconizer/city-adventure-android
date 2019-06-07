@@ -13,7 +13,9 @@ import javax.inject.Named
 @Module(includes = [
     ErrorHandlersModule::class
 ])
-class CreatorProfileModule {
+class CreatorProfileModule(
+        private val creatorId: String
+) {
 
     @Provides
     @ViewScope
@@ -27,7 +29,8 @@ class CreatorProfileModule {
                 backgroundScheduler,
                 mainScheduler,
                 creatorRepository,
-                errorsHandler
+                errorsHandler,
+                creatorId
         )
     }
 

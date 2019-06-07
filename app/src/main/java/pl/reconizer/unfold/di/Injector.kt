@@ -152,8 +152,8 @@ object Injector {
         return editUserProfileComponent!!
     }
 
-    fun buildCreatorProfileComponent(): CreatorProfileComponent {
-        creatorProfileComponent = mainActivityComponent!!.creatorProfileComponent(CreatorProfileModule())
+    fun buildCreatorProfileComponent(creatorId: String): CreatorProfileComponent {
+        creatorProfileComponent = mainActivityComponent!!.creatorProfileComponent(CreatorProfileModule(creatorId))
         return creatorProfileComponent!!
     }
 

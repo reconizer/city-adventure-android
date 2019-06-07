@@ -27,16 +27,15 @@
 
             <pl.reconizer.unfold.presentation.customviews.ScalableSpace
                 android:id="@+id/leftMargin"
-                android:layout_width="@dimen/space_1x"
+                android:layout_width="1dp"
                 android:layout_height="1dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <pl.reconizer.unfold.presentation.customviews.ScalableSpace
                 android:id="@+id/rightMargin"
-                android:layout_width="@dimen/space_1x"
+                android:layout_width="1dp"
                 android:layout_height="1dp"
                 app:layout_constraintEnd_toEndOf="parent" />
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/contentContainer"

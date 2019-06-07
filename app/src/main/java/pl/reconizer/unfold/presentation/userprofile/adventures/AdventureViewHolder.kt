@@ -19,7 +19,7 @@ class AdventureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(adventure: UserAdventure) {
         adventureName.text = adventure.name
         position.text = adventure.position.toString()
-        completionTime.text = adventure.completionTime?.toPrettyTimeString()
+        completionTime.text = adventure.completionTime?.toPrettyTimeString(2)
 
         Picasso.get()
                 .load(adventure.coverImage)

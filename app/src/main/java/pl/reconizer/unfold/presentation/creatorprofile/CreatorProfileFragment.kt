@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_creator_profile.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
@@ -17,7 +18,9 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildCreatorProfileComponent().inject(this)
+        Injector.buildCreatorProfileComponent(
+                arguments?.get(CREATOR_ID_PARAM) as String? ?: throw IllegalStateException("Creator id is required.")
+        ).inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,10 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
+        if (presenter.profile == null) {
+            presenter.fetchProfile()
+        }
+        showProfile()
     }
 
     override fun onPause() {
@@ -48,7 +55,17 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
     }
 
     override fun showProfile() {
+        creatorName.text =  presenter.profile?.name
+        description.text = presenter.profile?.description
+        favoritesCounter.text = presenter.profile?.favoriteCount.toString()
 
+        Picasso.get()
+                .load(presenter.profile?.logo)
+                .into(logo)
+    }
+
+    companion object {
+        const val CREATOR_ID_PARAM = "creator_id"
     }
 
 }
