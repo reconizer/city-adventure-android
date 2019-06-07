@@ -1,10 +1,11 @@
 package pl.reconizer.unfold.domain.entities
 
+import com.google.gson.annotations.SerializedName
+
 data class UserAdventure(
         val id: String,
         val name: String,
-        val rating: Double?,
-        val completionTime: Long?,
+        @SerializedName("completion_time") val completionTime: Long?,
         val position: Int?,
-        val coverImage: String
+        @SerializedName("image_url") val coverImage: String
 )

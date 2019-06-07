@@ -56,4 +56,11 @@ interface IAdventureApi {
             @Query("rating") rating: Int
     ): Single<RatingResponse>
 
+    @GET("api/adventures/user")
+    fun getUserAdventures(
+            @Query("page") page: Int,
+            @Query("completed") completed: Boolean,
+            @Query("paid") paid: Boolean
+    ): Single<List<UserAdventure>>
+
 }

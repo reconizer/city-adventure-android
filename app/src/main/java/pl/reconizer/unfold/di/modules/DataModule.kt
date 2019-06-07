@@ -41,11 +41,13 @@ class DataModule {
     fun provideUserRepository(
             authenticationApi: IAuthenticationApi,
             userApi: IUserApi,
+            adventureApi: IAdventureApi,
             tokenMapper: TokenMapper
     ): IUserRepository {
         return UserRepository(
                 authenticationApi,
                 userApi,
+                adventureApi,
                 tokenMapper
         )
     }
