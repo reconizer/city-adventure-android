@@ -33,6 +33,8 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
 
         closeButton.setOnClickListener { navigator.goBack() }
 
+        favoriteButton.setOnClickListener { presenter.toggleFollow(favoriteButton.isChecked) }
+
     }
 
     override fun onResume() {
@@ -58,6 +60,9 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
         creatorName.text =  presenter.profile?.name
         description.text = presenter.profile?.description
         favoritesCounter.text = presenter.profile?.favoriteCount.toString()
+
+        // TODO when api will be updated, change it to actual field
+        favoriteButton.isChecked = (presenter.profile?.favoriteCount ?: 0) > 0
 
         Picasso.get()
                 .load(presenter.profile?.logo)
