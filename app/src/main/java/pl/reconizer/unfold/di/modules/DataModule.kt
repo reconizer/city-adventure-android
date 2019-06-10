@@ -64,9 +64,10 @@ class DataModule {
     @Provides
     @Singleton
     fun provideCreatorRepository(
-            creatorApi: ICreatorApi
+            creatorApi: ICreatorApi,
+            adventureApi: IAdventureApi
     ): ICreatorRepository {
-        return CreatorRepository(creatorApi)
+        return CreatorRepository(creatorApi, adventureApi)
     }
 
 }

@@ -63,4 +63,10 @@ interface IAdventureApi {
             @Query("paid") paid: Boolean
     ): Single<List<UserAdventure>>
 
+    @GET("api/creator/adventures")
+    fun getCreatorAdventures(
+            @Query("filters[page]") page: Int,
+            @Query("creator_id") creatorId: String
+    ): Single<List<CreatorAdventure>>
+
 }

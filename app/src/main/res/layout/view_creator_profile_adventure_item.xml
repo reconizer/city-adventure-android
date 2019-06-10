@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="94dp"
+    android:background="@drawable/frame_small">
+
+    <ImageView
+        android:id="@+id/coverImageBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/frame_offset"
+        android:layout_marginTop="@dimen/frame_offset"
+        android:layout_marginBottom="@dimen/frame_offset"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,16:9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/coverImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/frame_offset"
+        app:layout_constraintBottom_toBottomOf="@id/coverImageBackground"
+        app:layout_constraintEnd_toEndOf="@id/coverImageBackground"
+        app:layout_constraintStart_toStartOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="@id/coverImageBackground"
+        tools:src="@drawable/test_banner" />
+
+    <TextView
+        android:id="@+id/completionTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="14dp"
+        android:drawableStart="@drawable/icon_completion_time_black"
+        android:drawablePadding="@dimen/space_1_5x"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="@id/coverImageBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="53m - 2h 30m" />
+
+    <TextView
+        android:id="@+id/difficultyLevel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="14dp"
+        android:drawableStart="@drawable/icon_difficulty_level"
+        android:drawablePadding="@dimen/space_1_5x"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:layout_marginTop="@dimen/space_xs"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toBottomOf="@id/completionTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="trudny" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="14dp"
+        android:drawableStart="@drawable/icon_rating"
+        android:drawablePadding="@dimen/space_1_5x"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:layout_marginTop="@dimen/space_xs"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toBottomOf="@id/difficultyLevel"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="4.5" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="14dp"
+        android:drawableStart="@drawable/icon_price"
+        android:drawablePadding="@dimen/space_1_5x"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:layout_marginTop="@dimen/space_xs"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toBottomOf="@id/rating"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="FREE" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,3 +19,4 @@ interface ICreatorApi {
     fun unfollow(@Path("id") creatorId: String): Completable
 
 }
+
