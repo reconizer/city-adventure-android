@@ -172,7 +172,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/favoritesCounter"
-                    tools:text="@tools:sample/lorem/random" />
+                    tools:text="@tools:sample/lorem" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -199,7 +199,8 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:paddingTop="@dimen/frame_offset"
             android:paddingBottom="@dimen/frame_offset"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false"
+            tools:listitem="@layout/view_creator_profile_adventure_item" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
