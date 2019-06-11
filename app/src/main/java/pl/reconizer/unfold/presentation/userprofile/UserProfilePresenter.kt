@@ -9,7 +9,6 @@ import pl.reconizer.unfold.domain.entities.UserProfile
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
-import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import pl.reconizer.unfold.presentation.mvp.PaginatedDataPresenter
 import java.lang.ref.WeakReference
 

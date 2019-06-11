@@ -1,8 +1,9 @@
 package pl.reconizer.unfold.presentation.creatorprofile
 
-import pl.reconizer.unfold.presentation.mvp.IView
+import pl.reconizer.unfold.domain.entities.CreatorAdventure
+import pl.reconizer.unfold.presentation.mvp.IListView
 
-interface ICreatorProfileView : IView {
+interface ICreatorProfileView : IListView<CreatorAdventure> {
 
     fun showProfile()
 

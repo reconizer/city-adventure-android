@@ -7,6 +7,7 @@ import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.repositories.ICreatorRepository
+import pl.reconizer.unfold.presentation.creatorprofile.adventures.CreatorAdventuresAdapter
 import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
@@ -34,5 +35,10 @@ class CreatorProfileModule(
         )
     }
 
+    @Provides
+    @ViewScope
+    fun provideAdapter(): CreatorAdventuresAdapter {
+        return CreatorAdventuresAdapter()
+    }
 
 }

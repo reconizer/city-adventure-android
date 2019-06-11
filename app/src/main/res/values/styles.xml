@@ -18,10 +18,15 @@
 
     <style name="Text">
         <item name="android:fontFamily">@font/oswald_regular</item>
+        <item name="android:textColor">@color/fontDark</item>
     </style>
 
     <style name="Text.Medium">
         <item name="android:fontFamily">@font/oswald_medium</item>
+    </style>
+
+    <style name="Text.Bold">
+        <item name="android:fontFamily">@font/oswald_bold</item>
     </style>
 
     <style name="TypeWriterText.JournalTabTitle">
