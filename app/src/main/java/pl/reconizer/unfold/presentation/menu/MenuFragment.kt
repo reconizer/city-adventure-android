@@ -11,6 +11,7 @@ import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.navigation.keys.AuthenticationStartKey
+import pl.reconizer.unfold.presentation.navigation.keys.UserAdventuresKey
 import pl.reconizer.unfold.presentation.navigation.keys.UserProfileKey
 import javax.inject.Inject
 
@@ -37,6 +38,10 @@ class MenuFragment : BaseFragment(), IMenuView {
         avatarBackground.setOnClickListener { navigator.goTo(UserProfileKey()) }
 
         logoutMenuItem.setOnClickListener { presenter.logout() }
+
+        adventuresMenuItem.setOnClickListener {
+            navigator.goTo(UserAdventuresKey())
+        }
     }
 
     override fun onResume() {
