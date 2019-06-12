@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="44dp">
+
+    <TextView
+        android:id="@+id/startedTab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/user_adventures_tab_started"
+        android:gravity="center"
+        android:text="@string/user_adventures_started"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/completedTab"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/completedTab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/user_adventures_tab_completed"
+        android:gravity="center"
+        android:text="@string/user_adventures_completed"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/purchasedTab"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/startedTab"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/purchasedTab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/user_adventures_tab_purchased"
+        android:gravity="center"
+        android:text="@string/user_adventures_purchased"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/completedTab"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

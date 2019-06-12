@@ -58,6 +58,9 @@
     <string name="puzzle_number_push_lock_tutorial_2">Kolejność wciskania cyfr nie ma znaczenia, ważne jest wciśnięcie odpowiednich cyfr na mechaniźmie.</string>
     <string name="puzzle_number_push_lock_tutorial_title">Kłódka z kodem numerycznym</string>
     <string name="puzzle_wrong_answer">Podana odpowiedź jest nieprawidłowa.</string>
+    <string name="user_adventures_completed">zakończone</string>
+    <string name="user_adventures_purchased">zakupione</string>
+    <string name="user_adventures_started">rozpoczęte</string>
     <string name="user_profile_avatar_label">Avatar</string>
     <string name="user_profile_edit">Edytuj profil</string>
     <string name="user_profile_finished_adventures">Skończone trasy</string>
