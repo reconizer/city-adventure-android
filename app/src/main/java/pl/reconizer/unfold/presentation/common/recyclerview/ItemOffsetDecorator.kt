@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.annotation.DimenRes
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.ceil
 
 class ItemOffsetDecorator(private val itemOffset: Int, private val offsetType: Int) : RecyclerView.ItemDecoration() {
 
@@ -12,12 +14,42 @@ class ItemOffsetDecorator(private val itemOffset: Int, private val offsetType: I
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.set(
-                if (offsetType and OFFSET_LEFT != 0) itemOffset else 0,
-                if (offsetType and OFFSET_TOP != 0) itemOffset else 0,
-                if (offsetType and OFFSET_RIGHT != 0) itemOffset else 0,
-                if (offsetType and OFFSET_BOTTOM != 0) itemOffset else 0
-        )
+        when (determineDisplayType(parent)) {
+            DisplayType.LINEAR -> {
+                outRect.set(
+                        if (offsetType and OFFSET_LEFT != 0) itemOffset else 0,
+                        if (offsetType and OFFSET_TOP != 0) itemOffset else 0,
+                        if (offsetType and OFFSET_RIGHT != 0) itemOffset else 0,
+                        if (offsetType and OFFSET_BOTTOM != 0) itemOffset else 0
+                )
+            }
+            DisplayType.GRID -> {
+                val position = parent.getChildViewHolder(view).adapterPosition
+                val columns = (parent.layoutManager as GridLayoutManager).spanCount
+                val currentColumn = position % columns
+                val rows = ceil(1.0 * state.itemCount / columns).toInt()
+                outRect.set(
+                        if (offsetType and OFFSET_LEFT != 0) itemOffset - currentColumn * itemOffset / columns else 0,
+                        if (offsetType and OFFSET_TOP != 0) itemOffset else 0,
+                        if (offsetType and OFFSET_RIGHT != 0) (currentColumn + 1) * itemOffset / columns else 0,
+                        if (offsetType and OFFSET_BOTTOM != 0) itemOffset else 0
+
+                )
+            }
+        }
+    }
+
+    private fun determineDisplayType(recyclerView: RecyclerView): DisplayType {
+        return if (recyclerView.layoutManager is GridLayoutManager) {
+            DisplayType.GRID
+        } else {
+            DisplayType.LINEAR
+        }
+    }
+
+    enum class DisplayType {
+        LINEAR,
+        GRID
     }
 
     companion object {
