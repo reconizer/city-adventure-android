@@ -21,7 +21,13 @@
         android:id="@+id/contentBackgroundDecoratorShadowSpace"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        app:layout_constraintBottom_toBottomOf="@id/adventuresFilterTabs"/>
+        app:layout_constraintBottom_toBottomOf="@id/adventuresFilterTabs" />
+
+    <Space
+        android:id="@+id/contentBackgroundShadowSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="6.25dp"
+        app:layout_constraintBottom_toBottomOf="@id/contentBackgroundDecorator" />
 
     <ImageView
         android:id="@+id/contentBackgroundDecorator"
@@ -31,7 +37,7 @@
         android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="@id/contentBackgroundDecoratorShadowSpace"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/contentBackground"
@@ -44,14 +50,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contentBackgroundDecorator" />
 
-    <ImageView
-        android:id="@+id/contentBackgroundShadow"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/adventuresPager"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/user_adventures_content_background_shadow"
-        app:layout_constraintStart_toStartOf="@id/contentBackground"
-        app:layout_constraintEnd_toEndOf="@id/contentBackground"
-        app:layout_constraintBottom_toTopOf="@id/contentBackground"/>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/contentBackgroundShadowSpace" />
 
     <ImageView
         android:id="@+id/closeButton"

@@ -59,4 +59,22 @@ class UserRepository(
                 .map { CollectionContainer(it) }
     }
 
+    override fun getStartedAdventures(page: Int): Single<ICollectionContainer<UserAdventure>> {
+        return adventureApi.getUserAdventures(
+                page = page,
+                completed = false,
+                paid = false
+        )
+                .map { CollectionContainer(it) }
+    }
+
+    override fun getPurchasedAdventures(page: Int): Single<ICollectionContainer<UserAdventure>> {
+        return adventureApi.getUserAdventures(
+                page = page,
+                completed = false,
+                paid = true
+        )
+                .map { CollectionContainer(it) }
+    }
+
 }

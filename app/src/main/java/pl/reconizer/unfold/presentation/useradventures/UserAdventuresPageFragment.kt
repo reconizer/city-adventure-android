@@ -1,29 +1,26 @@
-package pl.reconizer.unfold.presentation.userprofile
+package pl.reconizer.unfold.presentation.useradventures
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_user_profile.*
+import kotlinx.android.synthetic.main.fragment_user_adventures_page.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.UserAdventure
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.recyclerview.EndlessRecyclerViewScrollListener
 import pl.reconizer.unfold.presentation.common.recyclerview.ItemOffsetDecorator
-import pl.reconizer.unfold.presentation.navigation.keys.EditUserProfileKey
-import pl.reconizer.unfold.presentation.userprofile.adventures.UserAdventuresAdapter
 import javax.inject.Inject
 
-class UserProfileFragment : BaseFragment(), IUserProfileView {
+class UserAdventuresPageFragment : BaseFragment(), IUserAdventuresView {
 
     @Inject
-    lateinit var presenter: UserProfilePresenter
+    lateinit var presenter: UserAdventuresPresenter
 
     @Inject
     lateinit var adapter: UserAdventuresAdapter
@@ -32,23 +29,21 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildUserProfileComponent().inject(this)
+        Injector.buildUserAdventuresComponent(
+                arguments?.get(ADVENTURES_TYPE_PARAM) as UserAdventuresType? ?: UserAdventuresType.COMPLETED
+        ).inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_user_profile, container, false)
+        return inflater.inflate(R.layout.fragment_user_adventures_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        editButton.setOnClickListener { navigator.goTo(EditUserProfileKey()) }
-
-        closeButton.setOnClickListener { navigator.goBack() }
-
-        val linearLayoutManager = LinearLayoutManager(context)
-        endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+        val gridLayoutManager = GridLayoutManager(context, 2)
+        endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(gridLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 if (presenter.hasGotMorePages) presenter.fetchNextPage()
             }
@@ -58,44 +53,26 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
             if (itemDecorationCount == 0) {
                 addItemDecoration(ItemOffsetDecorator(
                         context,
-                        R.dimen.frame_offset_with_thickness,
-                        ItemOffsetDecorator.OFFSET_BOTTOM or ItemOffsetDecorator.OFFSET_OUTSIDE
+                        R.dimen.space_1x,
+                        ItemOffsetDecorator.OFFSET_BOTTOM or ItemOffsetDecorator.OFFSET_INSIDE
                 ))
             }
-            layoutManager = linearLayoutManager
+            layoutManager = gridLayoutManager
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-            this.adapter = this@UserProfileFragment.adapter
+            this.adapter = this@UserAdventuresPageFragment.adapter
             addOnScrollListener(endlessRecyclerViewScrollListener)
         }
-
     }
 
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        presenter.fetchProfile()
         if (presenter.items.isEmpty()) presenter.fetchFirstPage()
-        showProfile()
     }
 
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Injector.clearUserProfileComponent()
-    }
-
-    override fun showProfile() {
-        presenter.profile?.let {
-            usernameTextView.text = it.nick
-
-            Picasso.get()
-                    .load(it.avatarUrl)
-                    .into(avatar)
-        }
     }
 
     override fun showFirstPage(collection: List<UserAdventure>) {
@@ -118,6 +95,19 @@ class UserProfileFragment : BaseFragment(), IUserProfileView {
 
     override fun hideListLoader() {
         hideLoader()
+    }
+
+    companion object {
+        const val ADVENTURES_TYPE_PARAM = "adventures_type"
+
+        fun newInstance(type: UserAdventuresType): UserAdventuresPageFragment {
+            return UserAdventuresPageFragment().apply {
+                arguments = bundleOf(
+                        ADVENTURES_TYPE_PARAM to type
+                )
+            }
+        }
+
     }
 
 }

@@ -36,6 +36,9 @@ import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageComponent
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageModule
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresType
 import pl.reconizer.unfold.presentation.userprofile.UserProfileComponent
 import pl.reconizer.unfold.presentation.userprofile.UserProfileModule
 import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileComponent
@@ -155,6 +158,10 @@ object Injector {
     fun buildCreatorProfileComponent(creatorId: String): CreatorProfileComponent {
         creatorProfileComponent = mainActivityComponent!!.creatorProfileComponent(CreatorProfileModule(creatorId))
         return creatorProfileComponent!!
+    }
+
+    fun buildUserAdventuresComponent(userAdventuresType: UserAdventuresType): UserAdventuresPageComponent {
+        return mainActivityComponent!!.userAdventuresComponent(UserAdventuresPageModule(userAdventuresType))
     }
 
     fun clearAppComponent() {

@@ -1,5 +1,6 @@
 package pl.reconizer.unfold.presentation.common.recyclerview
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -7,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  * https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
  * I simplified it for usage with LinearLayout only, at least for now.
  */
-abstract class EndlessRecyclerViewScrollListener(private val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
+abstract class EndlessRecyclerViewScrollListener(private val layoutManager: RecyclerView.LayoutManager) : RecyclerView.OnScrollListener() {
 
     // The minimum amount of items to have below your current scroll position
     // before loading more.
@@ -25,12 +26,20 @@ abstract class EndlessRecyclerViewScrollListener(private val layoutManager: Line
     // Sets the starting page index
     private val startingPageIndex = 0
 
+    init {
+        if (layoutManager is GridLayoutManager) {
+            visibleThreshold *= layoutManager.spanCount
+        }
+    }
+
     // This happens many times a second during a scroll, so be wary of the code you place here.
     // We are given a few useful parameters to help us work out if we need to load some more data,
     // but first we check if we are waiting for the previous load to finish.
     override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
         val totalItemCount = layoutManager.itemCount
-        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+        val lastVisibleItemPosition = if (layoutManager is LinearLayoutManager) {
+            layoutManager.findLastVisibleItemPosition()
+        } else { throw IllegalStateException("Not supported LayoutManager") }
 
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state

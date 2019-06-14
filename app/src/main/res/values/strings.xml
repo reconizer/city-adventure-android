@@ -61,6 +61,7 @@
     <string name="user_adventures_completed">zakończone</string>
     <string name="user_adventures_purchased">zakupione</string>
     <string name="user_adventures_started">rozpoczęte</string>
+    <string name="user_adventures_title">Lista Twoich przygód</string>
     <string name="user_profile_avatar_label">Avatar</string>
     <string name="user_profile_edit">Edytuj profil</string>
     <string name="user_profile_finished_adventures">Skończone trasy</string>

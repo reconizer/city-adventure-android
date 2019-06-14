@@ -17,9 +17,9 @@ class ItemOffsetDecorator(private val itemOffset: Int, private val offsetType: I
         when (determineDisplayType(parent)) {
             DisplayType.LINEAR -> {
                 outRect.set(
-                        if (offsetType and OFFSET_LEFT != 0) itemOffset else 0,
+                        if (offsetType and OFFSET_OUTSIDE != 0) itemOffset else 0,
                         if (offsetType and OFFSET_TOP != 0) itemOffset else 0,
-                        if (offsetType and OFFSET_RIGHT != 0) itemOffset else 0,
+                        if (offsetType and OFFSET_OUTSIDE != 0) itemOffset else 0,
                         if (offsetType and OFFSET_BOTTOM != 0) itemOffset else 0
                 )
             }
@@ -29,11 +29,29 @@ class ItemOffsetDecorator(private val itemOffset: Int, private val offsetType: I
                 val currentColumn = position % columns
                 val rows = ceil(1.0 * state.itemCount / columns).toInt()
                 outRect.set(
-                        if (offsetType and OFFSET_LEFT != 0) itemOffset - currentColumn * itemOffset / columns else 0,
-                        if (offsetType and OFFSET_TOP != 0) itemOffset else 0,
-                        if (offsetType and OFFSET_RIGHT != 0) (currentColumn + 1) * itemOffset / columns else 0,
-                        if (offsetType and OFFSET_BOTTOM != 0) itemOffset else 0
+                        // left
+                        if (currentColumn == 0 && offsetType and OFFSET_OUTSIDE != 0) {
+                            itemOffset
+                        } else if (offsetType and OFFSET_INSIDE != 0 && currentColumn > 0) {
+                            itemOffset / 2
+                        } else {
+                            0
+                        },
 
+                        // top
+                        if (offsetType and OFFSET_TOP != 0) itemOffset else 0,
+
+                        // right
+                        if (currentColumn == columns - 1 && offsetType and OFFSET_OUTSIDE != 0) {
+                            itemOffset
+                        } else if (offsetType and OFFSET_INSIDE != 0 && currentColumn < columns - 1) {
+                            itemOffset / 2
+                        } else {
+                            0
+                        },
+
+                        // bottom
+                        if (offsetType and OFFSET_BOTTOM != 0) itemOffset else 0
                 )
             }
         }
@@ -54,8 +72,8 @@ class ItemOffsetDecorator(private val itemOffset: Int, private val offsetType: I
 
     companion object {
         const val OFFSET_BOTTOM = 1
-        const val OFFSET_LEFT = 2
+        const val OFFSET_INSIDE = 2
         const val OFFSET_TOP = 4
-        const val OFFSET_RIGHT = 8
+        const val OFFSET_OUTSIDE = 8
     }
 }

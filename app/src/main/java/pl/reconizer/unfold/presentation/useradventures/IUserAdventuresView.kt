@@ -1,7 +1,6 @@
 package pl.reconizer.unfold.presentation.useradventures
 
-import pl.reconizer.unfold.presentation.mvp.IView
+import pl.reconizer.unfold.domain.entities.UserAdventure
+import pl.reconizer.unfold.presentation.mvp.IListView
 
-interface IUserAdventuresView : IView {
-
-}
+interface IUserAdventuresView : IListView<UserAdventure>

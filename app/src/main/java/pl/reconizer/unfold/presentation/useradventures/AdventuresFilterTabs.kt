@@ -13,13 +13,7 @@ class AdventuresFilterTabs @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    enum class Tab {
-        STARTED,
-        COMPLETED,
-        PURCHASED
-    }
-
-    var currentTab = Tab.STARTED
+    var currentTab = UserAdventuresType.STARTED
         set(value) {
             val previousType = field
             field = value
@@ -27,38 +21,38 @@ class AdventuresFilterTabs @JvmOverloads constructor(
             onTabChangeListener?.invoke(field)
         }
 
-    var onTabChangeListener: ((tab: Tab) -> Unit)? = null
+    var onTabChangeListener: ((tab: UserAdventuresType) -> Unit)? = null
 
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.view_user_adventures_tabs, this, true)
 
         completedTabBackground.setOnClickListener {
-            currentTab = Tab.COMPLETED
+            currentTab = UserAdventuresType.COMPLETED
         }
 
         startedTabBackground.setOnClickListener {
-            currentTab = Tab.STARTED
+            currentTab = UserAdventuresType.STARTED
         }
 
         purchasedTabBackground.setOnClickListener {
-            currentTab = Tab.PURCHASED
+            currentTab = UserAdventuresType.PURCHASED
         }
 
         updateView(currentTab, currentTab)
     }
 
-    private fun updateView(oldTabType: Tab, newTabType: Tab) {
+    private fun updateView(oldTabType: UserAdventuresType, newTabType: UserAdventuresType) {
         when(oldTabType) {
-            Tab.STARTED -> startedTabSpace.isVisible = true
-            Tab.COMPLETED -> completedTabSpace.isVisible = true
-            Tab.PURCHASED -> purchasedTabSpace.isVisible = true
+            UserAdventuresType.STARTED -> startedTabSpace.isVisible = true
+            UserAdventuresType.COMPLETED -> completedTabSpace.isVisible = true
+            UserAdventuresType.PURCHASED -> purchasedTabSpace.isVisible = true
         }
 
         when(newTabType) {
-            Tab.STARTED -> startedTabSpace.isGone = true
-            Tab.COMPLETED -> completedTabSpace.isGone = true
-            Tab.PURCHASED -> purchasedTabSpace.isGone = true
+            UserAdventuresType.STARTED -> startedTabSpace.isGone = true
+            UserAdventuresType.COMPLETED -> completedTabSpace.isGone = true
+            UserAdventuresType.PURCHASED -> purchasedTabSpace.isGone = true
         }
     }
 }
