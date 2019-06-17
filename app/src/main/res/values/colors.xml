@@ -24,4 +24,8 @@
     <color name="authenticationColor">#ab842a</color>
     <color name="authenticationColorLighter">#d0a137</color>
     <color name="authenticationLabelColor">#9696a9</color>
+
+    <color name="light1">#e9d1b3</color>
+    
+    <color name="brown1">#3d352a</color>
 </resources>

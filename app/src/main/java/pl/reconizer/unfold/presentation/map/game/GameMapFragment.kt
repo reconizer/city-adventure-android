@@ -20,6 +20,7 @@ import pl.reconizer.unfold.presentation.map.PinProvider
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureStartPointKey
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
+import pl.reconizer.unfold.presentation.navigation.keys.SearchKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.NumberPushLockPuzzleKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.TextPuzzleKey
 import javax.inject.Inject
@@ -68,6 +69,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         journalButton.setOnClickListener { navigator.goBack() }
         locationCheckerButton.setOnClickListener { presenter.checkLocation() }
         menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
+        searchButton.setOnClickListener { navigator.goTo(SearchKey()) }
+
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
             adventuresButtonsGroup.isVisible = true
