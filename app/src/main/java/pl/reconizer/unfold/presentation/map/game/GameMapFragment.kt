@@ -86,7 +86,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun onResume() {
         super.onResume()
-        presenter.adventure = arguments?.get(ADVENTURE_PARAM) as Adventure?
+        presenter.adventure = arguments?.get(ADVENTURE_PARAM) as MapAdventure?
         presenter.subscribe(this, mapMode)
         presenter.lastLocation?.let {
             mapView.handleNewUserLocation(it.toLatLng())
@@ -96,7 +96,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
         mapView.pinClickListener = {
             when (it) {
-                is Adventure -> {
+                is MapAdventure -> {
                     navigator.goTo(AdventureStartPointKey(it))
                 }
                 is AdventurePoint -> {
@@ -151,7 +151,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         mapView.handleNewUserLocation(position.toLatLng())
     }
 
-    override fun showAdventures(adventures: List<Adventure>) {
+    override fun showAdventures(adventures: List<MapAdventure>) {
         mapView.showMarkers(adventures)
     }
 

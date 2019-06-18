@@ -200,7 +200,7 @@
             android:paddingTop="@dimen/frame_offset"
             android:paddingBottom="@dimen/frame_offset"
             android:clipToPadding="false"
-            tools:listitem="@layout/view_creator_profile_adventure_item" />
+            tools:listitem="@layout/view_adventure_item_with_details" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

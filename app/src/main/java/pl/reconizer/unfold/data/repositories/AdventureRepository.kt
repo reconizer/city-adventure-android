@@ -12,8 +12,20 @@ class AdventureRepository(
     private val adventurePointWithCluesMapper: AdventurePointWithCluesMapper
 ) : IAdventureRepository {
 
-    override fun getAdventures(lat: Double, lng: Double): Single<List<Adventure>> {
+    override fun getAdventures(lat: Double, lng: Double): Single<List<MapAdventure>> {
         return adventureApi.getAdventures(lat, lng)
+    }
+
+    override fun searchAdventures(page: Int, position: Position): Single<ICollectionContainer<Adventure>> {
+        return adventureApi.searchAdventures(
+                page = page,
+                position = position,
+                name = null,
+                difficultyLevel = null,
+                range = null,
+                order = null
+        )
+                .map { CollectionContainer(it) }
     }
 
     override fun getAdventure(adventureId: String): Single<AdventureStartPoint> {

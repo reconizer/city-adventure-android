@@ -12,7 +12,7 @@ import org.mockito.ArgumentMatchers.anyDouble
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.Position
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
@@ -138,7 +138,7 @@ class GameMapPresenterSpec : Spek({
 
                 context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
                     val adventurePoints = emptyList<AdventurePoint>()
-                    val adventure = mock<Adventure>()
+                    val adventure = mock<MapAdventure>()
                     val adventureId = "adv-id"
 
                     beforeEachTest {
@@ -163,7 +163,7 @@ class GameMapPresenterSpec : Spek({
                 }
 
                 context("when the map camera is moving") {
-                    val adventures = emptyList<Adventure>()
+                    val adventures = emptyList<MapAdventure>()
 
                     context("when it is the first change emit") {
                         val cameraDetails = CameraDetails(LatLng(1.0, 1.0), 15f)
@@ -335,7 +335,7 @@ class GameMapPresenterSpec : Spek({
                 }
 
                 context("when the map camera is not moving") {
-                    val adventures = emptyList<Adventure>()
+                    val adventures = emptyList<MapAdventure>()
                     val cameraDetails = CameraDetails(LatLng(1.0, 1.0), 15f)
 
                     context("when ${GameMapPresenter.LOAD_ADVENTURES_TIMEOUT} seconds passed") {

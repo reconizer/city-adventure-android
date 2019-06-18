@@ -17,7 +17,7 @@ class AdventureSummaryPresenter(
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
         private val errorsHandler: ErrorsHandler<Error>,
-        private val adventure: Adventure
+        private val adventure: MapAdventure
 ) : BasePresenter<IAdventureSummaryView>() {
 
     var userRanking: RankingEntry? = null

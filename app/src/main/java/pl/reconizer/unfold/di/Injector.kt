@@ -8,10 +8,7 @@ import pl.reconizer.unfold.di.components.DaggerAppComponent
 import pl.reconizer.unfold.di.components.MainActivityComponent
 import pl.reconizer.unfold.di.modules.ContextModule
 import pl.reconizer.unfold.di.modules.MainActivityModule
-import pl.reconizer.unfold.domain.entities.Adventure
-import pl.reconizer.unfold.domain.entities.AdventurePoint
-import pl.reconizer.unfold.domain.entities.AdventureStartPoint
-import pl.reconizer.unfold.domain.entities.PuzzleType
+import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.presentation.adventure.journal.JournalComponent
 import pl.reconizer.unfold.presentation.adventure.journal.JournalModule
 import pl.reconizer.unfold.presentation.adventure.startpoint.StartPointComponent
@@ -34,6 +31,8 @@ import pl.reconizer.unfold.presentation.menu.MenuComponent
 import pl.reconizer.unfold.presentation.menu.MenuModule
 import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
+import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresComponent
+import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
 import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageComponent
@@ -113,14 +112,14 @@ object Injector {
         return gameMapComponent!!
     }
 
-    fun buildAdventureStartPointComponent(adventure: Adventure): StartPointComponent {
+    fun buildAdventureStartPointComponent(adventure: MapAdventure): StartPointComponent {
         adventureStartPointComponent = mainActivityComponent!!.adventureStartPointComponent(
                 StartPointModule(adventure)
         )
         return adventureStartPointComponent!!
     }
 
-    fun buildJournalComponent(adventure: Adventure, adventureStartPoint: AdventureStartPoint): JournalComponent {
+    fun buildJournalComponent(adventure: MapAdventure, adventureStartPoint: AdventureStartPoint): JournalComponent {
         journalComponent = mainActivityComponent!!.journalComponent(
                 JournalModule(adventure, adventureStartPoint)
         )
@@ -128,7 +127,7 @@ object Injector {
     }
 
     fun buildPuzzleComponent(
-            adventure: Adventure,
+            adventure: MapAdventure,
             adventurePoint: AdventurePoint,
             puzzleType: PuzzleType
     ): PuzzleComponent {
@@ -138,7 +137,7 @@ object Injector {
         return puzzleComponent!!
     }
 
-    fun buildAdventureSummaryComponent(adventure: Adventure): AdventureSummaryComponent {
+    fun buildAdventureSummaryComponent(adventure: MapAdventure): AdventureSummaryComponent {
         adventureSummaryComponent = mainActivityComponent!!.adventureSummaryComponent(AdventureSummaryModule(
                 adventure
         ))
@@ -162,6 +161,10 @@ object Injector {
 
     fun buildUserAdventuresComponent(userAdventuresType: UserAdventuresType): UserAdventuresPageComponent {
         return mainActivityComponent!!.userAdventuresComponent(UserAdventuresPageModule(userAdventuresType))
+    }
+
+    fun buildSearchAdventuresComponent(position: Position): SearchAdventuresComponent {
+        return mainActivityComponent!!.searchAdventuresComponent(SearchAdventuresModule(position))
     }
 
     fun clearAppComponent() {

@@ -4,7 +4,7 @@ import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.domain.entities.CreatorAdventure
+import pl.reconizer.unfold.domain.entities.Adventure
 import pl.reconizer.unfold.domain.entities.CreatorProfile
 import pl.reconizer.unfold.domain.entities.ICollectionContainer
 import pl.reconizer.unfold.domain.repositories.ICreatorRepository
@@ -21,7 +21,7 @@ class CreatorProfilePresenter(
         private val creatorRepository: ICreatorRepository,
         errorsHandler: ErrorsHandler<Error>,
         val creatorId: String
-) : PaginatedDataPresenter<CreatorAdventure, ICreatorProfileView>(
+) : PaginatedDataPresenter<Adventure, ICreatorProfileView>(
         backgroundScheduler,
         mainScheduler,
         errorsHandler
@@ -62,7 +62,7 @@ class CreatorProfilePresenter(
         )
     }
 
-    override fun load(page: Int): Single<ICollectionContainer<CreatorAdventure>> {
+    override fun load(page: Int): Single<ICollectionContainer<Adventure>> {
         return creatorRepository.getAdventures(page, creatorId)
     }
 

@@ -34,7 +34,7 @@ class GameMapPresenter(
 
     private lateinit var mapMode: MapMode
 
-    var adventure: Adventure? = null
+    var adventure: MapAdventure? = null
 
     val cameraPositionObserver: PublishSubject<CameraDetails> = PublishSubject.create()
 
@@ -111,8 +111,8 @@ class GameMapPresenter(
                                 )
                             }
                             .observeOn(mainScheduler)
-                            .subscribeWith(object : CallbackWrapper<List<Adventure>, Error>(errorsHandler) {
-                                override fun onNext(t: List<Adventure>) {
+                            .subscribeWith(object : CallbackWrapper<List<MapAdventure>, Error>(errorsHandler) {
+                                override fun onNext(t: List<MapAdventure>) {
                                     this@GameMapPresenter.view?.showAdventures(t)
                                 }
 
@@ -132,10 +132,10 @@ class GameMapPresenter(
                                 ).toMaybe()
                             }
                             .observeOn(mainScheduler)
-                            .subscribeWith(object : MaybeCallbackWrapper<List<Adventure>, Error>(errorsHandler) {
+                            .subscribeWith(object : MaybeCallbackWrapper<List<MapAdventure>, Error>(errorsHandler) {
                                 override fun onComplete() {}
 
-                                override fun onSuccess(t: List<Adventure>) {
+                                override fun onSuccess(t: List<MapAdventure>) {
                                     this@GameMapPresenter.view?.showAdventures(t)
                                 }
                             })

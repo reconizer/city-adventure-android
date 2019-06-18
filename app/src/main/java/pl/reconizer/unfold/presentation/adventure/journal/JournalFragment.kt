@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_adventure_journal.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.openInBrowser
 import pl.reconizer.unfold.di.Injector
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.domain.entities.ClueType
 import pl.reconizer.unfold.presentation.adventure.journal.clues.CluesPagesAdapter
@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 class JournalFragment : BaseFragment(), IJournalView {
 
-    val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
+    val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as MapAdventure? }
     val adventureStartPoint by lazy { arguments?.get(ADVENTURE_START_POINT_PARAM) as AdventureStartPoint? }
 
     @Inject
@@ -187,7 +187,7 @@ class JournalFragment : BaseFragment(), IJournalView {
         const val ADVENTURE_PARAM = "adventure"
         const val ADVENTURE_START_POINT_PARAM = "adventure_start_point"
 
-        fun newInstance(adventure: Adventure, adventureStartPoint: AdventureStartPoint): JournalFragment {
+        fun newInstance(adventure: MapAdventure, adventureStartPoint: AdventureStartPoint): JournalFragment {
             return JournalFragment().apply {
                 arguments = bundleOf(
                         ADVENTURE_PARAM to adventure,

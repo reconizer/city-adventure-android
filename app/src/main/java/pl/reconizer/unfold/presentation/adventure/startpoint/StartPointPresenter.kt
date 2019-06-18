@@ -2,7 +2,7 @@ package pl.reconizer.unfold.presentation.adventure.startpoint
 
 import io.reactivex.Scheduler
 import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
@@ -16,7 +16,7 @@ class StartPointPresenter(
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
         private val errorsHandler: ErrorsHandler<Error>,
-        val adventure: Adventure
+        val adventure: MapAdventure
 ) : BasePresenter<IStartPointView>() {
 
     var adventureStartPoint: AdventureStartPoint? = null

@@ -3,13 +3,13 @@ package pl.reconizer.unfold.presentation.map
 import com.nhaarman.mockitokotlin2.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.Position
 
 class AdventurePinMapperSpec : Spek({
 
-    fun adventureFactory(purchasable: Boolean, completed: Boolean, started: Boolean): Adventure {
-        return Adventure(
+    fun adventureFactory(purchasable: Boolean, completed: Boolean, started: Boolean): MapAdventure {
+        return MapAdventure(
                 adventureId = "1",
                 startPointId = "2",
                 position = Position(0.0, 0.0),
@@ -27,7 +27,7 @@ class AdventurePinMapperSpec : Spek({
         beforeEachTest { reset(pinProvider) }
 
         describe("determinePin") {
-            lateinit var adventure: Adventure
+            lateinit var adventure: MapAdventure
 
             context("purchasable") {
 

@@ -6,7 +6,7 @@ import io.reactivex.Scheduler
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.PuzzleType
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
@@ -18,7 +18,7 @@ import javax.inject.Named
     ErrorHandlersModule::class
 ])
 class PuzzleModule(
-        private val adventure: Adventure,
+        private val adventure: MapAdventure,
         private val adventurePoint: AdventurePoint,
         private val puzzleType: PuzzleType
 ) {

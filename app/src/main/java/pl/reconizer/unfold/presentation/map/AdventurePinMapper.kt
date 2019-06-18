@@ -1,7 +1,7 @@
 package pl.reconizer.unfold.presentation.map
 
 import com.google.android.gms.maps.model.BitmapDescriptor
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 
 class AdventurePinMapper(
         private val provider: PinProvider
@@ -9,7 +9,7 @@ class AdventurePinMapper(
 
     override fun determinePin(t: Any): BitmapDescriptor? {
         return when(t) {
-            is Adventure -> {
+            is MapAdventure -> {
                 if (t.purchasable) {
                     when {
                         t.completed -> provider.purchasableFinishedPin

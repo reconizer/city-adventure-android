@@ -8,7 +8,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.data.repositories.AdventureRepository
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
@@ -21,7 +21,7 @@ class StartPointPresenterSpec : Spek({
         lateinit var errorsHandler: ErrorsHandler<Error>
 
         var adventureStartPoint = mock<AdventureStartPoint>()
-        var adventure = mock<Adventure>()
+        var adventure = mock<MapAdventure>()
 
         before { whenever(adventure.adventureId).thenReturn("test-id") }
 

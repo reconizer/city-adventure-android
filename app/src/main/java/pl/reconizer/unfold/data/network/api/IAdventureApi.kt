@@ -9,13 +9,23 @@ import retrofit2.http.*
 
 interface IAdventureApi {
 
-    @GET("/api/adventures")
+    @GET("api/adventures")
     fun getAdventures(
             @Query("lat") lat: Double,
             @Query("lng") lng: Double
+    ): Single<List<MapAdventure>>
+
+    @GET("api/adventures/filters")
+    fun searchAdventures(
+            @Query("filters[page]") page: Int,
+            @Query("position") position: Position,
+            @Query("filters[name]") name: String?,
+            @Query("filters[difficulty_level]") difficultyLevel: Int?,
+            @Query("filters[range]") range: Float?,
+            @Query("orders") order: String?
     ): Single<List<Adventure>>
 
-    @GET("/api/adventures/{id}")
+    @GET("api/adventures/{id}")
     fun getAdventure(
         @Path("id") adventureId: String
     ): Single<AdventureStartPoint>
@@ -67,6 +77,6 @@ interface IAdventureApi {
     fun getCreatorAdventures(
             @Query("filter[page]") page: Int,
             @Query("creator_id") creatorId: String
-    ): Single<List<CreatorAdventure>>
+    ): Single<List<Adventure>>
 
 }

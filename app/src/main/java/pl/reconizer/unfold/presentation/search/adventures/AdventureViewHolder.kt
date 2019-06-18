@@ -1,4 +1,4 @@
-package pl.reconizer.unfold.presentation.creatorprofile.adventures
+package pl.reconizer.unfold.presentation.search.adventures
 
 import android.view.View
 import android.widget.ImageView

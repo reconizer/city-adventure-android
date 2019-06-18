@@ -18,7 +18,7 @@ class PuzzlePresenter(
         private val adventureRepository: IAdventureRepository,
         private val locationProvider: ILocationProvider,
         private val errorsHandler: ErrorsHandler<Error>,
-        val adventure: Adventure,
+        val adventure: MapAdventure,
         val adventurePoint: AdventurePoint,
         val puzzleType: PuzzleType
 ) : BasePresenter<IPuzzleView>() {

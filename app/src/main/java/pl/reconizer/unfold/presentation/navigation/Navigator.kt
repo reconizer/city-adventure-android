@@ -4,7 +4,7 @@ import androidx.annotation.IdRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.presentation.map.MapMode
 import pl.reconizer.unfold.presentation.map.game.GameMapFragment
 import pl.reconizer.unfold.presentation.map.game.GameMapFragment.Companion.ADVENTURE_PARAM
@@ -62,7 +62,7 @@ class Navigator(
         goToMap()
     }
 
-    override fun showAdventureMap(adventure: Adventure, adventurePointId: String?) {
+    override fun showAdventureMap(adventure: MapAdventure, adventurePointId: String?) {
         mapFragment.arguments = bundleOf(
                 MAP_MODE_PARAM to MapMode.STARTED_ADVENTURE,
                 ADVENTURE_PARAM to adventure,

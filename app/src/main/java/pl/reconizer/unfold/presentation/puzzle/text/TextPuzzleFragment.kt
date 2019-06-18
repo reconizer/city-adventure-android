@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import kotlinx.android.synthetic.main.fragment_text_puzzle.*
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 
@@ -43,7 +43,7 @@ class TextPuzzleFragment : BasePuzzleFragment() {
 
     companion object {
 
-        fun newInstance(adventure: Adventure, adventurePoint: AdventurePoint): TextPuzzleFragment {
+        fun newInstance(adventure: MapAdventure, adventurePoint: AdventurePoint): TextPuzzleFragment {
             return TextPuzzleFragment().apply {
                 arguments = bundleOf(
                         ADVENTURE_PARAM to adventure,

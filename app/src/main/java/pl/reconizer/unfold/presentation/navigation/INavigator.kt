@@ -1,7 +1,7 @@
 package pl.reconizer.unfold.presentation.navigation
 
 import androidx.fragment.app.Fragment
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 
 interface INavigator {
 
@@ -11,6 +11,6 @@ interface INavigator {
     fun isRoot(): Boolean
 
     fun showAdventuresMap()
-    fun showAdventureMap(adventure: Adventure, adventurePointId: String? = null)
+    fun showAdventureMap(adventure: MapAdventure, adventurePointId: String? = null)
 
 }
