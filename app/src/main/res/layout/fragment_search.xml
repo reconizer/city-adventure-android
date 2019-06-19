@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/content_double_frame"
-        android:layout_margin="@dimen/space_xs"
+        android:layout_margin="@dimen/space_1_5x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

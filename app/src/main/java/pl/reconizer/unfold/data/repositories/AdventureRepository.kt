@@ -19,7 +19,8 @@ class AdventureRepository(
     override fun searchAdventures(page: Int, position: Position): Single<ICollectionContainer<Adventure>> {
         return adventureApi.searchAdventures(
                 page = page,
-                position = position,
+                lat = position.lat,
+                lng = position.lng,
                 name = null,
                 difficultyLevel = null,
                 range = null,

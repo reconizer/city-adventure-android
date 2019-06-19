@@ -4,10 +4,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.unfold.data.network.api.IAdventureApi
 import pl.reconizer.unfold.data.network.api.ICreatorApi
-import pl.reconizer.unfold.domain.entities.CollectionContainer
-import pl.reconizer.unfold.domain.entities.Adventure
-import pl.reconizer.unfold.domain.entities.CreatorProfile
-import pl.reconizer.unfold.domain.entities.ICollectionContainer
+import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.ICreatorRepository
 
 class CreatorRepository(
@@ -17,6 +14,18 @@ class CreatorRepository(
 
     override fun getProfile(creatorId: String): Single<CreatorProfile> {
         return creatorApi.getProfile(creatorId)
+    }
+
+    override fun search(page: Int, position: Position, isCloseBy: Boolean): Single<ICollectionContainer<Creator>> {
+        return creatorApi.searchCreator(
+                page = page,
+                lat = position.lat,
+                lng = position.lng,
+                closeBy = isCloseBy,
+                name = null,
+                order = null
+        )
+                .map { CollectionContainer(it) }
     }
 
     override fun follow(creatorId: String): Completable {

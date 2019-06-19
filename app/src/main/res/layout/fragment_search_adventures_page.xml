@@ -98,6 +98,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/list_border"
         android:scaleType="fitXY"
+        android:layout_marginBottom="@dimen/space_1x"
         app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
         app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
         app:layout_constraintBottom_toBottomOf="parent" />

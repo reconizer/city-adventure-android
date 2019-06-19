@@ -28,6 +28,8 @@ import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
 import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresComponent
 import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresModule
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsComponent
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
 import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageComponent
@@ -61,5 +63,6 @@ interface MainActivityComponent {
     fun creatorProfileComponent(module: CreatorProfileModule): CreatorProfileComponent
     fun userAdventuresComponent(module: UserAdventuresPageModule): UserAdventuresPageComponent
     fun searchAdventuresComponent(module: SearchAdventuresModule): SearchAdventuresComponent
+    fun searchCreatorsComponent(module: SearchCreatorsModule): SearchCreatorsComponent
 
 }

@@ -17,8 +17,9 @@ interface IAdventureApi {
 
     @GET("api/adventures/filters")
     fun searchAdventures(
-            @Query("filters[page]") page: Int,
-            @Query("position") position: Position,
+            @Query("page") page: Int,
+            @Query("lat") lat: Double,
+            @Query("lng") lng: Double,
             @Query("filters[name]") name: String?,
             @Query("filters[difficulty_level]") difficultyLevel: Int?,
             @Query("filters[range]") range: Float?,

@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import pl.reconizer.unfold.domain.entities.Position
 import pl.reconizer.unfold.presentation.search.adventures.AdventuresFragmentPage
+import pl.reconizer.unfold.presentation.search.creators.CreatorsFragmentPage
 
 class SearchAdapter(fm: FragmentManager, private val userPosition: Position) : FragmentPagerAdapter(fm) {
 
@@ -12,7 +13,7 @@ class SearchAdapter(fm: FragmentManager, private val userPosition: Position) : F
         return if (position == 0) {
             AdventuresFragmentPage.newInstance(userPosition)
         } else {
-            AdventuresFragmentPage.newInstance(userPosition)
+            CreatorsFragmentPage.newInstance(userPosition)
         }
     }
 

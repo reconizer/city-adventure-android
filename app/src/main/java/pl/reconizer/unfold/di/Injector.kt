@@ -33,6 +33,8 @@ import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
 import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresComponent
 import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresModule
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsComponent
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
 import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageComponent
@@ -165,6 +167,10 @@ object Injector {
 
     fun buildSearchAdventuresComponent(position: Position): SearchAdventuresComponent {
         return mainActivityComponent!!.searchAdventuresComponent(SearchAdventuresModule(position))
+    }
+
+    fun buildSearchCreatorsComponent(position: Position): SearchCreatorsComponent {
+        return mainActivityComponent!!.searchCreatorsComponent(SearchCreatorsModule(position))
     }
 
     fun clearAppComponent() {
