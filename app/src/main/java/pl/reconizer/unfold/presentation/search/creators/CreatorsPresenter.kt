@@ -21,13 +21,31 @@ class CreatorsPresenter(
         errorsHandler
 ) {
 
+    var sortType: CreatorsSort = CreatorsSort.RATING
+    var displayCloseByCreators: Boolean = false
+
     override fun subscribe(view: IFilteredCreatorsView) {
         super.subscribe(view)
         errorsHandler.view = WeakReference(view)
     }
 
     override fun load(page: Int): Single<ICollectionContainer<Creator>> {
-        return creatorRepository.search(page, position, false)
+        return creatorRepository.search(
+                page,
+                position,
+                displayCloseByCreators,
+                sortType
+        )
+    }
+
+    fun updateSortType(newSortType: CreatorsSort) {
+        sortType = newSortType
+        fetchFirstPage()
+    }
+
+    fun updateDisplayCloseByCreatorsFlag(value: Boolean) {
+        displayCloseByCreators = value
+        fetchFirstPage()
     }
 
 }

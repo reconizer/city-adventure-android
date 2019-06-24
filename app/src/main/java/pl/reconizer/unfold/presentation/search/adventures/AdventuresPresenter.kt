@@ -21,13 +21,24 @@ class AdventuresPresenter(
         errorsHandler
 ) {
 
+    var sortType: AdventuresSort = AdventuresSort.RATING
+
     override fun subscribe(view: IFilteredAdventuresView) {
         super.subscribe(view)
         errorsHandler.view = WeakReference(view)
     }
 
     override fun load(page: Int): Single<ICollectionContainer<Adventure>> {
-        return adventuresRepository.searchAdventures(page, position)
+        return adventuresRepository.searchAdventures(
+                page,
+                position,
+                sortType
+        )
+    }
+
+    fun updateSortType(newSortType: AdventuresSort) {
+        sortType = newSortType
+        fetchFirstPage()
     }
 
 }

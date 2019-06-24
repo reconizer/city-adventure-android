@@ -16,14 +16,19 @@ class CreatorRepository(
         return creatorApi.getProfile(creatorId)
     }
 
-    override fun search(page: Int, position: Position, isCloseBy: Boolean): Single<ICollectionContainer<Creator>> {
+    override fun search(
+            page: Int,
+            position: Position,
+            isCloseBy: Boolean,
+            order: CreatorsSort
+    ): Single<ICollectionContainer<Creator>> {
         return creatorApi.searchCreator(
                 page = page,
                 lat = position.lat,
                 lng = position.lng,
                 closeBy = isCloseBy,
                 name = null,
-                order = null
+                order = order.name.toLowerCase()
         )
                 .map { CollectionContainer(it) }
     }

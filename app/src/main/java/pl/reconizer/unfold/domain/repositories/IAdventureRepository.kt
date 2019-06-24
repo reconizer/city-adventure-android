@@ -8,7 +8,11 @@ interface IAdventureRepository {
 
     fun getAdventures(lat: Double, lng: Double): Single<List<MapAdventure>>
 
-    fun searchAdventures(page: Int, position: Position): Single<ICollectionContainer<Adventure>>
+    fun searchAdventures(
+            page: Int,
+            position: Position,
+            order: AdventuresSort
+    ): Single<ICollectionContainer<Adventure>>
 
     fun getAdventure(adventureId: String): Single<AdventureStartPoint>
 

@@ -63,6 +63,16 @@ class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
             this.adapter = this@AdventuresFragmentPage.adapter
             addOnScrollListener(endlessRecyclerViewScrollListener)
         }
+
+        sortButton.onSelectionListener = { selectedOrder ->
+            selectedOrder?.let {
+                presenter.updateSortType(it)
+            }
+        }
+
+        sortButton.currentlySelectedItem?.let {
+            presenter.sortType = it
+        }
     }
 
     override fun onResume() {

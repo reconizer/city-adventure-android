@@ -8,7 +8,12 @@ interface ICreatorRepository {
 
     fun getProfile(creatorId: String): Single<CreatorProfile>
 
-    fun search(page: Int, position: Position, isCloseBy: Boolean): Single<ICollectionContainer<Creator>>
+    fun search(
+            page: Int,
+            position: Position,
+            isCloseBy: Boolean,
+            order: CreatorsSort
+    ): Single<ICollectionContainer<Creator>>
 
     fun follow(creatorId: String): Completable
 

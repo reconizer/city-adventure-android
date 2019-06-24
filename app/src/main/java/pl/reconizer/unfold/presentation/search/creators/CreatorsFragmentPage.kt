@@ -64,6 +64,20 @@ class CreatorsFragmentPage : BaseFragment(), IFilteredCreatorsView {
             this.adapter = this@CreatorsFragmentPage.adapter
             addOnScrollListener(endlessRecyclerViewScrollListener)
         }
+
+        sortButton.onSelectionListener = { selectedOrder ->
+            selectedOrder?.let {
+                presenter.updateSortType(it)
+            }
+        }
+        sortButton.currentlySelectedItem?.let {
+            presenter.sortType = it
+        }
+
+        closeByCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            presenter.updateDisplayCloseByCreatorsFlag(isChecked)
+        }
+        presenter.displayCloseByCreators = closeByCheckBox.isChecked
     }
 
     override fun onResume() {
