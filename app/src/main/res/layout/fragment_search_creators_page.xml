@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/filtersLeftMargin"
@@ -34,14 +34,26 @@
 
     <CheckBox
         android:id="@+id/closeByCheckBox"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/search_close_by"
+        android:textAllCaps="true"
         android:textAppearance="@style/Text.Medium"
         android:textSize="12dp"
-        android:textAllCaps="true"
-        app:layout_constraintStart_toEndOf="@id/filtersLeftMargin"
-        app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
+        android:layout_marginTop="@dimen/space_1x"
+        app:layout_constraintEnd_toStartOf="@+id/sortButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/filtersLeftMargin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.CreatorsSortDropdown
+        android:id="@+id/sortButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1x"
+        app:layout_constraintEnd_toStartOf="@+id/filtersRightMargin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/closeByCheckBox"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -55,6 +67,7 @@
         android:padding="@dimen/space_xs"
         android:textAppearance="@style/TypeWriterText"
         android:textSize="16dp"
+        android:layout_marginTop="@dimen/space_1x"
         app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
         app:layout_constraintStart_toEndOf="@id/filtersLeftMargin"
         app:layout_constraintTop_toBottomOf="@id/closeByCheckBox" />
@@ -63,22 +76,23 @@
         android:id="@+id/topListBorder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/list_border"
-        android:scaleType="fitXY"
         android:layout_marginTop="@dimen/space_1x"
-        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        android:scaleType="fitXY"
+        android:src="@drawable/list_border"
         app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
+        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
         app:layout_constraintTop_toBottomOf="@id/searchInput" />
 
     <ImageView
         android:id="@+id/bottomListBorder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/list_border"
         android:scaleType="fitXY"
-        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        android:src="@drawable/list_border"
+        android:layout_marginBottom="@dimen/space_1x"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/contentLeftMargin" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -86,9 +100,9 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingTop="@dimen/space_1x"
-        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        app:layout_constraintBottom_toTopOf="@id/bottomListBorder"
         app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
-        app:layout_constraintTop_toBottomOf="@id/topListBorder"
-        app:layout_constraintBottom_toTopOf="@id/bottomListBorder" />
+        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        app:layout_constraintTop_toBottomOf="@id/topListBorder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

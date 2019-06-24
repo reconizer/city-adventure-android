@@ -49,16 +49,10 @@
         app:layout_constraintEnd_toStartOf="@id/sortButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <pl.reconizer.unfold.presentation.customviews.AdventuresSortDropdown
         android:id="@+id/sortButton"
         android:layout_width="0dp"
-        android:layout_height="@dimen/space_4x"
-        android:background="@drawable/frame_small"
-        android:stateListAnimator="@null"
-        android:text="@string/common_sort"
-        android:textAllCaps="true"
-        android:textAppearance="@style/Text.Medium"
-        android:textSize="14dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_1x"
         app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
         app:layout_constraintHorizontal_bias="0.5"

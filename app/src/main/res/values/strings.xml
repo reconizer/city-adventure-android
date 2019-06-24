@@ -66,6 +66,9 @@
     <string name="search_close_by">blisko ciebie</string>
     <string name="search_creators_tab">twórcy</string>
     <string name="search_name_input_placeholder">Nazwa</string>
+    <string name="sort_rating">ocena</string>
+    <string name="sort_difficulty_level">poziom trudności</string>
+    <string name="sort_range">zasięg</string>
     <string name="user_adventures_completed">zakończone</string>
     <string name="user_adventures_purchased">zakupione</string>
     <string name="user_adventures_started">rozpoczęte</string>
