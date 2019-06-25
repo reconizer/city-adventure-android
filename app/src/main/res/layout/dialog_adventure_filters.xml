@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background">
+
+    <pl.reconizer.unfold.presentation.customviews.DialogHeader
+        android:id="@+id/dialogHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/common_filters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2.3334dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="2.3334dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/dialog_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_2x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialogHeader">
+
+        <CheckBox
+            android:id="@+id/rangeCheckbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rangeIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="@string/sort_range"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textAppearance="@style/Text.Medium"
+            android:textSize="15dp"
+            app:layout_constraintTop_toTopOf="@id/rangeCheckbox"
+            app:layout_constraintBottom_toBottomOf="@id/rangeCheckbox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/rangeMinValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="1"
+            android:textAppearance="@style/Text.Medium"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/range"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/range" />
+
+        <TextView
+            android:id="@+id/rangeMaxValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="5"
+            android:textAppearance="@style/Text.Medium"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/range"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/range" />
+
+        <SeekBar
+            android:id="@+id/range"
+            style="@style/CustomSeekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_1x"
+            android:layout_marginTop="@dimen/space_1x"
+            android:layout_marginEnd="@dimen/space_1x"
+            app:layout_constraintEnd_toStartOf="@id/rangeMaxValue"
+            app:layout_constraintStart_toEndOf="@id/rangeMinValue"
+            app:layout_constraintTop_toBottomOf="@id/rangeCheckbox" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/rangeBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="range" />
+
+        <CheckBox
+            android:id="@+id/difficultyLevelCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_2x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rangeBarrier" />
+
+        <RadioGroup
+            android:id="@+id/difficultyLevelGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_1x"
+            android:orientation="vertical"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/difficultyLevelCheckbox"
+            app:layout_constraintTop_toTopOf="@id/difficultyLevelCheckbox"
+            app:layout_constraintWidth_max="145dp">
+
+            <RadioButton
+                android:id="@+id/easyLevel"
+                style="@style/ButtonLikeRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/difficulty_level_easy"
+                android:textAlignment="gravity" />
+
+            <RadioButton
+                android:id="@+id/mediumLevel"
+                style="@style/ButtonLikeRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_1x"
+                android:gravity="center"
+                android:text="@string/difficulty_level_medium"
+                android:textAlignment="gravity" />
+
+            <RadioButton
+                android:id="@+id/hardLevel"
+                style="@style/ButtonLikeRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_1x"
+                android:gravity="center"
+                android:text="@string/difficulty_level_hard"
+                android:textAlignment="gravity" />
+
+        </RadioGroup>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/difficultyLevelBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="difficultyLevelCheckbox,difficultyLevelGroup" />
+
+        <Button
+            android:id="@+id/applyButton"
+            style="@style/DialogButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/common_apply"
+            android:layout_marginTop="@dimen/space_2x"
+            app:layout_constraintTop_toBottomOf="@id/difficultyLevelBarrier"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

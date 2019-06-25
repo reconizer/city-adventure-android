@@ -66,6 +66,8 @@
         <attr name="integerValue" />
     </declare-styleable>
 
-
+    <declare-styleable name="DialogHeader">
+        <attr name="android:text" />
+    </declare-styleable>
 
 </resources>

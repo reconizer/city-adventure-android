@@ -49,32 +49,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_4x"
                 android:layout_marginEnd="@dimen/frame_thickness"
-                android:layout_weight="1"
-                android:background="@drawable/button_like_radio_button"
-                android:button="@color/transparent"
+                style="@style/ButtonLikeRadioButton"
                 android:gravity="center"
                 android:text="@string/search_adventures_tab"
-                android:textAlignment="gravity"
-                android:textAppearance="@style/Text.Medium"
-                android:textAllCaps="true"
-                android:textColor="@color/button_like_radio_button_text"
-                android:textSize="15dp" />
+                android:textAlignment="gravity" />
 
             <RadioButton
                 android:id="@+id/creatorsTab"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_4x"
                 android:layout_marginStart="@dimen/frame_thickness"
-                android:layout_weight="1"
-                android:background="@drawable/button_like_radio_button"
-                android:button="@color/transparent"
+                style="@style/ButtonLikeRadioButton"
                 android:gravity="center"
-                android:text="@string/search_creators_tab"
-                android:textAlignment="gravity"
-                android:textAppearance="@style/Text.Medium"
-                android:textAllCaps="true"
-                android:textColor="@color/button_like_radio_button_text"
-                android:textSize="15dp" />
+                android:text="@string/search_creators_tab" />
 
         </RadioGroup>
 

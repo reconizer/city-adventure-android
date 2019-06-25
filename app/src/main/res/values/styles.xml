@@ -142,4 +142,24 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="CustomSeekbar">
+        <item name="android:max">100</item>
+        <item name="android:background">@null</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+        <item name="android:thumb">@drawable/seekbar_thumb</item>
+        <item name="android:thumbOffset">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <style name="ButtonLikeRadioButton">
+        <item name="android:background">@drawable/button_like_radio_button</item>
+        <item name="android:button">@color/transparent</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/button_like_radio_button_text</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
 </resources>
