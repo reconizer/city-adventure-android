@@ -6,8 +6,10 @@ import pl.reconizer.unfold.domain.entities.DifficultyLevel
 
 @Parcelize
 data class AdventureFilters(
+        val minRange: Float,
+        val maxRange: Float,
         var isRangeActive: Boolean = false,
-        var rangeValue: Float = 0f,
+        var range: Float = 0f,
         var isDifficultyLevelActive: Boolean = false,
         var difficultyLevel: DifficultyLevel? = null
 ) : Parcelable

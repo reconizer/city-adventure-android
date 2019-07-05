@@ -41,4 +41,9 @@ class AdventuresPresenter(
         fetchFirstPage()
     }
 
+    companion object {
+        const val MIN_RANGE = 1f
+        const val MAX_RANGE = 5f
+    }
+
 }

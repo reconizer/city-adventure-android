@@ -1,52 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@android:id/background"
-        android:gravity="center_vertical|fill_horizontal"
-        android:top="0.4dp">
-
-        <shape android:shape="rectangle">
-
-            <solid android:color="@color/transparent" />
-
-            <stroke
-                android:width="1.5dp"
-                android:color="@color/brown1" />
-
-            <corners
-                android:radius="100in" />
-
-            <size android:height="13dp" />
-
-        </shape>
-
-    </item>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@android:id/progress"
-        android:gravity="center_vertical|fill_horizontal"
-        android:top="0.4dp">
-        <clip>
+        android:drawable="@drawable/seekbar_progress_active"
+        android:state_enabled="true" />
 
-            <selector>
+    <item
+        android:drawable="@drawable/seekbar_progress_disabled"
+        android:state_enabled="false" />
 
-                <item
-                    android:top="@dimen/space_xs"
-                    android:bottom="@dimen/space_xs">
+    <item
+        android:drawable="@drawable/seekbar_progress_active" />
 
-                    <shape android:shape="rectangle">
-
-                        <corners android:radius="100in"/>
-                        <size android:height="13dp" />
-                        <solid android:color="@color/brown1" />
-
-                    </shape>
-
-                </item>
-
-            </selector>
-
-        </clip>
-
-    </item>
-</layer-list>
+</selector>

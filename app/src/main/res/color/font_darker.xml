@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:color="@color/fontDarkerDisabled"
+        android:state_enabled="false" />
+
+    <item
+        android:color="@color/fontDarker"
+        android:state_enabled="true" />
+
+    <item
+        android:color="@color/fontDarker" />
+
+</selector>

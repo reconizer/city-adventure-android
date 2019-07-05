@@ -3,11 +3,23 @@
 
     <item
         android:drawable="@drawable/frame_small"
-        android:state_checked="false" />
+        android:state_checked="false"
+        android:state_enabled="true" />
+
+    <item
+        android:drawable="@drawable/frame_small_disabled"
+        android:state_checked="false"
+        android:state_enabled="false"/>
 
     <item
         android:drawable="@drawable/button_like_radio_button_active"
-        android:state_checked="true" />
+        android:state_checked="true"
+        android:state_enabled="true" />
+
+    <item
+        android:drawable="@drawable/button_like_radio_button_disabled"
+        android:state_checked="true"
+        android:state_enabled="false" />
 
     <item
         android:drawable="@drawable/button_like_radio_button_active" />
