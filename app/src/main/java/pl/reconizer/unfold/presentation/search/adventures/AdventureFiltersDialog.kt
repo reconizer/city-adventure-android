@@ -9,21 +9,21 @@ import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.dialog_adventure_filters.*
 import kotlinx.android.synthetic.main.dialog_adventure_filters.view.*
 import kotlinx.android.synthetic.main.dialog_puzzle_tutorial.view.dialogHeader
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.domain.entities.DifficultyLevel
-import java.lang.IllegalArgumentException
 
 class AdventureFiltersDialog : DialogFragment() {
+
+    var onApplyListener: ((filtersState: AdventureFilters) -> Unit)? = null
 
     lateinit var filtersState: AdventureFilters
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        filtersState = arguments?.get(ADVENTURE_FILTERS_PARAM) as AdventureFilters? ?: throw IllegalStateException("AdventureFilters object is required")
+        filtersState = arguments?.get(ADVENTURE_FILTERS_PARAM) as AdventureFilters? ?: throw IllegalArgumentException("AdventureFilters object is required")
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -62,6 +62,11 @@ class AdventureFiltersDialog : DialogFragment() {
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
             })
+
+            applyButton.setOnClickListener {
+                onApplyListener?.invoke(filtersState)
+                this@AdventureFiltersDialog.dismiss()
+            }
 
             rangeFilterActivityChanged(this)
             difficultyFilterActivityChanged(this)

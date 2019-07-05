@@ -77,15 +77,12 @@ class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
 
         filtersButton.setOnClickListener {
             AdventureFiltersDialog.newInstance(
-                    AdventureFilters(
-                            AdventuresPresenter.MIN_RANGE,
-                            AdventuresPresenter.MAX_RANGE,
-                            true,
-                            0.5f,
-                            false,
-                            DifficultyLevel.MEDIUM
-                    )
-            ).show(childFragmentManager, "filters_dialog")
+                    presenter.filters
+            ).apply {
+                onApplyListener = { filters ->
+                    presenter.filters = filters
+                }
+            }.show(childFragmentManager, "filters_dialog")
         }
     }
 

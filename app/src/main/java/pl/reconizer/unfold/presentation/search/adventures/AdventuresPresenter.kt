@@ -23,6 +23,15 @@ class AdventuresPresenter(
 
     var sortType: AdventuresSort = AdventuresSort.RATING
 
+    var filters = AdventureFilters(
+            AdventuresPresenter.MIN_RANGE,
+            AdventuresPresenter.MAX_RANGE,
+            true,
+            0.5f,
+            false,
+            DifficultyLevel.MEDIUM
+    )
+
     override fun subscribe(view: IFilteredAdventuresView) {
         super.subscribe(view)
         errorsHandler.view = WeakReference(view)
