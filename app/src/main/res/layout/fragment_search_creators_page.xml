@@ -67,6 +67,8 @@
         android:padding="@dimen/space_xs"
         android:textAppearance="@style/TypeWriterText"
         android:textSize="16dp"
+        android:inputType="text"
+        android:maxLines="1"
         android:layout_marginTop="@dimen/space_1x"
         app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
         app:layout_constraintStart_toEndOf="@id/filtersLeftMargin"

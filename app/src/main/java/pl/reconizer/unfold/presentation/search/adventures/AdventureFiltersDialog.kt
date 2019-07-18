@@ -43,18 +43,18 @@ class AdventureFiltersDialog : DialogFragment() {
             }
 
             rangeCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                filtersState.isRangeActive = isChecked
+                filtersState = filtersState.copy(isRangeActive = isChecked)
                 rangeFilterActivityChanged(this)
             }
 
             difficultyLevelCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                filtersState.isDifficultyLevelActive = isChecked
+                filtersState = filtersState.copy(isDifficultyLevelActive = isChecked)
                 difficultyFilterActivityChanged(this)
             }
 
             range.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    filtersState.range = progress / 100f
+                    filtersState = filtersState.copy(range = progress / 100f)
                     rangeIndicator.text = formatRangeIndicator()
                 }
 
@@ -62,6 +62,10 @@ class AdventureFiltersDialog : DialogFragment() {
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
             })
+
+            difficultyLevelGroup.setOnCheckedChangeListener { _, checkedId ->
+                filtersState = filtersState.copy(difficultyLevel = radioButtonIdToDifficultyLevel(checkedId))
+            }
 
             applyButton.setOnClickListener {
                 onApplyListener?.invoke(filtersState)

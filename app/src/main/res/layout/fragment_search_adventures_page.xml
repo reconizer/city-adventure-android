@@ -67,6 +67,8 @@
         android:drawableStart="@drawable/icon_search_input"
         android:textAppearance="@style/TypeWriterText"
         android:textSize="16dp"
+        android:inputType="text"
+        android:maxLines="1"
         android:padding="@dimen/space_xs"
         android:drawablePadding="@dimen/space_1x"
         android:hint="@string/search_name_input_placeholder"

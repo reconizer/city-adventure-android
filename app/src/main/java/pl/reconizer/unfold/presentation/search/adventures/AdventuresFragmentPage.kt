@@ -1,6 +1,8 @@
 package pl.reconizer.unfold.presentation.search.adventures
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +46,8 @@ class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        searchInput.setText(presenter.filters.name)
+
         val linearLayoutManager = LinearLayoutManager(context)
         endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
@@ -81,15 +85,29 @@ class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
             ).apply {
                 onApplyListener = { filters ->
                     presenter.filters = filters
+                    showActiveFilters()
+                    presenter.fetchFirstPage()
                 }
             }.show(childFragmentManager, "filters_dialog")
         }
+
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                presenter.updateNameFilter(s.toString())
+            }
+
+        })
+
+        showActiveFilters()
     }
 
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        if (presenter.items.isEmpty()) presenter.fetchFirstPage()
+        if (presenter.items.isEmpty() || presenter.hasFiltersChanged) presenter.fetchFirstPage()
     }
 
     override fun onPause() {
@@ -117,6 +135,14 @@ class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
 
     override fun hideListLoader() {
         hideLoader()
+    }
+
+    private fun showActiveFilters() {
+        if (presenter.filters.activeFiltersCount > 0) {
+            filtersButton.text = "${resources.getString(R.string.common_filter)} (${presenter.filters.activeFiltersCount})"
+        } else {
+            filtersButton.setText(R.string.common_filter)
+        }
     }
 
     companion object {

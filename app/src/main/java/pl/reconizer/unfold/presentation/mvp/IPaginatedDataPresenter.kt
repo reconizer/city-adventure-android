@@ -8,6 +8,7 @@ interface IPaginatedDataPresenter<T> {
     val requestedPage: Int
     val hasGotMorePages: Boolean
 
+    fun resetPagination()
     fun fetchFirstPage()
     fun fetchNextPage()
 

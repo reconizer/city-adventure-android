@@ -19,15 +19,18 @@ class AdventureRepository(
     override fun searchAdventures(
             page: Int,
             position: Position,
-            order: AdventuresSort
+            order: AdventuresSort,
+            name: String,
+            range: Float?,
+            difficultyLevel: DifficultyLevel?
     ): Single<ICollectionContainer<Adventure>> {
         return adventureApi.searchAdventures(
                 page = page,
                 lat = position.lat,
                 lng = position.lng,
-                name = null,
-                difficultyLevel = null,
-                range = null,
+                name = name,
+                difficultyLevel = difficultyLevel?.value,
+                range = range,
                 order = order.name.toLowerCase()
         )
                 .map { CollectionContainer(it) }

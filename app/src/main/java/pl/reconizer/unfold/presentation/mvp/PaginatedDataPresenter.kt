@@ -25,9 +25,13 @@ abstract class PaginatedDataPresenter<TEntity, TView: IListView<TEntity>>(
     override var hasGotMorePages: Boolean = true
         protected set
 
-    override fun fetchFirstPage() {
+    override fun resetPagination() {
         page = 0
         hasGotMorePages = true
+    }
+
+    override fun fetchFirstPage() {
+        resetPagination()
         fetchNextPage()
     }
 
