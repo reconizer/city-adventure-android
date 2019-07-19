@@ -98,7 +98,6 @@ class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 presenter.updateNameFilter(s.toString())
             }
-
         })
 
         showActiveFilters()

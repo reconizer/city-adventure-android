@@ -12,7 +12,8 @@ interface ICreatorRepository {
             page: Int,
             position: Position,
             isCloseBy: Boolean,
-            order: CreatorsSort
+            order: CreatorsSort,
+            name: String?
     ): Single<ICollectionContainer<Creator>>
 
     fun follow(creatorId: String): Completable

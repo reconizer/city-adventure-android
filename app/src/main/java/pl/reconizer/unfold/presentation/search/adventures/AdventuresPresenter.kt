@@ -50,7 +50,7 @@ class AdventuresPresenter(
         disposables.add(
             changeNameObservable
                     .subscribeOn(backgroundScheduler)
-                    .filter { it.length >= 3 }
+                    .filter { it.isEmpty() || it.length >= 3 }
                     .throttleLast(NAME_FILTER_DELAY, TimeUnit.MILLISECONDS, backgroundScheduler)
                     .observeOn(mainScheduler)
                     .subscribe {

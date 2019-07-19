@@ -28,7 +28,7 @@ class AdventureRepository(
                 page = page,
                 lat = position.lat,
                 lng = position.lng,
-                name = name,
+                name = if (name.isBlank()) null else name,
                 difficultyLevel = difficultyLevel?.value,
                 range = range,
                 order = order.name.toLowerCase()

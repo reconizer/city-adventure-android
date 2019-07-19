@@ -20,14 +20,15 @@ class CreatorRepository(
             page: Int,
             position: Position,
             isCloseBy: Boolean,
-            order: CreatorsSort
+            order: CreatorsSort,
+            name: String?
     ): Single<ICollectionContainer<Creator>> {
         return creatorApi.searchCreator(
                 page = page,
                 lat = position.lat,
                 lng = position.lng,
                 closeBy = isCloseBy,
-                name = null,
+                name = if (name.isNullOrBlank()) null else name,
                 order = order.name.toLowerCase()
         )
                 .map { CollectionContainer(it) }
