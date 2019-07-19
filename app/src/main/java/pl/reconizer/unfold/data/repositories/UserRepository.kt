@@ -6,10 +6,7 @@ import pl.reconizer.unfold.data.mappers.TokenMapper
 import pl.reconizer.unfold.data.network.api.IAdventureApi
 import pl.reconizer.unfold.data.network.api.IAuthenticationApi
 import pl.reconizer.unfold.data.network.api.IUserApi
-import pl.reconizer.unfold.domain.entities.CollectionContainer
-import pl.reconizer.unfold.domain.entities.ICollectionContainer
-import pl.reconizer.unfold.domain.entities.UserAdventure
-import pl.reconizer.unfold.domain.entities.UserProfile
+import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import kotlin.random.Random
@@ -48,6 +45,10 @@ class UserRepository(
 
     override fun updateProfile(form: UserProfileForm): Completable {
         return userApi.updateProfile(form)
+    }
+
+    override fun getAvatars(): Single<List<Avatar>> {
+        return userApi.getAvatars()
     }
 
     override fun getCompletedAdventures(page: Int): Single<ICollectionContainer<UserAdventure>> {

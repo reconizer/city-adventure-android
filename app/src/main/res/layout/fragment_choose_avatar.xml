@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/user_profile_background">
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/leftMargin"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rightMargin"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginTop="@dimen/space_7x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:layout_marginBottom="@dimen/space_5x"
+        android:background="@drawable/pinned_paper_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rightMargin"
+        app:layout_constraintStart_toEndOf="@id/leftMargin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/backgroundFrame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/space_1_5x"
+            android:layout_marginTop="@dimen/space_1_5x"
+            android:layout_marginEnd="@dimen/space_1_5x"
+            android:layout_marginBottom="@dimen/space_1_5x"
+            android:background="@drawable/frame_big"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Space
+            android:id="@id/leftMargin"
+            android:layout_width="@dimen/space_2x"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/frame_thickness"
+            app:layout_constraintStart_toStartOf="@id/backgroundFrame" />
+
+        <Space
+            android:id="@id/rightMargin"
+            android:layout_width="@dimen/space_2x"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/frame_thickness"
+            app:layout_constraintEnd_toEndOf="@id/backgroundFrame" />
+
+        <TextView
+            android:id="@+id/avatarLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_1x"
+            android:layout_marginTop="@dimen/space_4x"
+            android:text="@string/user_profile_avatar_label"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TypeWriterText"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toStartOf="@id/rightMargin"
+            app:layout_constraintStart_toEndOf="@id/leftMargin"
+            app:layout_constraintTop_toTopOf="@id/backgroundFrame" />
+
+        <View
+            android:id="@+id/avatarLabelBorder"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/frame_thickness"
+            android:background="@drawable/border_horizontal"
+            app:layout_constraintEnd_toStartOf="@id/rightMargin"
+            app:layout_constraintStart_toEndOf="@id/leftMargin"
+            app:layout_constraintTop_toBottomOf="@id/avatarLabel" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/avatarsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/space_2x"
+            app:layout_constraintTop_toBottomOf="@id/avatarLabelBorder"
+            app:layout_constraintBottom_toTopOf="@id/actionsBarrier"
+            app:layout_constraintEnd_toStartOf="@id/rightMargin"
+            app:layout_constraintStart_toEndOf="@id/leftMargin" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/actionsBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="saveButton,goBackButton"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="321dp" />
+
+        <Button
+            android:id="@+id/saveButton"
+            style="@style/DialogButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_2x"
+            android:text="@string/common_save"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/backgroundFrame"
+            app:layout_constraintEnd_toStartOf="@id/goBackButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/backgroundFrame"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_constraintWidth_max="131dp"
+            app:layout_constraintWidth_min="100dp" />
+
+        <Button
+            android:id="@+id/goBackButton"
+            style="@style/DialogButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_2x"
+            android:text="@string/common_go_back"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/backgroundFrame"
+            app:layout_constraintEnd_toEndOf="@id/backgroundFrame"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/saveButton"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_constraintWidth_max="131dp"
+            app:layout_constraintWidth_min="100dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/paperPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/paper_pin"
+        app:layout_constraintStart_toStartOf="@id/contentContainer"
+        app:layout_constraintEnd_toEndOf="@id/contentContainer"
+        app:layout_constraintTop_toTopOf="@id/contentContainer"
+        app:layout_constraintBottom_toTopOf="@id/contentContainer" />
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_with_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

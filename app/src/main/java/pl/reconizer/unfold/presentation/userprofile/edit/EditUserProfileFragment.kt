@@ -11,6 +11,7 @@ import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
 import pl.reconizer.unfold.presentation.common.BaseFragment
+import pl.reconizer.unfold.presentation.navigation.keys.ChooseAvatarKey
 import javax.inject.Inject
 
 class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
@@ -36,6 +37,10 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
 
         saveButton.setOnClickListener {
             presenter.updateProfile(UserProfileForm(usernameInput.text.toString(), null))
+        }
+
+        changeAvatarButton.setOnClickListener {
+            navigator.goTo(ChooseAvatarKey())
         }
 
     }

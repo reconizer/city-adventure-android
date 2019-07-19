@@ -23,6 +23,8 @@ import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.R
 import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarComponent
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarModule
 import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileComponent
 import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileModule
 import pl.reconizer.unfold.presentation.map.game.GameMapComponent
@@ -62,6 +64,7 @@ object Injector {
     private var adventureSummaryComponent: AdventureSummaryComponent? = null
     private var userProfileComponent: UserProfileComponent? = null
     private var editUserProfileComponent: EditUserProfileComponent? = null
+    private var chooseAvatarComponent: ChooseAvatarComponent? = null
     private var creatorProfileComponent: CreatorProfileComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
@@ -156,6 +159,11 @@ object Injector {
         return editUserProfileComponent!!
     }
 
+    fun buildChooseAvatarComponent(): ChooseAvatarComponent {
+        chooseAvatarComponent = mainActivityComponent!!.chooseAvatarComponent(ChooseAvatarModule())
+        return chooseAvatarComponent!!
+    }
+
     fun buildCreatorProfileComponent(creatorId: String): CreatorProfileComponent {
         creatorProfileComponent = mainActivityComponent!!.creatorProfileComponent(CreatorProfileModule(creatorId))
         return creatorProfileComponent!!
@@ -231,6 +239,10 @@ object Injector {
 
     fun clearEditUserProfileComponent() {
         editUserProfileComponent = null
+    }
+
+    fun clearChooseAvatarComponent() {
+        chooseAvatarComponent = null
     }
 
     fun clearCreatorProfileComponent() {
