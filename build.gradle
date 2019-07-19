@@ -9,7 +9,7 @@ buildscript {
         materialVersion = '1.0.0'
         constraintLayoutVersion = '2.0.0-alpha3'
 
-        mapsServicesVersion = '16.0.0'
+        mapsServicesVersion = '17.0.0'
         mapUtilsVersion = '0.5'
 
         retrofitVersion = '2.5.0'

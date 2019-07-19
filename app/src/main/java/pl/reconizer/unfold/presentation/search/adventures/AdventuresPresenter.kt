@@ -1,9 +1,7 @@
 package pl.reconizer.unfold.presentation.search.adventures
 
-import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
