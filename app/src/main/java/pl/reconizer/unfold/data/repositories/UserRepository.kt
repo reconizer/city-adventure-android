@@ -48,7 +48,21 @@ class UserRepository(
     }
 
     override fun getAvatars(): Single<List<Avatar>> {
-        return userApi.getAvatars()
+        return userApi.getAvatars().map {
+            val avatars = mutableListOf<Avatar>()
+            // TODO: REMOVE IT
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars.addAll(it)
+            avatars
+        }
     }
 
     override fun getCompletedAdventures(page: Int): Single<ICollectionContainer<UserAdventure>> {

@@ -90,6 +90,7 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:paddingTop="@dimen/space_2x"
+            android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/avatarLabelBorder"
             app:layout_constraintBottom_toTopOf="@id/actionsBarrier"
             app:layout_constraintEnd_toStartOf="@id/rightMargin"

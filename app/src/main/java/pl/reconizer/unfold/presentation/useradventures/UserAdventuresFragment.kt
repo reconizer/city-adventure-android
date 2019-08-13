@@ -27,6 +27,7 @@ class UserAdventuresFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        closeButton.setOnClickListener { navigator.goBack() }
 
         adventuresPager.adapter = adapter
 
