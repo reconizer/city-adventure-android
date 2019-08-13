@@ -22,8 +22,8 @@ class ChooseAvatarModule() {
             @Named("main") mainScheduler: Scheduler,
             userRepository: IUserRepository,
             errorsHandler: ErrorsHandler<Error>
-    ): AvatarsPresenter {
-        return AvatarsPresenter(
+    ): ChooseAvatarPresenter {
+        return ChooseAvatarPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 userRepository,

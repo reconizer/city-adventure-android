@@ -16,7 +16,7 @@ import javax.inject.Inject
 class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
 
     @Inject
-    lateinit var presenter: AvatarsPresenter
+    lateinit var presenter: ChooseAvatarPresenter
 
     @Inject
     lateinit var adapter: AvatarsAdapter
@@ -50,6 +50,12 @@ class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
 
         closeButton.setOnClickListener { navigator.goBack() }
         goBackButton.setOnClickListener { navigator.goBack() }
+
+        saveButton.setOnClickListener {
+            adapter.selectedAvatar?.let {
+                presenter.changeAvatar(it.id)
+            }
+        }
     }
 
     override fun onResume() {
@@ -71,6 +77,10 @@ class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
     override fun showAvatars() {
         adapter.items = presenter.avatars
         adapter.notifyDataSetChanged()
+    }
+
+    override fun avatarUpdated() {
+        navigator.goBack()
     }
 
 }

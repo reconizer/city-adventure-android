@@ -10,8 +10,6 @@ import pl.reconizer.unfold.di.scopes.ActivityScope
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.location.LocationProvider
 import pl.reconizer.unfold.presentation.navigation.FragmentStateChanger
-import pl.reconizer.unfold.presentation.navigation.INavigator
-import pl.reconizer.unfold.presentation.navigation.Navigator
 
 @Module
 class MainActivityModule(
@@ -23,12 +21,6 @@ class MainActivityModule(
     @ActivityScope
     fun provideLocationProvider(context: Context): ILocationProvider {
         return LocationProvider(context)
-    }
-
-    @Provides
-    @ActivityScope
-    fun provideNavigator(): INavigator {
-        return Navigator(fragmentContainer, activity.supportFragmentManager)
     }
 
     @Provides

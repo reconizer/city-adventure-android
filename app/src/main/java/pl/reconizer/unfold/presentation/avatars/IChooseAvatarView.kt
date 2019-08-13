@@ -6,4 +6,6 @@ interface IChooseAvatarView : IView {
 
     fun showAvatars()
 
+    fun avatarUpdated()
+
 }

@@ -26,6 +26,8 @@ interface IUserRepository {
 
     fun updateProfile(form: UserProfileForm): Completable
 
+    fun updateAvatar(avatarId: String): Completable
+
     fun getAvatars(): Single<List<Avatar>>
 
     fun getCompletedAdventures(page: Int = 1): Single<ICollectionContainer<UserAdventure>>

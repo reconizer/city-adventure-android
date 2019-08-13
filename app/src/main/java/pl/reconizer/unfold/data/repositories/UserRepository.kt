@@ -47,22 +47,12 @@ class UserRepository(
         return userApi.updateProfile(form)
     }
 
+    override fun updateAvatar(avatarId: String): Completable {
+        return userApi.updateProfile(UserProfileForm(null, avatarId))
+    }
+
     override fun getAvatars(): Single<List<Avatar>> {
-        return userApi.getAvatars().map {
-            val avatars = mutableListOf<Avatar>()
-            // TODO: REMOVE IT
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars.addAll(it)
-            avatars
-        }
+        return userApi.getAvatars()
     }
 
     override fun getCompletedAdventures(page: Int): Single<ICollectionContainer<UserAdventure>> {

@@ -40,6 +40,7 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
         }
 
         changeAvatarButton.setOnClickListener {
+            presenter.profile = null
             navigator.goTo(ChooseAvatarKey())
         }
 

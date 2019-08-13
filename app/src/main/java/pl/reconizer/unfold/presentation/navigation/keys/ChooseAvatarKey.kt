@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 import pl.reconizer.unfold.presentation.avatars.ChooseAvatarFragment
 
 @Parcelize
-class ChooseAvatarKey() : BaseKey() {
+class ChooseAvatarKey : BaseKey() {
 
     override fun createFragment(): Fragment {
         return ChooseAvatarFragment()
