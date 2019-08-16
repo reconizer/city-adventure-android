@@ -34,7 +34,7 @@ class RatingView @JvmOverloads constructor(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         1f
                 ).apply {
-                    val margin = resources.getDimensionPixelOffset(R.dimen.space_sm)
+                    val margin = resources.getDimensionPixelOffset(R.dimen.space_1x)
                     setMargins(margin, 0, margin, 0)
                 }
                 setOnClickListener {

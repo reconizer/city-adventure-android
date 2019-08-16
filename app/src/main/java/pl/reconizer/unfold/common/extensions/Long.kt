@@ -1,6 +1,6 @@
 package pl.reconizer.unfold.common.extensions
 
-fun Long.toPrettyTimeString(): String {
+fun Long.toPrettyTimeString(numberOfSegments: Int = 3): String {
     val days = (this / TimeConsts.SECONDS_IN_DAY).toInt()
     var remaining = this % TimeConsts.SECONDS_IN_DAY
 
@@ -14,6 +14,6 @@ fun Long.toPrettyTimeString(): String {
 
     return listOf(days to "d", hours to "h", minutes to "m", seconds to "s")
             .filter { it.first > 0 }
-            .take(3)
+            .take(numberOfSegments)
             .joinToString(" ") { (value, abbr) -> "${value}${abbr}" }
 }

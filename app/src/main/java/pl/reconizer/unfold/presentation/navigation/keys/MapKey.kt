@@ -3,7 +3,7 @@ package pl.reconizer.unfold.presentation.navigation.keys
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import kotlinx.android.parcel.Parcelize
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.presentation.map.MapMode
 import pl.reconizer.unfold.presentation.map.game.GameMapFragment
 import pl.reconizer.unfold.presentation.map.game.GameMapFragment.Companion.ADVENTURE_PARAM
@@ -13,7 +13,7 @@ import pl.reconizer.unfold.presentation.map.game.GameMapFragment.Companion.MAP_M
 @Parcelize
 open class MapKey(
         val mapMode: MapMode,
-        val adventure: Adventure? = null,
+        val adventure: MapAdventure? = null,
         val adventurePointId: String? = null
 ) : BaseKey(bundleOf(
                 MAP_MODE_PARAM to mapMode,
@@ -40,7 +40,7 @@ open class MapKey(
                 return MapKey(MapMode.ADVENTURES)
             }
 
-            fun buildAdventureMapKey(adventure: Adventure, adventurePointId: String? = null): MapKey {
+            fun buildAdventureMapKey(adventure: MapAdventure, adventurePointId: String? = null): MapKey {
                 return MapKey(
                         MapMode.STARTED_ADVENTURE,
                         adventure,

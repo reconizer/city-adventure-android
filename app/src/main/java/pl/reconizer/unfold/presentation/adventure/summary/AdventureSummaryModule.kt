@@ -6,17 +6,17 @@ import io.reactivex.Scheduler
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.adventure.ranking.RankingAdapter
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
     ErrorHandlersModule::class
 ])
 class AdventureSummaryModule(
-        private val adventure: Adventure
+        private val adventure: MapAdventure
 ) {
 
     @Provides
@@ -25,13 +25,13 @@ class AdventureSummaryModule(
             @Named("background") backgroundScheduler: Scheduler,
             @Named("main") mainScheduler: Scheduler,
             adventureRepository: IAdventureRepository,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): AdventureSummaryPresenter {
         return AdventureSummaryPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 adventureRepository,
-                errorHandler,
+                errorsHandler,
                 adventure
         )
     }

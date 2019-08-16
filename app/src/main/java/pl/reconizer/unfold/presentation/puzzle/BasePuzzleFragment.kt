@@ -1,9 +1,10 @@
 package pl.reconizer.unfold.presentation.puzzle
 
 import android.os.Bundle
+import com.zhuinden.simplestack.StateChange
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.PuzzleType
 import pl.reconizer.unfold.presentation.common.BaseFragment
@@ -11,7 +12,6 @@ import pl.reconizer.unfold.presentation.common.IViewWithLocation
 import pl.reconizer.unfold.presentation.customviews.dialogs.ErrorDialogBuilder
 import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
-import pl.reconizer.unfold.presentation.navigation.keys.MapKey
 import javax.inject.Inject
 
 open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
@@ -23,7 +23,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val adventure = arguments?.get(ADVENTURE_PARAM) as Adventure?
+        val adventure = arguments?.get(ADVENTURE_PARAM) as MapAdventure?
         val adventurePoint = arguments?.get(ADVENTURE_POINT_PARAM) as AdventurePoint?
         val puzzleType = arguments?.get(PUZZLE_TYPE_PARAM) as PuzzleType?
         Injector.buildPuzzleComponent(
@@ -64,10 +64,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun correctAnswer() {
-        navigator.goTo(MapKey.Builder.buildAdventureMapKey(
-                adventure = presenter.adventure,
-                adventurePointId = presenter.adventurePoint.id
-        ))
+        navigator.goBack() // opens the map
     }
 
     override fun wrongAnswer() {
@@ -75,9 +72,11 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun completedAdventure() {
-        navigator.goTo(AdventureSummaryKey(
-                arguments?.get(ADVENTURE_PARAM) as Adventure
-        ))
+        // replaces in order to prevent going back to a puzzle screen
+        navigator.replaceTop(
+                AdventureSummaryKey(arguments?.get(ADVENTURE_PARAM) as MapAdventure),
+                StateChange.REPLACE
+        )
     }
 
     fun showWrongAnswerDialog() {

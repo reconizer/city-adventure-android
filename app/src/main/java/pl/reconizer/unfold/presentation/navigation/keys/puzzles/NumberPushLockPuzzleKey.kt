@@ -3,7 +3,7 @@ package pl.reconizer.unfold.presentation.navigation.keys.puzzles
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import kotlinx.android.parcel.Parcelize
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.PuzzleType
 import pl.reconizer.unfold.presentation.navigation.keys.BaseKey
@@ -12,7 +12,7 @@ import pl.reconizer.unfold.presentation.puzzle.numberpushlock.NumberPushLockPuzz
 
 @Parcelize
 class NumberPushLockPuzzleKey(
-        val adventure: Adventure,
+        val adventure: MapAdventure,
         val adventurePoint: AdventurePoint,
         val puzzleType: PuzzleType
 ) : BaseKey(

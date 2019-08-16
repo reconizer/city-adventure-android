@@ -6,11 +6,11 @@ import io.reactivex.Scheduler
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.PuzzleType
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import javax.inject.Named
 
@@ -18,7 +18,7 @@ import javax.inject.Named
     ErrorHandlersModule::class
 ])
 class PuzzleModule(
-        private val adventure: Adventure,
+        private val adventure: MapAdventure,
         private val adventurePoint: AdventurePoint,
         private val puzzleType: PuzzleType
 ) {
@@ -30,14 +30,14 @@ class PuzzleModule(
             @Named("main") mainScheduler: Scheduler,
             adventureRepository: IAdventureRepository,
             locationProvider: ILocationProvider,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): PuzzlePresenter {
         return PuzzlePresenter(
                 backgroundScheduler,
                 mainScheduler,
                 adventureRepository,
                 locationProvider,
-                errorHandler,
+                errorsHandler,
                 adventure,
                 adventurePoint,
                 puzzleType

@@ -8,10 +8,7 @@ import pl.reconizer.unfold.di.components.DaggerAppComponent
 import pl.reconizer.unfold.di.components.MainActivityComponent
 import pl.reconizer.unfold.di.modules.ContextModule
 import pl.reconizer.unfold.di.modules.MainActivityModule
-import pl.reconizer.unfold.domain.entities.Adventure
-import pl.reconizer.unfold.domain.entities.AdventurePoint
-import pl.reconizer.unfold.domain.entities.AdventureStartPoint
-import pl.reconizer.unfold.domain.entities.PuzzleType
+import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.presentation.adventure.journal.JournalComponent
 import pl.reconizer.unfold.presentation.adventure.journal.JournalModule
 import pl.reconizer.unfold.presentation.adventure.startpoint.StartPointComponent
@@ -26,14 +23,29 @@ import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.R
 import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarComponent
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarModule
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileComponent
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileModule
 import pl.reconizer.unfold.presentation.map.game.GameMapComponent
 import pl.reconizer.unfold.presentation.map.game.GameMapModule
 import pl.reconizer.unfold.presentation.menu.MenuComponent
 import pl.reconizer.unfold.presentation.menu.MenuModule
 import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
+import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresComponent
+import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresModule
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsComponent
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageComponent
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageModule
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresType
+import pl.reconizer.unfold.presentation.userprofile.UserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.UserProfileModule
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileModule
 
 object Injector {
 
@@ -50,6 +62,10 @@ object Injector {
     private var journalComponent: JournalComponent? = null
     private var puzzleComponent: PuzzleComponent? = null
     private var adventureSummaryComponent: AdventureSummaryComponent? = null
+    private var userProfileComponent: UserProfileComponent? = null
+    private var editUserProfileComponent: EditUserProfileComponent? = null
+    private var chooseAvatarComponent: ChooseAvatarComponent? = null
+    private var creatorProfileComponent: CreatorProfileComponent? = null
 
     fun buildAppComponent(appContext: Context): AppComponent {
         appComponent = DaggerAppComponent.builder()
@@ -101,14 +117,14 @@ object Injector {
         return gameMapComponent!!
     }
 
-    fun buildAdventureStartPointComponent(adventure: Adventure): StartPointComponent {
+    fun buildAdventureStartPointComponent(adventure: MapAdventure): StartPointComponent {
         adventureStartPointComponent = mainActivityComponent!!.adventureStartPointComponent(
                 StartPointModule(adventure)
         )
         return adventureStartPointComponent!!
     }
 
-    fun buildJournalComponent(adventure: Adventure, adventureStartPoint: AdventureStartPoint): JournalComponent {
+    fun buildJournalComponent(adventure: MapAdventure, adventureStartPoint: AdventureStartPoint): JournalComponent {
         journalComponent = mainActivityComponent!!.journalComponent(
                 JournalModule(adventure, adventureStartPoint)
         )
@@ -116,7 +132,7 @@ object Injector {
     }
 
     fun buildPuzzleComponent(
-            adventure: Adventure,
+            adventure: MapAdventure,
             adventurePoint: AdventurePoint,
             puzzleType: PuzzleType
     ): PuzzleComponent {
@@ -126,11 +142,43 @@ object Injector {
         return puzzleComponent!!
     }
 
-    fun buildAdventureSummaryComponent(adventure: Adventure): AdventureSummaryComponent {
+    fun buildAdventureSummaryComponent(adventure: MapAdventure): AdventureSummaryComponent {
         adventureSummaryComponent = mainActivityComponent!!.adventureSummaryComponent(AdventureSummaryModule(
                 adventure
         ))
         return adventureSummaryComponent!!
+    }
+
+    fun buildUserProfileComponent(): UserProfileComponent {
+        userProfileComponent = mainActivityComponent!!.userProfileComponent(UserProfileModule())
+        return userProfileComponent!!
+    }
+
+    fun buildEditUserProfileComponent(): EditUserProfileComponent {
+        editUserProfileComponent = mainActivityComponent!!.editUserProfileComponent(EditUserProfileModule())
+        return editUserProfileComponent!!
+    }
+
+    fun buildChooseAvatarComponent(): ChooseAvatarComponent {
+        chooseAvatarComponent = mainActivityComponent!!.chooseAvatarComponent(ChooseAvatarModule())
+        return chooseAvatarComponent!!
+    }
+
+    fun buildCreatorProfileComponent(creatorId: String): CreatorProfileComponent {
+        creatorProfileComponent = mainActivityComponent!!.creatorProfileComponent(CreatorProfileModule(creatorId))
+        return creatorProfileComponent!!
+    }
+
+    fun buildUserAdventuresComponent(userAdventuresType: UserAdventuresType): UserAdventuresPageComponent {
+        return mainActivityComponent!!.userAdventuresComponent(UserAdventuresPageModule(userAdventuresType))
+    }
+
+    fun buildSearchAdventuresComponent(position: Position): SearchAdventuresComponent {
+        return mainActivityComponent!!.searchAdventuresComponent(SearchAdventuresModule(position))
+    }
+
+    fun buildSearchCreatorsComponent(position: Position): SearchCreatorsComponent {
+        return mainActivityComponent!!.searchCreatorsComponent(SearchCreatorsModule(position))
     }
 
     fun clearAppComponent() {
@@ -184,4 +232,21 @@ object Injector {
     fun clearAdventureSummaryComponent() {
         adventureSummaryComponent = null
     }
+
+    fun clearUserProfileComponent() {
+        userProfileComponent = null
+    }
+
+    fun clearEditUserProfileComponent() {
+        editUserProfileComponent = null
+    }
+
+    fun clearChooseAvatarComponent() {
+        chooseAvatarComponent = null
+    }
+
+    fun clearCreatorProfileComponent() {
+        creatorProfileComponent = null
+    }
+
 }

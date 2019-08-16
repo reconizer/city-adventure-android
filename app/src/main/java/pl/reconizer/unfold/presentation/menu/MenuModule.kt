@@ -9,7 +9,7 @@ import pl.reconizer.unfold.di.modules.usecases.authentication.AuthenticationUsec
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.domain.usecases.authentication.Logout
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
@@ -25,14 +25,14 @@ class MenuModule {
             @Named("main") mainScheduler: Scheduler,
             userRepository: IUserRepository,
             logout: Logout,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): MenuPresenter {
         return MenuPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 userRepository,
                 logout,
-                errorHandler
+                errorsHandler
         )
     }
 

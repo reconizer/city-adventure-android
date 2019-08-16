@@ -45,8 +45,8 @@
         android:id="@+id/goToMapButton"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="@dimen/space_md"
-        android:layout_marginTop="@dimen/space_md"
+        android:layout_marginStart="@dimen/space_2x"
+        android:layout_marginTop="@dimen/space_2x"
         android:src="@drawable/button_go_to_map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -122,7 +122,7 @@
                 android:id="@+id/journalAdventureDescriptionView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/space_lg"
+                android:paddingTop="@dimen/space_3x"
                 android:scaleX="0.9"
                 android:scaleY="0.9" />
 

@@ -6,7 +6,16 @@ import pl.reconizer.unfold.domain.entities.*
 
 interface IAdventureRepository {
 
-    fun getAdventures(lat: Double, lng: Double): Single<List<Adventure>>
+    fun getAdventures(lat: Double, lng: Double): Single<List<MapAdventure>>
+
+    fun searchAdventures(
+            page: Int,
+            position: Position,
+            order: AdventuresSort,
+            name: String,
+            range: Float?,
+            difficultyLevel: DifficultyLevel?
+    ): Single<ICollectionContainer<Adventure>>
 
     fun getAdventure(adventureId: String): Single<AdventureStartPoint>
 
@@ -21,5 +30,7 @@ interface IAdventureRepository {
     fun userAdventureRanking(adventureId: String): Single<RankingEntry>
 
     fun getSummary(adventureId: String): Single<List<RankingEntry>>
+
+    fun rate(adventureId: String, rating: Int): Completable
 
 }

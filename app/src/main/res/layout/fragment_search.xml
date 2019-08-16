@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/search_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/content_double_frame"
+        android:layout_margin="@dimen/space_1_5x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+            android:id="@+id/filtersLeftMargin"
+            android:layout_width="@dimen/space_8x"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:scaleDirection="width" />
+
+        <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+            android:id="@+id/filtersRightMargin"
+            android:layout_width="@dimen/space_8x"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:scaleDirection="width" />
+
+        <RadioGroup
+            android:id="@+id/tabsContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/frame_small"
+            android:checkedButton="@id/adventuresTab"
+            android:orientation="horizontal"
+            android:padding="@dimen/frame_offset"
+            app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
+            app:layout_constraintStart_toEndOf="@id/filtersLeftMargin"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/adventuresTab"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_4x"
+                android:layout_marginEnd="@dimen/frame_thickness"
+                style="@style/ButtonLikeRadioButton"
+                android:gravity="center"
+                android:text="@string/search_adventures_tab"
+                android:textAlignment="gravity" />
+
+            <RadioButton
+                android:id="@+id/creatorsTab"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_4x"
+                android:layout_marginStart="@dimen/frame_thickness"
+                style="@style/ButtonLikeRadioButton"
+                android:gravity="center"
+                android:text="@string/search_creators_tab" />
+
+        </RadioGroup>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabsContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_with_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

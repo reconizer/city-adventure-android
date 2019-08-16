@@ -5,15 +5,15 @@ import dagger.Module
 import dagger.Provides
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.scopes.ViewScope
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
 @Module
 class ErrorHandlersModule {
 
     @Provides
     @ViewScope
-    fun provideBasicErrorHandler(gson: Gson): ErrorHandler<Error> {
-        return ErrorHandler.build(gson)
+    fun provideBasicErrorHandler(gson: Gson): ErrorsHandler<Error> {
+        return ErrorsHandler.build(gson)
     }
 
 }

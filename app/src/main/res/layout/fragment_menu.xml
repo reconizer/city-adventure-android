@@ -74,7 +74,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TypeWriterText"
                 android:textColor="@color/menuItemFontColor"
-                android:textSize="@dimen/space_md"
+                android:textSize="@dimen/space_2x"
                 app:layout_constraintEnd_toStartOf="@id/rightViewMargin"
                 app:layout_constraintStart_toEndOf="@id/leftViewMargin"
                 app:layout_constraintTop_toBottomOf="@id/avatarBackground" />
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/menu_adventure_list"
-                android:layout_marginTop="@dimen/space_sm"
+                android:layout_marginTop="@dimen/space_1x"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/listDecoration" />
@@ -223,10 +223,10 @@
                 android:id="@+id/closeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/space_md"
-                android:paddingTop="@dimen/space_md"
-                android:paddingEnd="@dimen/space_sm"
-                android:paddingBottom="@dimen/space_sm"
+                android:paddingStart="@dimen/space_2x"
+                android:paddingTop="@dimen/space_2x"
+                android:paddingEnd="@dimen/space_1x"
+                android:paddingBottom="@dimen/space_1x"
                 android:src="@drawable/icon_close_with_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

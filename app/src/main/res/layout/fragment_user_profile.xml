@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/user_profile_background">
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_with_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/topBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="closeButton" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/bottomMargin"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/space_4x"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/leftMargin"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rightMargin"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:background="@drawable/pinned_paper_background"
+        app:layout_constraintBottom_toTopOf="@id/bottomMargin"
+        app:layout_constraintEnd_toStartOf="@id/rightMargin"
+        app:layout_constraintStart_toEndOf="@id/leftMargin"
+        app:layout_constraintTop_toBottomOf="@id/topBarrier">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/frame_big"
+            android:layout_marginStart="@dimen/space_1x"
+            android:layout_marginTop="@dimen/space_1x"
+            android:layout_marginEnd="@dimen/space_1x"
+            android:layout_marginBottom="@dimen/space_1x">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:elevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|snap">
+
+                    <View
+                        android:id="@+id/usernameFrame"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/space_5x"
+                        android:layout_margin="@dimen/frame_offset_with_thickness"
+                        android:background="@drawable/frame_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/usernameTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="@dimen/frame_offset_with_thickness"
+                        android:ellipsize="end"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/TypeWriterText"
+                        android:textColor="@color/fontHeaderColor"
+                        android:textSize="21dp"
+                        app:layout_constraintBottom_toBottomOf="@id/usernameFrame"
+                        app:layout_constraintEnd_toStartOf="@id/headerRightDecorator"
+                        app:layout_constraintStart_toEndOf="@id/headerLeftDecorator"
+                        app:layout_constraintTop_toTopOf="@id/usernameFrame"
+                        tools:text="@string/lorem_long" />
+
+                    <ImageView
+                        android:id="@+id/headerLeftDecorator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/frame_offset"
+                        android:src="@drawable/user_profile_nick_decorator"
+                        app:layout_constraintBottom_toBottomOf="@id/usernameFrame"
+                        app:layout_constraintStart_toStartOf="@id/usernameFrame"
+                        app:layout_constraintTop_toTopOf="@id/usernameFrame" />
+
+                    <ImageView
+                        android:id="@+id/headerRightDecorator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/frame_offset"
+                        android:src="@drawable/user_profile_nick_decorator"
+                        app:layout_constraintBottom_toBottomOf="@id/usernameFrame"
+                        app:layout_constraintEnd_toEndOf="@id/usernameFrame"
+                        app:layout_constraintTop_toTopOf="@id/usernameFrame" />
+
+
+                    <ImageView
+                        android:id="@+id/avatarLeftDecorator"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/frame_offset_with_thickness"
+                        android:layout_marginEnd="@dimen/frame_offset"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/user_profile_avatar_decorator"
+                        app:layout_constraintBottom_toBottomOf="@id/avatarBackground"
+                        app:layout_constraintEnd_toStartOf="@id/avatarBackground"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/avatarBackground" />
+
+                    <ImageView
+                        android:id="@+id/avatarRightDecorator"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/frame_offset"
+                        android:layout_marginEnd="@dimen/frame_offset_with_thickness"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/user_profile_avatar_decorator"
+                        app:layout_constraintBottom_toBottomOf="@id/avatarBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/avatarBackground"
+                        app:layout_constraintTop_toTopOf="@id/avatarBackground" />
+
+                    <ImageView
+                        android:id="@+id/avatarBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_1x"
+                        android:background="@drawable/frame_medium"
+                        android:padding="@dimen/frame_offset"
+                        android:src="@drawable/avatar_background"
+                        app:layout_constraintDimensionRatio="w,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/usernameTextView" />
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
+                        android:layout_margin="@dimen/space_1x"
+                        app:layout_constraintStart_toStartOf="@id/avatarBackground"
+                        app:layout_constraintTop_toTopOf="@id/avatarBackground"
+                        app:layout_constraintEnd_toEndOf="@id/avatarBackground"
+                        app:layout_constraintBottom_toBottomOf="@id/avatarBackground" />
+
+                    <Button
+                        android:id="@+id/editButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_profile_edit"
+                        style="@style/FramedButton"
+                        android:layout_marginTop="@dimen/space_xs"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/avatarBackground" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/adventuresHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_4x"
+                    android:background="@drawable/frame_small"
+                    android:textAppearance="@style/TypeWriterText"
+                    android:textColor="@color/fontHeaderColor"
+                    android:textSize="18dp"
+                    android:text="@string/user_profile_finished_adventures"
+                    android:gravity="center"
+                    android:textAlignment="gravity"
+                    android:layout_marginStart="@dimen/frame_offset_with_thickness"
+                    android:layout_marginTop="@dimen/frame_offset"
+                    android:layout_marginEnd="@dimen/frame_offset_with_thickness" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/adventuresRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                android:paddingTop="@dimen/frame_offset"
+                android:paddingBottom="@dimen/frame_offset"
+                android:clipToPadding="false"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/paperPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/paper_pin"
+        app:layout_constraintStart_toStartOf="@id/contentContainer"
+        app:layout_constraintEnd_toEndOf="@id/contentContainer"
+        app:layout_constraintTop_toTopOf="@id/contentContainer"
+        app:layout_constraintBottom_toTopOf="@id/contentContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

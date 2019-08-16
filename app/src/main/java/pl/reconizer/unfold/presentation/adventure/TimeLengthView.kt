@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_adventure_time_length.view.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.prettyTimeStringRange
 import pl.reconizer.unfold.common.extensions.toPrettyTimeString
 
 class TimeLengthView @JvmOverloads constructor(
@@ -34,14 +35,6 @@ class TimeLengthView @JvmOverloads constructor(
     }
 
     private fun updateTextView() {
-        if (minLength > 0 && maxLength > 0) {
-            if (minLength == maxLength) {
-                timeTextView.text = minLength.toPrettyTimeString()
-            } else {
-                timeTextView.text = "${minLength.toPrettyTimeString()} - ${maxLength.toPrettyTimeString()}"
-            }
-        } else {
-            timeTextView.text = "? ? ?"
-        }
+        timeTextView.text = prettyTimeStringRange(minLength, maxLength)
     }
 }

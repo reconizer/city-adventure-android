@@ -15,6 +15,7 @@ data class AdventureStartPoint(
         val language: String,
         val rating: Double?,
         @SerializedName("rating_count") val ratingCount: Int,
+        @SerializedName("author_id") val authorId: String,
         @SerializedName("author_name") val authorName: String,
         @SerializedName("author_image_url") val authorImage: String,
         @SerializedName("min_time") val minFinishTime: Long,

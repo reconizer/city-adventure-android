@@ -1,16 +1,18 @@
 package pl.reconizer.unfold.domain.entities
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class Adventure(
-        @SerializedName("adventure_id") val adventureId: String,
-        val completed: Boolean,
-        val started: Boolean,
-        @SerializedName("paid") val purchasable: Boolean,
-        val purchased: Boolean,
-        @SerializedName("start_point_id") val startPointId: String,
-        override val position: Position
-): Parcelable, IPositionable
+        val id: String,
+        val name: String,
+        @SerializedName("min_time") val minFinishTime: Long?,
+        @SerializedName("max_time") val maxFinishTime: Long?,
+        @SerializedName("image_url") val coverImage: String,
+        @SerializedName("difficulty_level") val difficultyLevelValue: Int,
+        val rating: Float
+) {
+
+    val difficultyLevel
+        get() = DifficultyLevel.fromInt(difficultyLevelValue)
+
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent">
+
+    <ImageView
+        android:id="@+id/contentBackgroundShadow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/user_adventures_content_background_shadow"
+        app:layout_constraintStart_toStartOf="@id/contentBackground"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/contentBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/user_adventures_content_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contentBackgroundShadow" />
+
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/leftContentMargin"
+        android:layout_width="@dimen/space_4x"
+        android:layout_height="wrap_content"
+        app:scaleDirection="width"
+        app:layout_constraintStart_toStartOf="@id/contentBackground" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rightContentMargin"
+        android:layout_width="@dimen/space_4x"
+        android:layout_height="wrap_content"
+        app:scaleDirection="width"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/bottomContentMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space_4x"
+        app:scaleDirection="height"
+        app:layout_constraintBottom_toBottomOf="@id/contentBackground"/>
+
+    <TextView
+        android:id="@+id/contentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="23dp"
+        android:text="@string/user_adventures_title"
+        android:layout_marginTop="@dimen/space_4x"
+        android:paddingBottom="@dimen/space_xs"
+        app:layout_constraintStart_toStartOf="@id/contentBackground"
+        app:layout_constraintTop_toTopOf="@id/contentBackground"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/adventuresRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_2x"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toEndOf="@id/leftContentMargin"
+        app:layout_constraintEnd_toStartOf="@id/rightContentMargin"
+        app:layout_constraintTop_toBottomOf="@id/topListBorder"
+        app:layout_constraintBottom_toTopOf="@id/bottomListBorder" />
+
+    <ImageView
+        android:id="@+id/topListBorder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/list_border"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@id/leftContentMargin"
+        app:layout_constraintEnd_toStartOf="@id/rightContentMargin"
+        app:layout_constraintTop_toBottomOf="@id/contentTitle" />
+
+    <ImageView
+        android:id="@+id/bottomListBorder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/list_border"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@id/leftContentMargin"
+        app:layout_constraintEnd_toStartOf="@id/rightContentMargin"
+        app:layout_constraintBottom_toTopOf="@id/bottomContentMargin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

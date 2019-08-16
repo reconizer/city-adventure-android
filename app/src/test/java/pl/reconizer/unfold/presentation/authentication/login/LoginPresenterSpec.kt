@@ -7,14 +7,14 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.usecases.authentication.SignIn
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
 class LoginPresenterSpec : Spek({
 
     describe("LoginPresenter") {
         val view = mock<ILoginView>()
         val scheduler = Schedulers.trampoline()
-        val errorHandler = mock<ErrorHandler<Error>>()
+        val errorHandler = mock<ErrorsHandler<Error>>()
         val signIn = mock<SignIn>()
 
         val presenter = LoginPresenter(scheduler, signIn, errorHandler)

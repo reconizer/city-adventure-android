@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="91dp"
+    android:background="@drawable/frame_small">
+
+    <ImageView
+        android:id="@+id/coverImageBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/frame_offset"
+        android:layout_marginTop="@dimen/frame_offset"
+        android:layout_marginBottom="@dimen/frame_offset"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/coverImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/frame_offset"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/coverImageBackground"
+        app:layout_constraintEnd_toEndOf="@id/coverImageBackground"
+        app:layout_constraintStart_toStartOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="@id/coverImageBackground"
+        tools:src="@drawable/test_banner" />
+
+    <ImageView
+        android:id="@+id/contentBorder"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/frame_thickness"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:scaleType="fitXY"
+        android:src="@drawable/border_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <TextView
+        android:id="@+id/creatorName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_1x"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/contentBorder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/coverImageBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/adventuresCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/icon_search_adventures_count"
+        android:drawablePadding="@dimen/space_1x"
+        android:includeFontPadding="false"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/followersCount"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/coverImageBackground"
+        app:layout_constraintTop_toBottomOf="@id/contentBorder"
+        tools:text="6" />
+
+    <TextView
+        android:id="@+id/followersCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/icon_followers"
+        android:drawablePadding="@dimen/space_1x"
+        android:includeFontPadding="false"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/adventuresCount"
+        app:layout_constraintTop_toBottomOf="@id/contentBorder"
+        tools:text="32" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
