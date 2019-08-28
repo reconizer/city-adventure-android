@@ -13,7 +13,8 @@ enum class DifficultyLevel(val value: Int) {
                 1 -> EASY
                 2 -> MEDIUM
                 3 -> HARD
-                else -> throw IllegalArgumentException("Values can range between 1 and 3")
+                // TODO: Fixes issue with invalid data on backend. Need to be removed later.
+                else -> MEDIUM //throw IllegalArgumentException("Values can range between 1 and 3")
             }
         }
     }
