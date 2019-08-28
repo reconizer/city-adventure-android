@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.transition.*
-import com.crashlytics.android.Crashlytics
 import com.zhuinden.simplestack.StateChange
 import kotlinx.android.synthetic.main.fragment_splash_start.*
 import pl.reconizer.unfold.R
@@ -73,9 +72,6 @@ class SplashFragment : BaseFragment(), ISplashView {
         super.onResume()
         presenter.subscribe(this)
         presenter.checkUser()
-        view?.postDelayed({
-            Crashlytics.getInstance().crash()
-        },1000)
     }
 
     override fun onPause() {

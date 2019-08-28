@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <Space
+        android:id="@+id/startedTabSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space_1_5x"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/completedTabSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space_1_5x"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Space
+        android:id="@+id/purchasedTabSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space_1_5x"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/startedTabBackground"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/user_adventures_tab_started"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/completedTabBackground"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startedTabSpace" />
+
+    <ImageView
+        android:id="@+id/completedTabBackground"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/user_adventures_tab_completed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/purchasedTabBackground"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/startedTabBackground"
+        app:layout_constraintTop_toBottomOf="@id/completedTabSpace" />
+
+    <ImageView
+        android:id="@+id/purchasedTabBackground"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/user_adventures_tab_purchased"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/completedTabBackground"
+        app:layout_constraintTop_toBottomOf="@id/purchasedTabSpace" />
+
+    <TextView
+        android:id="@+id/startedTab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/user_adventures_started"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@id/startedTabBackground"
+        app:layout_constraintTop_toTopOf="@id/startedTabBackground"
+        app:layout_constraintEnd_toEndOf="@id/startedTabBackground"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/completedTab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/user_adventures_tab_completed"
+        android:gravity="center"
+        android:text="@string/user_adventures_completed"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@id/completedTabBackground"
+        app:layout_constraintTop_toTopOf="@id/completedTabBackground"
+        app:layout_constraintEnd_toEndOf="@id/completedTabBackground"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/purchasedTab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/user_adventures_tab_purchased"
+        android:gravity="center"
+        android:text="@string/user_adventures_purchased"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@id/purchasedTabBackground"
+        app:layout_constraintTop_toTopOf="@id/purchasedTabBackground"
+        app:layout_constraintEnd_toEndOf="@id/purchasedTabBackground"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

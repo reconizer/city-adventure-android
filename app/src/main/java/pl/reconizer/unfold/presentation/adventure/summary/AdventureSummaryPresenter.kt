@@ -6,8 +6,9 @@ import io.reactivex.functions.BiFunction
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -15,8 +16,8 @@ class AdventureSummaryPresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
-        private val errorHandler: ErrorHandler<Error>,
-        private val adventure: Adventure
+        private val errorsHandler: ErrorsHandler<Error>,
+        private val adventure: MapAdventure
 ) : BasePresenter<IAdventureSummaryView>() {
 
     var userRanking: RankingEntry? = null
@@ -25,7 +26,7 @@ class AdventureSummaryPresenter(
 
     override fun subscribe(view: IAdventureSummaryView) {
         super.subscribe(view)
-        errorHandler.view = WeakReference(view)
+        errorsHandler.view = WeakReference(view)
     }
 
     fun fetchData() {
@@ -49,8 +50,23 @@ class AdventureSummaryPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : SingleCallbackWrapper<Pair<RankingEntry, List<RankingEntry>>, Error>(errorHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<Pair<RankingEntry, List<RankingEntry>>, Error>(errorsHandler) {
                             override fun onSuccess(t: Pair<RankingEntry, List<RankingEntry>>) {
+                            }
+                        })
+        )
+    }
+
+    fun rateAdventure(rating: Int) {
+        disposables.add(
+                adventureRepository.rate(adventure.adventureId, rating)
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .doOnSubscribe { view?.showLoader() }
+                        .doFinally { view?.hideLoader() }
+                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorsHandler) {
+                            override fun onComplete() {
+
                             }
                         })
         )

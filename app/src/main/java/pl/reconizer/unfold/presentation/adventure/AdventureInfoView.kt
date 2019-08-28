@@ -34,6 +34,8 @@ class AdventureInfoView @JvmOverloads constructor(
     var rateable: Boolean = true
     var isCompleted: Boolean = false
 
+    var onAuthorClickListener: (() -> Unit)? = null
+
     var galleryImageClickListener: ((index: Int) -> Unit)? = null
     var rateListener: ((rateValue: Int) -> Unit)? = null
 
@@ -52,6 +54,8 @@ class AdventureInfoView @JvmOverloads constructor(
         difficultyLevel.isGone = true
         timeLength.isGone = true
         galleryPreview.isGone = true
+
+        authorInfo.setOnClickListener { onAuthorClickListener?.invoke() }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

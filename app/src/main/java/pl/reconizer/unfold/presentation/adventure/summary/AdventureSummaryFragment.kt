@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_adventure_summary.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.presentation.adventure.ranking.RankingAdapter
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.recyclerview.ItemOffsetDecorator
@@ -25,7 +25,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.buildAdventureSummaryComponent(arguments?.get(ADVENTURE_PARAM) as Adventure).inject(this)
+        Injector.buildAdventureSummaryComponent(arguments?.get(ADVENTURE_PARAM) as MapAdventure).inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,11 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
         rankingRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = rankingAdapter
-            addItemDecoration(ItemOffsetDecorator(context, R.dimen.space_sm))
+            addItemDecoration(ItemOffsetDecorator(context, R.dimen.space_1x))
+        }
+
+        ratingView.rateListener = { rating ->
+            presenter.rateAdventure(rating)
         }
 
         exitButton.setOnClickListener {
@@ -80,7 +84,7 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
     companion object {
         const val ADVENTURE_PARAM = "adventure"
 
-        fun newInstance(adventure: Adventure): AdventureSummaryFragment {
+        fun newInstance(adventure: MapAdventure): AdventureSummaryFragment {
             return AdventureSummaryFragment().apply {
                 arguments = bundleOf(
                         ADVENTURE_PARAM to adventure

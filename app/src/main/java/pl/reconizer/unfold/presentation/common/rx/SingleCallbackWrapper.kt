@@ -1,14 +1,14 @@
 package pl.reconizer.unfold.presentation.common.rx
 
 import io.reactivex.observers.DisposableSingleObserver
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
-abstract class SingleCallbackWrapper<TEntity, TErrorEntity>(private val errorHandler: ErrorHandler<TErrorEntity>) : DisposableSingleObserver<TEntity>() {
+abstract class SingleCallbackWrapper<TEntity, TErrorEntity>(private val errorsHandler: ErrorsHandler<TErrorEntity>) : DisposableSingleObserver<TEntity>() {
 
     abstract override fun onSuccess(t: TEntity)
 
     override fun onError(e: Throwable) {
-        errorHandler.onError(e)
+        errorsHandler.onError(e)
     }
 
 }

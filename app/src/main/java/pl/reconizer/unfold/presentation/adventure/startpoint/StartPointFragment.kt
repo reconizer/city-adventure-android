@@ -14,10 +14,11 @@ import kotlinx.android.synthetic.main.view_adventure_start_point_top_ranking.*
 import kotlinx.android.synthetic.main.view_ranking_title.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.customviews.ShadowGenerator
+import pl.reconizer.unfold.presentation.navigation.keys.CreatorProfileKey
 import pl.reconizer.unfold.presentation.navigation.keys.GalleryKey
 import pl.reconizer.unfold.presentation.navigation.keys.JournalKey
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     @Inject
     lateinit var shadowGenerator: ShadowGenerator
 
-    val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as Adventure? }
+    val adventure by lazy { arguments?.get(ADVENTURE_PARAM) as MapAdventure? }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,15 +56,21 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         }
 
         adventureInfoView.rateListener = { rateValue ->
-
+            presenter.rateAdventure(rateValue)
         }
 
         adventureInfoView.shadowGenerator = shadowGenerator
-        adventureInfoView.rateable = true
+        adventureInfoView.rateable = adventure?.completed ?: false
         adventureInfoView.isCompleted = adventure?.completed ?: false
 
         closeButton.setOnClickListener {
             goBack()
+        }
+
+        adventureInfoView.onAuthorClickListener = {
+            presenter.adventureStartPoint?.let {
+                navigator.goTo(CreatorProfileKey(it.authorId))
+            }
         }
 
         updateActionButton()
@@ -202,7 +209,7 @@ class StartPointFragment : BaseFragment(), IStartPointView {
     companion object {
         const val ADVENTURE_PARAM = "adventure"
 
-        fun newInstance(adventure: Adventure): StartPointFragment {
+        fun newInstance(adventure: MapAdventure): StartPointFragment {
             return StartPointFragment().apply {
                 arguments = bundleOf(ADVENTURE_PARAM to adventure)
             }

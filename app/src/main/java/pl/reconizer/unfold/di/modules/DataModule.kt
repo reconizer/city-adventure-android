@@ -9,11 +9,15 @@ import pl.reconizer.unfold.data.mappers.AdventurePointWithCluesMapper
 import pl.reconizer.unfold.data.mappers.TokenMapper
 import pl.reconizer.unfold.data.network.api.IAdventureApi
 import pl.reconizer.unfold.data.network.api.IAuthenticationApi
+import pl.reconizer.unfold.data.network.api.ICreatorApi
+import pl.reconizer.unfold.data.network.api.IUserApi
 import pl.reconizer.unfold.data.repositories.AdventureRepository
 import pl.reconizer.unfold.data.repositories.AuthenticationRepository
+import pl.reconizer.unfold.data.repositories.CreatorRepository
 import pl.reconizer.unfold.data.repositories.UserRepository
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.domain.repositories.IAuthenticationRepository
+import pl.reconizer.unfold.domain.repositories.ICreatorRepository
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import javax.inject.Singleton
 
@@ -36,9 +40,16 @@ class DataModule {
     @Singleton
     fun provideUserRepository(
             authenticationApi: IAuthenticationApi,
+            userApi: IUserApi,
+            adventureApi: IAdventureApi,
             tokenMapper: TokenMapper
     ): IUserRepository {
-        return UserRepository(authenticationApi, tokenMapper)
+        return UserRepository(
+                authenticationApi,
+                userApi,
+                adventureApi,
+                tokenMapper
+        )
     }
 
     @Provides
@@ -48,6 +59,15 @@ class DataModule {
             adventurePointWithCluesMapper: AdventurePointWithCluesMapper
     ): IAdventureRepository {
         return AdventureRepository(adventureApi, adventurePointWithCluesMapper)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreatorRepository(
+            creatorApi: ICreatorApi,
+            adventureApi: IAdventureApi
+    ): ICreatorRepository {
+        return CreatorRepository(creatorApi, adventureApi)
     }
 
 }

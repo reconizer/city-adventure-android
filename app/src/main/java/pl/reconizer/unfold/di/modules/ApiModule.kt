@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import pl.reconizer.unfold.data.network.api.IAdventureApi
 import pl.reconizer.unfold.data.network.api.IAuthenticationApi
+import pl.reconizer.unfold.data.network.api.ICreatorApi
+import pl.reconizer.unfold.data.network.api.IUserApi
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -20,6 +22,18 @@ class ApiModule {
     @Singleton
     fun provideAdventureApi(retrofit: Retrofit): IAdventureApi {
         return retrofit.create(IAdventureApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserApi(retrofit: Retrofit): IUserApi {
+        return retrofit.create(IUserApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreatorApi(retrofit: Retrofit): ICreatorApi {
+        return retrofit.create(ICreatorApi::class.java)
     }
 
 }

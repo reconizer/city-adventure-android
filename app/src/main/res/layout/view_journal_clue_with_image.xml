@@ -36,13 +36,13 @@
 
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/imageLeftMargin"
-        android:layout_width="@dimen/space_lg"
+        android:layout_width="@dimen/space_3x"
         android:layout_height="1dp"
         app:layout_constraintStart_toEndOf="@id/indexSpace" />
 
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/imageRightMargin"
-        android:layout_width="@dimen/space_lg"
+        android:layout_width="@dimen/space_3x"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -62,7 +62,7 @@
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_md"
+        android:layout_marginTop="@dimen/space_2x"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@id/imageRightMargin"

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/creator_profile_background">
+    
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/topMargin"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_5x"
+        app:scaleDirection="height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/bottomMargin"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_4x"
+        app:scaleDirection="height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/leftContentMargin"
+        android:layout_width="@dimen/space_5x"
+        android:layout_height="1dp"
+        app:scaleDirection="width"
+        app:layout_constraintStart_toStartOf="@id/contentBackground" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rightContentMargin"
+        android:layout_width="@dimen/space_5x"
+        android:layout_height="1dp"
+        app:scaleDirection="width"
+        app:layout_constraintEnd_toEndOf="@id/contentBackground" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/topContentMargin"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/space_5x"
+        app:scaleDirection="height"
+        app:layout_constraintTop_toTopOf="@id/contentBackground" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/bottomContentMargin"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/space_7x"
+        app:scaleDirection="height"
+        app:layout_constraintBottom_toBottomOf="@id/contentBackground" />
+
+
+    <ImageView
+        android:id="@+id/contentBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/creator_profile_content_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomMargin"
+        app:layout_constraintTop_toBottomOf="@id/topMargin" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/leftContentMargin"
+        app:layout_constraintTop_toBottomOf="@id/topContentMargin"
+        app:layout_constraintEnd_toStartOf="@id/rightContentMargin"
+        app:layout_constraintBottom_toTopOf="@id/bottomContentMargin">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:elevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_1x"
+                app:layout_scrollFlags="scroll|snap">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/creatorNameContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/space_5x"
+                    android:background="@drawable/frame_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <CheckBox
+                        android:id="@+id/favoriteButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:button="@drawable/follow_button"
+                        android:layout_marginStart="@dimen/space_1x"
+                        android:paddingEnd="@dimen/space_1x"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/creatorName"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="36dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/TypeWriterText"
+                        android:textColor="@color/fontHeaderColor"
+                        android:textSize="21dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/favoriteButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@tools:sample/lorem/random" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/logoBackground"
+                    android:layout_width="164dp"
+                    android:layout_height="164dp"
+                    android:layout_marginTop="@dimen/space_1x"
+                    android:src="@drawable/avatar_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/creatorNameContainer" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/frame_offset"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="@id/logoBackground"
+                    app:layout_constraintEnd_toEndOf="@id/logoBackground"
+                    app:layout_constraintStart_toStartOf="@id/logoBackground"
+                    app:layout_constraintTop_toTopOf="@id/logoBackground"
+                    tools:src="@drawable/test_avatar" />
+
+                <TextView
+                    android:id="@+id/favoritesCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_1x"
+                    android:drawableStart="@drawable/heart_small"
+                    android:drawablePadding="@dimen/space_1x"
+                    android:textAppearance="@style/TypeWriterText"
+                    android:textSize="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/logoBackground"
+                    tools:text="568" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:textAppearance="@style/TypeWriterText"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/favoritesCounter"
+                    tools:text="@tools:sample/lorem" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/adventuresHeader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_5x"
+                android:background="@drawable/frame_button"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="trasy"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TypeWriterText"
+                android:textSize="25dp" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/adventuresRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:paddingTop="@dimen/frame_offset"
+            android:paddingBottom="@dimen/frame_offset"
+            android:clipToPadding="false"
+            tools:listitem="@layout/view_adventure_item_with_details" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_with_background"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

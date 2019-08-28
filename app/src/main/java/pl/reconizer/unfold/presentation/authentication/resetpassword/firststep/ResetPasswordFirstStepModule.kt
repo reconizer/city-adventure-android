@@ -7,7 +7,7 @@ import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.di.modules.ErrorHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.repositories.IUserRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
@@ -21,13 +21,13 @@ class ResetPasswordFirstStepModule {
             @Named("background") backgroundScheduler: Scheduler,
             @Named("main") mainScheduler: Scheduler,
             repository: IUserRepository,
-            errorHandler: ErrorHandler<Error>
+            errorsHandler: ErrorsHandler<Error>
     ): ResetPasswordFirstStepPresenter {
         return ResetPasswordFirstStepPresenter(
                 backgroundScheduler,
                 mainScheduler,
                 repository,
-                errorHandler
+                errorsHandler
         )
     }
 

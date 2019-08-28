@@ -8,6 +8,7 @@
     <color name="transparent">#00000000</color>
 
     <color name="fontDarker">#27221e</color>
+    <color name="fontDarkerDisabled">#7b7773</color>
     <color name="fontDark">#332d26</color>
     <color name="fontLighter">#41382f</color>
 
@@ -24,4 +25,10 @@
     <color name="authenticationColor">#ab842a</color>
     <color name="authenticationColorLighter">#d0a137</color>
     <color name="authenticationLabelColor">#9696a9</color>
+
+    <color name="light1">#e9d1b3</color>
+    <color name="light1Disabled">#f0e1cd</color>
+
+    <color name="brown1">#3d352a</color>
+    <color name="brown1Disabled">#917e64</color>
 </resources>

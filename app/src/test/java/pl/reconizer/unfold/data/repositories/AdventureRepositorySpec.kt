@@ -17,7 +17,7 @@ class AdventureRepositorySpec : Spek({
         val repository = AdventureRepository(api, adventurePointWithCluesMapper)
 
         describe("getAdventures") {
-            val adventures = listOf(Adventure(
+            val adventures = listOf(MapAdventure(
                     adventureId = "test-id",
                     startPointId = "test-point-id",
                     position = Position(0.0, 0.0),

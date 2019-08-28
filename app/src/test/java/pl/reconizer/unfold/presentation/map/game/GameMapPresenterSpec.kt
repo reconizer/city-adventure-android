@@ -12,11 +12,11 @@ import org.mockito.ArgumentMatchers.anyDouble
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.domain.entities.Adventure
+import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.Position
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.map.CameraDetails
 import pl.reconizer.unfold.presentation.map.MapMode
@@ -28,7 +28,7 @@ class GameMapPresenterSpec : Spek({
         lateinit var testScheduler: TestScheduler
         lateinit var simplePresenter: GameMapPresenter
         lateinit var adventureRepository: IAdventureRepository
-        lateinit var errorHandler: ErrorHandler<Error>
+        lateinit var errorsHandler: ErrorsHandler<Error>
 
         val locationProvider = mock<ILocationProvider>()
 
@@ -43,7 +43,7 @@ class GameMapPresenterSpec : Spek({
         }
 
         beforeEachTest {
-            errorHandler = mock()
+            errorsHandler = mock()
             adventureRepository =  mock()
             testScheduler = TestScheduler()
             simplePresenter = GameMapPresenter(
@@ -51,7 +51,7 @@ class GameMapPresenterSpec : Spek({
                     Schedulers.trampoline(),
                     locationProvider,
                     adventureRepository,
-                    errorHandler
+                    errorsHandler
             )
         }
 
@@ -87,7 +87,7 @@ class GameMapPresenterSpec : Spek({
 
             it("sets view for error handler") {
                 simplePresenter.subscribe(view)
-                verify(errorHandler, atLeastOnce()).view = any()
+                verify(errorsHandler, atLeastOnce()).view = any()
             }
 
             context("when location permissions are not granted") {
@@ -113,7 +113,7 @@ class GameMapPresenterSpec : Spek({
                             testScheduler,
                             customLocationProvider,
                             adventureRepository,
-                            errorHandler
+                            errorsHandler
                     )
                 }
 
@@ -138,7 +138,7 @@ class GameMapPresenterSpec : Spek({
 
                 context("when in ${MapMode.STARTED_ADVENTURE.name} map mode") {
                     val adventurePoints = emptyList<AdventurePoint>()
-                    val adventure = mock<Adventure>()
+                    val adventure = mock<MapAdventure>()
                     val adventureId = "adv-id"
 
                     beforeEachTest {
@@ -163,7 +163,7 @@ class GameMapPresenterSpec : Spek({
                 }
 
                 context("when the map camera is moving") {
-                    val adventures = emptyList<Adventure>()
+                    val adventures = emptyList<MapAdventure>()
 
                     context("when it is the first change emit") {
                         val cameraDetails = CameraDetails(LatLng(1.0, 1.0), 15f)
@@ -335,7 +335,7 @@ class GameMapPresenterSpec : Spek({
                 }
 
                 context("when the map camera is not moving") {
-                    val adventures = emptyList<Adventure>()
+                    val adventures = emptyList<MapAdventure>()
                     val cameraDetails = CameraDetails(LatLng(1.0, 1.0), 15f)
 
                     context("when ${GameMapPresenter.LOAD_ADVENTURES_TIMEOUT} seconds passed") {

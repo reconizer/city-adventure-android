@@ -18,14 +18,28 @@ import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.R
 import pl.reconizer.unfold.presentation.authentication.resetpassword.firststep.ResetPasswordFirstStepModule
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepComponent
 import pl.reconizer.unfold.presentation.authentication.resetpassword.secondstep.ResetPasswordSecondStepModule
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarComponent
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarModule
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileComponent
+import pl.reconizer.unfold.presentation.creatorprofile.CreatorProfileModule
 import pl.reconizer.unfold.presentation.map.game.GameMapComponent
 import pl.reconizer.unfold.presentation.map.game.GameMapModule
 import pl.reconizer.unfold.presentation.menu.MenuComponent
 import pl.reconizer.unfold.presentation.menu.MenuModule
 import pl.reconizer.unfold.presentation.puzzle.PuzzleComponent
 import pl.reconizer.unfold.presentation.puzzle.PuzzleModule
+import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresComponent
+import pl.reconizer.unfold.presentation.search.adventures.SearchAdventuresModule
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsComponent
+import pl.reconizer.unfold.presentation.search.creators.SearchCreatorsModule
 import pl.reconizer.unfold.presentation.splash.SplashComponent
 import pl.reconizer.unfold.presentation.splash.SplashModule
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageComponent
+import pl.reconizer.unfold.presentation.useradventures.UserAdventuresPageModule
+import pl.reconizer.unfold.presentation.userprofile.UserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.UserProfileModule
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileComponent
+import pl.reconizer.unfold.presentation.userprofile.edit.EditUserProfileModule
 
 @Subcomponent(modules = [
     MainActivityModule::class
@@ -46,5 +60,12 @@ interface MainActivityComponent {
     fun journalComponent(module: JournalModule): JournalComponent
     fun puzzleComponent(module: PuzzleModule): PuzzleComponent
     fun adventureSummaryComponent(module: AdventureSummaryModule): AdventureSummaryComponent
+    fun userProfileComponent(module: UserProfileModule): UserProfileComponent
+    fun editUserProfileComponent(module: EditUserProfileModule): EditUserProfileComponent
+    fun chooseAvatarComponent(module: ChooseAvatarModule): ChooseAvatarComponent
+    fun creatorProfileComponent(module: CreatorProfileModule): CreatorProfileComponent
+    fun userAdventuresComponent(module: UserAdventuresPageModule): UserAdventuresPageComponent
+    fun searchAdventuresComponent(module: SearchAdventuresModule): SearchAdventuresComponent
+    fun searchCreatorsComponent(module: SearchCreatorsModule): SearchCreatorsComponent
 
 }

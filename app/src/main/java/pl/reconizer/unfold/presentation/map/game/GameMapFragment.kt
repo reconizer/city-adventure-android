@@ -20,6 +20,7 @@ import pl.reconizer.unfold.presentation.map.PinProvider
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureStartPointKey
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
+import pl.reconizer.unfold.presentation.navigation.keys.SearchKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.NumberPushLockPuzzleKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.TextPuzzleKey
 import javax.inject.Inject
@@ -68,6 +69,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         journalButton.setOnClickListener { navigator.goBack() }
         locationCheckerButton.setOnClickListener { presenter.checkLocation() }
         menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
+        searchButton.setOnClickListener { navigator.goTo(SearchKey()) }
+
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
             adventuresButtonsGroup.isVisible = true
@@ -83,7 +86,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun onResume() {
         super.onResume()
-        presenter.adventure = arguments?.get(ADVENTURE_PARAM) as Adventure?
+        presenter.adventure = arguments?.get(ADVENTURE_PARAM) as MapAdventure?
         presenter.subscribe(this, mapMode)
         presenter.lastLocation?.let {
             mapView.handleNewUserLocation(it.toLatLng())
@@ -93,8 +96,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
         mapView.pinClickListener = {
             when (it) {
-                is Adventure -> {
-                    //navigator.leaveMap()
+                is MapAdventure -> {
                     navigator.goTo(AdventureStartPointKey(it))
                 }
                 is AdventurePoint -> {
@@ -149,7 +151,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         mapView.handleNewUserLocation(position.toLatLng())
     }
 
-    override fun showAdventures(adventures: List<Adventure>) {
+    override fun showAdventures(adventures: List<MapAdventure>) {
         mapView.showMarkers(adventures)
     }
 

@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.3.20'
-        kotlinExtensionsVersion = '1.0.1'
+        kotlinVersion = '1.3.31'
+        kotlinExtensionsVersion = '1.0.2'
 
         androidXVersion = '1.0.0'
         materialVersion = '1.0.0'
@@ -11,7 +11,7 @@ buildscript {
 
         firebaseVersion = "16.0.7"
         crashlyticsVersion = "2.9.9"
-        mapsServicesVersion = '16.1.0'
+        mapsServicesVersion = '17.0.0'
         mapUtilsVersion = '0.5'
 
         retrofitVersion = '2.5.0'
@@ -40,7 +40,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.google.gms:google-services:4.2.0'
         classpath 'io.fabric.tools:gradle:1.26.1'

@@ -75,5 +75,5 @@
     <fields>;
 }
 
--keep class unfold.app.data.** { *; }
--keep class unfold.app.domain.** { *; }
+-keep class pl.reconizer.unfold.data.** { *; }
+-keep class pl.reconizer.unfold.domain.** { *; }

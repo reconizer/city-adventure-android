@@ -7,13 +7,13 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.repositories.IUserRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
 class ResetPasswordFirstStepPresenterSpec : Spek({
 
     describe("ResetPasswordFirstStepPresenter") {
         val view = mock<IResetPasswordFirstStepView>()
-        val errorHandler = mock<ErrorHandler<Error>>()
+        val errorHandler = mock<ErrorsHandler<Error>>()
         val repository = mock<IUserRepository>()
 
         val presenter = ResetPasswordFirstStepPresenter(

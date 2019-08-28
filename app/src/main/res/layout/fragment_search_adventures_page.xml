@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/filtersLeftMargin"
+        android:layout_width="@dimen/space_8x"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:scaleDirection="width" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/filtersRightMargin"
+        android:layout_width="@dimen/space_8x"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:scaleDirection="width" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/contentLeftMargin"
+        android:layout_width="@dimen/space_3x"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:scaleDirection="width" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/contentRightMargin"
+        android:layout_width="@dimen/space_3x"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:scaleDirection="width" />
+
+    <Button
+        android:id="@+id/filtersButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_4x"
+        android:background="@drawable/frame_small"
+        android:stateListAnimator="@null"
+        android:text="@string/common_filter"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Text.Medium"
+        android:textSize="14dp"
+        android:layout_marginTop="@dimen/space_1x"
+        android:layout_marginEnd="@dimen/space_xs"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/filtersLeftMargin"
+        app:layout_constraintEnd_toStartOf="@id/sortButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.AdventuresSortDropdown
+        android:id="@+id/sortButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1x"
+        app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/filtersButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_small"
+        android:drawableStart="@drawable/icon_search_input"
+        android:textAppearance="@style/TypeWriterText"
+        android:textSize="16dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="@dimen/space_xs"
+        android:drawablePadding="@dimen/space_1x"
+        android:hint="@string/search_name_input_placeholder"
+        android:layout_marginTop="@dimen/space_1x"
+        app:layout_constraintStart_toEndOf="@id/filtersLeftMargin"
+        app:layout_constraintEnd_toStartOf="@id/filtersRightMargin"
+        app:layout_constraintTop_toBottomOf="@id/filtersButton" />
+
+    <ImageView
+        android:id="@+id/topListBorder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/list_border"
+        android:scaleType="fitXY"
+        android:layout_marginTop="@dimen/space_1x"
+        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
+        app:layout_constraintTop_toBottomOf="@id/searchInput" />
+
+    <ImageView
+        android:id="@+id/bottomListBorder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/list_border"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="@dimen/space_1x"
+        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/space_1x"
+        app:layout_constraintStart_toEndOf="@id/contentLeftMargin"
+        app:layout_constraintEnd_toStartOf="@id/contentRightMargin"
+        app:layout_constraintTop_toBottomOf="@id/topListBorder"
+        app:layout_constraintBottom_toTopOf="@id/bottomListBorder" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

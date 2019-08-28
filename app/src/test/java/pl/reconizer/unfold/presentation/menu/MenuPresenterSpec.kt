@@ -8,7 +8,7 @@ import org.spekframework.spek2.style.specification.describe
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.domain.usecases.authentication.Logout
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorHandler
+import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
 class MenuPresenterSpec : Spek({
 
@@ -17,19 +17,19 @@ class MenuPresenterSpec : Spek({
         lateinit var view: IMenuView
         lateinit var userRepository: IUserRepository
         lateinit var logoutUsecase: Logout
-        lateinit var errorHandler: ErrorHandler<Error>
+        lateinit var errorsHandler: ErrorsHandler<Error>
 
         beforeEachTest {
             view = mock()
             userRepository = mock()
             logoutUsecase = mock()
-            errorHandler = mock()
+            errorsHandler = mock()
             presenter = MenuPresenter(
                     Schedulers.trampoline(),
                     Schedulers.trampoline(),
                     userRepository,
                     logoutUsecase,
-                    errorHandler
+                    errorsHandler
             )
             whenever(logoutUsecase.invoke()).thenReturn(Completable.complete())
         }
@@ -39,7 +39,7 @@ class MenuPresenterSpec : Spek({
 
             it("sets view for error handler") {
                 presenter.subscribe(view)
-                verify(errorHandler, atLeastOnce()).view = any()
+                verify(errorsHandler, atLeastOnce()).view = any()
             }
 
         }

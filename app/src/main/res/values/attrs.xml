@@ -9,6 +9,11 @@
 
     <declare-styleable name="Scalables">
         <attr name="baseScreenWidth" format="integer" />
+        <attr name="baseScreenHeight" format="integer" />
+        <attr name="scaleDirection" format="flags">
+            <flag name="height" value="1" />
+            <flag name="width" value="2" />
+        </attr>
     </declare-styleable>
     
     <declare-styleable name="ShadowView">
@@ -29,6 +34,8 @@
 
     <declare-styleable name="ScalableSpace">
         <attr name="baseScreenWidth" />
+        <attr name="baseScreenHeight" />
+        <attr name="scaleDirection" />
     </declare-styleable>
 
     <declare-styleable name="AuthorInfoView">
@@ -59,6 +66,8 @@
         <attr name="integerValue" />
     </declare-styleable>
 
-
+    <declare-styleable name="DialogHeader">
+        <attr name="android:text" />
+    </declare-styleable>
 
 </resources>

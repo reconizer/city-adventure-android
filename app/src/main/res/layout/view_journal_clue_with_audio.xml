@@ -50,7 +50,7 @@
         android:id="@+id/startAudioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_md"
+        android:layout_marginTop="@dimen/space_2x"
         android:adjustViewBounds="true"
         android:src="@drawable/journal_audio_clue"
         app:layout_constraintStart_toStartOf="@id/contentText"
