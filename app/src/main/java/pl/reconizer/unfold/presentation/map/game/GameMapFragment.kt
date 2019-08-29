@@ -21,6 +21,7 @@ import pl.reconizer.unfold.presentation.navigation.keys.AdventureStartPointKey
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
 import pl.reconizer.unfold.presentation.navigation.keys.SearchKey
+import pl.reconizer.unfold.presentation.navigation.keys.puzzles.CypherLockPuzzleKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.NumberPushLockPuzzleKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.TextPuzzleKey
 import javax.inject.Inject
@@ -170,10 +171,14 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
         puzzleResponse.puzzleType?.let {
             navigator.goTo(when(it) {
+                PuzzleType.NUMBER_LOCK_3 -> CypherLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.NUMBER_LOCK_4 -> CypherLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.NUMBER_LOCK_5 -> CypherLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.NUMBER_LOCK_6 -> CypherLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_3 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_4 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_5 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
-                else -> TextPuzzleKey(presenter.adventure!!, point, PuzzleType.TEXT)
+                else -> CypherLockPuzzleKey(presenter.adventure!!, point, PuzzleType.NUMBER_LOCK_6)//TextPuzzleKey(presenter.adventure!!, point, PuzzleType.TEXT)
             })
         }
     }
