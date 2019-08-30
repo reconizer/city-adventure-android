@@ -13,8 +13,8 @@ import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 class CypherLockPuzzleFragment : BasePuzzleFragment() {
 
     private val tutorialDialog = PuzzleTutorialDialog().apply {
-        contentLayoutResId = R.layout.view_number_push_lock_tutorial
-        headerTextResId = R.string.puzzle_number_push_lock_tutorial_title
+        contentLayoutResId = R.layout.view_cypher_lock_tutorial
+        headerTextResId = R.string.puzzle_number_lock_tutorial_title
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

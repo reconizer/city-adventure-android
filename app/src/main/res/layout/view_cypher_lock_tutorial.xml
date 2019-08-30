@@ -9,7 +9,7 @@
         android:id="@+id/tutorialFirstImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/puzzle_number_push_lock_tutorial_1"
+        android:src="@drawable/puzzle_cypher_lock_tutorial_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_xs"
-        android:text="@string/puzzle_number_push_lock_tutorial_1"
+        android:text="@string/puzzle_number_lock_tutorial_1"
         android:textAppearance="@style/TutorialDialogText"
         app:layout_constraintStart_toEndOf="@id/tutorialFirstImage"
         app:layout_constraintTop_toTopOf="@id/tutorialFirstImage"
@@ -28,8 +28,8 @@
         android:id="@+id/firstInstructionIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="71dp"
         android:src="@drawable/puzzle_tutorial_hand"
         app:layout_constraintStart_toStartOf="@id/tutorialFirstImage"
         app:layout_constraintTop_toTopOf="@+id/tutorialFirstImage" />
@@ -39,13 +39,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tutorialFirstImage,tutorialFirstInstruction" />
+        app:constraint_referenced_ids="tutorialFirstImage,tutorialFirstInstruction"
+        tools:layout_editor_absoluteY="117dp" />
 
     <ImageView
         android:id="@+id/tutorialSecondImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/puzzle_number_push_lock_tutorial_2"
+        android:src="@drawable/puzzle_cypher_lock_tutorial_2"
         android:layout_marginTop="@dimen/space_5x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/firstInstructionBarrier" />
@@ -55,20 +56,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_xs"
-        android:text="@string/puzzle_number_push_lock_tutorial_1"
+        android:text="@string/puzzle_number_lock_tutorial_2"
         android:textAppearance="@style/TutorialDialogText"
         app:layout_constraintStart_toEndOf="@id/tutorialSecondImage"
         app:layout_constraintTop_toTopOf="@id/tutorialSecondImage"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/secondInstructionIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/puzzle_tutorial_hand"
-        app:layout_constraintStart_toStartOf="@id/tutorialSecondImage"
-        app:layout_constraintTop_toTopOf="@+id/tutorialSecondImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
