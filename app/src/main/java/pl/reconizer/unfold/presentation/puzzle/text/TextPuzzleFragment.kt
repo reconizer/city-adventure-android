@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import kotlinx.android.synthetic.main.fragment_text_puzzle.*
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.domain.entities.MapAdventure
-import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 
 class TextPuzzleFragment : BasePuzzleFragment() {
@@ -39,18 +36,6 @@ class TextPuzzleFragment : BasePuzzleFragment() {
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
-    }
-
-    companion object {
-
-        fun newInstance(adventure: MapAdventure, adventurePoint: AdventurePoint): TextPuzzleFragment {
-            return TextPuzzleFragment().apply {
-                arguments = bundleOf(
-                        ADVENTURE_PARAM to adventure,
-                        ADVENTURE_POINT_PARAM to adventurePoint
-                )
-            }
-        }
     }
 
 }

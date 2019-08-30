@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="@id/lockBackgroundSpace"
         app:layout_constraintStart_toStartOf="@id/lockBackgroundSpace"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/puzzle_cypher_lock_4_background" />
+        tools:src="@drawable/puzzle_cypher_lock_6_background" />
 
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/rowsMargin"
@@ -31,6 +31,16 @@
         app:layout_constraintTop_toTopOf="@id/lockBackground"
         app:layout_constraintStart_toEndOf="@id/lockBackground" />
 
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rowsSpace"
+        android:layout_width="109dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/lockBackground"
+        app:layout_constraintEnd_toEndOf="@id/rowsMargin"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/lockBackground"
+        app:layout_constraintTop_toTopOf="@id/lockBackground" />
+
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:layout_width="0dp"
@@ -38,9 +48,8 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/lockBackground"
-        app:layout_constraintEnd_toEndOf="@id/rowsMargin"
-        app:layout_constraintStart_toStartOf="@id/lockBackground"
-        app:layout_constraintTop_toTopOf="@id/lockBackground"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@id/rowsSpace"
+        app:layout_constraintStart_toStartOf="@id/rowsSpace"
+        app:layout_constraintTop_toTopOf="@id/lockBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

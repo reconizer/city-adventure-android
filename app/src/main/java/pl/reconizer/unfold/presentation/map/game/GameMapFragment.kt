@@ -178,7 +178,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 PuzzleType.NUMBER_PUSH_LOCK_3 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_4 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_5 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
-                else -> CypherLockPuzzleKey(presenter.adventure!!, point, PuzzleType.NUMBER_LOCK_6)//TextPuzzleKey(presenter.adventure!!, point, PuzzleType.TEXT)
+                else -> TextPuzzleKey(presenter.adventure!!, point, it)
             })
         }
     }

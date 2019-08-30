@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.android.synthetic.main.view_cypher_lock.view.*
 import kotlinx.android.synthetic.main.view_number_push_lock.view.buttonsContainer
 import kotlinx.android.synthetic.main.view_number_push_lock.view.lockBackground
 import pl.reconizer.unfold.R
@@ -38,6 +39,7 @@ class CypherLock @JvmOverloads constructor(
 
     private fun initView() {
         rows.clear()
+        buttonsContainer.removeAllViews()
         when(numberOfRows) {
             3 -> lockBackground.setImageResource(R.drawable.puzzle_cypher_lock_3_background)
             4 -> lockBackground.setImageResource(R.drawable.puzzle_cypher_lock_4_background)
