@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/puzzle_cypher_lock_background">
+
+    <ImageView
+        android:id="@+id/backgroundDecorator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/puzzle_cypher_lock_background_decorator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/lockPositionGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.46" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/leftLockMargin"
+        android:layout_width="15.75dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/rightLockMargin"
+        android:layout_width="57.5dp"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <pl.reconizer.unfold.presentation.puzzle.cypherlock.CypherLock
+        android:id="@+id/cypherLock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rightLockMargin"
+        app:layout_constraintStart_toEndOf="@id/leftLockMargin"
+        app:layout_constraintTop_toBottomOf="@id/lockPositionGuideline"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/topLockDecoration"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/puzzle_cypher_lock_top"
+        app:layout_constraintBottom_toTopOf="@id/cypherLock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/bottomLockDecoration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/puzzle_cypher_lock_bottom"
+        app:layout_constraintEnd_toEndOf="@id/cypherLock"
+        app:layout_constraintStart_toStartOf="@id/cypherLock"
+        app:layout_constraintTop_toBottomOf="@id/cypherLock" />
+
+    <Button
+        android:id="@+id/resetButton"
+        style="@style/DialogButton"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_3x"
+        android:text="@string/common_reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/confirmButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        style="@style/DialogButton"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_5x"
+        android:layout_marginBottom="@dimen/space_3x"
+        android:text="@string/common_confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/resetButton" />
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_puzzle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/helpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_1x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_help_puzzle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
