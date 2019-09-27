@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_cypher_lock.*
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.domain.entities.PuzzleType
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 

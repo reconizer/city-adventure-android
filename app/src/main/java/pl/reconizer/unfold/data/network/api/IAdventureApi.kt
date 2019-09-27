@@ -5,6 +5,8 @@ import io.reactivex.Single
 import pl.reconizer.unfold.data.entities.AdventurePointWithCluesResponse
 import pl.reconizer.unfold.data.entities.RatingResponse
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 import retrofit2.http.*
 
 interface IAdventureApi {

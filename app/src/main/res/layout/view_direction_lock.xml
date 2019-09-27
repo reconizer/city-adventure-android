@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
+        android:id="@+id/lockBackgroundSpace"
+        android:layout_width="303dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/lockBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/puzzle_direction_lock"
+        app:layout_constraintEnd_toEndOf="@id/lockBackgroundSpace"
+        app:layout_constraintStart_toStartOf="@id/lockBackgroundSpace"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
+        android:id="@+id/lockKnob"
+        android:layout_width="174dp"
+        android:layout_height="174dp"
+        android:src="@drawable/puzzle_direction_lock_knob"
+        app:layout_constraintBottom_toBottomOf="@id/lockBackground"
+        app:layout_constraintEnd_toEndOf="@id/lockBackground"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/lockBackground"
+        app:layout_constraintTop_toTopOf="@id/lockBackground" />
+
+</merge>

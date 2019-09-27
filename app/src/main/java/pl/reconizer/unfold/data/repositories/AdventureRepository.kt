@@ -5,6 +5,8 @@ import io.reactivex.Single
 import pl.reconizer.unfold.data.mappers.AdventurePointWithCluesMapper
 import pl.reconizer.unfold.data.network.api.IAdventureApi
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 
 class AdventureRepository(

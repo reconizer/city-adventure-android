@@ -1,25 +1,25 @@
-package pl.reconizer.unfold.presentation.puzzle.numberpushlock
+package pl.reconizer.unfold.presentation.puzzle.directionlock
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_number_push_lock.*
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_direction_lock.*
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 
-class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
+class DirectionLockPuzzleFragment : BasePuzzleFragment() {
 
     private val tutorialDialog = PuzzleTutorialDialog().apply {
-        contentLayoutResId = R.layout.view_number_push_lock_tutorial
-        headerTextResId = R.string.puzzle_number_push_lock_tutorial_title
+        contentLayoutResId = R.layout.view_direction_lock_tutorial
+        headerTextResId = R.string.puzzle_direction_lock_tutorial_title
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_number_push_lock, container, false)
+        return inflater.inflate(R.layout.fragment_direction_lock, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,20 +27,16 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
 
         closeButton.setOnClickListener { navigator.goBack() }
         helpButton.setOnClickListener {
-            tutorialDialog.show(childFragmentManager, "number_push_lock_tutorial")
-        }
-        resetButton.setOnClickListener {
-            pushLock?.clearSelection()
-        }
-        confirmButton.setOnClickListener {
-            presenter.resolvePoint(pushLock.valuesStack.joinToString(""))
+            tutorialDialog.show(childFragmentManager, "direction_lock_tutorial")
         }
 
-        pushLock.numberOfRows = when(presenter.puzzleType) {
-            PuzzleType.NUMBER_PUSH_LOCK_3 -> 3
-            PuzzleType.NUMBER_PUSH_LOCK_4 -> 4
-            PuzzleType.NUMBER_PUSH_LOCK_5 -> 5
-            else -> 5
+        confirmButton.setOnClickListener {
+            presenter.resolvePoint(directionLock.valuesStack.joinToString("") { it.code })
+        }
+
+        resetButton.setOnClickListener {
+            directionLock.resetLock()
+            Toast.makeText(context, R.string.puzzle_direction_lock_reset, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -52,6 +48,11 @@ class NumberPushLockPuzzleFragment : BasePuzzleFragment() {
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
+    }
+
+    override fun wrongAnswer() {
+        super.wrongAnswer()
+        directionLock.resetLock()
     }
 
 }

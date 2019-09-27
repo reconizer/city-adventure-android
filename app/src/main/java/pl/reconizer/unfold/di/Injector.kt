@@ -9,6 +9,7 @@ import pl.reconizer.unfold.di.components.MainActivityComponent
 import pl.reconizer.unfold.di.modules.ContextModule
 import pl.reconizer.unfold.di.modules.MainActivityModule
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.adventure.journal.JournalComponent
 import pl.reconizer.unfold.presentation.adventure.journal.JournalModule
 import pl.reconizer.unfold.presentation.adventure.startpoint.StartPointComponent
