@@ -3,9 +3,7 @@ package pl.reconizer.unfold.presentation.search.adventures
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
@@ -13,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_adventure_filters.view.*
 import kotlinx.android.synthetic.main.dialog_puzzle_tutorial.view.dialogHeader
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.domain.entities.DifficultyLevel
 
 class AdventureFiltersDialog : DialogFragment() {
 

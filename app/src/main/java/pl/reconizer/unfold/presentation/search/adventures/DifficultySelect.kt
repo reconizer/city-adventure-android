@@ -50,5 +50,4 @@ class DifficultySelect @JvmOverloads constructor(
         hardLevel?.isChecked = selection == DifficultyLevel.HARD
     }
 
-
 }
