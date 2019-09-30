@@ -152,7 +152,7 @@
         <item name="android:paddingEnd">0dp</item>
     </style>
 
-    <style name="ButtonLikeRadioButton">
+    <style name="ButtonLikeToggleButton">
         <item name="android:background">@drawable/button_like_radio_button</item>
         <item name="android:button">@color/transparent</item>
         <item name="android:textAppearance">@style/Text.Medium</item>

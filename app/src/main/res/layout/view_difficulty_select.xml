@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <CheckBox
+        android:id="@+id/easyLevel"
+        style="@style/ButtonLikeToggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/difficulty_level_easy"
+        android:textAlignment="gravity" />
+
+    <CheckBox
+        android:id="@+id/mediumLevel"
+        style="@style/ButtonLikeToggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1x"
+        android:gravity="center"
+        android:text="@string/difficulty_level_medium"
+        android:textAlignment="gravity" />
+
+    <CheckBox
+        android:id="@+id/hardLevel"
+        style="@style/ButtonLikeToggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1x"
+        android:gravity="center"
+        android:text="@string/difficulty_level_hard"
+        android:textAlignment="gravity" />
+
+</merge>

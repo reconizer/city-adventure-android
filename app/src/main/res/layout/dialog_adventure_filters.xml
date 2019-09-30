@@ -33,14 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialogHeader">
 
-        <CheckBox
-            android:id="@+id/rangeCheckbox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/rangeIndicator"
             android:layout_width="wrap_content"
@@ -52,8 +44,7 @@
             android:textAppearance="@style/Text.Medium"
             android:textSize="15dp"
             android:textColor="@color/font_darker"
-            app:layout_constraintTop_toTopOf="@id/rangeCheckbox"
-            app:layout_constraintBottom_toBottomOf="@id/rangeCheckbox"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -93,7 +84,7 @@
             android:layout_marginEnd="@dimen/space_1x"
             app:layout_constraintEnd_toStartOf="@id/rangeMaxValue"
             app:layout_constraintStart_toEndOf="@id/rangeMinValue"
-            app:layout_constraintTop_toBottomOf="@id/rangeCheckbox" />
+            app:layout_constraintTop_toBottomOf="@id/rangeIndicator" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/rangeBarrier"
@@ -102,64 +93,23 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="range" />
 
-        <CheckBox
-            android:id="@+id/difficultyLevelCheckbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_2x"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rangeBarrier" />
-
-        <RadioGroup
+        <pl.reconizer.unfold.presentation.search.adventures.DifficultySelect
             android:id="@+id/difficultyLevelGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_1x"
-            android:orientation="vertical"
+            android:layout_marginTop="@dimen/space_3x"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/difficultyLevelCheckbox"
-            app:layout_constraintTop_toTopOf="@id/difficultyLevelCheckbox"
-            app:layout_constraintWidth_max="145dp">
-
-            <RadioButton
-                android:id="@+id/easyLevel"
-                style="@style/ButtonLikeRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/difficulty_level_easy"
-                android:textAlignment="gravity" />
-
-            <RadioButton
-                android:id="@+id/mediumLevel"
-                style="@style/ButtonLikeRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_1x"
-                android:gravity="center"
-                android:text="@string/difficulty_level_medium"
-                android:textAlignment="gravity" />
-
-            <RadioButton
-                android:id="@+id/hardLevel"
-                style="@style/ButtonLikeRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_1x"
-                android:gravity="center"
-                android:text="@string/difficulty_level_hard"
-                android:textAlignment="gravity" />
-
-        </RadioGroup>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rangeBarrier"
+            app:layout_constraintWidth_max="145dp" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/difficultyLevelBarrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="difficultyLevelCheckbox,difficultyLevelGroup" />
+            app:constraint_referenced_ids="difficultyLevelGroup" />
 
         <Button
             android:id="@+id/applyButton"
@@ -167,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/common_apply"
-            android:layout_marginTop="@dimen/space_2x"
+            android:layout_marginTop="@dimen/space_4x"
             app:layout_constraintTop_toBottomOf="@id/difficultyLevelBarrier"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
