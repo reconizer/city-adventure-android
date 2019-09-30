@@ -12,9 +12,7 @@ import pl.reconizer.unfold.domain.entities.DifficultyLevel
 data class AdventureFilters(
         val minRange: Float,
         val maxRange: Float,
-        val isRangeActive: Boolean = false,
         val range: Float = 0f,
-        val isDifficultyLevelActive: Boolean = false,
         val difficultyLevel: DifficultyLevel? = null,
         val name: String = ""
 ) : Parcelable {
@@ -24,9 +22,8 @@ data class AdventureFilters(
 
     val activeFiltersCount: Int
         get() {
-            var counter = 0
-            if (isRangeActive) counter++
-            if (isDifficultyLevelActive) counter++
+            var counter = 1
+            if (difficultyLevel != null) counter++
             return counter
         }
 

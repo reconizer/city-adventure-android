@@ -26,11 +26,9 @@ class AdventuresPresenter(
     var sortType: AdventuresSort = AdventuresSort.RATING
 
     var filters = AdventureFilters(
-            AdventuresPresenter.MIN_RANGE,
-            AdventuresPresenter.MAX_RANGE,
-            false,
-            0.5f,
-            false,
+            MIN_RANGE,
+            MAX_RANGE,
+            1f,
             DifficultyLevel.MEDIUM
     )
         set(value) {
@@ -71,8 +69,8 @@ class AdventuresPresenter(
                 position,
                 sortType,
                 filters.name,
-                if (filters.isRangeActive) filters.calculatedRangeValue else null,
-                if (filters.isDifficultyLevelActive) filters.difficultyLevel else null
+                filters.calculatedRangeValue,
+                filters.difficultyLevel
         )
     }
 
