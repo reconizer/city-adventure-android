@@ -8,10 +8,10 @@ import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.navigation.keys.BaseKey
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
-import pl.reconizer.unfold.presentation.puzzle.cypherlock.CypherLockPuzzleFragment
+import pl.reconizer.unfold.presentation.puzzle.directionlock.DirectionLockPuzzleFragment
 
 @Parcelize
-class CypherLockPuzzleKey(
+class DirectionLockPuzzleKey(
         val adventure: MapAdventure,
         val adventurePoint: AdventurePoint,
         val puzzleType: PuzzleType
@@ -24,6 +24,6 @@ class CypherLockPuzzleKey(
 ) {
 
     override fun createFragment(): Fragment {
-        return CypherLockPuzzleFragment()
+        return DirectionLockPuzzleFragment()
     }
 }

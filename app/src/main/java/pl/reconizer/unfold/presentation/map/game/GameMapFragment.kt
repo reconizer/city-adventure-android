@@ -11,6 +11,8 @@ import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.toLatLng
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.IViewWithLocation
 import pl.reconizer.unfold.presentation.map.IMapView
@@ -22,6 +24,7 @@ import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
 import pl.reconizer.unfold.presentation.navigation.keys.SearchKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.CypherLockPuzzleKey
+import pl.reconizer.unfold.presentation.navigation.keys.puzzles.DirectionLockPuzzleKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.NumberPushLockPuzzleKey
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.TextPuzzleKey
 import javax.inject.Inject
@@ -178,6 +181,9 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 PuzzleType.NUMBER_PUSH_LOCK_3 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_4 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.NUMBER_PUSH_LOCK_5 -> NumberPushLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.DIRECTION_LOCK_4 -> DirectionLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.DIRECTION_LOCK_6 -> DirectionLockPuzzleKey(presenter.adventure!!, point, it)
+                PuzzleType.DIRECTION_LOCK_8 -> DirectionLockPuzzleKey(presenter.adventure!!, point, it)
                 else -> TextPuzzleKey(presenter.adventure!!, point, it)
             })
         }

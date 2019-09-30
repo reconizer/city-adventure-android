@@ -9,6 +9,8 @@ import io.reactivex.subjects.PublishSubject
 import pl.reconizer.unfold.common.extensions.toPosition
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.common.rx.CallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.MaybeCallbackWrapper

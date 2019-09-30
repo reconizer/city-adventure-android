@@ -1,4 +1,4 @@
-package pl.reconizer.unfold.domain.entities
+package pl.reconizer.unfold.domain.entities.puzzles
 
 enum class PuzzleType {
     TEXT,

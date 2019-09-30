@@ -3,6 +3,8 @@ package pl.reconizer.unfold.domain.repositories
 import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 
 interface IAdventureRepository {
 

@@ -1,4 +1,4 @@
-package pl.reconizer.unfold.domain.entities
+package pl.reconizer.unfold.domain.entities.puzzles
 
 import com.google.gson.annotations.SerializedName
 

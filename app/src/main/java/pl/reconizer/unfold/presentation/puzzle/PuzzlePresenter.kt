@@ -4,6 +4,9 @@ import io.reactivex.Scheduler
 import pl.reconizer.unfold.common.extensions.toPosition
 import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
 import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler

@@ -64,6 +64,8 @@
     <string name="puzzle_number_push_lock_tutorial_1">W celu rozwiązania tej zagadki należy wcisnąć odpowiednią kombinację cyfr.</string>
     <string name="puzzle_number_push_lock_tutorial_2">Kolejność wciskania cyfr nie ma znaczenia, ważne jest wciśnięcie odpowiednich cyfr na mechaniźmie.</string>
     <string name="puzzle_number_push_lock_tutorial_title">Kłódka z kodem numerycznym</string>
+    <string name="puzzle_direction_lock_tutorial_1">Aby rozwiązać tę zagadkę, należy przytrzymać palcem okrąg na środku kłódki i przesunąć mechanizm w odpowiednim kierunku. Mechanizm można przesunąć w cztery kierunki. W prawo i lewo oraz w górę i dół. Nie można poruszać się po ukosach. Jeśli mechanizm nie wydał dźwięku po przesunięciu, oznacza to, że nie został on przesunięty wystarczająco mocno, należy więc przesunąć go jeszcze raz w odpowiednim kierunku.</string>
+    <string name="puzzle_direction_lock_tutorial_title">Kłódka na kombinację ruchów</string>
     <string name="puzzle_wrong_answer">Podana odpowiedź jest nieprawidłowa.</string>
     <string name="search_adventures_tab">trasy</string>
     <string name="search_close_by">blisko ciebie</string>
@@ -81,4 +83,5 @@
     <string name="user_profile_finished_adventures">Skończone trasy</string>
     <string name="user_profile_updated">Zaktualizowano profil</string>
     <string name="user_profile_username_label">Nazwa użytkownika</string>
+    <string name="puzzle_direction_lock_reset">Zresetowano kłódkę</string>
 </resources>

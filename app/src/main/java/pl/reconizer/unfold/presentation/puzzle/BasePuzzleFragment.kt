@@ -6,7 +6,7 @@ import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
-import pl.reconizer.unfold.domain.entities.PuzzleType
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.IViewWithLocation
 import pl.reconizer.unfold.presentation.customviews.dialogs.ErrorDialogBuilder
