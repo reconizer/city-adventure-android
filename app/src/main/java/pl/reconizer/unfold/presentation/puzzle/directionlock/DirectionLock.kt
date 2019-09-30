@@ -34,7 +34,7 @@ class DirectionLock @JvmOverloads constructor(
         LayoutInflater.from(context)
                 .inflate(R.layout.view_direction_lock, this, true)
 
-        lockKnob.setOnTouchListener { v: View?, event: MotionEvent? ->
+        lockKnob.setOnTouchListener { _: View?, event: MotionEvent? ->
             onKnobTouchEvent(event)
         }
     }
@@ -55,7 +55,6 @@ class DirectionLock @JvmOverloads constructor(
                                 certainEvent.rawX,
                                 certainEvent.rawY
                         )
-                        Log.d("DirectionLock", "TOUCH: $eventPoint")
                         val knobMoveRadius = (lockBackground.width - lockKnob.width) / 2
                         val moveVector = PointF(
                                 -(certainStartPoint.x - eventPoint.x),
@@ -76,10 +75,6 @@ class DirectionLock @JvmOverloads constructor(
                             )
 
                             var currentlySelectedDirection: DirectionAnswerType? = null
-
-                            if (knobMoveNormalisedVector.x < RESET_THRESHOLD && knobMoveNormalisedVector.y < RESET_THRESHOLD) {
-                                previousSelectedDirection = null
-                            }
 
                             if(moveVector.x < 0 && moveVector.y >= 0) { // bottom left
                                 if (abs(moveVector.x) > abs(moveVector.y)) { // left
@@ -132,6 +127,10 @@ class DirectionLock @JvmOverloads constructor(
                                 }
                             }
 
+                            if (knobMoveNormalisedVector.x < RESET_THRESHOLD && knobMoveNormalisedVector.y < RESET_THRESHOLD) {
+                                previousSelectedDirection = null
+                            }
+
                             if (previousSelectedDirection != currentlySelectedDirection &&
                                     (knobMoveNormalisedVector.x > ACCEPTANCE_THRESHOLD || knobMoveNormalisedVector.y > ACCEPTANCE_THRESHOLD)) {
                                 previousSelectedDirection = currentlySelectedDirection
@@ -147,7 +146,7 @@ class DirectionLock @JvmOverloads constructor(
                 MotionEvent.ACTION_UP -> {
                     startPoint = null
                     previousTouchPoint = PointF(0f, 0f)
-                    moveKnob(0f, DirectionAnswerType.LEFT)
+                    resetKnob()
                 }
             }
             certainEvent
@@ -159,7 +158,11 @@ class DirectionLock @JvmOverloads constructor(
         _valuesStack.clear()
     }
 
-    private fun moveKnob(value: Float, direction: DirectionAnswerType) {
+    private fun resetKnob() {
+        moveKnob(0f)
+    }
+
+    private fun moveKnob(value: Float, direction: DirectionAnswerType? = null) {
         Log.d("DirectionLock", "Movement: $value")
         val constraintSet = ConstraintSet().apply {
             clone(this@DirectionLock)
