@@ -58,6 +58,9 @@
     <string name="menu_shop">Sklep</string>
     <string name="menu_username">Nickname:</string>
     <string name="puzzle_input_label">Hasło:</string>
+    <string name="puzzle_cryptex_lock_tutorial_1">W celu rozwiązania tej zagadki należy ułożyć  litery w odpowiedniej kolejności. Litery układamy w rzędzie z czerwonym paskiem w tle. Każdy slot można przesuwać w górę i w dół.</string>
+    <string name="puzzle_cryptex_lock_tutorial_2">Po ułożeniu hasła, kliknij „zatwierdź”. Jeśli usłyszysz  szczęk otwieranego zamka, oznacza to, że hasło było prawidłowe i możesz przejść dalej.</string>
+    <string name="puzzle_cryptex_lock_tutorial_title">Kłódka z hasłem literowym</string>
     <string name="puzzle_number_lock_tutorial_1">W celu rozwiązania tej zagadki należy ułożyć  cyfry w odpowiedniej kolejności. Cyfry układamy w rzędzie z czerwonym paskiem w tle. Wystarczy przesunąć palcem rządek, aby przestawić cyfry.</string>
     <string name="puzzle_number_lock_tutorial_2">Po ułożeniu kodu, kliknij „zatwierdź”. Jeśli usłyszysz  szczęk otwieranego zamka, brawo! Oznacza to, że kod był prawidłowy i możesz przejść dalej.</string>
     <string name="puzzle_number_lock_tutorial_title">Kłódka szyfrowa</string>

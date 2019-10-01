@@ -13,8 +13,8 @@ import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 class CryptexLockPuzzleFragment : BasePuzzleFragment() {
 
     private val tutorialDialog = PuzzleTutorialDialog().apply {
-        contentLayoutResId = R.layout.view_cypher_lock_tutorial
-        headerTextResId = R.string.puzzle_number_lock_tutorial_title
+        contentLayoutResId = R.layout.view_cryptex_lock_tutorial
+        headerTextResId = R.string.puzzle_cryptex_lock_tutorial_title
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +27,7 @@ class CryptexLockPuzzleFragment : BasePuzzleFragment() {
 
         closeButton.setOnClickListener { navigator.goBack() }
         helpButton.setOnClickListener {
-            tutorialDialog.show(childFragmentManager, "number_push_lock_tutorial")
+            tutorialDialog.show(childFragmentManager, "cryptex_lock_tutorial")
         }
 
         confirmButton.setOnClickListener {
