@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- overrides resource for android-wheel -->
+<!-- It represents "selected" item indicator but in our case we don't need any foreground indicator. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/transparent" />
+</shape>

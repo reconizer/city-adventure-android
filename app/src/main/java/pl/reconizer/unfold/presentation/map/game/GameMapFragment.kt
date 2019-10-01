@@ -23,10 +23,7 @@ import pl.reconizer.unfold.presentation.navigation.keys.AdventureStartPointKey
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
 import pl.reconizer.unfold.presentation.navigation.keys.SearchKey
-import pl.reconizer.unfold.presentation.navigation.keys.puzzles.CypherLockPuzzleKey
-import pl.reconizer.unfold.presentation.navigation.keys.puzzles.DirectionLockPuzzleKey
-import pl.reconizer.unfold.presentation.navigation.keys.puzzles.NumberPushLockPuzzleKey
-import pl.reconizer.unfold.presentation.navigation.keys.puzzles.TextPuzzleKey
+import pl.reconizer.unfold.presentation.navigation.keys.puzzles.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -184,7 +181,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 PuzzleType.DIRECTION_LOCK_4 -> DirectionLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.DIRECTION_LOCK_6 -> DirectionLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.DIRECTION_LOCK_8 -> DirectionLockPuzzleKey(presenter.adventure!!, point, it)
-                else -> TextPuzzleKey(presenter.adventure!!, point, it)
+                else -> CryptexLockPuzzleKey(presenter.adventure!!, point, PuzzleType.CRYPTEX_LOCK_7)//TextPuzzleKey(presenter.adventure!!, point, it)
             })
         }
     }
