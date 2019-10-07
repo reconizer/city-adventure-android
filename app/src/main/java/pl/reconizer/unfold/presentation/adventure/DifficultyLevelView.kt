@@ -16,10 +16,8 @@ class DifficultyLevelView @JvmOverloads constructor(
 
     var level: DifficultyLevel = DifficultyLevel.EASY
         set(value) {
-            if (value != field) {
-                field = value
-                updateLevel()
-            }
+            field = value
+            updateLevel()
         }
 
     init {
