@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textItem"
+    android:layout_width="36dp"
+    android:layout_height="68dp"
+    android:gravity="center"
+    android:paddingTop="@dimen/space_1x"
+    android:paddingBottom="@dimen/space_1x"
+    android:textAppearance="@style/TypeWriterText"
+    android:textSize="40dp"
+    tools:text="A"
+    android:background="@drawable/puzzle_cryptex_lock_item_background"/>

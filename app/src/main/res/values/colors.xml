@@ -31,4 +31,6 @@
 
     <color name="brown1">#3d352a</color>
     <color name="brown1Disabled">#917e64</color>
+
+    <color name="cryptexLockCylinderBackgroundColor">#B3120E0B</color>
 </resources>
