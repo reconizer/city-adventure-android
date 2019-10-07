@@ -39,6 +39,7 @@ class CypherLockPuzzleFragment : BasePuzzleFragment() {
         }
 
         cypherLock.numberOfRows = when(presenter.puzzleType) {
+            PuzzleType.NUMBER_LOCK_3 -> 3
             PuzzleType.NUMBER_LOCK_4 -> 4
             PuzzleType.NUMBER_LOCK_5 -> 5
             PuzzleType.NUMBER_LOCK_6 -> 6
