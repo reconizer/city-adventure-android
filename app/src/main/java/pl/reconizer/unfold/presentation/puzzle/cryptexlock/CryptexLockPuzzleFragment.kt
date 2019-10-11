@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_cryptex_lock.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.isFragmentOnStack
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
@@ -27,7 +28,9 @@ class CryptexLockPuzzleFragment : BasePuzzleFragment() {
 
         closeButton.setOnClickListener { navigator.goBack() }
         helpButton.setOnClickListener {
-            tutorialDialog.show(childFragmentManager, "cryptex_lock_tutorial")
+            if (!childFragmentManager.isFragmentOnStack(TUTORIAL_DIALOG_TAG)) {
+                tutorialDialog.show(childFragmentManager, TUTORIAL_DIALOG_TAG)
+            }
         }
 
         confirmButton.setOnClickListener {
@@ -52,6 +55,10 @@ class CryptexLockPuzzleFragment : BasePuzzleFragment() {
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
+    }
+
+    companion object {
+        private const val TUTORIAL_DIALOG_TAG = "number_push_lock_tutorial"
     }
 
 }

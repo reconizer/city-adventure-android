@@ -43,37 +43,33 @@ class CluesAdapter : RecyclerView.Adapter<ClueViewHolder>() {
     }
 
     private fun onBindTextClue(holder: TextClueViewHolder, position: Int) {
-        holder.bind(getClue(position), flipPosition(position))
+        holder.bind(getClue(position), position)
     }
 
     private fun onBindImageClue(holder: ImageClueViewHolder, position: Int) {
-        holder.bind(getClue(position), flipPosition(position))
+        holder.bind(getClue(position), position)
         holder.image.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindAudioClue(holder: AudioClueViewHolder, position: Int) {
-        holder.bind(getClue(position), flipPosition(position))
+        holder.bind(getClue(position), position)
         holder.startButton.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindVideoClue(holder: VideoClueViewHolder, position: Int) {
-        holder.bind(getClue(position), flipPosition(position))
+        holder.bind(getClue(position), position)
         holder.thumbnail.setOnClickListener { clueClickListener?.invoke(getClue(position)) }
     }
 
     private fun onBindUrlClue(holder: UrlClueViewHolder, position: Int) {
-        holder.bind(getClue(position), flipPosition(position))
+        holder.bind(getClue(position), position)
         holder.url.setOnClickListener {
             clueClickListener?.invoke(getClue(position))
         }
     }
 
     private fun getClue(position: Int): Clue {
-        return clues[flipPosition(position)]
-    }
-
-    private fun flipPosition(position: Int): Int {
-        return clues.size - position - 1
+        return clues[position]
     }
 
 }
