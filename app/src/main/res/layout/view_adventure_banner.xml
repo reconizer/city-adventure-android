@@ -94,16 +94,16 @@
         android:id="@+id/ratingContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/bottomBannerMargin"
         app:layout_constraintEnd_toStartOf="@id/rightBannerMargin"
         app:layout_constraintStart_toEndOf="@id/leftBannerMargin"
         app:layout_constraintTop_toBottomOf="@+id/adventureName">
-        
+
         <pl.reconizer.unfold.presentation.customviews.ScalableSpace
             android:id="@+id/starsSpace"
             android:layout_width="1dp"
-            android:layout_height="12dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -127,6 +127,7 @@
             android:layout_marginStart="@dimen/space_1x"
             android:layout_marginEnd="@dimen/space_1x"
             android:gravity="top|center"
+            android:includeFontPadding="false"
             android:textAppearance="@style/TypeWriterText"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -141,6 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:gravity="top|center"
+            android:includeFontPadding="false"
             android:textAppearance="@style/TypeWriterText"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
