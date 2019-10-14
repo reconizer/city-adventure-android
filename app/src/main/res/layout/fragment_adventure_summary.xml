@@ -9,7 +9,7 @@
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topMargin"
         android:layout_width="1dp"
-        android:layout_height="43.5dp"
+        android:layout_height="59dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
@@ -30,29 +30,17 @@
         android:layout_height="22.5dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
-        android:id="@+id/exitButtonSpace"
-        android:layout_width="118dp"
-        android:layout_height="71dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
+    <ImageView
         android:id="@+id/exitButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/adventure_summary_exit_background"
-        android:gravity="top|center"
-        android:padding="10dp"
-        android:text="@string/adventure_summary_finish"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TypeWriterText"
-        android:textColor="@color/fontLighter"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@id/exitButtonSpace"
-        app:layout_constraintEnd_toEndOf="@id/exitButtonSpace"
-        app:layout_constraintStart_toStartOf="@id/exitButtonSpace"
-        app:layout_constraintTop_toTopOf="@id/exitButtonSpace" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_puzzle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/summaryBackground"

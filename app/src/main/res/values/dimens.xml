@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="map_ui_margin">14dp</dimen>
+    <dimen name="map_ui_margin">@dimen/space_2x</dimen>
 
     <dimen name="frame_offset">4dp</dimen>
     <dimen name="frame_offset_with_thickness">6dp</dimen>

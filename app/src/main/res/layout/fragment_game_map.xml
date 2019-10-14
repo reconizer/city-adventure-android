@@ -37,26 +37,15 @@
         app:layout_constraintTop_toBottomOf="@id/myLocationButton" />
 
     <ImageButton
-        android:id="@+id/scannerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/map_ui_margin"
-        android:layout_marginBottom="@dimen/map_ui_margin"
-        android:background="@null"
-        android:src="@drawable/map_button_scanner"
-        app:layout_constraintBottom_toTopOf="@id/menuButton"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
         android:id="@+id/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/map_ui_margin"
-        android:layout_marginBottom="@dimen/map_ui_margin"
+        android:layout_marginTop="@dimen/map_ui_margin"
+        android:layout_marginStart="@dimen/map_ui_margin"
         android:background="@null"
         android:src="@drawable/map_button_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/locationCheckerButton"
@@ -66,25 +55,26 @@
         android:layout_marginBottom="@dimen/map_ui_margin"
         android:background="@null"
         android:src="@drawable/map_button_location_scan"
-        app:layout_constraintBottom_toTopOf="@id/journalButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/journalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/map_ui_margin"
-        android:layout_marginBottom="@dimen/map_ui_margin"
-        android:background="@null"
-        android:src="@drawable/map_button_journal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_dark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/adventuresButtonsGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="searchButton,scannerButton,menuButton" />
+        app:constraint_referenced_ids="searchButton,menuButton" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/adventureButtonsGroup"

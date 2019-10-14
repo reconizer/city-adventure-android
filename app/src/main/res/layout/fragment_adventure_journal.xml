@@ -16,38 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <pl.reconizer.unfold.presentation.customviews.ScalableSpace
-        android:id="@+id/exitButtonSpace"
-        android:layout_width="98dp"
-        android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <pl.reconizer.unfold.presentation.customviews.ScalableTextView
+    <ImageView
         android:id="@+id/exitButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/journal_exit_button"
-        android:gravity="top|center"
-        android:padding="10dp"
-        android:text="@string/journal_exit"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TypeWriterText"
-        android:textColor="@color/fontLighter"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/exitButtonSpace"
-        app:layout_constraintEnd_toEndOf="@id/exitButtonSpace"
-        app:layout_constraintStart_toStartOf="@id/exitButtonSpace"
-        app:layout_constraintTop_toTopOf="@id/exitButtonSpace" />
-
-    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
-        android:id="@+id/goToMapButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="@dimen/space_2x"
-        android:layout_marginTop="@dimen/space_2x"
-        android:src="@drawable/button_go_to_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/icon_close_puzzle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,5 +116,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/journalPageTopMargin"
         app:layout_constraintEnd_toStartOf="@id/journalPageRightMargin" />
+
+    <pl.reconizer.unfold.presentation.customviews.ScalableImageView
+        android:id="@+id/goToMapButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="@dimen/space_2x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:src="@drawable/button_go_to_map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
