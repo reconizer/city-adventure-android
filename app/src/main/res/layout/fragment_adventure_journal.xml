@@ -31,7 +31,7 @@
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/topJournalMargin"
         android:layout_width="1dp"
-        android:layout_height="103.5dp" />
+        android:layout_height="110.5dp" />
 
     <pl.reconizer.unfold.presentation.customviews.ScalableSpace
         android:id="@+id/journalTabsMargin"
