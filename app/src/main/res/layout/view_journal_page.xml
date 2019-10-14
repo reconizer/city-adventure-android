@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/journal_page"
@@ -8,35 +9,6 @@
     android:paddingStart="12dp"
     android:paddingTop="10dp"
     android:paddingEnd="12dp">
-
-    <ImageView
-        android:id="@+id/turnNextArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:paddingStart="@dimen/space_5x"
-        android:paddingTop="@dimen/space_1x"
-        android:paddingBottom="@dimen/space_1x"
-        android:scaleType="fitXY"
-        android:src="@drawable/journal_bottom_arrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
-
-    <ImageView
-        android:id="@+id/turnPrevArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:paddingStart="@dimen/space_5x"
-        android:paddingTop="@dimen/space_1x"
-        android:paddingBottom="@dimen/space_1x"
-        android:scaleType="fitXY"
-        android:src="@drawable/journal_bottom_arrow"
-        android:scaleX="-1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
 
     <FrameLayout
         android:id="@+id/contentContainer"
@@ -48,6 +20,70 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/topDecoration" />
+
+    <Space
+        android:id="@+id/turnPrevArrow"
+        android:layout_width="56dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/space_2x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/arrowGuideline"
+        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
+
+    <Space
+        android:id="@+id/turnNextArrow"
+        android:layout_width="56dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_2x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/arrowGuideline"
+        app:layout_constraintTop_toBottomOf="@id/bottomDecoration" />
+
+    <ImageView
+        android:id="@+id/turnPrevArrowImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:scaleX="-1"
+        android:src="@drawable/journal_bottom_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/turnPrevArrow"
+        app:layout_constraintEnd_toEndOf="@id/turnPrevArrow"
+        app:layout_constraintStart_toStartOf="@id/turnPrevArrow"
+        app:layout_constraintTop_toTopOf="@id/turnPrevArrow" />
+
+    <ImageView
+        android:id="@+id/turnNextArrowImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/journal_bottom_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/turnNextArrow"
+        app:layout_constraintEnd_toEndOf="@id/turnNextArrow"
+        app:layout_constraintStart_toStartOf="@id/turnNextArrow"
+        app:layout_constraintTop_toTopOf="@id/turnNextArrow" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/turnPrevArrowGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="turnPrevArrow,turnPrevArrowImageView"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="10dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/turnNextArrowGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="turnNextArrow,turnNextArrowImageView"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/arrowGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.517" />
 
     <ImageView
         android:id="@+id/topDecoration"

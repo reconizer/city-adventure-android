@@ -18,13 +18,13 @@ class JournalPageView @JvmOverloads constructor(
     var turnableRight: Boolean = true
         set(value) {
             field = value
-            turnNextArrow.isGone = !value
+            turnNextArrowGroup.isGone = !value
         }
 
     var turnableLeft: Boolean = false
         set(value) {
             field = value
-            turnPrevArrow.isGone = !value
+            turnPrevArrowGroup.isGone = !value
         }
 
     init {
