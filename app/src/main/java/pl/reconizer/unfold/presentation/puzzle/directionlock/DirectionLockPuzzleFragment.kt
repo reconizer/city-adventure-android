@@ -1,6 +1,8 @@
 package pl.reconizer.unfold.presentation.puzzle.directionlock
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_direction_lock.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
+import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 
@@ -33,14 +36,26 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
             }
         }
 
-        confirmButton.setOnClickListener {
-            presenter.resolvePoint(directionLock.valuesStack.joinToString("") { it.code })
+        directionLockAnswers.numberOfItems = when (presenter.puzzleType) {
+            PuzzleType.DIRECTION_LOCK_4 -> 4
+            PuzzleType.DIRECTION_LOCK_6 -> 6
+            PuzzleType.DIRECTION_LOCK_8 -> 8
+            else -> 4
         }
 
-        resetButton.setOnClickListener {
-            directionLock.resetLock()
-            Toast.makeText(context, R.string.puzzle_direction_lock_reset, Toast.LENGTH_SHORT).show()
+        directionLock.onNewDirectionListener = { newDirection ->
+            var answers = directionLockAnswers.answers.filterNotNull()
+            val nextPosition = answers.size
+            if (nextPosition < directionLockAnswers.numberOfItems) {
+                directionLockAnswers.addAnswer(nextPosition, newDirection)
+
+                answers = directionLockAnswers.answers.filterNotNull()
+                if (answers.size == directionLockAnswers.numberOfItems) { // full lock
+                    presenter.resolvePoint(answers.joinToString("") { it.code })
+                }
+            }
         }
+
     }
 
     override fun onResume() {
@@ -55,8 +70,10 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
 
     override fun wrongAnswer() {
         super.wrongAnswer()
-        directionLock.resetLock()
-    }
+        directionLock.reset()
+        directionLockAnswers.reset()
+        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+        vibrator?.vibrate(400)    }
 
     companion object {
         private const val TUTORIAL_DIALOG_TAG = "direction_lock_tutorial"

@@ -57,31 +57,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/directionLock" />
 
-    <Button
-        android:id="@+id/resetButton"
-        style="@style/DialogButton"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_3x"
-        android:text="@string/common_reset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/confirmButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/confirmButton"
-        style="@style/DialogButton"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_5x"
-        android:layout_marginBottom="@dimen/space_3x"
-        android:text="@string/common_confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <pl.reconizer.unfold.presentation.puzzle.directionlock.DirectionLockAnswers
+        android:id="@+id/directionLockAnswers"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/resetButton" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/closeButton"

@@ -33,4 +33,7 @@
     <color name="brown1Disabled">#917e64</color>
 
     <color name="cryptexLockCylinderBackgroundColor">#B3120E0B</color>
+
+    <color name="directionLockAnswersContainerBackgroundColor">#B3120E0B</color>
+    <color name="directionLockAnswerItemContainerBackgroundColor">#585858</color>
 </resources>
