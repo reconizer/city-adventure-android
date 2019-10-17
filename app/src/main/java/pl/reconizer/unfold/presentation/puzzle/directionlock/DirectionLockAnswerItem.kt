@@ -24,19 +24,21 @@ class DirectionLockAnswerItem @JvmOverloads constructor(
         LayoutInflater.from(context)
                 .inflate(R.layout.view_direction_lock_answer_item, this, true)
 
-        setBackgroundColor(ContextCompat.getColor(context, R.color.directionLockAnswerItemContainerBackgroundColor))
-
         updateView()
     }
 
     private fun updateView() {
         answerIndicator.isVisible = true
+        answerPlaceholder.isVisible = false
         when (direction) {
             DirectionAnswerType.UP -> answerIndicator.rotation = 0f
             DirectionAnswerType.RIGHT -> answerIndicator.rotation = 90f
             DirectionAnswerType.DOWN -> answerIndicator.rotation = 180f
             DirectionAnswerType.LEFT -> answerIndicator.rotation = 270f
-            null -> answerIndicator.isVisible = false
+            null -> {
+                answerIndicator.isVisible = false
+                answerPlaceholder.isVisible = true
+            }
         }
     }
 }

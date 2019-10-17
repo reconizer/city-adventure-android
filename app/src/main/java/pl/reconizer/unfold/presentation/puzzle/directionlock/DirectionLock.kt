@@ -192,7 +192,7 @@ class DirectionLock @JvmOverloads constructor(
     }
 
     companion object {
-        private const val MOVE_RANGE = 0.5f
+        private const val MOVE_RANGE = 0.4f
         private const val DEAD_ZONE = 0.05f
         private const val MINIMAL_CHANGE = 5
         private const val ACCEPTANCE_THRESHOLD = 0.9f

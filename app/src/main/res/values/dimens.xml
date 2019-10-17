@@ -39,8 +39,6 @@
     <dimen name="numberPushLockButtonsColumnOffset">12dp</dimen>
     <dimen name="numberPushLockButtonWidth">66dp</dimen>
 
-    <dimen name="directionLockAnswerItemSize">50dp</dimen>
-
     <dimen name="loaderLeftFeetRadius">132dp</dimen>
     <dimen name="loaderRightFeetRadius">107dp</dimen>
 </resources>
