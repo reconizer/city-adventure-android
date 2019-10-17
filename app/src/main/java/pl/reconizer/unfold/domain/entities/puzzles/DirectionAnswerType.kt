@@ -5,4 +5,17 @@ enum class DirectionAnswerType(val code: String) {
     RIGHT("r"),
     DOWN("d"),
     LEFT("l");
+
+    fun isSameAxisAs(direction: DirectionAnswerType): Boolean {
+        return if (direction == this) {
+            true
+        } else {
+            when (this) {
+                UP -> direction == DOWN
+                RIGHT -> direction == LEFT
+                DOWN -> direction == UP
+                LEFT -> direction == RIGHT
+            }
+        }
+    }
 }

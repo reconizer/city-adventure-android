@@ -24,6 +24,7 @@ class DirectionLock @JvmOverloads constructor(
 
     private var startPoint: PointF? = null
     private var previousTouchPoint = PointF(0f, 0f)
+    private var previousMoveDirection: DirectionAnswerType? = null
 
     private var previousSelectedDirection: DirectionAnswerType? = null
 
@@ -76,70 +77,25 @@ class DirectionLock @JvmOverloads constructor(
                                     (absTouchChangeVector.x > MINIMAL_CHANGE || absTouchChangeVector.y > MINIMAL_CHANGE)) {
                                 previousTouchPoint = eventPoint
 
-                                val knobMoveNormalisedVector = PointF(
-                                        (abs(moveVector.x) / knobMoveRadius).coerceIn(0f, 1f),
-                                        (abs(moveVector.y) / knobMoveRadius).coerceIn(0f, 1f)
-                                )
-
                                 var currentlySelectedDirection: DirectionAnswerType? = null
 
-                                if (moveVector.x < 0 && moveVector.y >= 0) { // bottom left
-                                    if (abs(moveVector.x) > abs(moveVector.y)) { // left
-                                        if (knobMoveNormalisedVector.x > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.LEFT
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.x, DirectionAnswerType.LEFT)
-                                    } else { // bottom
-                                        if (knobMoveNormalisedVector.y > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.DOWN
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.y, DirectionAnswerType.DOWN)
-                                    }
+                                val moveDirection = determineMoveDirection(moveVector)
 
-                                } else if (moveVector.x >= 0 && moveVector.y >= 0) { // bottom right
-                                    if (abs(moveVector.x) > abs(moveVector.y)) { // right
-                                        if (knobMoveNormalisedVector.x > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.RIGHT
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.x, DirectionAnswerType.RIGHT)
-                                    } else { // bottom
-                                        if (knobMoveNormalisedVector.y > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.DOWN
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.y, DirectionAnswerType.DOWN)
-                                    }
-                                } else if (moveVector.x < 0 && moveVector.y < 0) { // top left
-                                    if (abs(moveVector.x) > abs(moveVector.y)) { // left
-                                        if (knobMoveNormalisedVector.x > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.LEFT
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.x, DirectionAnswerType.LEFT)
-                                    } else { // top
-                                        if (knobMoveNormalisedVector.y > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.UP
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.y, DirectionAnswerType.UP)
-                                    }
-                                } else if (moveVector.x >= 0 && moveVector.y < 0) { // top right
-                                    if (abs(moveVector.x) > abs(moveVector.y)) { // right
-                                        if (knobMoveNormalisedVector.x > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.RIGHT
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.x, DirectionAnswerType.RIGHT)
-                                    } else { // top
-                                        if (knobMoveNormalisedVector.y > ACCEPTANCE_THRESHOLD) {
-                                            currentlySelectedDirection = DirectionAnswerType.UP
-                                        }
-                                        moveKnob(knobMoveNormalisedVector.y, DirectionAnswerType.UP)
-                                    }
+                                if (previousMoveDirection == null || moveDirection.isSameAxisAs(previousMoveDirection!!)) {
+                                    moveKnob(moveVector, moveDirection)
+                                } else {
+                                    moveKnob(moveVector, previousMoveDirection)
                                 }
 
-                                if (knobMoveNormalisedVector.x < RESET_THRESHOLD && knobMoveNormalisedVector.y < RESET_THRESHOLD) {
+                                if (isMovementAcceptedAsAnswer(moveVector)) {
+                                    currentlySelectedDirection = previousMoveDirection
+                                }
+
+                                if (hasMovedBelowResetThreshold(moveVector)) {
                                     previousSelectedDirection = null
                                 }
 
-                                if (previousSelectedDirection != currentlySelectedDirection &&
-                                        (knobMoveNormalisedVector.x > ACCEPTANCE_THRESHOLD || knobMoveNormalisedVector.y > ACCEPTANCE_THRESHOLD)) {
+                                if (previousSelectedDirection != currentlySelectedDirection && isMovementAcceptedAsAnswer(moveVector)) {
                                     previousSelectedDirection = currentlySelectedDirection
 
                                     val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
@@ -164,11 +120,12 @@ class DirectionLock @JvmOverloads constructor(
     }
 
     private fun resetKnob() {
-        moveKnob(0f)
+        moveKnob(PointF(0f, 0f))
     }
 
-    private fun moveKnob(value: Float, direction: DirectionAnswerType? = null) {
-        Log.d("DirectionLock", "Movement: $value")
+    private fun moveKnob(moveVector: PointF, direction: DirectionAnswerType? = null) {
+        previousMoveDirection = direction
+        val normalisedMovePoint = normalisedKnobMoveVector(moveVector)
         val constraintSet = ConstraintSet().apply {
             clone(this@DirectionLock)
         }
@@ -176,19 +133,71 @@ class DirectionLock @JvmOverloads constructor(
         constraintSet.setHorizontalBias(R.id.lockKnob, 0.5f)
         when (direction) {
             DirectionAnswerType.LEFT -> {
-                constraintSet.setHorizontalBias(R.id.lockKnob, 0.5f - 0.5f * value * MOVE_RANGE)
+                constraintSet.setHorizontalBias(R.id.lockKnob, 0.5f - 0.5f * normalisedMovePoint.x.absoluteValue * MOVE_RANGE)
             }
             DirectionAnswerType.UP -> {
-                constraintSet.setVerticalBias(R.id.lockKnob, 0.5f - 0.5f * value * MOVE_RANGE)
+                constraintSet.setVerticalBias(R.id.lockKnob, 0.5f - 0.5f * normalisedMovePoint.y.absoluteValue * MOVE_RANGE)
             }
             DirectionAnswerType.RIGHT -> {
-                constraintSet.setHorizontalBias(R.id.lockKnob, 0.5f + 0.5f * value * MOVE_RANGE)
+                constraintSet.setHorizontalBias(R.id.lockKnob, 0.5f + 0.5f * normalisedMovePoint.x.absoluteValue * MOVE_RANGE)
             }
             DirectionAnswerType.DOWN -> {
-                constraintSet.setVerticalBias(R.id.lockKnob, 0.5f + 0.5f * value * MOVE_RANGE)
+                constraintSet.setVerticalBias(R.id.lockKnob, 0.5f + 0.5f * normalisedMovePoint.y.absoluteValue * MOVE_RANGE)
             }
         }
         constraintSet.applyTo(this)
+    }
+
+    private fun determineMoveDirection(moveVector: PointF): DirectionAnswerType {
+        return if (moveVector.x < 0 && moveVector.y >= 0) {
+            if (abs(moveVector.x) > abs(moveVector.y)) {
+                DirectionAnswerType.LEFT
+            } else {
+                DirectionAnswerType.DOWN
+            }
+        } else if (moveVector.x >= 0 && moveVector.y >= 0) {
+            if (abs(moveVector.x) > abs(moveVector.y)) {
+                DirectionAnswerType.RIGHT
+            } else {
+                DirectionAnswerType.DOWN
+            }
+        } else if (moveVector.x < 0 && moveVector.y < 0) {
+            if (abs(moveVector.x) > abs(moveVector.y)) {
+                DirectionAnswerType.LEFT
+            } else {
+                DirectionAnswerType.UP
+            }
+        } else {
+            if (abs(moveVector.x) > abs(moveVector.y)) {
+                DirectionAnswerType.RIGHT
+            } else {
+                DirectionAnswerType.UP
+            }
+        }
+    }
+
+    private fun isMovementAcceptedAsAnswer(moveVector: PointF): Boolean {
+        val knobMoveNormalisedVector = normalisedKnobMoveVector(moveVector)
+        val moveDirection = determineMoveDirection(moveVector)
+
+        return (knobMoveNormalisedVector.x.absoluteValue > ACCEPTANCE_THRESHOLD && (moveDirection == DirectionAnswerType.LEFT || moveDirection == DirectionAnswerType.RIGHT)) ||
+                (knobMoveNormalisedVector.y.absoluteValue > ACCEPTANCE_THRESHOLD && (moveDirection == DirectionAnswerType.UP || moveDirection == DirectionAnswerType.DOWN))
+    }
+
+    private fun hasMovedBelowResetThreshold(moveVector: PointF): Boolean {
+        val knobMoveNormalisedVector = normalisedKnobMoveVector(moveVector)
+        val moveDirection = determineMoveDirection(moveVector)
+
+        return (knobMoveNormalisedVector.x.absoluteValue < RESET_THRESHOLD && (moveDirection == DirectionAnswerType.LEFT || moveDirection == DirectionAnswerType.RIGHT)) ||
+                (knobMoveNormalisedVector.y.absoluteValue < RESET_THRESHOLD && (moveDirection == DirectionAnswerType.UP || moveDirection == DirectionAnswerType.DOWN))
+    }
+
+    private fun normalisedKnobMoveVector(moveVector: PointF): PointF {
+        val knobMoveRadius = (lockBackground.width - lockKnob.width) / 2
+        return PointF(
+                (abs(moveVector.x) / knobMoveRadius).coerceIn(-1f, 1f),
+                (abs(moveVector.y) / knobMoveRadius).coerceIn(-1f, 1f)
+        )
     }
 
     companion object {

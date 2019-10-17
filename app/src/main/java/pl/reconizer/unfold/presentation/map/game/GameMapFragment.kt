@@ -185,7 +185,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 PuzzleType.CRYPTEX_LOCK_5 -> CryptexLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.CRYPTEX_LOCK_6 -> CryptexLockPuzzleKey(presenter.adventure!!, point, it)
                 PuzzleType.CRYPTEX_LOCK_7 -> CryptexLockPuzzleKey(presenter.adventure!!, point, it)
-                else -> TextPuzzleKey(presenter.adventure!!, point, it)
+                else -> DirectionLockPuzzleKey(presenter.adventure!!, point, PuzzleType.DIRECTION_LOCK_4)//TextPuzzleKey(presenter.adventure!!, point, it)
             })
         }
     }
