@@ -73,7 +73,8 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
         directionLock.reset()
         directionLockAnswers.reset()
         val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
-        vibrator?.vibrate(400)    }
+        vibrator?.vibrate(400)
+    }
 
     companion object {
         private const val TUTORIAL_DIALOG_TAG = "direction_lock_tutorial"

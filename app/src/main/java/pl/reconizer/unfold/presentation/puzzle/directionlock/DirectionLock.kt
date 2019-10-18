@@ -8,8 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.LinearInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.view_direction_lock.view.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.domain.entities.puzzles.DirectionAnswerType
@@ -63,7 +67,6 @@ class DirectionLock @JvmOverloads constructor(
                                     certainEvent.rawX,
                                     certainEvent.rawY
                             )
-                            val knobMoveRadius = (lockBackground.width - lockKnob.width) / 2
                             val moveVector = PointF(
                                     -(certainStartPoint.x - eventPoint.x),
                                     -(certainStartPoint.y - eventPoint.y)
@@ -73,8 +76,14 @@ class DirectionLock @JvmOverloads constructor(
                                     (eventPoint.x - previousTouchPoint.x).absoluteValue,
                                     (eventPoint.y - previousTouchPoint.y).absoluteValue
                             )
-                            if ((abs(moveVector.x) > knobMoveRadius * DEAD_ZONE || abs(moveVector.y) > knobMoveRadius * DEAD_ZONE) &&
-                                    (absTouchChangeVector.x > MINIMAL_CHANGE || absTouchChangeVector.y > MINIMAL_CHANGE)) {
+
+                            val normalisedMoveVector = normalisedKnobMoveVector(moveVector)
+
+                            if (normalisedMoveVector.x.absoluteValue <= DEAD_ZONE || normalisedMoveVector.y.absoluteValue <= DEAD_ZONE) {
+                                previousMoveDirection = null
+                            }
+
+                            if (absTouchChangeVector.x > MINIMAL_CHANGE || absTouchChangeVector.y > MINIMAL_CHANGE) {
                                 previousTouchPoint = eventPoint
 
                                 var currentlySelectedDirection: DirectionAnswerType? = null
@@ -87,15 +96,15 @@ class DirectionLock @JvmOverloads constructor(
                                     moveKnob(moveVector, previousMoveDirection)
                                 }
 
-                                if (isMovementAcceptedAsAnswer(moveVector)) {
+                                if (isMovementAcceptedAsAnswer(moveVector, previousMoveDirection)) {
                                     currentlySelectedDirection = previousMoveDirection
                                 }
 
-                                if (hasMovedBelowResetThreshold(moveVector)) {
+                                if (hasMovedBelowResetThreshold(moveVector, previousMoveDirection)) {
                                     previousSelectedDirection = null
                                 }
 
-                                if (previousSelectedDirection != currentlySelectedDirection && isMovementAcceptedAsAnswer(moveVector)) {
+                                if (previousSelectedDirection != currentlySelectedDirection && currentlySelectedDirection != null) {
                                     previousSelectedDirection = currentlySelectedDirection
 
                                     val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
@@ -120,7 +129,8 @@ class DirectionLock @JvmOverloads constructor(
     }
 
     private fun resetKnob() {
-        moveKnob(PointF(0f, 0f))
+        previousMoveDirection = null
+        animateReturn()
     }
 
     private fun moveKnob(moveVector: PointF, direction: DirectionAnswerType? = null) {
@@ -176,17 +186,15 @@ class DirectionLock @JvmOverloads constructor(
         }
     }
 
-    private fun isMovementAcceptedAsAnswer(moveVector: PointF): Boolean {
+    private fun isMovementAcceptedAsAnswer(moveVector: PointF, moveDirection: DirectionAnswerType?): Boolean {
         val knobMoveNormalisedVector = normalisedKnobMoveVector(moveVector)
-        val moveDirection = determineMoveDirection(moveVector)
 
         return (knobMoveNormalisedVector.x.absoluteValue > ACCEPTANCE_THRESHOLD && (moveDirection == DirectionAnswerType.LEFT || moveDirection == DirectionAnswerType.RIGHT)) ||
                 (knobMoveNormalisedVector.y.absoluteValue > ACCEPTANCE_THRESHOLD && (moveDirection == DirectionAnswerType.UP || moveDirection == DirectionAnswerType.DOWN))
     }
 
-    private fun hasMovedBelowResetThreshold(moveVector: PointF): Boolean {
+    private fun hasMovedBelowResetThreshold(moveVector: PointF, moveDirection: DirectionAnswerType?): Boolean {
         val knobMoveNormalisedVector = normalisedKnobMoveVector(moveVector)
-        val moveDirection = determineMoveDirection(moveVector)
 
         return (knobMoveNormalisedVector.x.absoluteValue < RESET_THRESHOLD && (moveDirection == DirectionAnswerType.LEFT || moveDirection == DirectionAnswerType.RIGHT)) ||
                 (knobMoveNormalisedVector.y.absoluteValue < RESET_THRESHOLD && (moveDirection == DirectionAnswerType.UP || moveDirection == DirectionAnswerType.DOWN))
@@ -200,12 +208,27 @@ class DirectionLock @JvmOverloads constructor(
         )
     }
 
+    private fun animateReturn() {
+        val transition = AutoTransition().apply {
+            interpolator = LinearInterpolator()
+            duration = RETURN_ANIMATION_DURATION
+        }
+        TransitionManager.beginDelayedTransition(this, transition)
+        val constraintSet = ConstraintSet().apply {
+            clone(this@DirectionLock)
+        }
+        constraintSet.setHorizontalBias(R.id.lockKnob, 0.5f)
+        constraintSet.setVerticalBias(R.id.lockKnob, 0.5f)
+        constraintSet.applyTo(this)
+    }
+
     companion object {
         private const val MOVE_RANGE = 0.4f
         private const val DEAD_ZONE = 0.05f
-        private const val MINIMAL_CHANGE = 5
+        private const val MINIMAL_CHANGE = 2 // in pixels
         private const val ACCEPTANCE_THRESHOLD = 0.9f
         private const val RESET_THRESHOLD = 0.5f
+        private const val RETURN_ANIMATION_DURATION = 100L
     }
 
 }
