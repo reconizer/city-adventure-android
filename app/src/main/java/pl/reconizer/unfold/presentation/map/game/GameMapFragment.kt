@@ -8,6 +8,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.isFragmentOnStack
 import pl.reconizer.unfold.common.extensions.toLatLng
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.*
@@ -15,10 +16,10 @@ import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.IViewWithLocation
+import pl.reconizer.unfold.presentation.customviews.dialogs.MapLegendDialog
 import pl.reconizer.unfold.presentation.map.IMapView
 import pl.reconizer.unfold.presentation.map.IPinMapper
 import pl.reconizer.unfold.presentation.map.MapMode
-import pl.reconizer.unfold.presentation.map.PinProvider
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureStartPointKey
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
@@ -29,8 +30,8 @@ import javax.inject.Named
 
 class GameMapFragment : BaseFragment(), IGameMapView {
 
-    @Inject
-    lateinit var pinProvider: PinProvider
+    @field:[Inject Named("user_pin_mapper")]
+    lateinit var userPinMapper: IPinMapper
 
     @field:[Inject Named("adventure_pin_mapper")]
     lateinit var adventurePinMapper: IPinMapper
@@ -49,6 +50,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     private val mapView: IMapView
         get() { return childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
+
+    private val mapLegendDialog = MapLegendDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +74,16 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         locationCheckerButton.setOnClickListener { presenter.checkLocation() }
         menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
         searchButton.setOnClickListener { navigator.goTo(SearchKey()) }
+        legendButton.setOnClickListener {
+            mapLegendDialog.contentLayoutResId = if (mapMode == MapMode.ADVENTURES) {
+                R.layout.view_map_legend
+            } else {
+                R.layout.view_map_legend_adventure
+            }
+            if (!childFragmentManager.isFragmentOnStack(LEGEND_DIALOG_TAG)) {
+                mapLegendDialog.show(childFragmentManager, LEGEND_DIALOG_TAG)
+            }
+        }
 
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
@@ -81,7 +94,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
             adventuresButtonsGroup.isGone = true
             adventureButtonsGroup.isVisible = true
         }
-        mapView.userPin = pinProvider.userPin
+        mapView.userPinMapper = userPinMapper
         mapView.clearMarkers()
     }
 
@@ -198,6 +211,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         const val MAP_MODE_PARAM = "map_mode"
         const val ADVENTURE_PARAM = "adventure"
         const val ADVENTURE_POINT_ID_PARAM = "adventure_point_id"
+
+        const val LEGEND_DIALOG_TAG = "legend_dialog"
     }
 
 }

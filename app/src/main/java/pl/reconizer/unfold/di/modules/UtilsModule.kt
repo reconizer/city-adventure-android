@@ -2,10 +2,7 @@ package pl.reconizer.unfold.di.modules
 
 import dagger.Module
 import dagger.Provides
-import pl.reconizer.unfold.presentation.map.AdventurePinMapper
-import pl.reconizer.unfold.presentation.map.IPinMapper
-import pl.reconizer.unfold.presentation.map.PinProvider
-import pl.reconizer.unfold.presentation.map.StartedAdventurePinMapper
+import pl.reconizer.unfold.presentation.map.*
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -16,6 +13,15 @@ class UtilsModule {
     @Singleton
     fun providePinProvider(): PinProvider {
         return PinProvider()
+    }
+
+    @Provides
+    @Named("user_pin_mapper")
+    @Singleton
+    fun provideUserPinMapper(
+            pinProvider: PinProvider
+    ): IPinMapper {
+        return UserPinMapper(pinProvider)
     }
 
     @Provides

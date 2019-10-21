@@ -44,7 +44,7 @@ class PrettyDialog : DialogFragment() {
         contentTextView = WeakReference(dialogView.dialogText)
         buildDialog(dialogView)
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        dialog.window?.decorView?.setBackgroundResource(android.R.color.transparent);
+        dialog.window?.decorView?.setBackgroundResource(android.R.color.transparent)
         return dialog
     }
 

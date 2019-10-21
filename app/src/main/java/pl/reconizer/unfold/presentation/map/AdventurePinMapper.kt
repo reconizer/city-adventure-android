@@ -7,7 +7,7 @@ class AdventurePinMapper(
         private val provider: PinProvider
 ): IPinMapper {
 
-    override fun determinePin(t: Any): BitmapDescriptor? {
+    override fun determinePin(t: Any?): BitmapDescriptor? {
         return when(t) {
             is MapAdventure -> {
                 if (t.purchasable) {
