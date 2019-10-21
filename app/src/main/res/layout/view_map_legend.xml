@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/userPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/userPinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_user"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/userPin"
+            app:layout_constraintTop_toTopOf="@id/userPin"
+            app:layout_constraintBottom_toBottomOf="@id/userPin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/userPinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="userPin,userPinInstruction" />
+
+        <ImageView
+            android:id="@+id/freeNotStartedAdventurePin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_free_not_started"
+            android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userPinBarrier" />
+
+        <TextView
+            android:id="@+id/freeNotStartedAdventurePinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_free_not_started"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/freeNotStartedAdventurePin"
+            app:layout_constraintTop_toTopOf="@id/freeNotStartedAdventurePin"
+            app:layout_constraintBottom_toBottomOf="@id/freeNotStartedAdventurePin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/freeNotStartedAdventurePinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="freeNotStartedAdventurePin,freeNotStartedAdventurePinInstruction" />
+
+        <ImageView
+            android:id="@+id/freeStartedAdventurePin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_free_started"
+            android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/freeNotStartedAdventurePinBarrier" />
+
+        <TextView
+            android:id="@+id/freeStartedAdventurePinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_free_started"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/freeStartedAdventurePin"
+            app:layout_constraintTop_toTopOf="@id/freeStartedAdventurePin"
+            app:layout_constraintBottom_toBottomOf="@id/freeStartedAdventurePin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/freeStartedAdventurePinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="freeStartedAdventurePin,freeStartedAdventurePinInstruction" />
+
+        <ImageView
+            android:id="@+id/freeFinishedAdventurePin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_free_finished"
+            android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/freeStartedAdventurePinBarrier" />
+
+        <TextView
+            android:id="@+id/freeFinishedAdventurePinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_free_finished"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/freeFinishedAdventurePin"
+            app:layout_constraintTop_toTopOf="@id/freeFinishedAdventurePin"
+            app:layout_constraintBottom_toBottomOf="@id/freeFinishedAdventurePin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/freeFinishedAdventurePinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="freeFinishedAdventurePin,freeFinishedAdventurePinInstruction" />
+
+        <ImageView
+            android:id="@+id/paidNotStartedAdventurePin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_purchasable_not_started"
+            android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/freeFinishedAdventurePinBarrier" />
+
+        <TextView
+            android:id="@+id/paidNotStartedAdventurePinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_paid_not_started"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/paidNotStartedAdventurePin"
+            app:layout_constraintTop_toTopOf="@id/paidNotStartedAdventurePin"
+            app:layout_constraintBottom_toBottomOf="@id/paidNotStartedAdventurePin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/paidNotStartedAdventurePinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="paidNotStartedAdventurePin,paidNotStartedAdventurePinInstruction" />
+
+        <ImageView
+            android:id="@+id/paidStartedAdventurePin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_purchasable_started"
+            android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paidNotStartedAdventurePinBarrier" />
+
+        <TextView
+            android:id="@+id/paidStartedAdventurePinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_paid_started"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/paidStartedAdventurePin"
+            app:layout_constraintTop_toTopOf="@id/paidStartedAdventurePin"
+            app:layout_constraintBottom_toBottomOf="@id/paidStartedAdventurePin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/paidStartedAdventurePinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="paidStartedAdventurePin,paidStartedAdventurePinInstruction" />
+
+        <ImageView
+            android:id="@+id/paidFinishedAdventurePin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_purchasable_finished"
+            android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paidStartedAdventurePinBarrier" />
+
+        <TextView
+            android:id="@+id/paidFinishedAdventurePinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_paid_finished"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintStart_toEndOf="@id/paidFinishedAdventurePin"
+            app:layout_constraintTop_toTopOf="@id/paidFinishedAdventurePin"
+            app:layout_constraintBottom_toBottomOf="@id/paidFinishedAdventurePin"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/paidFinishedAdventurePinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="paidFinishedAdventurePin,paidFinishedAdventurePinInstruction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

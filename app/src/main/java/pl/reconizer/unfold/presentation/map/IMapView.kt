@@ -1,13 +1,12 @@
 package pl.reconizer.unfold.presentation.map
 
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import pl.reconizer.unfold.domain.entities.IPositionable
 
 interface IMapView {
 
     var pinMapper: IPinMapper?
-    var userPin: BitmapDescriptor?
+    var userPinMapper: IPinMapper?
 
     var pinClickListener: ((pin: IPositionable) -> Unit)?
     var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)?

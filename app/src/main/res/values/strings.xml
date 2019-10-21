@@ -87,4 +87,17 @@
     <string name="user_profile_updated">Zaktualizowano profil</string>
     <string name="user_profile_username_label">Nazwa użytkownika</string>
     <string name="puzzle_direction_lock_reset">Zresetowano kłódkę</string>
+
+    <string name="map_legend_title">Legenda</string>
+    <string name="map_legend_user">znacznik użytkownika</string>
+    <string name="map_legend_free_not_started">znacznik trasy darmowej, nierozpoczętej</string>
+    <string name="map_legend_free_started">znacznik trasy darmowej, rozpoczętej</string>
+    <string name="map_legend_free_finished">znacznik trasy darmowej, zakończonej</string>
+    <string name="map_legend_paid_not_started">znacznik trasy płatnej, nierozpoczętej</string>
+    <string name="map_legend_paid_started">znacznik trasy płatnej, rozpoczętej</string>
+    <string name="map_legend_paid_finished">znacznik trasy płatnej, zakończonej</string>
+    <string name="map_legend_adventure_not_solved">znacznik nierozwiązanego punktu</string>
+    <string name="map_legend_adventure_solved">znacznik rozwiązanego punktu</string>
+    <string name="map_legend_adventure_location_checker">przycisk sprawdzający obecność punktu przygody w pobliżu Twojej lokalizacji</string>
+
 </resources>
