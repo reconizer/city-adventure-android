@@ -30,7 +30,7 @@ class MapFragment : SupportMapFragment(), IMapView {
     private var lastMapZoom: Float = 0f
 
     override var pinMapper: IPinMapper? = null
-    override var userPin: BitmapDescriptor? = null
+    override var userPinMapper: IPinMapper? = null
 
     @DrawableRes
     override var overlayDrawableRes: Int = R.drawable.map_overlay
@@ -153,7 +153,7 @@ class MapFragment : SupportMapFragment(), IMapView {
                 .zIndex(1f)
                 .position(latLng)
                 .anchor(0.5f, 1f)
-                .icon(userPin)
+                .icon(userPinMapper?.determinePin())
         )
     }
 

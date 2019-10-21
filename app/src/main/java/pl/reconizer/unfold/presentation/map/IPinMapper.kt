@@ -4,6 +4,6 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 
 interface IPinMapper {
 
-    fun determinePin(t: Any): BitmapDescriptor?
+    fun determinePin(t: Any? = null): BitmapDescriptor?
 
 }

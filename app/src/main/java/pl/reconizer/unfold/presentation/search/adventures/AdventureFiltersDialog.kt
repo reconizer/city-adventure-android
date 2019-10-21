@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_adventure_filters.view.*
-import kotlinx.android.synthetic.main.dialog_puzzle_tutorial.view.dialogHeader
+import kotlinx.android.synthetic.main.dialog_with_header_and_content.view.dialogHeader
 import pl.reconizer.unfold.R
 
 class AdventureFiltersDialog : DialogFragment() {

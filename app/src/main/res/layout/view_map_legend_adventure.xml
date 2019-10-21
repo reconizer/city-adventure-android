@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/iconsGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="56dp" />
+
+        <ImageView
+            android:id="@+id/userPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_pin_user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/notSolvedPointPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_3x"
+            android:src="@drawable/icon_pin_free_started"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
+            app:layout_constraintTop_toBottomOf="@id/userPinBarrier" />
+
+
+        <ImageView
+            android:id="@+id/solvedPointPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_3x"
+            android:src="@drawable/icon_pin_free_finished"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
+            app:layout_constraintTop_toBottomOf="@id/notSolvedPointPinBarrier" />
+
+        <ImageView
+            android:id="@+id/checkLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_3x"
+            android:src="@drawable/map_button_location_scan"
+
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
+            app:layout_constraintTop_toBottomOf="@id/solvedPointPinBarrier" />
+
+        <TextView
+            android:id="@+id/userPinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_user"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintBottom_toBottomOf="@id/userPin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
+            app:layout_constraintTop_toTopOf="@id/userPin" />
+
+        <TextView
+            android:id="@+id/notSolvedPointPinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_adventure_not_solved"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintBottom_toBottomOf="@id/notSolvedPointPin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
+            app:layout_constraintTop_toTopOf="@id/notSolvedPointPin" />
+
+        <TextView
+            android:id="@+id/solvedPointPinInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_adventure_solved"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintBottom_toBottomOf="@id/solvedPointPin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
+            app:layout_constraintTop_toTopOf="@id/solvedPointPin" />
+
+        <TextView
+            android:id="@+id/checkLocationInstruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_2x"
+            android:text="@string/map_legend_adventure_location_checker"
+            android:textAppearance="@style/MapLegendDialogText"
+            app:layout_constraintBottom_toBottomOf="@id/checkLocation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
+            app:layout_constraintTop_toTopOf="@id/checkLocation" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/userPinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="userPin,userPinInstruction" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/notSolvedPointPinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="notSolvedPointPin,notSolvedPointPinInstruction" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/solvedPointPinBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="solvedPointPin,solvedPointPinInstruction" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/checkLocationBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="checkLocation,checkLocationInstruction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
