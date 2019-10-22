@@ -35,4 +35,6 @@
     <color name="cryptexLockCylinderBackgroundColor">#B3120E0B</color>
 
     <color name="directionLockAnswersContainerBackgroundColor">#66120E0B</color>
+
+    <color name="adventureTitleBackgroundColor">#DECEAF</color>
 </resources>
