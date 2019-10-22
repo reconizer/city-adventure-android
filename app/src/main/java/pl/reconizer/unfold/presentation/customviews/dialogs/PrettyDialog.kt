@@ -33,6 +33,8 @@ class PrettyDialog : DialogFragment() {
     var firstButtonClickListener: (() -> Unit)? = null
     var secondButtonClickListener: (() -> Unit)? = null
 
+    var closeButtonClickListener: (() -> Unit) = { dismiss() }
+
     private var contentTextView: WeakReference<TextView>? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -49,7 +51,7 @@ class PrettyDialog : DialogFragment() {
     }
 
     private fun buildDialog(view: View) {
-        view.dialogHeader.closeButtonClickListener = { dismiss() }
+        view.dialogHeader.closeButtonClickListener = closeButtonClickListener
         view.dialogHeader.apply {
             isGone = headerText.isNullOrBlank()
             text = headerText

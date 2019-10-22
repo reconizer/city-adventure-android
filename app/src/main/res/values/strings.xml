@@ -100,4 +100,10 @@
     <string name="map_legend_adventure_solved">znacznik rozwiązanego punktu</string>
     <string name="map_legend_adventure_location_checker">przycisk sprawdzający obecność punktu przygody w pobliżu Twojej lokalizacji</string>
 
+    <string name="puzzle_correct_answer_title">Gratulacje!</string>
+    <string name="puzzle_correct_answer_message">Świetna robota, rozwiązałeś zagadkę!\n\nTeraz możesz przejść do Dziennika i zacząć analizować kolejną porcję wskazówek.\n\nTrzymamy kciuki i wierzymy, że Ci się uda.</string>
+    <string name="puzzle_correct_answer_button">Wróć do Dziennika</string>
+    <string name="puzzle_correct_answer_message_summary">Świetna robota, rozwiązałeś zagadkę, a tym samym całą przygodę!\n\nTeraz możesz przejść do podsumowania i zobaczyć jak wypadłeś na tle innych graczy oraz ocenić tę przygodę.</string>
+    <string name="puzzle_correct_naswer_summary_button">Idź do podsumowania</string>
+
 </resources>

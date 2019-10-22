@@ -3,6 +3,7 @@ package pl.reconizer.unfold.presentation.puzzle
 import android.os.Bundle
 import com.zhuinden.simplestack.StateChange
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.isFragmentOnStack
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
@@ -12,6 +13,8 @@ import pl.reconizer.unfold.presentation.common.IViewWithLocation
 import pl.reconizer.unfold.presentation.customviews.dialogs.ErrorDialogBuilder
 import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
+import pl.reconizer.unfold.presentation.navigation.keys.BaseKey
+import pl.reconizer.unfold.presentation.navigation.keys.JournalKey
 import javax.inject.Inject
 
 open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
@@ -20,6 +23,8 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     lateinit var presenter: PuzzlePresenter
 
     private var wrongAnswerInfoDialog: PrettyDialog? = null
+
+    private var correctAnswerInfoDialog: PrettyDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     override fun onPause() {
         super.onPause()
         wrongAnswerInfoDialog?.dismiss()
+        correctAnswerInfoDialog?.dismiss()
     }
 
     override fun onDestroy() {
@@ -64,7 +70,16 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun correctAnswer() {
-        navigator.goBack() // opens the map
+        if (!childFragmentManager.isFragmentOnStack(CORRECT_ANSWER_DIALOG_TAG)){
+            correctAnswerInfoDialog = PrettyDialog().apply {
+                headerText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_title)
+                contentText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_message)
+                firstButtonText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_button)
+                firstButtonClickListener = { goToJournal() }
+                closeButtonClickListener = { goToJournal() }
+            }
+            correctAnswerInfoDialog?.show(childFragmentManager, CORRECT_ANSWER_DIALOG_TAG)
+        }
     }
 
     override fun wrongAnswer() {
@@ -72,11 +87,16 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun completedAdventure() {
-        // replaces in order to prevent going back to a puzzle screen
-        navigator.replaceTop(
-                AdventureSummaryKey(arguments?.get(ADVENTURE_PARAM) as MapAdventure),
-                StateChange.REPLACE
-        )
+        if (!childFragmentManager.isFragmentOnStack(CORRECT_ANSWER_DIALOG_TAG)){
+            correctAnswerInfoDialog = PrettyDialog().apply {
+                headerText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_title)
+                contentText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_message_summary)
+                firstButtonText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_naswer_summary_button)
+                firstButtonClickListener = { goToSummary() }
+                closeButtonClickListener = { goToSummary() }
+            }
+            correctAnswerInfoDialog?.show(childFragmentManager, CORRECT_ANSWER_DIALOG_TAG)
+        }
     }
 
     fun showWrongAnswerDialog() {
@@ -89,9 +109,23 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
         }
     }
 
+    private fun goToJournal() {
+        navigator.goTo(navigator.fromTop<BaseKey>(2))
+    }
+
+    private fun goToSummary() {
+        // replaces in order to prevent going back to a puzzle screen
+        navigator.replaceTop(
+                AdventureSummaryKey(arguments?.get(ADVENTURE_PARAM) as MapAdventure),
+                StateChange.REPLACE
+        )
+    }
+
     companion object {
         const val ADVENTURE_PARAM = "adventure"
         const val ADVENTURE_POINT_PARAM = "adventure_point"
         const val PUZZLE_TYPE_PARAM = "puzzle_type"
+
+        const val CORRECT_ANSWER_DIALOG_TAG = "correct_answer"
     }
 }
