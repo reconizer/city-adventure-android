@@ -38,6 +38,9 @@ class GameMapPresenter(
 
     var adventure: MapAdventure? = null
 
+    var adventureStartPoint: AdventureStartPoint? = null
+        private set
+
     val cameraPositionObserver: PublishSubject<CameraDetails> = PublishSubject.create()
 
     val lastLocation: Position?
@@ -213,6 +216,22 @@ class GameMapPresenter(
                             }
                         })
         )
+    }
+
+    fun fetchStartPoint() {
+        adventure?.adventureId?.let {
+            disposables.add(
+                    adventureRepository.getAdventure(it)
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(mainScheduler)
+                            .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint, Error>(errorsHandler) {
+                                override fun onSuccess(t: AdventureStartPoint) {
+                                    adventureStartPoint = t
+                                    view?.showAdventure(t)
+                                }
+                            })
+            )
+        }
     }
 
     companion object {

@@ -65,6 +65,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         myLocationButton.setOnClickListener {
             presenter.lastLocation?.let {
                 mapView.moveToLocation(it.toLatLng())
@@ -87,12 +88,12 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
-            adventuresButtonsGroup.isVisible = true
-            adventureButtonsGroup.isGone = true
+            adventuresUIGroup.isVisible = true
+            adventureUIGroup.isGone = true
         } else {
             mapView.pinMapper = startedAdventurePinMapper
-            adventuresButtonsGroup.isGone = true
-            adventureButtonsGroup.isVisible = true
+            adventuresUIGroup.isGone = true
+            adventureUIGroup.isVisible = true
         }
         mapView.userPinMapper = userPinMapper
         mapView.clearMarkers()
@@ -117,6 +118,15 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                     if (!it.isCompleted) {
                         presenter.resolvePoint(it)
                     }
+                }
+            }
+        }
+        if (mapMode == MapMode.STARTED_ADVENTURE) {
+            if (presenter.adventureStartPoint == null) {
+                presenter.fetchStartPoint()
+            } else {
+                presenter.adventureStartPoint?.let {
+                    showAdventure(it)
                 }
             }
         }
@@ -179,6 +189,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 mapView.moveToLocation(it.position.toLatLng())
             }
         }
+    }
+
+    override fun showAdventure(adventureStartPoint: AdventureStartPoint) {
+        adventureTitle.text = adventureStartPoint.name
     }
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {

@@ -43,12 +43,12 @@
                 android:id="@+id/closeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/space_1x"
+                android:paddingStart="@dimen/space_2x"
                 android:paddingTop="@dimen/space_2x"
                 android:paddingEnd="@dimen/space_2x"
                 android:paddingBottom="@dimen/space_1x"
                 android:src="@drawable/icon_close_dark"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
