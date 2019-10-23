@@ -48,14 +48,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchButton" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/map_ui_margin"
-        android:layout_marginStart="@dimen/map_ui_margin"
-        android:background="@null"
-        android:src="@drawable/map_button_menu"
+        android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingEnd="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_1x"
+        android:src="@drawable/button_map_menu"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -87,9 +88,12 @@
         android:id="@+id/adventureTitle"
         style="@style/AdventureTitleOnMap"
         android:layout_width="0dp"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_1x"
         android:layout_marginEnd="@dimen/space_2x"
+        android:background="@drawable/map_adventure_title_background"
+        android:paddingStart="@dimen/space_4x"
+        android:paddingEnd="@dimen/space_3x"
         android:textAppearance="@style/TypeWriterText"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
