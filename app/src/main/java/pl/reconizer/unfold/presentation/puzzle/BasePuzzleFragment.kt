@@ -41,7 +41,6 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     override fun onPause() {
         super.onPause()
         wrongAnswerInfoDialog?.dismiss()
-        correctAnswerInfoDialog?.dismiss()
     }
 
     override fun onDestroy() {
@@ -72,6 +71,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     override fun correctAnswer() {
         if (!childFragmentManager.isFragmentOnStack(CORRECT_ANSWER_DIALOG_TAG)){
             correctAnswerInfoDialog = PrettyDialog().apply {
+                isCancelable = false
                 headerText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_title)
                 contentText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_message)
                 firstButtonText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_button)
@@ -89,6 +89,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     override fun completedAdventure() {
         if (!childFragmentManager.isFragmentOnStack(CORRECT_ANSWER_DIALOG_TAG)){
             correctAnswerInfoDialog = PrettyDialog().apply {
+                isCancelable = false
                 headerText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_title)
                 contentText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_message_summary)
                 firstButtonText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_naswer_summary_button)

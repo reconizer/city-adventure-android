@@ -29,7 +29,7 @@ class AdventuresPresenter(
             MIN_RANGE,
             MAX_RANGE,
             1f,
-            DifficultyLevel.MEDIUM
+            null
     )
         set(value) {
             hasFiltersChanged = true
