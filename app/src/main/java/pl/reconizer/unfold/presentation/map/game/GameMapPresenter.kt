@@ -188,7 +188,7 @@ class GameMapPresenter(
                             override fun onSuccess(t: Any) {
                                 when(t) {
                                     is List<*> -> this@GameMapPresenter.view?.showAdventurePoints(t as List<AdventurePoint>)
-                                    is PuzzleResponse -> view?.showSummary()
+                                    is PuzzleResponse -> view?.finishAdventure()
                                 }
 
                             }
@@ -208,7 +208,7 @@ class GameMapPresenter(
                             override fun onSuccess(t: PuzzleResponse) {
                                 if (t.isCompleted) {
                                     if (t.isLastPoint) {
-                                        view?.showSummary()
+                                        view?.finishAdventure()
                                     }
                                 } else {
                                     view?.showPuzzle(point, t)

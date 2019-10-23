@@ -17,6 +17,7 @@ import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.IViewWithLocation
 import pl.reconizer.unfold.presentation.customviews.dialogs.MapLegendDialog
+import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.unfold.presentation.map.IMapView
 import pl.reconizer.unfold.presentation.map.IPinMapper
 import pl.reconizer.unfold.presentation.map.MapMode
@@ -52,6 +53,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         get() { return childFragmentManager.findFragmentById(R.id.mapContainer) as IMapView }
 
     private val mapLegendDialog = MapLegendDialog()
+
+    private var finishedAdventureInfoDialog: PrettyDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -217,7 +220,22 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
     }
 
-    override fun showSummary() {
+    override fun finishAdventure() {
+        if (!childFragmentManager.isFragmentOnStack(FINISHED_ADVENTURE_DIALOG_TAG)){
+            finishedAdventureInfoDialog = PrettyDialog().apply {
+                isCancelable = false
+                headerText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_title)
+                contentText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_message_summary)
+                firstButtonText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_naswer_summary_button)
+                firstButtonClickListener = { goToSummary() }
+                closeButtonClickListener = { goToSummary() }
+            }
+            finishedAdventureInfoDialog?.show(childFragmentManager, FINISHED_ADVENTURE_DIALOG_TAG)
+        }
+    }
+
+    private fun goToSummary() {
+        finishedAdventureInfoDialog?.dismiss()
         navigator.goTo(AdventureSummaryKey(presenter.adventure!!))
     }
 
@@ -227,6 +245,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         const val ADVENTURE_POINT_ID_PARAM = "adventure_point_id"
 
         const val LEGEND_DIALOG_TAG = "legend_dialog"
+        const val FINISHED_ADVENTURE_DIALOG_TAG = "finished_adventure_dialog"
     }
 
 }

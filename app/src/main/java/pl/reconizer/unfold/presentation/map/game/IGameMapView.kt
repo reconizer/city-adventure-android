@@ -17,6 +17,6 @@ interface IGameMapView : IView, IViewWithLocation {
     fun showAdventurePoints(points: List<AdventurePoint>)
 
     fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse)
-    fun showSummary()
+    fun finishAdventure()
 
 }
