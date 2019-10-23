@@ -13,7 +13,7 @@ class TimeLengthView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var minLength: Long = 0
+    var minLength: Long? = null
         set(value) {
             if (value != field) {
                 field = value
@@ -21,7 +21,7 @@ class TimeLengthView @JvmOverloads constructor(
             }
         }
 
-    var maxLength: Long = 0
+    var maxLength: Long? = null
         set(value) {
             if (value != field) {
                 field = value

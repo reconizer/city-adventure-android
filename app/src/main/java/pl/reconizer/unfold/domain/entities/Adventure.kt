@@ -8,11 +8,11 @@ data class Adventure(
         @SerializedName("min_time") val minFinishTime: Long?,
         @SerializedName("max_time") val maxFinishTime: Long?,
         @SerializedName("image_url") val coverImage: String,
-        @SerializedName("difficulty_level") val difficultyLevelValue: Int,
+        @SerializedName("difficulty_level") val difficultyLevelValue: Int?,
         val rating: Float
 ) {
 
     val difficultyLevel
-        get() = DifficultyLevel.fromInt(difficultyLevelValue)
+        get() = if (difficultyLevelValue == null) null else DifficultyLevel.fromInt(difficultyLevelValue)
 
 }

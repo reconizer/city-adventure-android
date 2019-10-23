@@ -64,17 +64,19 @@ class AdventureInfoView @JvmOverloads constructor(
     }
 
     private fun show() {
-        if (adventureStartPoint != null) {
-            showBanner(adventureStartPoint!!)
-            showAuthor(adventureStartPoint!!)
-            showFinishTime(adventureStartPoint!!)
-            showGallery(adventureStartPoint!!)
-            showCurrentUserRating(adventureStartPoint!!)
+        adventureStartPoint?.let {
+            showBanner(it)
+            showAuthor(it)
+            showFinishTime(it)
+            showGallery(it)
+            showCurrentUserRating(it)
 
-            difficultyLevel.isVisible = true
-            difficultyLevel.level = adventureStartPoint!!.difficultyLevel
+            difficultyLevel.isVisible = it.difficultyLevel != null
+            it.difficultyLevel?.let { certainDifficultyLevel ->
+                difficultyLevel.level = certainDifficultyLevel
+            }
 
-            adventureDescription.text = adventureStartPoint!!.description
+            adventureDescription.text = it.description
         }
     }
 
@@ -93,7 +95,7 @@ class AdventureInfoView @JvmOverloads constructor(
     private fun showFinishTime(adventureStartPoint: AdventureStartPoint) {
         timeLength.minLength = adventureStartPoint.minFinishTime
         timeLength.maxLength = adventureStartPoint.maxFinishTime
-        timeLength.isVisible = true
+        timeLength.isVisible = adventureStartPoint.minFinishTime != null
     }
 
     private fun showGallery(adventureStartPoint: AdventureStartPoint) {
