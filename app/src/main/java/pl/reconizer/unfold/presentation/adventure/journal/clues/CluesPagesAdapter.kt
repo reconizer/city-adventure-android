@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.view_journal_clues_page.view.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.domain.entities.AdventurePointWithClues
 import pl.reconizer.unfold.domain.entities.Clue
+import pl.reconizer.unfold.presentation.adventure.journal.JournalPageView
 import pl.reconizer.unfold.presentation.common.recyclerview.ItemOffsetDecorator
 
 class CluesPagesAdapter : PagerAdapter() {
@@ -32,9 +33,21 @@ class CluesPagesAdapter : PagerAdapter() {
         return points.size
     }
 
+    override fun getItemPosition(obj: Any): Int {
+        var position = POSITION_NONE
+        points.forEachIndexed { pointIndex, point ->
+            if ("${points[pointIndex].id}${pointIndex}" == (obj as JournalPageView).tag) {
+                position = pointIndex
+                return@forEachIndexed
+            }
+        }
+        return position
+    }
+
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(container.context)
                 .inflate(R.layout.view_journal_clues_page, container, false) as ViewGroup
+        view.tag = "${points[position].id}${position}"
         val cluesAdapter = CluesAdapter()
         view.cluesRecyclerView.apply {
             if (itemDecorationCount == 0) addItemDecoration(ItemOffsetDecorator(container.context, R.dimen.journalClueOffset))
@@ -64,6 +77,7 @@ class CluesPagesAdapter : PagerAdapter() {
     }
 
     private fun preparePointHeader(view: View, point: AdventurePointWithClues) {
+        // underlines the text
         view.pointHeader.text = SpannableString(point.discoveryDateString).apply {
             setSpan(UnderlineSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
