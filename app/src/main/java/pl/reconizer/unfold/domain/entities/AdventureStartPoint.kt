@@ -9,7 +9,7 @@ data class AdventureStartPoint(
         val id: String,
         val description: String,
         val name: String,
-        @SerializedName("difficulty_level") val difficultyLevelValue: Int,
+        @SerializedName("difficulty_level") val difficultyLevelValue: Int?,
         @SerializedName("image_url") val coverImage: String,
         val gallery: List<String>,
         val language: String,
@@ -18,8 +18,8 @@ data class AdventureStartPoint(
         @SerializedName("author_id") val authorId: String,
         @SerializedName("author_name") val authorName: String,
         @SerializedName("author_image_url") val authorImage: String,
-        @SerializedName("min_time") val minFinishTime: Long,
-        @SerializedName("max_time") val maxFinishTime: Long,
+        @SerializedName("min_time") val minFinishTime: Long?,
+        @SerializedName("max_time") val maxFinishTime: Long?,
         @SerializedName("current_user_ranking") val currentUserRanking: RankingEntry?,
         @SerializedName("top_five") val topFiveRanking: List<RankingEntry>,
         @SerializedName("current_user_rating") val currentUserRating: Int?
@@ -27,6 +27,6 @@ data class AdventureStartPoint(
 ): Parcelable {
 
     val difficultyLevel
-            get() = DifficultyLevel.fromInt(difficultyLevelValue)
+            get() = if (difficultyLevelValue == null) null else DifficultyLevel.fromInt(difficultyLevelValue)
 
 }

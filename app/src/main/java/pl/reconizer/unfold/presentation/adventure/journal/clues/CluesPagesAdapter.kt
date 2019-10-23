@@ -34,14 +34,14 @@ class CluesPagesAdapter : PagerAdapter() {
     }
 
     override fun getItemPosition(obj: Any): Int {
-        var idx = -1
+        var position = POSITION_NONE
         points.forEachIndexed { pointIndex, point ->
             if ("${points[pointIndex].id}${pointIndex}" == (obj as JournalPageView).tag) {
-                idx = pointIndex
+                position = pointIndex
                 return@forEachIndexed
             }
         }
-        return if (idx >= 0) idx else POSITION_NONE
+        return position
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -77,6 +77,7 @@ class CluesPagesAdapter : PagerAdapter() {
     }
 
     private fun preparePointHeader(view: View, point: AdventurePointWithClues) {
+        // underlines the text
         view.pointHeader.text = SpannableString(point.discoveryDateString).apply {
             setSpan(UnderlineSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }

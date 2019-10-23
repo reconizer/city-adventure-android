@@ -65,6 +65,11 @@ class AdventureSummaryFragment : BaseFragment(), IAdventureSummaryView {
         Injector.clearAdventureSummaryComponent()
     }
 
+    override fun goBack(): Boolean {
+        navigator.jumpToRoot()
+        return true
+    }
+
     override fun showUserRanking() {
         presenter.userRanking?.let {
             userRankingEntryView.apply {
