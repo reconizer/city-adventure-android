@@ -2,13 +2,10 @@ package pl.reconizer.unfold.presentation.puzzle.directionlock
 
 import android.content.Context
 import android.graphics.PointF
-import android.os.Vibrator
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -16,6 +13,7 @@ import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.view_direction_lock.view.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.performOneShotVibration
 import pl.reconizer.unfold.domain.entities.puzzles.DirectionAnswerType
 import kotlin.math.abs
 import kotlin.math.absoluteValue
@@ -107,8 +105,7 @@ class DirectionLock @JvmOverloads constructor(
                                 if (previousSelectedDirection != currentlySelectedDirection && currentlySelectedDirection != null) {
                                     previousSelectedDirection = currentlySelectedDirection
 
-                                    val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
-                                    vibrator?.vibrate(100)
+                                    context?.performOneShotVibration(100)
                                     currentlySelectedDirection?.let { onNewDirectionListener?.invoke(it) }
 
                                 }
