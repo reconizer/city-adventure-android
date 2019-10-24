@@ -15,6 +15,7 @@ interface IGameMapView : IView, IViewWithLocation {
     fun showAdventures(adventures: List<MapAdventure>)
     fun showAdventure(adventureStartPoint: AdventureStartPoint)
     fun showAdventurePoints(points: List<AdventurePoint>)
+    fun showNumberOfActiveAdventures(n: Int)
 
     fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse)
     fun finishAdventure()
