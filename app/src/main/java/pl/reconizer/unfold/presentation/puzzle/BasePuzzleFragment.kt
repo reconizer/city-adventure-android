@@ -4,6 +4,8 @@ import android.os.Bundle
 import com.zhuinden.simplestack.StateChange
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
+import pl.reconizer.unfold.common.extensions.performErrorHapticFeedback
+import pl.reconizer.unfold.common.extensions.performSuccessHapticFeedback
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
@@ -14,7 +16,6 @@ import pl.reconizer.unfold.presentation.customviews.dialogs.ErrorDialogBuilder
 import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
 import pl.reconizer.unfold.presentation.navigation.keys.BaseKey
-import pl.reconizer.unfold.presentation.navigation.keys.JournalKey
 import javax.inject.Inject
 
 open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
@@ -69,6 +70,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun correctAnswer() {
+        context?.performSuccessHapticFeedback()
         if (!childFragmentManager.isFragmentOnStack(CORRECT_ANSWER_DIALOG_TAG)){
             correctAnswerInfoDialog = PrettyDialog().apply {
                 isCancelable = false
@@ -83,10 +85,12 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
     }
 
     override fun wrongAnswer() {
+        context?.performErrorHapticFeedback()
         showWrongAnswerDialog()
     }
 
     override fun completedAdventure() {
+        context?.performSuccessHapticFeedback()
         if (!childFragmentManager.isFragmentOnStack(CORRECT_ANSWER_DIALOG_TAG)){
             correctAnswerInfoDialog = PrettyDialog().apply {
                 isCancelable = false

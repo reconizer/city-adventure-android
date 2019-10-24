@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_direction_lock.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
-import pl.reconizer.unfold.common.extensions.performOneShotVibration
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
@@ -70,7 +69,6 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
         super.wrongAnswer()
         directionLock.reset()
         directionLockAnswers.reset()
-        context?.performOneShotVibration(400)
     }
 
     companion object {
