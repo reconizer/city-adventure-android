@@ -1,6 +1,7 @@
 package pl.reconizer.unfold.presentation.puzzle.numberpushlock
 
 import android.content.Context
+import android.os.Vibrator
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -74,13 +75,7 @@ class PushLock @JvmOverloads constructor(
         val leftButton = PushLockButton(context).apply {
             value = baseValue
             valueSide = PushLockButton.ValueSide.LEFT
-            checkedChangeListener = {isChecked ->
-                if (isChecked) {
-                    _valuesStack.add(value)
-                } else {
-                    _valuesStack.remove(value)
-                }
-            }
+            checkedChangeListener = {isChecked -> onButtonClickListener(value, isChecked) }
             layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -91,13 +86,7 @@ class PushLock @JvmOverloads constructor(
         val rightButton = PushLockButton(context).apply {
             value = if (baseValue + numberOfRows > 2 * numberOfRows - 1) 0 else baseValue + numberOfRows
             valueSide = PushLockButton.ValueSide.RIGHT
-            checkedChangeListener = {isChecked ->
-                if (isChecked) {
-                    _valuesStack.add(value)
-                } else {
-                    _valuesStack.remove(value)
-                }
-            }
+            checkedChangeListener = {isChecked -> onButtonClickListener(value, isChecked) }
             layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -118,5 +107,15 @@ class PushLock @JvmOverloads constructor(
             add(rightButton)
         }
         return rowContainer
+    }
+
+    private fun onButtonClickListener(value: Int, isChecked: Boolean) {
+        if (isChecked) {
+            _valuesStack.add(value)
+        } else {
+            _valuesStack.remove(value)
+        }
+        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+        vibrator?.vibrate(50)
     }
 }

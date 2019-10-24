@@ -36,4 +36,6 @@ interface IUserRepository {
 
     fun getPurchasedAdventures(page: Int = 1): Single<ICollectionContainer<UserAdventure>>
 
+    fun getStartedAdventuresCount(): Single<Int>
+
 }

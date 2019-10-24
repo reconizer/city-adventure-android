@@ -12,6 +12,7 @@ import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.presentation.common.rx.CallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
@@ -29,6 +30,7 @@ class GameMapPresenter(
         private val mainScheduler: Scheduler,
         private val locationProvider: ILocationProvider,
         private val adventureRepository: IAdventureRepository,
+        private val userRepository: IUserRepository,
         private val errorsHandler: ErrorsHandler<Error>
 ) : BasePresenter<IGameMapView>() {
 
@@ -232,6 +234,19 @@ class GameMapPresenter(
                             })
             )
         }
+    }
+
+    fun fetchNumberOfActiveAdventures() {
+        disposables.add(
+                userRepository.getStartedAdventuresCount()
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribeWith(object : SingleCallbackWrapper<Int, Error>(errorsHandler) {
+                            override fun onSuccess(t: Int) {
+                                view?.showNumberOfActiveAdventures(t)
+                            }
+                        })
+        )
     }
 
     companion object {

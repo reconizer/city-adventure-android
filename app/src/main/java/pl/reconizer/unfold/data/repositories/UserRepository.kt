@@ -82,4 +82,8 @@ class UserRepository(
                 .map { CollectionContainer(it) }
     }
 
+    override fun getStartedAdventuresCount(): Single<Int> {
+        return Single.just(5)
+    }
+
 }
