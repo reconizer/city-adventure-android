@@ -1,7 +1,6 @@
 package pl.reconizer.unfold.presentation.puzzle.numberpushlock
 
 import android.content.Context
-import android.os.Vibrator
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_number_push_lock.view.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.performOneShotVibration
 import pl.reconizer.unfold.presentation.customviews.ScalableSpace
 
 class PushLock @JvmOverloads constructor(
@@ -115,7 +115,6 @@ class PushLock @JvmOverloads constructor(
         } else {
             _valuesStack.remove(value)
         }
-        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
-        vibrator?.vibrate(50)
+        context?.performOneShotVibration(50)
     }
 }

@@ -1,15 +1,13 @@
 package pl.reconizer.unfold.presentation.puzzle.directionlock
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_direction_lock.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
+import pl.reconizer.unfold.common.extensions.performOneShotVibration
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.presentation.customviews.dialogs.PuzzleTutorialDialog
 import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
@@ -72,8 +70,7 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
         super.wrongAnswer()
         directionLock.reset()
         directionLockAnswers.reset()
-        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
-        vibrator?.vibrate(400)
+        context?.performOneShotVibration(400)
     }
 
     companion object {

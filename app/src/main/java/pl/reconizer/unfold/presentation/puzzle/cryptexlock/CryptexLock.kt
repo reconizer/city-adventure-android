@@ -9,6 +9,7 @@ import kankan.wheel.widget.WheelView
 import kankan.wheel.widget.adapters.ArrayWheelAdapter
 import kotlinx.android.synthetic.main.view_cryptex_lock.view.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.performOneShotVibration
 
 class CryptexLock @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -57,7 +58,13 @@ class CryptexLock @JvmOverloads constructor(
                 itemTextResource = R.id.textItem
             }
             isCyclic = true
+        }.apply {
+            addChangingListener { _, _, _ -> onWheelChangedListener() }
         }
+    }
+
+    private fun onWheelChangedListener() {
+        context?.performOneShotVibration(20)
     }
 
     companion object {
