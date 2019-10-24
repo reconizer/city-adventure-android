@@ -21,10 +21,7 @@ import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
 import pl.reconizer.unfold.presentation.map.IMapView
 import pl.reconizer.unfold.presentation.map.IPinMapper
 import pl.reconizer.unfold.presentation.map.MapMode
-import pl.reconizer.unfold.presentation.navigation.keys.AdventureStartPointKey
-import pl.reconizer.unfold.presentation.navigation.keys.AdventureSummaryKey
-import pl.reconizer.unfold.presentation.navigation.keys.MenuKey
-import pl.reconizer.unfold.presentation.navigation.keys.SearchKey
+import pl.reconizer.unfold.presentation.navigation.keys.*
 import pl.reconizer.unfold.presentation.navigation.keys.puzzles.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -88,6 +85,9 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 mapLegendDialog.show(childFragmentManager, LEGEND_DIALOG_TAG)
             }
         }
+        activeAdventuresIndicator.setOnClickListener {
+            navigator.goTo(UserAdventuresKey())
+        }
 
         if (mapMode == MapMode.ADVENTURES) {
             mapView.pinMapper = adventurePinMapper
@@ -132,6 +132,8 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                     showAdventure(it)
                 }
             }
+        } else {
+            presenter.fetchNumberOfActiveAdventures()
         }
     }
 
@@ -180,6 +182,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun showAdventures(adventures: List<MapAdventure>) {
         mapView.showMarkers(adventures)
+    }
+
+    override fun showNumberOfActiveAdventures(n: Int) {
+        activeAdventuresIndicator.number = n
     }
 
     override fun showAdventurePoints(points: List<AdventurePoint>) {

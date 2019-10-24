@@ -60,6 +60,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <pl.reconizer.unfold.presentation.map.ActiveAdventuresIndicator
+        android:id="@+id/activeAdventuresIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_2x"
+        android:layout_marginEnd="@dimen/space_2x"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/myLocationButton" />
+
     <ImageButton
         android:id="@+id/locationCheckerButton"
         android:layout_width="wrap_content"
@@ -106,7 +115,7 @@
         android:id="@+id/adventuresUIGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="searchButton,menuButton" />
+        app:constraint_referenced_ids="searchButton,menuButton,activeAdventuresIndicator" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/adventureUIGroup"
