@@ -1,32 +1,27 @@
 package pl.reconizer.unfold.domain.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Parcelize
 data class AdventureStartPoint(
         val id: String,
         val description: String,
         val name: String,
-        @SerializedName("difficulty_level") val difficultyLevelValue: Int?,
-        @SerializedName("image_url") val coverImage: String,
+        val difficultyLevel: DifficultyLevel?,
+        val coverImage: String,
         val gallery: List<String>,
         val language: String,
         val rating: Double?,
-        @SerializedName("rating_count") val ratingCount: Int,
-        @SerializedName("author_id") val authorId: String,
-        @SerializedName("author_name") val authorName: String,
-        @SerializedName("author_image_url") val authorImage: String,
-        @SerializedName("min_time") val minFinishTime: Long?,
-        @SerializedName("max_time") val maxFinishTime: Long?,
-        @SerializedName("current_user_ranking") val currentUserRanking: RankingEntry?,
-        @SerializedName("top_five") val topFiveRanking: List<RankingEntry>,
-        @SerializedName("current_user_rating") val currentUserRating: Int?
-
-): Parcelable {
-
-    val difficultyLevel
-            get() = if (difficultyLevelValue == null) null else DifficultyLevel.fromInt(difficultyLevelValue)
-
-}
+        val ratingCount: Int,
+        val authorId: String,
+        val authorName: String,
+        val authorImage: String,
+        val minFinishTime: Long?,
+        val maxFinishTime: Long?,
+        val currentUserRanking: RankingEntry?,
+        val topFiveRanking: List<RankingEntry>,
+        val currentUserRating: Int?,
+        val startedAt: Date?
+): Parcelable

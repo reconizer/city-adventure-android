@@ -226,6 +226,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         }
     }
 
+    override fun updateAdventureTimer(milliseconds: Long) {
+        adventureTimeIndicator.time = milliseconds
+    }
+
     override fun finishAdventure() {
         if (!childFragmentManager.isFragmentOnStack(FINISHED_ADVENTURE_DIALOG_TAG)){
             finishedAdventureInfoDialog = PrettyDialog().apply {

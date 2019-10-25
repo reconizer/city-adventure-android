@@ -8,9 +8,9 @@ fun prettyTimeStringRange(minLength: Long?, maxLength: Long?): String {
         "? ? ?"
     } else {
         if (maxLength == null) {
-            minLength.toPrettyTimeString()
+            minLength.toPrettyTimeStringFromSeconds()
         } else {
-            "${minLength.toPrettyTimeString()} - ${maxLength.toPrettyTimeString()}"
+            "${minLength.toPrettyTimeStringFromSeconds()} - ${maxLength.toPrettyTimeStringFromSeconds()}"
         }
     }
 }
