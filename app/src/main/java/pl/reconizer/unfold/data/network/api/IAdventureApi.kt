@@ -3,6 +3,7 @@ package pl.reconizer.unfold.data.network.api
 import io.reactivex.Completable
 import io.reactivex.Single
 import pl.reconizer.unfold.data.entities.AdventurePointWithCluesResponse
+import pl.reconizer.unfold.data.entities.AdventureStartPointResponse
 import pl.reconizer.unfold.data.entities.RatingResponse
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
@@ -31,7 +32,7 @@ interface IAdventureApi {
     @GET("api/adventures/{id}")
     fun getAdventure(
         @Path("id") adventureId: String
-    ): Single<AdventureStartPoint>
+    ): Single<AdventureStartPointResponse>
 
     @GET("api/clues/{id}")
     fun getAdventureDiscoveredClues(

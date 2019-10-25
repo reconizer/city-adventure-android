@@ -24,7 +24,7 @@
         android:background="@null"
         android:src="@drawable/icon_my_location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/adventureTitle" />
+        app:layout_constraintTop_toBottomOf="@id/adventureTimeIndicator" />
 
     <ImageButton
         android:id="@+id/searchButton"
@@ -110,6 +110,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/lorem_long" />
 
+    <pl.reconizer.unfold.presentation.map.AdventureTimeIndicator
+        android:id="@+id/adventureTimeIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1x"
+        android:layout_marginEnd="22.875dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adventureTitle" />
+
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/adventuresUIGroup"
@@ -121,6 +130,6 @@
         android:id="@+id/adventureUIGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="locationCheckerButton,journalButton,adventureTitle" />
+        app:constraint_referenced_ids="locationCheckerButton,journalButton,adventureTitle,adventureTimeIndicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

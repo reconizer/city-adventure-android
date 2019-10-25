@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_adventure_time_length.view.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.prettyTimeStringRange
-import pl.reconizer.unfold.common.extensions.toPrettyTimeString
 
 class TimeLengthView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

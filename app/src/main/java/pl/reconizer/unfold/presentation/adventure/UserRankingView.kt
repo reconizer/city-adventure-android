@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_adventure_start_point_my_ranking.view.*
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.common.extensions.toPrettyTimeString
+import pl.reconizer.unfold.common.extensions.toPrettyTimeStringFromSeconds
 import pl.reconizer.unfold.presentation.customviews.ShadowGenerator
 
 class UserRankingView @JvmOverloads constructor(
@@ -30,7 +30,7 @@ class UserRankingView @JvmOverloads constructor(
     var completionTime: Long = 0
         set(value) {
             field = value
-            timeTextView.text = value.toPrettyTimeString()
+            timeTextView.text = value.toPrettyTimeStringFromSeconds()
         }
 
     init {
