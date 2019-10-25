@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_ranking_entry.view.*
 import pl.reconizer.unfold.R
-import pl.reconizer.unfold.common.extensions.toPrettyTimeString
+import pl.reconizer.unfold.common.extensions.toPrettyTimeStringFromSeconds
 
 class RankingEntryView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -35,7 +35,7 @@ class RankingEntryView @JvmOverloads constructor(
     var completionTime: Long = 0
         set(value) {
             field = value
-            timeTextView.text = value.toPrettyTimeString()
+            timeTextView.text = value.toPrettyTimeStringFromSeconds()
         }
 
     init {

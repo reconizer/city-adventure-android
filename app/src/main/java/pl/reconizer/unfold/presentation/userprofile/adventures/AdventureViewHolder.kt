@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_user_profile_adventure_item.view.*
-import pl.reconizer.unfold.common.extensions.toPrettyTimeString
+import pl.reconizer.unfold.common.extensions.toPrettyTimeStringFromSeconds
 import pl.reconizer.unfold.domain.entities.UserAdventure
 
 class AdventureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,7 +19,7 @@ class AdventureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(adventure: UserAdventure) {
         adventureName.text = adventure.name
         position.text = adventure.position.toString()
-        completionTime.text = adventure.completionTime?.toPrettyTimeString(2)
+        completionTime.text = adventure.completionTime?.toPrettyTimeStringFromSeconds(2)
 
         Picasso.get()
                 .load(adventure.coverImage)

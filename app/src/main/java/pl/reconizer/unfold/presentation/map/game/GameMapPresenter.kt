@@ -23,6 +23,7 @@ import pl.reconizer.unfold.presentation.map.CameraDetails
 import pl.reconizer.unfold.presentation.map.MapMode
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class GameMapPresenter(
@@ -155,6 +156,23 @@ class GameMapPresenter(
                                 .subscribeWith(object : SingleCallbackWrapper<List<AdventurePoint>, Error>(errorsHandler) {
                                     override fun onSuccess(t: List<AdventurePoint>) {
                                         this@GameMapPresenter.view?.showAdventurePoints(t)
+                                    }
+                                })
+                )
+                disposables.add(
+                        Observable.interval(0L, 1000L, TimeUnit.MILLISECONDS)
+                                .subscribeOn(backgroundScheduler)
+                                .observeOn(mainScheduler)
+                                .subscribeWith(object : CallbackWrapper<Long, Error>(errorsHandler) {
+                                    override fun onComplete() {}
+
+                                    override fun onNext(t: Long) {
+                                        adventureStartPoint?.let { certainAdventureStartPoint ->
+                                            if (certainAdventureStartPoint.startedAt != null) {
+                                                val currentTimestamp = Calendar.getInstance().timeInMillis
+                                                this@GameMapPresenter.view?.updateAdventureTimer(currentTimestamp - certainAdventureStartPoint.startedAt.time)
+                                            }
+                                        }
                                     }
                                 })
                 )
