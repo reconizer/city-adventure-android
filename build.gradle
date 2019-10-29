@@ -23,6 +23,9 @@ buildscript {
 
         daggerVersion = '2.21'
 
+        loggerVersion = '4.7.1'
+
+        koptionalVersion = '1.6.0'
         simpleStackNavigationVersion = '1.13.1'
         picassoVersion = '2.71828'
         propertyAnimatorVersion = '1.4.5'

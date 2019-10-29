@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 
 class LocationProvider(private val context: Context) : ILocationProvider, LocationListener {
 
@@ -43,7 +44,7 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
 
     override fun enable() {
         if (isEnabled) {
-            Log.e(TAG, "LocationProvider has been already enabled.")
+            Timber.e("LocationProvider has been already enabled.")
             return
         }
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -51,12 +52,13 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
     }
 
     override fun disable() {
-        Log.d(TAG, "stop_location_updates")
+        Timber.d("stop location updates")
         locationManager?.removeUpdates(this)
         isEnabled = false
     }
 
     override fun onLocationChanged(location: Location) {
+        Timber.i("Location: (${location.latitude} | ${location.longitude})")
         previousLocation = lastLocation
         lastLocation = location
         locationChange.onNext(location)
@@ -66,24 +68,24 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
         when (status) {
             android.location.LocationProvider.AVAILABLE -> {
-                Log.d(TAG, "location_provider_available: $provider")
+                Timber.d("location_provider_available: $provider")
             }
             android.location.LocationProvider.OUT_OF_SERVICE -> {
-                Log.d(TAG, "location_provider_out_of_service: $provider")
+                Timber.d("location_provider_out_of_service: $provider")
             }
             android.location.LocationProvider.TEMPORARILY_UNAVAILABLE -> {
-                Log.d(TAG, "location_provider_unavailable: $provider")
+                Timber.d("location_provider_unavailable: $provider")
             }
         }
     }
 
     override fun onProviderEnabled(provider: String) {
-        Log.d(TAG, "location_provider_enabled: $provider")
+        Timber.d("location_provider_enabled: $provider")
         statusChange.onNext(interfaceStatus)
     }
 
     override fun onProviderDisabled(provider: String) {
-        Log.d(TAG, "location_provider_disabled: $provider")
+        Timber.d("location_provider_disabled: $provider")
         statusChange.onNext(interfaceStatus)
     }
 
@@ -93,22 +95,23 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
         locationProvider = locationManager!!.getBestProvider(criteria, false)
 
         if (locationProvider != null && hasPermission) {
-            locationManager!!.requestLocationUpdates(
-                    locationProvider,
-                    MIN_TIME_FOR_LOCATION_UPDATE,
-                    MIN_DISTANCE_FOR_LOCATION_UPDATE,
-                    this
-            )
-            lastLocation = locationManager!!.getLastKnownLocation(locationProvider)
+            locationManager?.let {
+                it.requestLocationUpdates(
+                        locationProvider,
+                        MIN_TIME_FOR_LOCATION_UPDATE,
+                        MIN_DISTANCE_FOR_LOCATION_UPDATE,
+                        this
+                )
+                lastLocation = it.getLastKnownLocation(locationProvider)
+            }
 
-            Log.d(TAG, "start_location_updates")
+            Timber.d("start_location_updates")
             isEnabled = true
         }
     }
 
     companion object {
-        const val TAG = "LocationProvider"
-        const val MIN_TIME_FOR_LOCATION_UPDATE = 400L
-        const val MIN_DISTANCE_FOR_LOCATION_UPDATE = 1f
+        const val MIN_TIME_FOR_LOCATION_UPDATE = 400L // in mills
+        const val MIN_DISTANCE_FOR_LOCATION_UPDATE = 1f // in meters
     }
 }

@@ -14,11 +14,13 @@ import com.google.maps.android.SphericalUtil
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.toLatLng
 import pl.reconizer.unfold.domain.entities.IPositionable
+import timber.log.Timber
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 class MapFragment : SupportMapFragment(), IMapView {
 
-    private var googleMap: GoogleMap? = null
+    private lateinit var googleMap: GoogleMap
 
     private var userMarker: Marker? = null
     private var markers: MutableList<Marker> = mutableListOf()
@@ -31,6 +33,9 @@ class MapFragment : SupportMapFragment(), IMapView {
 
     override var pinMapper: IPinMapper? = null
     override var userPinMapper: IPinMapper? = null
+
+    override var isMapReady: Boolean = false
+        private set
 
     @DrawableRes
     override var overlayDrawableRes: Int = R.drawable.map_overlay
@@ -47,21 +52,21 @@ class MapFragment : SupportMapFragment(), IMapView {
         getMapAsync(this::configure)
     }
 
-    override fun isMapReady(): Boolean {
-        return googleMap != null
-    }
-
     override fun moveToLocation(location: LatLng) {
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(LatLng(
-                location.latitude,
-                location.longitude
-        )))
+        if (isMapReady) {
+            googleMap.animateCamera(CameraUpdateFactory.newLatLng(LatLng(
+                    location.latitude,
+                    location.longitude
+            )))
+        }
     }
 
     override fun handleNewUserLocation(location: LatLng) {
         if (userMarker == null) createUserMarker(location)
         userMarker?.position = location
         currentLocation = location.also {
+            // Center map to user's location on first location update which probably means that
+            // this is a first map load and user didn't interact with the map
             if (currentLocation == null) {
                 moveToLocation(location)
             }
@@ -71,7 +76,7 @@ class MapFragment : SupportMapFragment(), IMapView {
     override fun showMarkers(positionables: List<IPositionable>) {
         clearMarkers()
         positionables.forEach {
-            markers.add(googleMap!!.addMarker(MarkerOptions()
+            markers.add(googleMap.addMarker(MarkerOptions()
                     .position(it.position.toLatLng())
                     .icon(pinMapper?.determinePin(it)))
                     .apply {
@@ -88,9 +93,10 @@ class MapFragment : SupportMapFragment(), IMapView {
 
     private fun configure(map: GoogleMap) {
         googleMap = map
+        isMapReady = true
         overlayBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(overlayBitmap)
-        if (googleMap!!.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.google_map_style))) {
-            googleMap!!.apply {
+        if (googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.google_map_style))) {
+            googleMap.apply {
                 setMinZoomPreference(MIN_ZOOM)
                 setMaxZoomPreference(MAX_ZOOM)
                 isBuildingsEnabled = false
@@ -109,57 +115,69 @@ class MapFragment : SupportMapFragment(), IMapView {
                 }
             }
         } else {
-            Log.e(TAG, "Map style parsing failed")
+            Timber.e("Map style parsing failed")
         }
         currentLocation?.let {
             handleNewUserLocation(it)
         }
 
         // when camera is moving
-        googleMap!!.setOnCameraMoveListener {
+        googleMap.setOnCameraMoveListener {
+            Timber.i("map camera: is moving")
             cameraMoveListener?.invoke(CameraDetails(
-                    googleMap!!.cameraPosition.target,
-                    googleMap!!.cameraPosition.zoom
+                    googleMap.cameraPosition.target,
+                    googleMap.cameraPosition.zoom
             ))
-            if (view != null && shouldUpdateOverlays()) {
+            if (shouldUpdateOverlays()) {
                 updateOverlays()
             }
         }
 
         // when camera stopped moving
-        googleMap!!.setOnCameraIdleListener {
+        googleMap.setOnCameraIdleListener {
+            Timber.i("map camera: stopped moving")
             cameraMovedListener?.invoke(CameraDetails(
-                    googleMap!!.cameraPosition.target,
-                    googleMap!!.cameraPosition.zoom
+                    googleMap.cameraPosition.target,
+                    googleMap.cameraPosition.zoom
             ))
-        }
-
-        googleMap!!.setOnMarkerClickListener {
-            if (it.tag is IPositionable) {
-                pinClickListener?.invoke(it.tag as IPositionable)
-                true
-            } else {
-                false
+            if (didZoomChanged() || didMoveOutOfBounds()) {
+                updateOverlays()
             }
         }
 
-        if (currentLocation != null) {
-            moveToLocation(currentLocation!!)
+        googleMap.setOnMarkerClickListener {
+            if (it.tag is IPositionable) {
+                Timber.i("map: clicked on adventure marker")
+                pinClickListener?.invoke(it.tag as IPositionable)
+            } else if (it == userMarker) {
+                Timber.i("map: clicked on user marker")
+            } else {
+                Timber.i("map: clicked on something else")
+            }
+            true
         }
+
+        currentLocation?.let {
+            moveToLocation(it)
+        }
+
+        updateOverlays()
     }
 
     private fun createUserMarker(latLng: LatLng) {
-        userMarker = googleMap?.addMarker(MarkerOptions()
-                .zIndex(1f)
-                .position(latLng)
-                .anchor(0.5f, 1f)
-                .icon(userPinMapper?.determinePin())
-        )
+        if (isMapReady) {
+            userMarker = googleMap.addMarker(MarkerOptions()
+                    .zIndex(1f)
+                    .position(latLng)
+                    .anchor(0.5f, 1f)
+                    .icon(userPinMapper?.determinePin())
+            )
+        }
     }
 
     private fun updateOverlays() {
-        lastMapCenter = googleMap!!.cameraPosition.target
-        lastMapZoom = googleMap!!.cameraPosition.zoom
+        lastMapCenter = googleMap.cameraPosition.target
+        lastMapZoom = googleMap.cameraPosition.zoom
         val tileSize = calculateTileWidth()
         val northWestCenter = LatLng(
                 SphericalUtil.computeOffset(lastMapCenter, tileSize * OVERLAYS_WIDTH / 2, 0.0).latitude,
@@ -173,7 +191,7 @@ class MapFragment : SupportMapFragment(), IMapView {
                         SphericalUtil.computeOffset(northWestCenter, j * tileSize, 90.0).longitude
                 )
                 if (overlays[idx] == null) {
-                    overlays[idx] = googleMap!!.addGroundOverlay(GroundOverlayOptions()
+                    overlays[idx] = googleMap.addGroundOverlay(GroundOverlayOptions()
                             .position(tileCenter, tileSize.toFloat())
                             .image(overlayBitmapDescriptor)
                             .transparency(OVERLAY_TRANSPARENCY))
@@ -192,28 +210,30 @@ class MapFragment : SupportMapFragment(), IMapView {
     }
 
     private fun didZoomChangeEnough(): Boolean {
-        val currentZoom = googleMap!!.cameraPosition.zoom
-        return abs(lastMapZoom - currentZoom) > 1 ||
+        val currentZoom = googleMap.cameraPosition.zoom
+        return (lastMapZoom - currentZoom).absoluteValue >= 0.5 ||
                 (lastMapZoom != currentZoom && (currentZoom == MAX_ZOOM || currentZoom == MIN_ZOOM))
     }
 
+    private fun didZoomChanged(): Boolean {
+        return lastMapZoom != googleMap.cameraPosition.zoom
+    }
+
     private fun didMoveOutOfBounds(): Boolean {
-        val tilesPerLongestEdge =  view!!.height / overlayBitmap.height
+        val tilesPerLongestEdge =  maxOf(view?.height ?: 0, view?.width ?: 0) / overlayBitmap.height
         val southWestLocation = overlays[OVERLAYS_WIDTH - tilesPerLongestEdge + 1 to tilesPerLongestEdge / 2]!!.position
         val northEastLocation = overlays[tilesPerLongestEdge / 2 to OVERLAYS_WIDTH - tilesPerLongestEdge + 1]!!.position
 
-        return !LatLngBounds(southWestLocation, northEastLocation).contains(googleMap!!.cameraPosition.target)
+        return !LatLngBounds(southWestLocation, northEastLocation).contains(googleMap.cameraPosition.target)
     }
 
     private fun calculateTileWidth(): Double {
-        val centerScreen = googleMap!!.projection.toScreenLocation(googleMap!!.cameraPosition.target)
+        val centerScreen = googleMap.projection.toScreenLocation(googleMap.cameraPosition.target)
         val tileEdge = Point(centerScreen.x - overlayBitmap.width / 2, centerScreen.y)
-        return 2 * SphericalUtil.computeDistanceBetween(googleMap!!.projection.fromScreenLocation(tileEdge), googleMap!!.cameraPosition.target)
+        return 2 * SphericalUtil.computeDistanceBetween(googleMap.projection.fromScreenLocation(tileEdge), googleMap.cameraPosition.target)
     }
 
     companion object {
-        const val TAG = "MapFragment"
-
         const val MIN_ZOOM = 15f
         const val MAX_ZOOM = 18f
 
