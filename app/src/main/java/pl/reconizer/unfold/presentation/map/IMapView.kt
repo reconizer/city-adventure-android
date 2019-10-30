@@ -14,7 +14,8 @@ interface IMapView {
 
     var overlayDrawableRes: Int
 
-    fun isMapReady(): Boolean
+    val isMapReady: Boolean
+
     fun moveToLocation(location: LatLng)
     fun handleNewUserLocation(location: LatLng)
 

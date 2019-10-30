@@ -80,6 +80,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
 
+    implementation "com.jakewharton.timber:timber:$rootProject.ext.loggerVersion"
+
+    implementation "com.gojuno.koptional:koptional:$rootProject.ext.koptionalVersion"
     implementation "com.github.Zhuinden:simple-stack:$rootProject.ext.simpleStackNavigationVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
     implementation "com.bartoszlipinski:viewpropertyobjectanimator:$rootProject.ext.propertyAnimatorVersion"

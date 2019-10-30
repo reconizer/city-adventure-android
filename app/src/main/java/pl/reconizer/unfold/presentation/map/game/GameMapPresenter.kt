@@ -1,6 +1,7 @@
 package pl.reconizer.unfold.presentation.map.game
 
-import android.util.Log
+import com.gojuno.koptional.Some
+import com.gojuno.koptional.toOptional
 import com.google.maps.android.SphericalUtil
 import io.reactivex.Observable
 import io.reactivex.Scheduler
@@ -22,6 +23,7 @@ import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.map.CameraDetails
 import pl.reconizer.unfold.presentation.map.MapMode
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
+import timber.log.Timber
 import java.lang.ref.WeakReference
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -51,7 +53,11 @@ class GameMapPresenter(
             return locationProvider.lastLocation?.toPosition()
         }
 
-    private val cameraMovedByDistanceObservable = cameraPositionObserver
+    /**
+     * Triggers when user 'pushes' new camera position and it is moved by DISTANCE_CHANGE
+     * or camera's zoom is changed
+     */
+    private val cameraMovedByDistanceObservable: Observable<Position> = cameraPositionObserver
             .observeOn(backgroundScheduler)
             .filter {
                 previousCameraDetails == null ||
@@ -62,10 +68,11 @@ class GameMapPresenter(
             .map { it.position.toPosition() }
             .share()
 
-    private val loadingIntervalsObservable = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
+    private val loadingIntervalsObservable: Observable<Position> = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
             .observeOn(backgroundScheduler)
-            .filter { previousCameraDetails != null }
-            .map { previousCameraDetails!!.position.toPosition() }
+            .map { previousCameraDetails.toOptional() }
+            .filter { it is Some }
+            .map { it.toNullable()!!.position.toPosition() }
             .share()
 
     fun subscribe(view: IGameMapView, mode: MapMode) {
@@ -98,7 +105,7 @@ class GameMapPresenter(
                             override fun onComplete() {}
 
                             override fun onNext(t: Position) {
-                                Log.d("GameMap", "Location: (${t.lat}, ${t.lng})")
+                                Timber.d("Location: (${t.lat}, ${t.lng})")
                                 this@GameMapPresenter.view?.showCurrentLocation(t)
                             }
                         })
@@ -112,7 +119,6 @@ class GameMapPresenter(
                             .subscribeOn(backgroundScheduler)
                             .observeOn(backgroundScheduler)
                             .flatMapSingle {
-                                Log.d("GameMapPresenter", "Checking pins")
                                 adventureRepository.getAdventures(
                                         lat = it.lat,
                                         lng = it.lng
@@ -133,7 +139,6 @@ class GameMapPresenter(
                             .subscribeOn(backgroundScheduler)
                             .observeOn(backgroundScheduler)
                             .flatMap {
-                                Log.d("GameMapPresenter", "Checking pins")
                                 adventureRepository.getAdventures(
                                         lat = it.latitude,
                                         lng = it.longitude
@@ -190,52 +195,56 @@ class GameMapPresenter(
     }
 
     fun checkLocation() {
-        disposables.add(
-                adventureRepository.resolvePoint(PuzzleAnswerForm(
-                        locationProvider.lastLocation!!.toPosition(),
-                        adventure!!.adventureId
-                ))
-                        .flatMap {
-                            if (it.isCompleted && it.isLastPoint) {
-                                Single.just(it)
-                            } else {
-                                adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
-                            }
-                        }
-                        .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<Any, Error>(errorsHandler) {
-                            override fun onSuccess(t: Any) {
-                                when(t) {
-                                    is List<*> -> this@GameMapPresenter.view?.showAdventurePoints(t as List<AdventurePoint>)
-                                    is PuzzleResponse -> view?.finishAdventure()
+        lastLocation?.let { certainLastLocation ->
+            disposables.add(
+                    adventureRepository.resolvePoint(PuzzleAnswerForm(
+                            certainLastLocation,
+                            adventure!!.adventureId
+                    ))
+                            .flatMap {
+                                if (it.isCompleted && it.isLastPoint) {
+                                    Single.just(it)
+                                } else {
+                                    adventureRepository.getAdventureCompletedPoints(adventure!!.adventureId)
                                 }
-
                             }
-                        })
-        )
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(mainScheduler)
+                            .subscribeWith(object : SingleCallbackWrapper<Any, Error>(errorsHandler) {
+                                override fun onSuccess(t: Any) {
+                                    when(t) {
+                                        is List<*> -> this@GameMapPresenter.view?.showAdventurePoints(t as List<AdventurePoint>)
+                                        is PuzzleResponse -> view?.finishAdventure()
+                                    }
+
+                                }
+                            })
+            )
+        }
     }
 
     fun resolvePoint(point: AdventurePoint) {
-        disposables.add(
-                adventureRepository.resolvePoint(PuzzleAnswerForm(
-                        locationProvider.lastLocation!!.toPosition(),
-                        adventure!!.adventureId
-                ))
-                        .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorsHandler) {
-                            override fun onSuccess(t: PuzzleResponse) {
-                                if (t.isCompleted) {
-                                    if (t.isLastPoint) {
-                                        view?.finishAdventure()
+        lastLocation?.let { certainLastLocation ->
+            disposables.add(
+                    adventureRepository.resolvePoint(PuzzleAnswerForm(
+                            certainLastLocation,
+                            adventure!!.adventureId
+                    ))
+                            .subscribeOn(backgroundScheduler)
+                            .observeOn(mainScheduler)
+                            .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorsHandler) {
+                                override fun onSuccess(t: PuzzleResponse) {
+                                    if (t.isCompleted) {
+                                        if (t.isLastPoint) {
+                                            view?.finishAdventure()
+                                        }
+                                    } else {
+                                        view?.showPuzzle(point, t)
                                     }
-                                } else {
-                                    view?.showPuzzle(point, t)
                                 }
-                            }
-                        })
-        )
+                            })
+            )
+        }
     }
 
     fun fetchStartPoint() {

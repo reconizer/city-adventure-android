@@ -82,11 +82,6 @@ class BannerView @JvmOverloads constructor(
         ratingTextView.text = String.format("%.1f", rating ?: 0f)
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.d("BannerView", "measure")
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    }
-
     private fun buildStarView(): ImageView {
         return ImageView(context).apply {
             scaleType = ImageView.ScaleType.FIT_XY
