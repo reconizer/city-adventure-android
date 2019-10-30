@@ -9,11 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/iconsGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="56dp" />
+
         <ImageView
             android:id="@+id/userPin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_user"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +32,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_user"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/userPin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/userPin"
             app:layout_constraintBottom_toBottomOf="@id/userPin"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -43,6 +51,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_free_not_started"
             android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userPinBarrier" />
 
@@ -53,7 +62,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_free_not_started"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/freeNotStartedAdventurePin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/freeNotStartedAdventurePin"
             app:layout_constraintBottom_toBottomOf="@id/freeNotStartedAdventurePin"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -71,6 +80,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_free_started"
             android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/freeNotStartedAdventurePinBarrier" />
 
@@ -81,7 +91,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_free_started"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/freeStartedAdventurePin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/freeStartedAdventurePin"
             app:layout_constraintBottom_toBottomOf="@id/freeStartedAdventurePin"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -99,6 +109,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_free_finished"
             android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/freeStartedAdventurePinBarrier" />
 
@@ -109,7 +120,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_free_finished"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/freeFinishedAdventurePin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/freeFinishedAdventurePin"
             app:layout_constraintBottom_toBottomOf="@id/freeFinishedAdventurePin"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -127,6 +138,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_purchasable_not_started"
             android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/freeFinishedAdventurePinBarrier" />
 
@@ -137,7 +149,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_paid_not_started"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/paidNotStartedAdventurePin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/paidNotStartedAdventurePin"
             app:layout_constraintBottom_toBottomOf="@id/paidNotStartedAdventurePin"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -155,6 +167,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_purchasable_started"
             android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/paidNotStartedAdventurePinBarrier" />
 
@@ -165,7 +178,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_paid_started"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/paidStartedAdventurePin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/paidStartedAdventurePin"
             app:layout_constraintBottom_toBottomOf="@id/paidStartedAdventurePin"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -183,6 +196,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pin_purchasable_finished"
             android:layout_marginTop="@dimen/space_3x"
+            app:layout_constraintEnd_toStartOf="@id/iconsGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/paidStartedAdventurePinBarrier" />
 
@@ -193,7 +207,7 @@
             android:layout_marginStart="@dimen/space_2x"
             android:text="@string/map_legend_paid_finished"
             android:textAppearance="@style/MapLegendDialogText"
-            app:layout_constraintStart_toEndOf="@id/paidFinishedAdventurePin"
+            app:layout_constraintStart_toEndOf="@id/iconsGuideline"
             app:layout_constraintTop_toTopOf="@id/paidFinishedAdventurePin"
             app:layout_constraintBottom_toBottomOf="@id/paidFinishedAdventurePin"
             app:layout_constraintEnd_toEndOf="parent" />
