@@ -140,7 +140,7 @@ class MapFragment : SupportMapFragment(), IMapView {
                     googleMap.cameraPosition.target,
                     googleMap.cameraPosition.zoom
             ))
-            if (didZoomChanged() || didMoveOutOfBounds()) {
+            if (didZoomChanged() || didMoveOutOfBounds() || didTileWidthChanged()) {
                 updateOverlays()
             }
         }
@@ -227,6 +227,14 @@ class MapFragment : SupportMapFragment(), IMapView {
         return !LatLngBounds(southWestLocation, northEastLocation).contains(googleMap.cameraPosition.target)
     }
 
+    private fun didTileWidthChanged(): Boolean {
+        if (overlays.isEmpty()) {
+            return true
+        }
+        val currentWidth: Float = overlays[0 to 0]?.width ?: 0f
+        return (currentWidth - calculateTileWidth()).absoluteValue >= OVERLAY_TILE_WIDTH_DIFFERENCE_THRESHOLD
+    }
+
     private fun calculateTileWidth(): Double {
         val centerScreen = googleMap.projection.toScreenLocation(googleMap.cameraPosition.target)
         val tileEdge = Point(centerScreen.x - overlayBitmap.width / 2, centerScreen.y)
@@ -239,6 +247,8 @@ class MapFragment : SupportMapFragment(), IMapView {
 
         const val OVERLAYS_WIDTH = 9
         const val OVERLAY_TRANSPARENCY = 0.75f
+
+        const val OVERLAY_TILE_WIDTH_DIFFERENCE_THRESHOLD = 1f
     }
 
 }
