@@ -3,10 +3,9 @@ package pl.reconizer.unfold.presentation.search.creators
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.repositories.ICreatorRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.PaginatedDataPresenter
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
@@ -15,7 +14,7 @@ class CreatorsPresenter(
         backgroundScheduler: Scheduler,
         mainScheduler: Scheduler,
         private val creatorRepository: ICreatorRepository,
-        errorsHandler: ErrorsHandler<Error>,
+        errorsHandler: ErrorsHandler,
         private val position: Position
 ) : PaginatedDataPresenter<Creator, IFilteredCreatorsView>(
         backgroundScheduler,

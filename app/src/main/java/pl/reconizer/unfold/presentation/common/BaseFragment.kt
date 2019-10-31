@@ -7,7 +7,8 @@ import com.zhuinden.simplestack.Backstack
 import com.zhuinden.simplestack.StateChange
 import pl.reconizer.unfold.MainActivity
 import pl.reconizer.unfold.OnBackPressedListener
-import pl.reconizer.unfold.data.entities.Error
+import pl.reconizer.unfold.R
+import pl.reconizer.unfold.domain.entities.errors.ErrorsContainer
 import pl.reconizer.unfold.presentation.customviews.dialogs.ErrorDialogBuilder
 import pl.reconizer.unfold.presentation.customviews.dialogs.LoadingDialog
 import pl.reconizer.unfold.presentation.customviews.dialogs.PrettyDialog
@@ -50,9 +51,7 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
 
     override fun showGenericError() {
         context?.let {
-            errorDialog?.dismiss()
-            errorDialog = ErrorDialogBuilder(it).build()
-            errorDialog?.show(childFragmentManager, "error")
+            showErrorMessage(it.resources.getString(R.string.error_something_went_wrong))
         }
     }
 
@@ -67,8 +66,12 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
         )
     }
 
-    override fun showParametrizedError(errorEntity: Error) {
-        showGenericError()
+    override fun showParametrizedError(errors: ErrorsContainer, translatedErrorMessage: String?) {
+        if (translatedErrorMessage == null) {
+            showGenericError()
+        } else {
+            showErrorMessage(translatedErrorMessage)
+        }
     }
 
     override fun showServerError() {
@@ -92,5 +95,15 @@ open class BaseFragment : Fragment(), IView, OnBackPressedListener {
 
     override fun hideLoader() {
         loaderDialog.hideDialog()
+    }
+
+    protected fun showErrorMessage(msg: String) {
+        context?.let {
+            errorDialog?.dismiss()
+            errorDialog = ErrorDialogBuilder(it)
+                .setErrorMessage(msg)
+                .build()
+            errorDialog?.show(childFragmentManager, "error")
+        }
     }
 }

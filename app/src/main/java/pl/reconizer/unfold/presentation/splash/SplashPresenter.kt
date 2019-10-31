@@ -4,10 +4,9 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.PublishSubject
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.repositories.IAuthenticationRepository
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.CallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -15,7 +14,7 @@ class SplashPresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val authenticationRepository: IAuthenticationRepository,
-        private val errorsHandler: ErrorsHandler<Error>
+        private val errorsHandler: ErrorsHandler
 ) : BasePresenter<ISplashView>() {
 
     private val readyToUserCheckSubject = PublishSubject.create<Boolean>()
@@ -34,7 +33,7 @@ class SplashPresenter(
                 )
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : CallbackWrapper<Boolean, Error>(errorsHandler) {
+                        .subscribeWith(object : CallbackWrapper<Boolean>(errorsHandler) {
                             override fun onComplete() {
                             }
 

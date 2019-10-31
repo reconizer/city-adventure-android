@@ -236,7 +236,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 isCancelable = false
                 headerText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_title)
                 contentText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_message_summary)
-                firstButtonText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_naswer_summary_button)
+                firstButtonText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_summary_button)
                 firstButtonClickListener = { goToSummary() }
                 closeButtonClickListener = { goToSummary() }
             }

@@ -96,7 +96,7 @@ open class BasePuzzleFragment : BaseFragment(), IPuzzleView, IViewWithLocation {
                 isCancelable = false
                 headerText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_title)
                 contentText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_message_summary)
-                firstButtonText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_naswer_summary_button)
+                firstButtonText = this@BasePuzzleFragment.resources.getString(R.string.puzzle_correct_answer_summary_button)
                 firstButtonClickListener = { goToSummary() }
                 closeButtonClickListener = { goToSummary() }
             }

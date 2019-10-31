@@ -3,14 +3,13 @@ package pl.reconizer.unfold.presentation.creatorprofile
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.Adventure
 import pl.reconizer.unfold.domain.entities.CreatorProfile
 import pl.reconizer.unfold.domain.entities.ICollectionContainer
 import pl.reconizer.unfold.domain.repositories.ICreatorRepository
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.CallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.PaginatedDataPresenter
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
@@ -19,7 +18,7 @@ class CreatorProfilePresenter(
         backgroundScheduler: Scheduler,
         mainScheduler: Scheduler,
         private val creatorRepository: ICreatorRepository,
-        errorsHandler: ErrorsHandler<Error>,
+        errorsHandler: ErrorsHandler,
         val creatorId: String
 ) : PaginatedDataPresenter<Adventure, ICreatorProfileView>(
         backgroundScheduler,
@@ -50,7 +49,7 @@ class CreatorProfilePresenter(
                                     .andThen(creatorRepository.getProfile(creatorId))
                         }
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : CallbackWrapper<CreatorProfile, Error>(errorsHandler) {
+                        .subscribeWith(object : CallbackWrapper<CreatorProfile>(errorsHandler) {
                             override fun onComplete() {}
 
                             override fun onNext(t: CreatorProfile) {
@@ -71,7 +70,7 @@ class CreatorProfilePresenter(
                 creatorRepository.getProfile(creatorId)
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<CreatorProfile, Error>(errorsHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<CreatorProfile>(errorsHandler) {
                             override fun onSuccess(t: CreatorProfile) {
                                 profile = t
                                 view?.showProfile()

@@ -3,17 +3,16 @@ package pl.reconizer.unfold.presentation.authentication.login
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
-import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.di.modules.ErrorHandlersModule
+import pl.reconizer.unfold.di.modules.ErrorsHandlersModule
 import pl.reconizer.unfold.di.modules.usecases.authentication.AuthenticationUsecasesModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.usecases.authentication.SignIn
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
     AuthenticationUsecasesModule::class,
-    ErrorHandlersModule::class
+    ErrorsHandlersModule::class
 ])
 class LoginModule {
 
@@ -22,7 +21,7 @@ class LoginModule {
     fun providePresenter(
             @Named("main") scheduler: Scheduler,
             signInUsecase: SignIn,
-            errorsHandler: ErrorsHandler<Error>
+            errorsHandler: ErrorsHandler
     ): LoginPresenter {
         return LoginPresenter(
                 scheduler,

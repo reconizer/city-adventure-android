@@ -4,17 +4,16 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
-import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.di.modules.ErrorHandlersModule
+import pl.reconizer.unfold.di.modules.ErrorsHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.customviews.ShadowGenerator
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import javax.inject.Named
 
 @Module(includes = [
-    ErrorHandlersModule::class
+    ErrorsHandlersModule::class
 ])
 class StartPointModule(
         private val adventure: MapAdventure
@@ -26,7 +25,7 @@ class StartPointModule(
             @Named("background") backgroundScheduler: Scheduler,
             @Named("main") mainScheduler: Scheduler,
             repository: IAdventureRepository,
-            errorsHandler: ErrorsHandler<Error>
+            errorsHandler: ErrorsHandler
     ): StartPointPresenter {
         return StartPointPresenter(
                 backgroundScheduler,

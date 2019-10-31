@@ -2,15 +2,14 @@ package pl.reconizer.unfold.presentation.mvp
 
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.ICollectionContainer
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 
 abstract class PaginatedDataPresenter<TEntity, TView: IListView<TEntity>>(
         protected val backgroundScheduler: Scheduler,
         protected val mainScheduler: Scheduler,
-        protected val errorsHandler: ErrorsHandler<Error>
+        protected val errorsHandler: ErrorsHandler
 ) : BasePresenter<TView>(), IPaginatedDataPresenter<TEntity>, IPaginatedLoader<TEntity> {
 
     override var items: List<TEntity> = emptyList()
@@ -45,7 +44,7 @@ abstract class PaginatedDataPresenter<TEntity, TView: IListView<TEntity>>(
                             .observeOn(mainScheduler)
                             .doOnSubscribe { view?.showListLoader() }
                             .doFinally { view?.hideListLoader() }
-                            .subscribeWith(object : SingleCallbackWrapper<ICollectionContainer<TEntity>, Error>(errorsHandler) {
+                            .subscribeWith(object : SingleCallbackWrapper<ICollectionContainer<TEntity>>(errorsHandler) {
                                 override fun onSuccess(t: ICollectionContainer<TEntity>) {
                                     hasGotMorePages = t.collection.isNotEmpty()
                                     if ((t.collection.isNotEmpty() && page != requestedPage) || page == 0) {
