@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.google.android.gms.maps.model.Circle
 import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
@@ -133,6 +134,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 }
             }
         } else {
+            mapView.clearMarkerRange()
             presenter.fetchNumberOfActiveAdventures()
         }
     }
@@ -202,6 +204,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
 
     override fun showAdventure(adventureStartPoint: AdventureStartPoint) {
         adventureTitle.text = adventureStartPoint.name
+    }
+
+    override fun resolveingPointFailed(point: AdventurePoint) {
+        mapView.showMarkerRange(point.position, point.accessibilityRadius.toDouble())
     }
 
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {

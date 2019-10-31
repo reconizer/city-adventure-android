@@ -37,4 +37,7 @@
     <color name="directionLockAnswersContainerBackgroundColor">#66120E0B</color>
 
     <color name="adventureTitleBackgroundColor">#DECEAF</color>
+
+    <color name="adventurePointRangeColor">#B3D6C5AA</color>
+    <color name="adventurePointRangeStrokeColor">#C2B29A</color>
 </resources>

@@ -22,6 +22,7 @@ import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.map.CameraDetails
 import pl.reconizer.unfold.presentation.map.MapMode
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
+import retrofit2.HttpException
 import timber.log.Timber
 import java.lang.ref.WeakReference
 import java.util.*
@@ -232,6 +233,14 @@ class GameMapPresenter(
                             .subscribeOn(backgroundScheduler)
                             .observeOn(mainScheduler)
                             .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse>(errorsHandler) {
+
+                                override fun onError(e: Throwable) {
+                                    if (e is HttpException && e.code() == 422) {
+                                        view?.resolveingPointFailed(point)
+                                    }
+                                    super.onError(e)
+                                }
+
                                 override fun onSuccess(t: PuzzleResponse) {
                                     if (t.isCompleted) {
                                         if (t.isLastPoint) {
