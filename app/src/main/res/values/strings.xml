@@ -107,5 +107,6 @@
     <string name="puzzle_correct_answer_summary_button">Idź do podsumowania</string>
 
     <string name="error_unknown_codes">Nieznane kody błędów:</string>
+    <string name="error_point_not_found">Jesteś za daleko punktu.\nPodejdź bliżej.</string>
 
 </resources>
