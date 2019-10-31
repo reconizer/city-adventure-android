@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.google.android.gms.maps.model.Circle
 import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
@@ -133,6 +134,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 }
             }
         } else {
+            mapView.clearMarkerRange()
             presenter.fetchNumberOfActiveAdventures()
         }
     }
@@ -204,6 +206,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         adventureTitle.text = adventureStartPoint.name
     }
 
+    override fun resolveingPointFailed(point: AdventurePoint) {
+        mapView.showMarkerRange(point.position, point.accessibilityRadius.toDouble())
+    }
+
     override fun showPuzzle(point: AdventurePoint, puzzleResponse: PuzzleResponse) {
         puzzleResponse.puzzleType?.let {
             navigator.goTo(when(it) {
@@ -236,7 +242,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 isCancelable = false
                 headerText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_title)
                 contentText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_message_summary)
-                firstButtonText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_naswer_summary_button)
+                firstButtonText = this@GameMapFragment.resources.getString(R.string.puzzle_correct_answer_summary_button)
                 firstButtonClickListener = { goToSummary() }
                 closeButtonClickListener = { goToSummary() }
             }

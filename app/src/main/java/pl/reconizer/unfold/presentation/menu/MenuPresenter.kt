@@ -1,13 +1,12 @@
 package pl.reconizer.unfold.presentation.menu
 
 import io.reactivex.Scheduler
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.UserProfile
 import pl.reconizer.unfold.domain.repositories.IUserRepository
 import pl.reconizer.unfold.domain.usecases.authentication.Logout
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -16,7 +15,7 @@ class MenuPresenter(
         private val mainScheduler: Scheduler,
         private val userRepository: IUserRepository,
         private val logout: Logout,
-        private val errorsHandler: ErrorsHandler<Error>
+        private val errorsHandler: ErrorsHandler
 ) : BasePresenter<IMenuView>() {
 
     var profile: UserProfile? = null
@@ -31,7 +30,7 @@ class MenuPresenter(
                 userRepository.getProfile()
                         .subscribeOn(backgroundScheduler)
                         .observeOn(mainScheduler)
-                        .subscribeWith(object : SingleCallbackWrapper<UserProfile, Error>(errorsHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<UserProfile>(errorsHandler) {
                             override fun onSuccess(t: UserProfile) {
                                 profile = t
                                 view?.showProfile()
@@ -46,7 +45,7 @@ class MenuPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorsHandler) {
+                        .subscribeWith(object : CompletableCallbackWrapper(errorsHandler) {
                             override fun onComplete() {
                                 view?.successfulLogout()
                             }

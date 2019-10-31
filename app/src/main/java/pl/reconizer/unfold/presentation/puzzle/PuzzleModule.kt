@@ -3,19 +3,18 @@ package pl.reconizer.unfold.presentation.puzzle
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
-import pl.reconizer.unfold.data.entities.Error
-import pl.reconizer.unfold.di.modules.ErrorHandlersModule
+import pl.reconizer.unfold.di.modules.ErrorsHandlersModule
 import pl.reconizer.unfold.di.scopes.ViewScope
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePoint
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import javax.inject.Named
 
 @Module(includes = [
-    ErrorHandlersModule::class
+    ErrorsHandlersModule::class
 ])
 class PuzzleModule(
         private val adventure: MapAdventure,
@@ -30,7 +29,7 @@ class PuzzleModule(
             @Named("main") mainScheduler: Scheduler,
             adventureRepository: IAdventureRepository,
             locationProvider: ILocationProvider,
-            errorsHandler: ErrorsHandler<Error>
+            errorsHandler: ErrorsHandler
     ): PuzzlePresenter {
         return PuzzlePresenter(
                 backgroundScheduler,

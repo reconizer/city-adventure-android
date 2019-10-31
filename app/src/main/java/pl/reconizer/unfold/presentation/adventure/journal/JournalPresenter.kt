@@ -1,13 +1,12 @@
 package pl.reconizer.unfold.presentation.adventure.journal
 
 import io.reactivex.Scheduler
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventurePointWithClues
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -15,7 +14,7 @@ class JournalPresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
-        private val errorsHandler: ErrorsHandler<Error>,
+        private val errorsHandler: ErrorsHandler,
         private val adventure: MapAdventure,
         private val adventureStartPoint: AdventureStartPoint
 ) : BasePresenter<IJournalView>() {
@@ -35,7 +34,7 @@ class JournalPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : SingleCallbackWrapper<List<AdventurePointWithClues>, Error>(errorsHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<List<AdventurePointWithClues>>(errorsHandler) {
                             override fun onSuccess(t: List<AdventurePointWithClues>) {
                                 points = t
                                 view?.showClues()

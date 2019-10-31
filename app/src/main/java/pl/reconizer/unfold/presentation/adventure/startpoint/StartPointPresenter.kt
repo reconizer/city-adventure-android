@@ -1,13 +1,12 @@
 package pl.reconizer.unfold.presentation.adventure.startpoint
 
 import io.reactivex.Scheduler
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.MapAdventure
 import pl.reconizer.unfold.domain.entities.AdventureStartPoint
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.CompletableCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
 import java.lang.ref.WeakReference
 
@@ -15,7 +14,7 @@ class StartPointPresenter(
         private val backgroundScheduler: Scheduler,
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
-        private val errorsHandler: ErrorsHandler<Error>,
+        private val errorsHandler: ErrorsHandler,
         val adventure: MapAdventure
 ) : BasePresenter<IStartPointView>() {
 
@@ -34,7 +33,7 @@ class StartPointPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint, Error>(errorsHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint>(errorsHandler) {
                             override fun onSuccess(t: AdventureStartPoint) {
                                 adventureStartPoint = t
                                 view?.show(t)
@@ -50,7 +49,7 @@ class StartPointPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : CompletableCallbackWrapper<Error>(errorsHandler) {
+                        .subscribeWith(object : CompletableCallbackWrapper(errorsHandler) {
                             override fun onComplete() {
                                 view?.adventureStarted()
                             }
@@ -66,7 +65,7 @@ class StartPointPresenter(
                         .observeOn(mainScheduler)
                         .doOnSubscribe { view?.showLoader() }
                         .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint, Error>(errorsHandler) {
+                        .subscribeWith(object : SingleCallbackWrapper<AdventureStartPoint>(errorsHandler) {
                             override fun onSuccess(t: AdventureStartPoint) {
                                 adventureStartPoint = t
                                 view?.show(t)

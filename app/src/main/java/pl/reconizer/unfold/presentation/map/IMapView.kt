@@ -2,6 +2,7 @@ package pl.reconizer.unfold.presentation.map
 
 import com.google.android.gms.maps.model.LatLng
 import pl.reconizer.unfold.domain.entities.IPositionable
+import pl.reconizer.unfold.domain.entities.Position
 
 interface IMapView {
 
@@ -21,5 +22,8 @@ interface IMapView {
 
     fun showMarkers(positionables: List<IPositionable>)
     fun clearMarkers()
+
+    fun showMarkerRange(position: Position, range: Double)
+    fun clearMarkerRange()
 
 }

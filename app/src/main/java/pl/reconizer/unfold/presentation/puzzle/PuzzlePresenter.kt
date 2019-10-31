@@ -2,14 +2,13 @@ package pl.reconizer.unfold.presentation.puzzle
 
 import io.reactivex.Scheduler
 import pl.reconizer.unfold.common.extensions.toPosition
-import pl.reconizer.unfold.data.entities.Error
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleResponse
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleType
 import pl.reconizer.unfold.domain.repositories.IAdventureRepository
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.location.GpsInterfaceStatus
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.mvp.BasePresenter
@@ -20,7 +19,7 @@ class PuzzlePresenter(
         private val mainScheduler: Scheduler,
         private val adventureRepository: IAdventureRepository,
         private val locationProvider: ILocationProvider,
-        private val errorsHandler: ErrorsHandler<Error>,
+        private val errorsHandler: ErrorsHandler,
         val adventure: MapAdventure,
         val adventurePoint: AdventurePoint,
         val puzzleType: PuzzleType
@@ -65,7 +64,7 @@ class PuzzlePresenter(
                             .observeOn(mainScheduler)
                             .doOnSubscribe { view?.showLoader() }
                             .doFinally { view?.hideLoader() }
-                            .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse, Error>(errorsHandler) {
+                            .subscribeWith(object : SingleCallbackWrapper<PuzzleResponse>(errorsHandler) {
                                 override fun onSuccess(t: PuzzleResponse) {
                                     if (t.isCompleted) {
                                         if (t.isLastPoint) {

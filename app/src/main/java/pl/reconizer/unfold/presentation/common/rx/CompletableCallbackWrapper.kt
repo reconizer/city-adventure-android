@@ -1,14 +1,17 @@
 package pl.reconizer.unfold.presentation.common.rx
 
 import io.reactivex.observers.DisposableCompletableObserver
-import pl.reconizer.unfold.presentation.errorhandlers.ErrorsHandler
+import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 
-abstract class CompletableCallbackWrapper<TErrorEntity>(private val errorsHandler: ErrorsHandler<TErrorEntity>) : DisposableCompletableObserver() {
+abstract class CompletableCallbackWrapper(
+        private val errorsHandler: ErrorsHandler,
+        private val errorNamespace: String = ErrorsHandler.DEFAULT_ERROR_NAMESPACE
+) : DisposableCompletableObserver() {
 
     abstract override fun onComplete()
 
     override fun onError(e: Throwable) {
-        errorsHandler.onError(e)
+        errorsHandler.onError(e, errorNamespace)
     }
 
 }

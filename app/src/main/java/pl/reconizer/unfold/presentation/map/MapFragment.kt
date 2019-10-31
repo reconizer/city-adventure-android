@@ -6,6 +6,7 @@ import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -14,6 +15,7 @@ import com.google.maps.android.SphericalUtil
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.toLatLng
 import pl.reconizer.unfold.domain.entities.IPositionable
+import pl.reconizer.unfold.domain.entities.Position
 import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.absoluteValue
@@ -24,6 +26,8 @@ class MapFragment : SupportMapFragment(), IMapView {
 
     private var userMarker: Marker? = null
     private var markers: MutableList<Marker> = mutableListOf()
+
+    private var markerRange: Circle? = null
 
     private var currentLocation: LatLng? = null
 
@@ -91,6 +95,24 @@ class MapFragment : SupportMapFragment(), IMapView {
         markers.clear()
     }
 
+    override fun showMarkerRange(position: Position, range: Double) {
+        clearMarkerRange()
+        markerRange = googleMap.addCircle(
+                CircleOptions()
+                        .center(position.toLatLng())
+                        .radius(range)
+                        .strokeWidth(8f)
+                        .fillColor(ContextCompat.getColor(requireContext(), R.color.adventurePointRangeColor))
+                        .strokeColor(ContextCompat.getColor(requireContext(), R.color.adventurePointRangeStrokeColor))
+
+        )
+    }
+
+    override fun clearMarkerRange() {
+        markerRange?.remove()
+        markerRange = null
+    }
+
     private fun configure(map: GoogleMap) {
         googleMap = map
         isMapReady = true
@@ -140,7 +162,7 @@ class MapFragment : SupportMapFragment(), IMapView {
                     googleMap.cameraPosition.target,
                     googleMap.cameraPosition.zoom
             ))
-            if (didZoomChanged() || didMoveOutOfBounds()) {
+            if (didZoomChanged() || didMoveOutOfBounds() || didTileWidthChanged()) {
                 updateOverlays()
             }
         }
@@ -227,6 +249,14 @@ class MapFragment : SupportMapFragment(), IMapView {
         return !LatLngBounds(southWestLocation, northEastLocation).contains(googleMap.cameraPosition.target)
     }
 
+    private fun didTileWidthChanged(): Boolean {
+        if (overlays.isEmpty()) {
+            return true
+        }
+        val currentWidth: Float = overlays[0 to 0]?.width ?: 0f
+        return (currentWidth - calculateTileWidth()).absoluteValue >= OVERLAY_TILE_WIDTH_DIFFERENCE_THRESHOLD
+    }
+
     private fun calculateTileWidth(): Double {
         val centerScreen = googleMap.projection.toScreenLocation(googleMap.cameraPosition.target)
         val tileEdge = Point(centerScreen.x - overlayBitmap.width / 2, centerScreen.y)
@@ -239,6 +269,8 @@ class MapFragment : SupportMapFragment(), IMapView {
 
         const val OVERLAYS_WIDTH = 9
         const val OVERLAY_TRANSPARENCY = 0.75f
+
+        const val OVERLAY_TILE_WIDTH_DIFFERENCE_THRESHOLD = 1f
     }
 
 }
