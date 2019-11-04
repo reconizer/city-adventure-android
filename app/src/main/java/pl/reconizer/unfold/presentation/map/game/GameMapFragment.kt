@@ -75,7 +75,11 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         journalButton.setOnClickListener { navigator.goBack() }
         locationCheckerButton.setOnClickListener { presenter.checkLocation() }
         menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
-        searchButton.setOnClickListener { navigator.goTo(SearchKey()) }
+        searchButton.setOnClickListener {
+            presenter.lastLocation?.let {
+                navigator.goTo(SearchKey(it))
+            }
+        }
         legendButton.setOnClickListener {
             mapLegendDialog.contentLayoutResId = if (mapMode == MapMode.ADVENTURES) {
                 R.layout.view_map_legend
