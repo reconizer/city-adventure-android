@@ -10,6 +10,8 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.view_cypher_lock_row.view.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.clamp
+import pl.reconizer.unfold.common.extensions.performOneShotVibration
+import timber.log.Timber
 import java.lang.IllegalArgumentException
 
 class CypherLockRow @JvmOverloads constructor(
@@ -18,7 +20,8 @@ class CypherLockRow @JvmOverloads constructor(
 
     var value: Int = 0
         set(value) {
-            field = clamp(value, 0, 9)
+            field = clamp(value, MIN_VALUE, MAX_VALUE)
+
             updateValue()
         }
 
@@ -32,18 +35,17 @@ class CypherLockRow @JvmOverloads constructor(
         override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
             val distanceX = e2.x - e1.x
             if (distanceX < 0) {
-                if (value < 9) {
-                    value++
-                } else {
-                    value = 0
-                }
+                increaseValue()
             } else {
-                if (value > 0) {
-                    value--
-                } else {
-                    value = 9
-                }
+                decreaseValue()
             }
+            context.performOneShotVibration(VIBRATION_DURATION)
+            return true
+        }
+
+        override fun onSingleTapUp(e: MotionEvent?): Boolean {
+            increaseValue()
+            context.performOneShotVibration(VIBRATION_DURATION)
             return true
         }
 
@@ -75,6 +77,29 @@ class CypherLockRow @JvmOverloads constructor(
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return gestureDetector.onTouchEvent(event)
+    }
+
+    private fun increaseValue() {
+        if (value < 9) {
+            value++
+        } else {
+            value = 0
+        }
+    }
+
+    private fun decreaseValue() {
+        if (value > 0) {
+            value--
+        } else {
+            value = 9
+        }
+    }
+
+    companion object {
+        private const val MIN_VALUE = 0
+        private const val MAX_VALUE = 9
+
+        private const val VIBRATION_DURATION = 25L
     }
 
 }
