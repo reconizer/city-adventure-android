@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.view_cypher_lock_row.view.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.clamp
 import pl.reconizer.unfold.common.extensions.performOneShotVibration
-import timber.log.Timber
 import java.lang.IllegalArgumentException
 
 class CypherLockRow @JvmOverloads constructor(

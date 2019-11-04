@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.fragment_search.*
 import pl.reconizer.unfold.R
@@ -17,10 +18,10 @@ class SearchFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = SearchAdapter(childFragmentManager, Position(
-                53.0138,
-                18.5984
-        ))
+        adapter = SearchAdapter(
+                childFragmentManager,
+                arguments?.get(POSITION_PARAM) as Position? ?: throw IllegalArgumentException("User's position is required")
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +56,10 @@ class SearchFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewPager.clearOnPageChangeListeners()
+    }
+
+    companion object {
+        const val POSITION_PARAM = "position"
     }
 
 }

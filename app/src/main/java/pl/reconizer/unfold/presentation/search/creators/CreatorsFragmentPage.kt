@@ -34,7 +34,7 @@ class CreatorsFragmentPage : BaseFragment(), IFilteredCreatorsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Injector.buildSearchCreatorsComponent(
-                arguments?.get(POSITION_PARAM) as Position? ?: throw IllegalArgumentException("User's")
+                arguments?.get(POSITION_PARAM) as Position? ?: throw IllegalArgumentException("User's position is required")
         ).inject(this)
     }
 
