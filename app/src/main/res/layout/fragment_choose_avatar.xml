@@ -108,35 +108,16 @@
         <Button
             android:id="@+id/saveButton"
             style="@style/DialogButton"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_2x"
             android:text="@string/common_save"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/backgroundFrame"
-            app:layout_constraintEnd_toStartOf="@id/goBackButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@id/backgroundFrame"
-            app:layout_constraintWidth_default="wrap"
-            app:layout_constraintWidth_max="131dp"
-            app:layout_constraintWidth_min="100dp" />
-
-        <Button
-            android:id="@+id/goBackButton"
-            style="@style/DialogButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_2x"
-            android:text="@string/common_go_back"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="@id/backgroundFrame"
-            app:layout_constraintEnd_toEndOf="@id/backgroundFrame"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/saveButton"
-            app:layout_constraintWidth_default="wrap"
-            app:layout_constraintWidth_max="131dp"
-            app:layout_constraintWidth_min="100dp" />
+            app:layout_constraintEnd_toEndOf="@id/backgroundFrame" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

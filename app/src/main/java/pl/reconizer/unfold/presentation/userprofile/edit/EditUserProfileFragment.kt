@@ -33,7 +33,6 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
         super.onViewCreated(view, savedInstanceState)
 
         closeButton.setOnClickListener { navigator.goBack() }
-        goBackButton.setOnClickListener { navigator.goBack() }
 
         saveButton.setOnClickListener {
             presenter.updateProfile(UserProfileForm(usernameInput.text.toString(), null))

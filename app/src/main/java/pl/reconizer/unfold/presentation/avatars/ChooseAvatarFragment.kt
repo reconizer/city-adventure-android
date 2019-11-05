@@ -49,7 +49,6 @@ class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
         }
 
         closeButton.setOnClickListener { navigator.goBack() }
-        goBackButton.setOnClickListener { navigator.goBack() }
 
         saveButton.setOnClickListener {
             adapter.selectedAvatar?.let {
