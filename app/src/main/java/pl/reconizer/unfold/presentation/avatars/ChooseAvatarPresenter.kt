@@ -38,19 +38,4 @@ class ChooseAvatarPresenter(
         )
     }
 
-    fun changeAvatar(avatarId: String) {
-        disposables.add(
-                userRepository.updateAvatar(avatarId)
-                        .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
-                        .doOnSubscribe { view?.showLoader() }
-                        .doFinally { view?.hideLoader() }
-                        .subscribeWith(object : CompletableCallbackWrapper(errorsHandler) {
-                            override fun onComplete() {
-                                view?.avatarUpdated()
-                            }
-                        })
-        )
-    }
-
 }
