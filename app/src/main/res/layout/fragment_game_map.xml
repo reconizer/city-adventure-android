@@ -53,11 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/space_2x"
-        android:paddingTop="@dimen/space_2x"
+        android:paddingTop="@dimen/space_1x"
         android:paddingEnd="@dimen/space_2x"
         android:paddingBottom="@dimen/space_1x"
         android:src="@drawable/button_map_menu"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/myLocationButton"
+        app:layout_constraintBottom_toBottomOf="@id/myLocationButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <pl.reconizer.unfold.presentation.map.ActiveAdventuresIndicator

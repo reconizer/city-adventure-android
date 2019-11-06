@@ -103,6 +103,9 @@ class LocationProvider(private val context: Context) : ILocationProvider, Locati
                         this
                 )
                 lastLocation = it.getLastKnownLocation(locationProvider)
+                lastLocation?.let {
+                    lastLocationChange.onNext(it)
+                }
             }
 
             Timber.d("start_location_updates")
