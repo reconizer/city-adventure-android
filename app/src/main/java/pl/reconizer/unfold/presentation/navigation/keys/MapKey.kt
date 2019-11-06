@@ -11,20 +11,20 @@ import pl.reconizer.unfold.presentation.map.game.GameMapFragment.Companion.ADVEN
 import pl.reconizer.unfold.presentation.map.game.GameMapFragment.Companion.MAP_MODE_PARAM
 
 @Parcelize
-open class MapKey(
+data class MapKey(
         val mapMode: MapMode,
         val adventure: MapAdventure? = null,
         val adventurePointId: String? = null
-) : BaseKey(bundleOf(
+) : BaseKey(
+        arguments =  bundleOf(
                 MAP_MODE_PARAM to mapMode,
                 ADVENTURE_PARAM to adventure,
                 ADVENTURE_POINT_ID_PARAM to adventurePointId
-)) {
+        ),
+        hasNewArguments = true
+) {
 
     override val isIdentifiedByTag: Boolean
-        get() = true
-
-    override val hasNewArguments: Boolean
         get() = true
 
     override val fragmentTag: String

@@ -9,7 +9,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_user_profile_edit.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
+import pl.reconizer.unfold.domain.entities.Avatar
 import pl.reconizer.unfold.domain.entities.forms.UserProfileForm
+import pl.reconizer.unfold.presentation.avatars.ChooseAvatarFragment
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.navigation.keys.ChooseAvatarKey
 import javax.inject.Inject
@@ -18,6 +20,9 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
 
     @Inject
     lateinit var presenter: EditUserProfilePresenter
+
+    private val selectedAvatar: Avatar?
+        get() = arguments?.get(ChooseAvatarFragment.SELECTED_AVATAR_PARAM) as Avatar?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +40,15 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
         closeButton.setOnClickListener { navigator.goBack() }
 
         saveButton.setOnClickListener {
-            presenter.updateProfile(UserProfileForm(usernameInput.text.toString(), null))
+            presenter.updateProfile(UserProfileForm(
+                    usernameInput.text.toString(),
+                    selectedAvatar?.id
+            ))
         }
 
         changeAvatarButton.setOnClickListener {
             presenter.profile = null
-            navigator.goTo(ChooseAvatarKey())
+            navigator.goTo(ChooseAvatarKey(navigator.top()))
         }
 
     }
@@ -69,13 +77,14 @@ class EditUserProfileFragment : BaseFragment(), IEditUserProfileView {
             usernameInput.setText(it.nick)
 
             Picasso.get()
-                    .load(it.avatarUrl)
+                    .load(selectedAvatar?.url ?: it.avatarUrl)
                     .into(avatar)
         }
     }
 
     override fun profileUpdated() {
         Toast.makeText(context, R.string.user_profile_updated, Toast.LENGTH_SHORT).show()
+        navigator.goBack()
     }
 
 }

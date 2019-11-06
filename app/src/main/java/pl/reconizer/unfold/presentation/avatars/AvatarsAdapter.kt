@@ -8,6 +8,8 @@ import pl.reconizer.unfold.domain.entities.Avatar
 
 class AvatarsAdapter : RecyclerView.Adapter<AvatarViewHolder>() {
 
+    var onSelectItemListener: ((selectedItem: Avatar) -> Unit)? = null
+
     var items = emptyList<Avatar>()
 
     val selectedAvatar: Avatar?
@@ -48,6 +50,7 @@ class AvatarsAdapter : RecyclerView.Adapter<AvatarViewHolder>() {
                 notifyItemChanged(previoslySelectedAvatarIdx, SELECTION_CHANGED)
             }
             notifyItemChanged(selectedAvatarIdx, SELECTION_CHANGED)
+            onSelectItemListener?.invoke(items[selectedAvatarIdx])
         }
     }
 

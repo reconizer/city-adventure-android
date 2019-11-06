@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import kotlinx.android.synthetic.main.fragment_choose_avatar.*
@@ -11,6 +12,7 @@ import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.presentation.common.BaseFragment
 import pl.reconizer.unfold.presentation.common.recyclerview.ItemOffsetDecorator
+import pl.reconizer.unfold.presentation.navigation.keys.BaseKey
 import javax.inject.Inject
 
 class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
@@ -20,6 +22,9 @@ class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
 
     @Inject
     lateinit var adapter: AvatarsAdapter
+
+    private val parentKey: BaseKey?
+        get() = arguments?.get(PARENT_KEY_PARAM) as BaseKey?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +55,11 @@ class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
 
         closeButton.setOnClickListener { navigator.goBack() }
 
-        saveButton.setOnClickListener {
-            adapter.selectedAvatar?.let {
-                presenter.changeAvatar(it.id)
+        adapter.onSelectItemListener = { selectedItem ->
+            parentKey?.let { certainParentKey ->
+                navigator.goTo(certainParentKey.apply { overrideArguments(bundleOf(
+                        SELECTED_AVATAR_PARAM to selectedItem
+                )) })
             }
         }
     }
@@ -80,6 +87,11 @@ class ChooseAvatarFragment : BaseFragment(), IChooseAvatarView {
 
     override fun avatarUpdated() {
         navigator.goBack()
+    }
+
+    companion object {
+        const val PARENT_KEY_PARAM = "parent_key"
+        const val SELECTED_AVATAR_PARAM = "selected_avatar"
     }
 
 }

@@ -92,32 +92,9 @@
             android:paddingTop="@dimen/space_2x"
             android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/avatarLabelBorder"
-            app:layout_constraintBottom_toTopOf="@id/actionsBarrier"
+            app:layout_constraintBottom_toBottomOf="@id/backgroundFrame"
             app:layout_constraintEnd_toStartOf="@id/rightMargin"
             app:layout_constraintStart_toEndOf="@id/leftMargin" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/actionsBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="top"
-            app:constraint_referenced_ids="saveButton,goBackButton"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="321dp" />
-
-        <Button
-            android:id="@+id/saveButton"
-            style="@style/DialogButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_2x"
-            android:text="@string/common_save"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="@id/backgroundFrame"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@id/backgroundFrame"
-            app:layout_constraintEnd_toEndOf="@id/backgroundFrame" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
