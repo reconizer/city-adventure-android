@@ -137,7 +137,7 @@
             android:includeFontPadding="false"
             android:textAlignment="gravity"
             android:textAppearance="@style/TypeWriterText"
-            android:textColor="#887a6b"
+            android:textColor="@color/galleryImageOverlayTextColor"
             android:textSize="42dp"
             app:layout_constraintBottom_toBottomOf="@id/fourthImage"
             app:layout_constraintEnd_toEndOf="@id/fourthImage"

@@ -7,9 +7,10 @@ import pl.reconizer.unfold.R
 import pl.reconizer.unfold.presentation.navigation.AnimationSet
 import pl.reconizer.unfold.presentation.navigation.Key
 
-abstract class BaseKey(override val arguments: Bundle? = null) : Key {
-
-
+abstract class BaseKey(
+        override var arguments: Bundle? = null,
+        override var hasNewArguments: Boolean = false
+) : Key {
 
     override fun newFragment(): Fragment = createFragment().also { fragment ->
         fragment.arguments = arguments
@@ -30,6 +31,11 @@ abstract class BaseKey(override val arguments: Bundle? = null) : Key {
             }
             else -> throw IllegalArgumentException("Invalid state change direction")
         }
+    }
+
+    override fun overrideArguments(newArguments: Bundle?) {
+        hasNewArguments = true
+        arguments = newArguments
     }
 
     override val fragmentTag: String

@@ -11,11 +11,12 @@ interface Key : Parcelable {
     val isIdentifiedByTag: Boolean
         get() = false
 
-    val hasNewArguments: Boolean
-        get() = false
+    var hasNewArguments: Boolean
 
-    val arguments: Bundle?
+    var arguments: Bundle?
 
     fun newFragment(): Fragment
+
+    fun overrideArguments(newArguments: Bundle?)
 
 }

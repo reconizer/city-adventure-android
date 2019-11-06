@@ -16,7 +16,8 @@
 
     <color name="basicShadow">#d94a4135</color>
 
-    <color name="galleryImageOverlayColor">#4a4135</color>
+    <color name="galleryImageOverlayColor">#D94A4135</color>
+    <color name="galleryImageOverlayTextColor">#E3CDA3</color>
 
     <color name="puzzleInputFontColor">#15100e</color>
 
@@ -38,6 +39,6 @@
 
     <color name="adventureTitleBackgroundColor">#DECEAF</color>
 
-    <color name="adventurePointRangeColor">#B3D6C5AA</color>
+    <color name="adventurePointRangeColor">#66D6C5AA</color>
     <color name="adventurePointRangeStrokeColor">#C2B29A</color>
 </resources>
