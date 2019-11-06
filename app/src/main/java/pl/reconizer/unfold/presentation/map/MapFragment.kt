@@ -101,7 +101,7 @@ class MapFragment : SupportMapFragment(), IMapView {
                 CircleOptions()
                         .center(position.toLatLng())
                         .radius(range)
-                        .strokeWidth(8f)
+                        .strokeWidth(2f)
                         .fillColor(ContextCompat.getColor(requireContext(), R.color.adventurePointRangeColor))
                         .strokeColor(ContextCompat.getColor(requireContext(), R.color.adventurePointRangeStrokeColor))
 
