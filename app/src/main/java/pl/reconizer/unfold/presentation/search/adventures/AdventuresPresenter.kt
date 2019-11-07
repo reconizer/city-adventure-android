@@ -27,8 +27,7 @@ class AdventuresPresenter(
     var filters = AdventureFilters(
             MIN_RANGE,
             MAX_RANGE,
-            1f,
-            null
+            1f
     )
         set(value) {
             hasFiltersChanged = true
@@ -67,9 +66,9 @@ class AdventuresPresenter(
                 page,
                 position,
                 sortType,
+                filters.difficultyLevels,
                 filters.name,
-                filters.calculatedRangeValue,
-                filters.difficultyLevel
+                filters.calculatedRangeValue
         )
     }
 

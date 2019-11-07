@@ -13,7 +13,7 @@ data class AdventureFilters(
         val minRange: Float,
         val maxRange: Float,
         val range: Float = 0f,
-        val difficultyLevel: DifficultyLevel? = null,
+        val difficultyLevels: List<DifficultyLevel> = emptyList(),
         val name: String = ""
 ) : Parcelable {
 
@@ -23,7 +23,7 @@ data class AdventureFilters(
     val activeFiltersCount: Int
         get() {
             var counter = 1
-            if (difficultyLevel != null) counter++
+            if (difficultyLevels.isNotEmpty()) counter++
             return counter
         }
 

@@ -25,16 +25,16 @@ class AdventureRepository(
             page: Int,
             position: Position,
             order: AdventuresSort,
+            difficultyLevels: List<DifficultyLevel>,
             name: String,
-            range: Float?,
-            difficultyLevel: DifficultyLevel?
+            range: Float?
     ): Single<ICollectionContainer<Adventure>> {
         return adventureApi.searchAdventures(
                 page = page,
                 lat = position.lat,
                 lng = position.lng,
                 name = if (name.isBlank()) null else name,
-                difficultyLevel = difficultyLevel?.value,
+                difficultyLevel = difficultyLevels.firstOrNull()?.value,
                 range = range,
                 order = order.name.toLowerCase()
         )
