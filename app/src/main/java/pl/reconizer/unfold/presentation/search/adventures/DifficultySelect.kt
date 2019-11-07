@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.view_difficulty_select.view.*
 import pl.reconizer.unfold.R
+import pl.reconizer.unfold.common.extensions.addIfNotExists
 import pl.reconizer.unfold.domain.entities.DifficultyLevel
 
 class DifficultySelect @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    var onSelectionChangedListener: ((selection: DifficultyLevel?) -> Unit)? = null
+    var onSelectionChangedListener: ((selection: List<DifficultyLevel>) -> Unit)? = null
 
-    var selection: DifficultyLevel? = null
+    var selection: List<DifficultyLevel> = emptyList()
         set(value) {
             field = value
             updateState()
@@ -27,27 +28,36 @@ class DifficultySelect @JvmOverloads constructor(
         orientation = VERTICAL
         
         easyLevel.setOnClickListener {
-            selection = if (easyLevel.isChecked) DifficultyLevel.EASY else null
-            onSelectionChangedListener?.invoke(selection)
+            handleClickOnLevel(DifficultyLevel.EASY, easyLevel.isChecked)
         }
 
         mediumLevel.setOnClickListener {
-            selection = if (mediumLevel.isChecked) DifficultyLevel.MEDIUM else null
-            onSelectionChangedListener?.invoke(selection)
+            handleClickOnLevel(DifficultyLevel.MEDIUM, mediumLevel.isChecked)
 
         }
 
         hardLevel.setOnClickListener {
-            selection = if (hardLevel.isChecked) DifficultyLevel.HARD else null
-            onSelectionChangedListener?.invoke(selection)
-
+            handleClickOnLevel(DifficultyLevel.HARD, hardLevel.isChecked)
         }
     }
 
     private fun updateState() {
-        easyLevel?.isChecked = selection == DifficultyLevel.EASY
-        mediumLevel?.isChecked = selection == DifficultyLevel.MEDIUM
-        hardLevel?.isChecked = selection == DifficultyLevel.HARD
+        easyLevel?.isChecked = DifficultyLevel.EASY in selection
+        mediumLevel?.isChecked = DifficultyLevel.MEDIUM in selection
+        hardLevel?.isChecked = DifficultyLevel.HARD in selection
+    }
+
+    private fun handleClickOnLevel(level: DifficultyLevel, isChecked: Boolean) {
+        selection = if (isChecked) {
+            selection.toMutableList().apply {
+                addIfNotExists(level)
+            }
+        } else {
+            selection.toMutableList().apply {
+                remove(level)
+            }
+        }
+        onSelectionChangedListener?.invoke(selection)
     }
 
 }

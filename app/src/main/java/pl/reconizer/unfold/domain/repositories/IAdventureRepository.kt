@@ -14,9 +14,9 @@ interface IAdventureRepository {
             page: Int,
             position: Position,
             order: AdventuresSort,
+            difficultyLevels: List<DifficultyLevel>,
             name: String,
-            range: Float?,
-            difficultyLevel: DifficultyLevel?
+            range: Float?
     ): Single<ICollectionContainer<Adventure>>
 
     fun getAdventure(adventureId: String): Single<AdventureStartPoint>

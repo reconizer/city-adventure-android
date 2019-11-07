@@ -32,7 +32,7 @@ class AdventureFiltersDialog : DialogFragment() {
             rangeMaxValue.text = "%d".format(filtersState.maxRange.toInt())
             range.progress = (filtersState.range * 100).toInt()
             rangeIndicator.text = formatRangeIndicator()
-            difficultyLevelGroup.selection = filtersState.difficultyLevel
+            difficultyLevelGroup.selection = filtersState.difficultyLevels
 
             range.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -45,8 +45,8 @@ class AdventureFiltersDialog : DialogFragment() {
 
             })
 
-            difficultyLevelGroup.onSelectionChangedListener = { selectedDifficulty ->
-                filtersState = filtersState.copy(difficultyLevel = selectedDifficulty)
+            difficultyLevelGroup.onSelectionChangedListener = { selectedDifficulties ->
+                filtersState = filtersState.copy(difficultyLevels = selectedDifficulties)
             }
 
             applyButton.setOnClickListener {
