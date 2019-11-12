@@ -14,14 +14,13 @@ import kotlinx.android.synthetic.main.fragment_search_adventures_page.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.di.Injector
 import pl.reconizer.unfold.domain.entities.Adventure
-import pl.reconizer.unfold.domain.entities.DifficultyLevel
 import pl.reconizer.unfold.domain.entities.Position
-import pl.reconizer.unfold.presentation.common.BaseFragment
+import pl.reconizer.unfold.presentation.common.BaseChildFragment
 import pl.reconizer.unfold.presentation.common.recyclerview.EndlessRecyclerViewScrollListener
 import pl.reconizer.unfold.presentation.common.recyclerview.ItemOffsetDecorator
 import javax.inject.Inject
 
-class AdventuresFragmentPage : BaseFragment(), IFilteredAdventuresView {
+class AdventuresFragmentPage : BaseChildFragment(), IFilteredAdventuresView {
 
     @Inject
     lateinit var presenter: AdventuresPresenter

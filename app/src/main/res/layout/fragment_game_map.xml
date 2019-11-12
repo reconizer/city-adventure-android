@@ -106,6 +106,8 @@
         android:paddingEnd="@dimen/space_3x"
         android:textAppearance="@style/TypeWriterText"
         android:textSize="16dp"
+        android:gravity="center"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/journalButton"
         app:layout_constraintTop_toTopOf="parent"

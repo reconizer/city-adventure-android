@@ -74,10 +74,12 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        if (presenter.profile == null) {
-            presenter.fetchProfile()
-        }
-        if (presenter.items.isEmpty()) presenter.fetchFirstPage()
+        view?.postDelayed({
+            if (presenter.profile == null) {
+                presenter.fetchProfile()
+            }
+            if (presenter.items.isEmpty()) presenter.fetchFirstPage()
+        }, 200)
         showProfile()
     }
 
@@ -94,10 +96,9 @@ class CreatorProfileFragment : BaseFragment(), ICreatorProfileView {
     override fun showProfile() {
         creatorName.text =  presenter.profile?.name
         description.text = presenter.profile?.description
-        favoritesCounter.text = presenter.profile?.followersCount.toString()
+        favoritesCounter.text = (presenter.profile?.followersCount ?: 0).toString()
 
-        // TODO when api will be updated, change it to actual field
-        favoriteButton.isChecked = (presenter.profile?.followersCount ?: 0) > 0
+        favoriteButton.isChecked = presenter.profile?.isFollowing == true
 
         Picasso.get()
                 .load(presenter.profile?.logo)

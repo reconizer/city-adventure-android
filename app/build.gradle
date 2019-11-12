@@ -63,9 +63,9 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
     implementation "com.google.android.material:material:$rootProject.ext.materialVersion"
-    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.legacySupportVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
-    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.androidXVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerViewVersion"
 
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlinVersion"

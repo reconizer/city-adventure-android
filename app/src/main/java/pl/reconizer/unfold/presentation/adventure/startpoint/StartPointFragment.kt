@@ -109,6 +109,11 @@ class StartPointFragment : BaseFragment(), IStartPointView {
         }, resources.getInteger(R.integer.transitionDuration).toLong())
     }
 
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         Injector.clearAdventureStartPointComponent()

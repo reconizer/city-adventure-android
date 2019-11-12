@@ -6,6 +6,7 @@ data class CreatorProfile(
         val id: String,
         val name: String,
         val description: String,
+        @SerializedName("follow") val isFollowing: Boolean,
         @SerializedName("followers_count") val followersCount: Int,
         @SerializedName("image_url") val logo: String?
 )
