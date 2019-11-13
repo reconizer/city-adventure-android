@@ -36,6 +36,9 @@ class CryptexLockPuzzleFragment : BasePuzzleFragment() {
         confirmButton.setOnClickListener {
             presenter.resolvePoint(cryptexLock.valuesStack.joinToString(""))
         }
+        resetButton.setOnClickListener {
+            cryptexLock.reset()
+        }
 
         cryptexLock.numberOfCylinders = when(presenter.puzzleType) {
             PuzzleType.CRYPTEX_LOCK_4 -> 4

@@ -40,8 +40,15 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
             else -> 4
         }
 
+        // If the "answer sheet" is full while getting new direction, it means input has been already
+        // validated and it is only presented for user's information.
+        // If it is full after adding new direction then the input is validated.
         directionLock.onNewDirectionListener = { newDirection ->
             var answers = directionLockAnswers.answers.filterNotNull()
+            if (answers.size == directionLockAnswers.numberOfItems) {
+                directionLockAnswers.reset()
+                answers = directionLockAnswers.answers.filterNotNull()
+            }
             val nextPosition = answers.size
             if (nextPosition < directionLockAnswers.numberOfItems) {
                 directionLockAnswers.addAnswer(nextPosition, newDirection)
@@ -68,7 +75,6 @@ class DirectionLockPuzzleFragment : BasePuzzleFragment() {
     override fun wrongAnswer() {
         super.wrongAnswer()
         directionLock.reset()
-        directionLockAnswers.reset()
     }
 
     companion object {

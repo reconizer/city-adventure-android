@@ -30,7 +30,7 @@ class DirectionLockAnswers @JvmOverloads constructor(
         setBackgroundColor(ContextCompat.getColor(context, R.color.directionLockAnswersContainerBackgroundColor))
 
         clearButton.setOnClickListener {
-            reset()
+            removeLast()
         }
     }
 
@@ -47,6 +47,10 @@ class DirectionLockAnswers @JvmOverloads constructor(
         items.forEach {
             it.direction = null
         }
+    }
+
+    fun removeLast() {
+        items.findLast { it.direction != null }?.direction = null
     }
 
     private fun createView() {

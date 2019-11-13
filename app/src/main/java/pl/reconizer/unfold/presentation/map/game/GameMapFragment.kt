@@ -72,7 +72,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 mapView.moveToLocation(it.toLatLng())
             }
         }
-        journalButton.setOnClickListener { navigator.goBack() }
+        journalButton.setOnClickListener { goBack() }
         locationCheckerButton.setOnClickListener { presenter.checkLocation() }
         menuButton.setOnClickListener { navigator.goTo(MenuKey()) }
         searchButton.setOnClickListener {
@@ -154,6 +154,7 @@ class GameMapFragment : BaseFragment(), IGameMapView {
     }
 
     override fun goBack(): Boolean {
+        mapView.clearMarkerRange()
         return if (mapMode == MapMode.STARTED_ADVENTURE) {
             navigator.goBack()
             true
