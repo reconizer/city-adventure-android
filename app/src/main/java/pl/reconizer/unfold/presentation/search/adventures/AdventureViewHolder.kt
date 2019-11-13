@@ -25,7 +25,7 @@ class AdventureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         title.text = adventure.name
         price.setText(R.string.common_free)
         completionTime.text = prettyTimeStringRange(adventure.minFinishTime, adventure.maxFinishTime)
-        rating.text = "%.2f".format(adventure.rating)
+        rating.text = formatRating(adventure.rating)
         difficultyLevel.text = stringifyDifficultyLevel(
                 itemView.context,
                 adventure.difficultyLevel
@@ -34,6 +34,14 @@ class AdventureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         Picasso.get()
                 .load(adventure.coverImage)
                 .into(cover)
+    }
+
+    private fun formatRating(rating: Float?): String {
+        return if (rating == null || rating == 0f) {
+            itemView.resources.getString(R.string.adventure_no_rating)
+        } else {
+            "%.2f".format(rating)
+        }
     }
 
 }

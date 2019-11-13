@@ -89,10 +89,12 @@
         android:paddingTop="@dimen/space_1x"
         android:paddingEnd="@dimen/space_2x"
         android:paddingBottom="@dimen/space_1x"
-        android:src="@drawable/icon_close_dark"
-        app:layout_constraintTop_toTopOf="@id/adventureTitle"
+        android:scaleX="-1.5"
+        android:scaleY="1.3"
+        android:src="@drawable/journal_bottom_arrow"
         app:layout_constraintBottom_toBottomOf="@id/adventureTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/adventureTitle" />
 
     <TextView
         android:id="@+id/adventureTitle"
@@ -106,6 +108,8 @@
         android:paddingEnd="@dimen/space_3x"
         android:textAppearance="@style/TypeWriterText"
         android:textSize="16dp"
+        android:gravity="center"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/journalButton"
         app:layout_constraintTop_toTopOf="parent"

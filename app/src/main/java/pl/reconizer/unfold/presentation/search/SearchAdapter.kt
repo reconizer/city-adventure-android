@@ -7,7 +7,7 @@ import pl.reconizer.unfold.domain.entities.Position
 import pl.reconizer.unfold.presentation.search.adventures.AdventuresFragmentPage
 import pl.reconizer.unfold.presentation.search.creators.CreatorsFragmentPage
 
-class SearchAdapter(fm: FragmentManager, private val userPosition: Position) : FragmentPagerAdapter(fm) {
+class SearchAdapter(fm: FragmentManager, private val userPosition: Position) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
         return if (position == 0) {

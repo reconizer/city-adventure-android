@@ -109,4 +109,7 @@
     <string name="error_unknown_codes">Nieznane kody błędów:</string>
     <string name="error_point_not_found">Jesteś za daleko punktu.\nPodejdź bliżej.</string>
 
+    <string name="adventure_no_rating">brak ocen</string>
+    <string name="creator_profile_adventures">trasy</string>
+
 </resources>

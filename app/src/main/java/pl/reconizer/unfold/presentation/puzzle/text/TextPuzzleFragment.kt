@@ -25,6 +25,7 @@ class TextPuzzleFragment : BasePuzzleFragment() {
         confirmButton.setOnClickListener {
             presenter.resolvePoint(answerInput.text.toString())
         }
+
         answerInput.requestFocus()
     }
 
