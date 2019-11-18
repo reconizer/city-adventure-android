@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.google.android.gms.maps.model.Circle
 import kotlinx.android.synthetic.main.fragment_game_map.*
 import pl.reconizer.unfold.R
 import pl.reconizer.unfold.common.extensions.isFragmentOnStack
@@ -114,10 +113,10 @@ class GameMapFragment : BaseFragment(), IGameMapView {
         presenter.lastLocation?.let {
             mapView.handleNewUserLocation(it.toLatLng())
         }
-        mapView.cameraMovedListener = {
+        mapView.onCameraMovedListener = {
             presenter.cameraPositionObserver.onNext(it)
         }
-        mapView.pinClickListener = {
+        mapView.onPinClickListener = {
             when (it) {
                 is MapAdventure -> {
                     navigator.goTo(AdventureStartPointKey(it))
@@ -129,6 +128,13 @@ class GameMapFragment : BaseFragment(), IGameMapView {
                 }
             }
         }
+
+        mapView.onMapClickListener = { clickedPosition ->
+            clickedPosition?.let {
+                presenter.handleClickedMapPosition(it)
+            }
+        }
+
         if (mapMode == MapMode.STARTED_ADVENTURE) {
             if (presenter.adventureStartPoint == null) {
                 presenter.fetchStartPoint()
