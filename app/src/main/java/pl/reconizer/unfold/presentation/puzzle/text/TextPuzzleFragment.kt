@@ -18,16 +18,6 @@ import pl.reconizer.unfold.presentation.puzzle.BasePuzzleFragment
 
 class TextPuzzleFragment : BasePuzzleFragment() {
 
-    private val answerInputTextWatcher = object : SimpleTextWatcherAdapter() {
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s?.contains("\n") == true) {
-                val strippedText = s.toString().replace("\n", "")
-                answerInput?.setText(strippedText)
-                answerInput?.setSelection(strippedText.length)
-            }
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_text_puzzle, container, false)
@@ -55,7 +45,6 @@ class TextPuzzleFragment : BasePuzzleFragment() {
             }
         }
 
-        answerInput.addTextChangedListener(answerInputTextWatcher)
         answerInput.requestFocus()
         context?.showKeyboard(answerInput)
     }
