@@ -30,6 +30,9 @@ class TextPuzzleFragment : BasePuzzleFragment() {
             presenter.resolvePoint(answerInput.text.toString())
         }
 
+        // Xml doesn't allow configure EditText to be a single line input
+        // but with ability to break lines. Having xml's textMultiline set
+        // and programmatically setting rawInputType a input starts behave like expected.
         answerInput.setRawInputType(InputType.TYPE_CLASS_TEXT)
 
         answerInput.setOnEditorActionListener { v, actionId, event ->
