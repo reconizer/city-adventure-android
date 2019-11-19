@@ -46,6 +46,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
             proguardFiles fileTree('proguard').asList().toArray()
         }
+        internalTests {
+            initWith release
+        }
     }
 }
 

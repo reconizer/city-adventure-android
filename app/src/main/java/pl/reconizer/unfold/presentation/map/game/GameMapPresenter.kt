@@ -1,12 +1,16 @@
 package pl.reconizer.unfold.presentation.map.game
 
+import android.location.Location
+import android.location.LocationListener
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
+import pl.reconizer.unfold.BuildConfig
 import pl.reconizer.unfold.common.extensions.toPosition
 import pl.reconizer.unfold.domain.entities.*
 import pl.reconizer.unfold.domain.entities.puzzles.PuzzleAnswerForm
@@ -17,6 +21,7 @@ import pl.reconizer.unfold.presentation.common.errorshandlers.ErrorsHandler
 import pl.reconizer.unfold.presentation.common.rx.CallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.MaybeCallbackWrapper
 import pl.reconizer.unfold.presentation.common.rx.SingleCallbackWrapper
+import pl.reconizer.unfold.presentation.location.DebugLocationProvider
 import pl.reconizer.unfold.presentation.location.GpsInterfaceStatus
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.map.CameraDetails
@@ -282,6 +287,17 @@ class GameMapPresenter(
                             }
                         })
         )
+    }
+
+    fun handleClickedMapPosition(position: LatLng) {
+        if (BuildConfig.BUILD_TYPE.contentEquals("debug") || BuildConfig.BUILD_TYPE.contentEquals("internalTests")) {
+            if (locationProvider is LocationListener) {
+                locationProvider.onLocationChanged(Location("").apply {
+                    latitude = position.latitude
+                    longitude = position.longitude
+                })
+            }
+        }
     }
 
     companion object {

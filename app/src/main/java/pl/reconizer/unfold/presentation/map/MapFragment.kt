@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -17,7 +16,6 @@ import pl.reconizer.unfold.common.extensions.toLatLng
 import pl.reconizer.unfold.domain.entities.IPositionable
 import pl.reconizer.unfold.domain.entities.Position
 import timber.log.Timber
-import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 class MapFragment : SupportMapFragment(), IMapView {
@@ -46,9 +44,10 @@ class MapFragment : SupportMapFragment(), IMapView {
     private lateinit var overlayBitmap: Bitmap
     private lateinit var overlayBitmapDescriptor: BitmapDescriptor
 
-    override var pinClickListener: ((pin: IPositionable) -> Unit)? = null
-    override var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)? = null
-    override var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)? = null
+    override var onPinClickListener: ((pin: IPositionable) -> Unit)? = null
+    override var onMapClickListener: ((clickedPosition: LatLng?) -> Unit)? = null
+    override var onCameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)? = null
+    override var onCameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,7 +145,7 @@ class MapFragment : SupportMapFragment(), IMapView {
         // when camera is moving
         googleMap.setOnCameraMoveListener {
             Timber.i("map camera: is moving")
-            cameraMoveListener?.invoke(CameraDetails(
+            onCameraMoveListener?.invoke(CameraDetails(
                     googleMap.cameraPosition.target,
                     googleMap.cameraPosition.zoom
             ))
@@ -158,7 +157,7 @@ class MapFragment : SupportMapFragment(), IMapView {
         // when camera stopped moving
         googleMap.setOnCameraIdleListener {
             Timber.i("map camera: stopped moving")
-            cameraMovedListener?.invoke(CameraDetails(
+            onCameraMovedListener?.invoke(CameraDetails(
                     googleMap.cameraPosition.target,
                     googleMap.cameraPosition.zoom
             ))
@@ -170,13 +169,17 @@ class MapFragment : SupportMapFragment(), IMapView {
         googleMap.setOnMarkerClickListener {
             if (it.tag is IPositionable) {
                 Timber.i("map: clicked on adventure marker")
-                pinClickListener?.invoke(it.tag as IPositionable)
+                onPinClickListener?.invoke(it.tag as IPositionable)
             } else if (it == userMarker) {
                 Timber.i("map: clicked on user marker")
             } else {
                 Timber.i("map: clicked on something else")
             }
             true
+        }
+
+        googleMap.setOnMapClickListener {
+            onMapClickListener?.invoke(it)
         }
 
         currentLocation?.let {

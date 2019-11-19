@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.zhuinden.simplestack.BackstackDelegate
 import dagger.Module
 import dagger.Provides
+import pl.reconizer.unfold.BuildConfig
 import pl.reconizer.unfold.di.scopes.ActivityScope
+import pl.reconizer.unfold.presentation.location.DebugLocationProvider
 import pl.reconizer.unfold.presentation.location.ILocationProvider
 import pl.reconizer.unfold.presentation.location.LocationProvider
 import pl.reconizer.unfold.presentation.navigation.FragmentStateChanger
@@ -20,7 +22,11 @@ class MainActivityModule(
     @Provides
     @ActivityScope
     fun provideLocationProvider(context: Context): ILocationProvider {
-        return LocationProvider(context)
+        return if (BuildConfig.BUILD_TYPE.contentEquals("debug") || BuildConfig.BUILD_TYPE.contentEquals("internalTests")) {
+            DebugLocationProvider(context)
+        } else {
+            LocationProvider(context)
+        }
     }
 
     @Provides

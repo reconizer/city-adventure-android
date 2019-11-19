@@ -9,9 +9,10 @@ interface IMapView {
     var pinMapper: IPinMapper?
     var userPinMapper: IPinMapper?
 
-    var pinClickListener: ((pin: IPositionable) -> Unit)?
-    var cameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)?
-    var cameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)?
+    var onPinClickListener: ((pin: IPositionable) -> Unit)?
+    var onMapClickListener: ((clickedPosition: LatLng?) -> Unit)?
+    var onCameraMoveListener: ((cameraDetails: CameraDetails) -> Unit)?
+    var onCameraMovedListener: ((cameraDetails: CameraDetails) -> Unit)?
 
     var overlayDrawableRes: Int
 
