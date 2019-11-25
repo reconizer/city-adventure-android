@@ -105,7 +105,11 @@ class AdventuresFragmentPage : BaseChildFragment(), IFilteredAdventuresView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        if (presenter.items.isEmpty() || presenter.hasFiltersChanged) presenter.fetchFirstPage()
+        if (presenter.items.isEmpty() || presenter.hasFiltersChanged) {
+            view?.postDelayed({
+                presenter.fetchFirstPage()
+            }, 200L)
+        }
     }
 
     override fun onPause() {

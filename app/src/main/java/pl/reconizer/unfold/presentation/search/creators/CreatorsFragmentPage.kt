@@ -101,7 +101,11 @@ class CreatorsFragmentPage : BaseChildFragment(), IFilteredCreatorsView {
     override fun onResume() {
         super.onResume()
         presenter.subscribe(this)
-        if (presenter.items.isEmpty()) presenter.fetchFirstPage()
+        if (presenter.items.isEmpty()) {
+            view?.postDelayed({
+                presenter.fetchFirstPage()
+            }, 200L)
+        }
     }
 
     override fun onPause() {
