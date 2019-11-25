@@ -2,6 +2,7 @@ package pl.reconizer.unfold.presentation.map.game
 
 import android.location.Location
 import android.location.LocationListener
+import com.gojuno.koptional.None
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
 import com.google.android.gms.maps.model.LatLng
@@ -73,11 +74,19 @@ class GameMapPresenter(
             .map { it.position.toPosition() }
             .share()
 
-    private val loadingIntervalsObservable: Observable<Position> = Observable.interval(LOAD_ADVENTURES_TIMEOUT, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
+    private val loadingIntervalsObservable: Observable<Position> = Observable.interval(0, LOAD_ADVENTURES_TIMEOUT, TimeUnit.SECONDS, backgroundScheduler)
             .observeOn(backgroundScheduler)
-            .map { previousCameraDetails.toOptional() }
+            .flatMap {
+                if (previousCameraDetails != null) {
+                    Observable.just(Some(previousCameraDetails!!.position.toPosition()))
+                } else if (lastLocation != null) {
+                    Observable.just(Some(lastLocation!!))
+                } else {
+                    Observable.just(None)
+                }
+            }
             .filter { it is Some }
-            .map { it.toNullable()!!.position.toPosition() }
+            .map { it.toNullable()!! }
             .share()
 
     fun subscribe(view: IGameMapView, mode: MapMode) {
